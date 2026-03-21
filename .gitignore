@@ -1,0 +1,28 @@
+## .NET
+bin/
+obj/
+*.user
+*.suo
+*.cache
+*.vs/
+*.DotSettings.user
+
+## NuGet
+*.nupkg
+*.snupkg
+packages/
+
+## IDE
+.idea/
+.vscode/
+*.swp
+
+## Environment
+.env
+.env.local
+.env.production
+!.env.example
+
+## OS
+Thumbs.db
+.DS_Store

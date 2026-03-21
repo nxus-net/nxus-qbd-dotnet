@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>net8.0;net9.0</TargetFrameworks>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <LangVersion>latest</LangVersion>
+    <RootNamespace>Nxus.Qbd</RootNamespace>
+
+    <!-- NuGet Package Metadata -->
+    <PackageId>Nxus.Qbd</PackageId>
+    <Version>0.1.0</Version>
+    <Authors>Nxus</Authors>
+    <Company>Nxus</Company>
+    <Description>Official .NET SDK for the Nxus QuickBooks Desktop API. Provides typed clients, cursor-based auto-pagination, and structured error handling.</Description>
+    <PackageTags>nxus;quickbooks;qbd;quickbooks-desktop;api;sdk</PackageTags>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/nxus-app/nxus-qbd-dotnet</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/nxus-app/nxus-qbd-dotnet</RepositoryUrl>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\..\README.md" Pack="true" PackagePath="\" />
+  </ItemGroup>
+
+</Project>

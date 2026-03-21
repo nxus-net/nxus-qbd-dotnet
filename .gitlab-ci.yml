@@ -1,0 +1,38 @@
+stages:
+  - build
+  - test
+  - publish
+
+variables:
+  DOTNET_CLI_TELEMETRY_OPTOUT: "1"
+  DOTNET_NOLOGO: "1"
+
+build:
+  stage: build
+  image: mcr.microsoft.com/dotnet/sdk:9.0
+  script:
+    - dotnet restore
+    - dotnet build --configuration Release --no-restore
+  artifacts:
+    paths:
+      - src/Nxus.Qbd/bin/Release/
+
+test:
+  stage: test
+  image: mcr.microsoft.com/dotnet/sdk:9.0
+  script:
+    - dotnet test --configuration Release --no-build --verbosity normal
+  needs:
+    - build
+
+publish:
+  stage: publish
+  image: mcr.microsoft.com/dotnet/sdk:9.0
+  script:
+    - dotnet pack src/Nxus.Qbd/Nxus.Qbd.csproj --configuration Release --no-build -o nupkgs/
+    - dotnet nuget push nupkgs/*.nupkg --source https://api.nuget.org/v3/index.json --api-key $NUGET_API_KEY
+  needs:
+    - test
+  only:
+    - tags
+  when: manual
