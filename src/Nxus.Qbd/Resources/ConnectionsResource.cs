@@ -14,15 +14,15 @@ public sealed class ConnectionsResource : ResourceBase {
     }
 
     protected override string ListPath => "/api/v1/connections";
-    protected override string SingularPath => "/api/v1/connections/{id}";
+    protected override string SingularPath => "/api/v1/connection/{id}";
 
     /// <summary>Check the authenticated status of a connection.</summary>
     public JsonElement RetrieveStatusAuthenticated(string connectionId, RequestOptions? options = null) =>
-        _http.Request(HttpMethod.Get, $"/api/v1/qwc-auth-setup/{connectionId}/status/authenticated", options: options);
+        _http.Request(HttpMethod.Get, $"/api/v1/connection/{connectionId}/status/authenticated", options: options);
 
     /// <summary>Check the authenticated status of a connection (async).</summary>
     public Task<JsonElement> RetrieveStatusAuthenticatedAsync(string connectionId, RequestOptions? options = null, CancellationToken ct = default) =>
-        _http.RequestAsync(HttpMethod.Get, $"/api/v1/qwc-auth-setup/{connectionId}/status/authenticated", options: options, ct: ct);
+        _http.RequestAsync(HttpMethod.Get, $"/api/v1/connection/{connectionId}/status/authenticated", options: options, ct: ct);
 }
 
 /// <summary>
@@ -37,19 +37,19 @@ public sealed class AuthSessionsResource {
 
     /// <summary>Create a new auth session.</summary>
     public JsonElement Create(object data, RequestOptions? options = null) =>
-        _transport.Request(HttpMethod.Post, "/api/v1/auth-sessions", body: data, options: options);
+        _transport.Request(HttpMethod.Post, "/api/v1/auth-session", body: data, options: options);
 
     /// <summary>Create a new auth session (async).</summary>
     public Task<JsonElement> CreateAsync(object data, RequestOptions? options = null, CancellationToken ct = default) =>
-        _transport.RequestAsync(HttpMethod.Post, "/api/v1/auth-sessions", body: data, options: options, ct: ct);
+        _transport.RequestAsync(HttpMethod.Post, "/api/v1/auth-session", body: data, options: options, ct: ct);
 
     /// <summary>Retrieve an auth session by token.</summary>
     public JsonElement Retrieve(string sessionToken, RequestOptions? options = null) =>
-        _transport.Request(HttpMethod.Get, $"/api/v1/auth-sessions/{sessionToken}", options: options);
+        _transport.Request(HttpMethod.Get, $"/api/v1/auth-session/{sessionToken}", options: options);
 
     /// <summary>Retrieve an auth session by token (async).</summary>
     public Task<JsonElement> RetrieveAsync(string sessionToken, RequestOptions? options = null, CancellationToken ct = default) =>
-        _transport.RequestAsync(HttpMethod.Get, $"/api/v1/auth-sessions/{sessionToken}", options: options, ct: ct);
+        _transport.RequestAsync(HttpMethod.Get, $"/api/v1/auth-session/{sessionToken}", options: options, ct: ct);
 }
 
 /// <summary>
@@ -64,9 +64,9 @@ public sealed class SpecialItemsResource {
 
     /// <summary>Create a special item.</summary>
     public JsonElement Create(object data, RequestOptions? options = null) =>
-        _transport.Request(HttpMethod.Post, "/api/v1/SpecialItem", body: data, options: options);
+        _transport.Request(HttpMethod.Post, "/api/v1/special-item", body: data, options: options);
 
     /// <summary>Create a special item (async).</summary>
     public Task<JsonElement> CreateAsync(object data, RequestOptions? options = null, CancellationToken ct = default) =>
-        _transport.RequestAsync(HttpMethod.Post, "/api/v1/SpecialItem", body: data, options: options, ct: ct);
+        _transport.RequestAsync(HttpMethod.Post, "/api/v1/special-item", body: data, options: options, ct: ct);
 }

@@ -11,10 +11,10 @@ namespace Nxus.Qbd.Resources;
 public abstract class ResourceBase {
     private readonly NxusHttpTransport _transport;
 
-    /// <summary>Plural path for list operations (e.g. <c>/api/v1/Vendors</c>).</summary>
+    /// <summary>Plural path for list operations (e.g. <c>/api/v1/vendors</c>).</summary>
     protected abstract string ListPath { get; }
 
-    /// <summary>Singular path template with <c>{id}</c> placeholder (e.g. <c>/api/v1/Vendor/{id}</c>).</summary>
+    /// <summary>Singular path template with <c>{id}</c> placeholder (e.g. <c>/api/v1/vendor/{id}</c>).</summary>
     protected abstract string SingularPath { get; }
 
     /// <summary>Path for create (POST). Defaults to singular path without <c>/{id}</c>.</summary>
