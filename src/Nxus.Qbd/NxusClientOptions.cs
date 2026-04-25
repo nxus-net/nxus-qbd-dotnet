@@ -35,4 +35,15 @@ public sealed class NxusClientOptions {
     /// When provided, the caller owns the lifetime — <see cref="NxusClient.Dispose"/> will not dispose it.
     /// </summary>
     public HttpClient? HttpClient { get; init; }
+
+    /// <summary>
+    /// Default value for the <c>X-Nxus-Timeout-Seconds</c> header sent on every
+    /// request. Tells the server how long to wait for the queued QuickBooks
+    /// Desktop job to complete before returning a 504. The server enforces
+    /// operation-specific ceilings and may clamp this value based on deployment
+    /// config. Current defaults are typically 120 seconds for CRUD and 90
+    /// seconds for list/report operations. Leave null to let the server apply
+    /// its own default.
+    /// </summary>
+    public int? ServerTimeoutSeconds { get; init; }
 }

@@ -14,6 +14,7 @@ internal sealed class NxusHttpTransport : IDisposable {
     private readonly bool _ownsClient;
     private readonly string? _defaultConnectionId;
     private readonly TimeSpan _defaultTimeout;
+    private readonly int? _defaultServerTimeoutSeconds;
 
     private static readonly JsonSerializerOptions JsonOptions = new() {
         PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
@@ -23,6 +24,7 @@ internal sealed class NxusHttpTransport : IDisposable {
     public NxusHttpTransport(NxusClientOptions options) {
         _defaultConnectionId = options.ConnectionId;
         _defaultTimeout = options.Timeout;
+        _defaultServerTimeoutSeconds = options.ServerTimeoutSeconds;
 
         if (options.HttpClient is not null) {
             _client = options.HttpClient;
@@ -110,6 +112,12 @@ internal sealed class NxusHttpTransport : IDisposable {
         var connectionId = options?.ConnectionId ?? _defaultConnectionId;
         if (connectionId is not null)
             request.Headers.TryAddWithoutValidation("X-Connection-Id", connectionId);
+
+        var serverTimeoutSeconds = options?.ServerTimeoutSeconds ?? _defaultServerTimeoutSeconds;
+        if (serverTimeoutSeconds is not null)
+            request.Headers.TryAddWithoutValidation(
+                "X-Nxus-Timeout-Seconds",
+                serverTimeoutSeconds.Value.ToString(System.Globalization.CultureInfo.InvariantCulture));
 
         if (options?.Headers is not null) {
             foreach (var (key, value) in options.Headers)
