@@ -24,12 +24,20 @@ public class SmokeTests : IDisposable {
         if (string.IsNullOrEmpty(apiKey))
             return; // tests will be skipped
 
-        var baseUrl = Environment.GetEnvironmentVariable("NXUS_BASE_URL") ?? "https://api.nxus.app/";
+        var baseUrl = Environment.GetEnvironmentVariable("NXUS_BASE_URL");
+        var environmentName = Environment.GetEnvironmentVariable("NXUS_ENVIRONMENT");
         _connectionId = Environment.GetEnvironmentVariable("NXUS_CONNECTION_ID");
+
+        var environment = string.Equals(environmentName, "development", StringComparison.OrdinalIgnoreCase) ||
+                          string.Equals(environmentName, "dev", StringComparison.OrdinalIgnoreCase) ||
+                          string.Equals(environmentName, "local", StringComparison.OrdinalIgnoreCase)
+            ? NxusEnvironment.Development
+            : NxusEnvironment.Production;
 
         _client = new NxusClient(new NxusClientOptions {
             ApiKey = apiKey,
             BaseUrl = baseUrl,
+            Environment = environment,
             ConnectionId = _connectionId,
         });
     }

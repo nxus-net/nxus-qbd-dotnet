@@ -1,6 +1,14 @@
 namespace Nxus.Qbd;
 
 /// <summary>
+/// Named SDK environments with stable default base URLs.
+/// </summary>
+public enum NxusEnvironment {
+    Production,
+    Development,
+}
+
+/// <summary>
 /// Configuration options for <see cref="NxusClient"/>.
 /// </summary>
 public sealed class NxusClientOptions {
@@ -10,9 +18,16 @@ public sealed class NxusClientOptions {
     public required string ApiKey { get; init; }
 
     /// <summary>
-    /// Base URL for the API. Defaults to <c>https://api.nxus.app/</c>.
+    /// Explicit base URL override. When omitted, the SDK resolves the base URL
+    /// from <see cref="Environment"/> and defaults to production.
     /// </summary>
-    public string BaseUrl { get; init; } = "https://api.nxus.app/";
+    public string? BaseUrl { get; init; }
+
+    /// <summary>
+    /// Named environment shortcut. Use <see cref="NxusEnvironment.Development"/>
+    /// for <c>https://localhost:7242/</c>. Production is the default.
+    /// </summary>
+    public NxusEnvironment Environment { get; init; } = NxusEnvironment.Production;
 
     /// <summary>
     /// Default request timeout. Defaults to 30 seconds.

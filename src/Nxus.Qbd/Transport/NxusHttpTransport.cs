@@ -31,7 +31,7 @@ internal sealed class NxusHttpTransport : IDisposable {
             _ownsClient = false;
         } else {
             _client = new HttpClient {
-                BaseAddress = new Uri(options.BaseUrl.TrimEnd('/') + "/"),
+                BaseAddress = new Uri(SdkEnvironment.ResolveBaseUrl(options.BaseUrl, options.Environment).TrimEnd('/') + "/"),
                 Timeout = options.Timeout,
             };
             _ownsClient = true;

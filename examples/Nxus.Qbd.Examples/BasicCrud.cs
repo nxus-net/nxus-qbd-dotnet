@@ -9,7 +9,8 @@
 ///   dotnet run --project examples/Nxus.Qbd.Examples -- crud
 ///
 /// Optional env vars:
-///   NXUS_BASE_URL         Defaults to https://api.nxus.app/
+///   NXUS_BASE_URL         Optional explicit override
+///   NXUS_ENVIRONMENT      Set to "development" to target https://localhost:7242/
 ///   NXUS_DEV_MODE         Set to "true" to extend timeout for local dev
 /// </summary>
 
@@ -35,12 +36,20 @@ public static class BasicCrud {
             Environment.Exit(1);
         }
 
-        var baseUrl = Environment.GetEnvironmentVariable("NXUS_BASE_URL") ?? "https://api.nxus.app/";
+        var baseUrl = Environment.GetEnvironmentVariable("NXUS_BASE_URL");
+        var environmentName = Environment.GetEnvironmentVariable("NXUS_ENVIRONMENT");
         var devMode = Environment.GetEnvironmentVariable("NXUS_DEV_MODE")?.ToLower() == "true";
+
+        var environment = string.Equals(environmentName, "development", StringComparison.OrdinalIgnoreCase) ||
+                          string.Equals(environmentName, "dev", StringComparison.OrdinalIgnoreCase) ||
+                          string.Equals(environmentName, "local", StringComparison.OrdinalIgnoreCase)
+            ? NxusEnvironment.Development
+            : NxusEnvironment.Production;
 
         using var client = new NxusClient(new NxusClientOptions {
             ApiKey = apiKey,
             BaseUrl = baseUrl,
+            Environment = environment,
             ConnectionId = connectionId,
             Timeout = devMode ? TimeSpan.FromSeconds(60) : TimeSpan.FromSeconds(30),
         });

@@ -7,6 +7,14 @@ namespace Nxus.Qbd.Tests;
 
 public class PaginationTests {
     [Fact]
+    public void ResolveBaseUrl_DefaultsToProduction() {
+        Assert.Equal("https://api.nx-us.net/", SdkEnvironment.ResolveBaseUrl());
+        Assert.Equal("https://api.nx-us.net/", SdkEnvironment.ResolveBaseUrl(environment: NxusEnvironment.Production));
+        Assert.Equal("https://localhost:7242/", SdkEnvironment.ResolveBaseUrl(environment: NxusEnvironment.Development));
+        Assert.Equal("https://custom.example.test/", SdkEnvironment.ResolveBaseUrl("https://custom.example.test/"));
+    }
+
+    [Fact]
     public async Task AutoPagination_ClosesCursor_WhenEnumerationStopsEarly() {
         using var handler = new RecordingHandler(
             new HttpResponseMessage(HttpStatusCode.OK) {
