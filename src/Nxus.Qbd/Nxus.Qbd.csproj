@@ -1,6 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
+    <NoWarn>$(NoWarn);CS1591</NoWarn>
     <TargetFrameworks>net8.0;net9.0;net10.0</TargetFrameworks>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
@@ -9,7 +10,7 @@
 
     <!-- NuGet Package Metadata -->
     <PackageId>Nxus.Qbd</PackageId>
-    <Version>0.1.0</Version>
+    <Version>0.2.0</Version>
     <Authors>Nxus</Authors>
     <Company>Nxus</Company>
     <Description>Official .NET SDK for the Nxus QuickBooks Desktop API. Provides typed clients, cursor-based auto-pagination, and structured error handling.</Description>

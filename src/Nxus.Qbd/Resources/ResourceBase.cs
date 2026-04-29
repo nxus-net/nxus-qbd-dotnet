@@ -24,6 +24,18 @@ public abstract class ResourceBase {
         _transport = transport;
     }
 
+    private static RequestOptions? BuildCursorCloseOptions(RequestOptions? options) {
+        if (options is null)
+            return null;
+
+        return new RequestOptions {
+            Headers = options.Headers is null
+                ? null
+                : new Dictionary<string, string>(options.Headers),
+            Timeout = options.Timeout,
+        };
+    }
+
     // ── List (paginated) ────────────────────────────────────────────────
 
     /// <summary>List resources with cursor-based pagination.</summary>
@@ -41,6 +53,10 @@ public abstract class ResourceBase {
 
         // Attach sync fetcher for page navigation
         page.SyncFetcher = nextCursor => List(limit, nextCursor, queryParams, options);
+        page.SyncCloser = nextCursor => _transport.Request(
+            HttpMethod.Post,
+            $"/api/v1/cursors/{Uri.EscapeDataString(nextCursor)}/close",
+            options: BuildCursorCloseOptions(options));
         return page;
     }
 
@@ -60,6 +76,11 @@ public abstract class ResourceBase {
 
         // Attach async fetcher for page navigation
         page.AsyncFetcher = (nextCursor, innerCt) => ListAsync(limit, nextCursor, queryParams, options, innerCt);
+        page.AsyncCloser = (nextCursor, innerCt) => _transport.RequestAsync(
+            HttpMethod.Post,
+            $"/api/v1/cursors/{Uri.EscapeDataString(nextCursor)}/close",
+            options: BuildCursorCloseOptions(options),
+            ct: innerCt);
         return page;
     }
 

@@ -35,6 +35,8 @@ public sealed class CursorPage<T> : IEnumerable<T>, IAsyncEnumerable<T> {
 
     internal Func<string, CancellationToken, Task<CursorPage<T>>>? AsyncFetcher { get; set; }
     internal Func<string, CursorPage<T>>? SyncFetcher { get; set; }
+    internal Func<string, CancellationToken, Task>? AsyncCloser { get; set; }
+    internal Action<string>? SyncCloser { get; set; }
 
     public CursorPage(
         IReadOnlyList<T> data,
@@ -82,12 +84,28 @@ public sealed class CursorPage<T> : IEnumerable<T>, IAsyncEnumerable<T> {
 
     public IEnumerator<T> GetEnumerator() {
         var current = this;
-        while (true) {
-            foreach (var item in current.Data)
-                yield return item;
-            if (!current.HasNextPage())
-                yield break;
-            current = current.GetNextPage();
+        var completed = false;
+        string? liveCursor = current.HasNextPage() ? current.NextCursor : null;
+
+        try {
+            while (true) {
+                liveCursor = current.HasNextPage() ? current.NextCursor : null;
+                foreach (var item in current.Data)
+                    yield return item;
+                if (!current.HasNextPage()) {
+                    completed = true;
+                    yield break;
+                }
+                current = current.GetNextPage();
+            }
+        } finally {
+            if (!completed && liveCursor is not null && SyncCloser is not null) {
+                try {
+                    SyncCloser(liveCursor);
+                } catch {
+                    // Cursor close is best-effort cleanup and must never mask iteration flow.
+                }
+            }
         }
     }
 
@@ -97,12 +115,28 @@ public sealed class CursorPage<T> : IEnumerable<T>, IAsyncEnumerable<T> {
 
     public async IAsyncEnumerator<T> GetAsyncEnumerator(CancellationToken ct = default) {
         var current = this;
-        while (true) {
-            foreach (var item in current.Data)
-                yield return item;
-            if (!current.HasNextPage())
-                yield break;
-            current = await current.GetNextPageAsync(ct).ConfigureAwait(false);
+        var completed = false;
+        string? liveCursor = current.HasNextPage() ? current.NextCursor : null;
+
+        try {
+            while (true) {
+                liveCursor = current.HasNextPage() ? current.NextCursor : null;
+                foreach (var item in current.Data)
+                    yield return item;
+                if (!current.HasNextPage()) {
+                    completed = true;
+                    yield break;
+                }
+                current = await current.GetNextPageAsync(ct).ConfigureAwait(false);
+            }
+        } finally {
+            if (!completed && liveCursor is not null && AsyncCloser is not null) {
+                try {
+                    await AsyncCloser(liveCursor, ct).ConfigureAwait(false);
+                } catch {
+                    // Cursor close is best-effort cleanup and must never mask iteration flow.
+                }
+            }
         }
     }
 

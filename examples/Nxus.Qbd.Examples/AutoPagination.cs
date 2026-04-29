@@ -3,7 +3,16 @@
 ///
 /// The SDK's CursorPage supports:
 ///   1. `await foreach (var item in ...)` — auto-fetches every page transparently.
-///   2. `page.GetNextPageAsync()` — manual page-by-page navigation.
+///   2. `foreach (var item in ...)` — same, using the synchronous List() overload.
+///   3. `page.GetNextPageAsync()` / `page.GetNextPage()` — manual page navigation.
+///
+/// A note on `break` and lane release:
+///   When you `break` out of an `await foreach` (or `foreach`) loop, the SDK
+///   quietly tells the backend you are done with the cursor (best-effort
+///   `POST /api/v1/cursors/{cursor}/close`). The QuickBooks Desktop
+///   connection lane is released within milliseconds — your *next* call on
+///   the same connection does not have to wait for the silent-client timeout
+///   to expire. There is nothing extra to do; just `break`.
 ///
 /// Usage:
 ///   Set NXUS_API_KEY and NXUS_CONNECTION_ID in environment (or .env file), then:
@@ -73,7 +82,41 @@ public static class AutoPagination {
             Console.WriteLine($"\nTotal items iterated: {count}");
 
             // -----------------------------------------------------------------
-            // Approach 2: Manual page-by-page navigation (async)
+            // Approach 2: Find-and-stop
+            //
+            // The most common real-world pagination pattern: iterate until
+            // you find what you need, then `break`. The SDK auto-iterator
+            // handles cleanup — when the loop exits via `break` (instead of
+            // running out of pages), the SDK fires a best-effort cursor-close
+            // so the QBD lane is released within milliseconds. Your next API
+            // call on this connection won't sit waiting for the silent-client
+            // timeout.
+            // -----------------------------------------------------------------
+            Console.WriteLine("\n=== Find-and-stop ===\n");
+
+            const string targetSubstring = "Store";
+            string? matched = null;
+
+            var findPage = await client.Customers.ListAsync(limit: 10);
+            await foreach (var customer in findPage) {
+                // TryGetProperty avoids throwing on records that don't have a top-level "name"
+                if (customer.TryGetProperty("name", out var nameElement)) {
+                    var name = nameElement.GetString() ?? string.Empty;
+                    if (name.Contains(targetSubstring, StringComparison.OrdinalIgnoreCase)) {
+                        matched = name;
+                        break; // ← SDK auto-closes the cursor here
+                    }
+                }
+            }
+
+            if (matched is not null) {
+                Console.WriteLine($"  Matched \"{matched}\" — stopped early.");
+            } else {
+                Console.WriteLine($"  No customer matched \"{targetSubstring}\".");
+            }
+
+            // -----------------------------------------------------------------
+            // Approach 3: Manual page-by-page navigation (async)
             //
             // Await the list call to get a CursorPage, then use HasNextPage()
             // and GetNextPageAsync() to step through pages one at a time.
