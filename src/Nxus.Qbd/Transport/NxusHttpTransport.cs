@@ -106,6 +106,62 @@ internal sealed class NxusHttpTransport : IDisposable {
             .GetResult();
     }
 
+    /// <summary>
+    /// Overload that accepts repeatable query params (duplicate keys allowed).
+    /// Use for ASP.NET <c>List&lt;T&gt;</c> [FromQuery] binding (e.g. ?accountTypes=Bank&amp;accountTypes=CreditCard).
+    /// </summary>
+    public async Task<JsonElement> RequestAsync(
+        HttpMethod method,
+        string path,
+        object? body,
+        IEnumerable<KeyValuePair<string, string>>? queryParams,
+        RequestOptions? options = null,
+        CancellationToken ct = default) {
+        var url = BuildUrl(path, queryParams);
+        using var request = new HttpRequestMessage(method, url);
+
+        if (body is not null) {
+            var json = JsonSerializer.Serialize(body, JsonOptions);
+            request.Content = new StringContent(json, Encoding.UTF8, "application/json");
+        }
+
+        ApplyHeaders(request, options);
+
+        using var cts = options?.Timeout is not null
+            ? CancellationTokenSource.CreateLinkedTokenSource(ct)
+            : null;
+        if (cts is not null)
+            cts.CancelAfter(options!.Timeout!.Value);
+
+        var response = await _client
+            .SendAsync(request, cts?.Token ?? ct)
+            .ConfigureAwait(false);
+
+        if (!response.IsSuccessStatusCode)
+            throw await NxusApiException.FromResponseAsync(response, ct).ConfigureAwait(false);
+
+        var responseText = await response.Content
+            .ReadAsStringAsync(ct)
+            .ConfigureAwait(false);
+
+        if (string.IsNullOrWhiteSpace(responseText))
+            return default;
+
+        return JsonSerializer.Deserialize<JsonElement>(responseText, JsonOptions);
+    }
+
+    public JsonElement Request(
+        HttpMethod method,
+        string path,
+        object? body,
+        IEnumerable<KeyValuePair<string, string>>? queryParams,
+        RequestOptions? options = null) {
+        return RequestAsync(method, path, body, queryParams, options, CancellationToken.None)
+            .ConfigureAwait(false)
+            .GetAwaiter()
+            .GetResult();
+    }
+
     // ── Helpers ──────────────────────────────────────────────────────────
 
     private void ApplyHeaders(HttpRequestMessage request, RequestOptions? options) {
@@ -128,12 +184,20 @@ internal sealed class NxusHttpTransport : IDisposable {
     private static string BuildUrl(string path, IDictionary<string, string>? queryParams) {
         if (queryParams is null or { Count: 0 })
             return path;
+        return BuildUrl(path, (IEnumerable<KeyValuePair<string, string>>)queryParams);
+    }
+
+    /// <summary>
+    /// Build a URL with query string. Supports duplicate keys (repeated key=value pairs)
+    /// which is what ASP.NET model binding for List&lt;T&gt; from [FromQuery] expects.
+    /// </summary>
+    private static string BuildUrl(string path, IEnumerable<KeyValuePair<string, string>>? queryParams) {
+        if (queryParams is null) return path;
 
         var sb = new StringBuilder(path);
-        sb.Append('?');
         var first = true;
         foreach (var (key, value) in queryParams) {
-            if (!first) sb.Append('&');
+            sb.Append(first ? '?' : '&');
             sb.Append(Uri.EscapeDataString(key));
             sb.Append('=');
             sb.Append(Uri.EscapeDataString(value));

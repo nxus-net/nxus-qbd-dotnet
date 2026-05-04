@@ -336,52 +336,55 @@ public sealed class ItemsResource : ResourceBase
     protected override string SingularPath => "/api/v1/item/{id}";
 }
 
+// QBD backend convention for items: /api/v1/items-{kind} for list,
+// /api/v1/item-{kind}/{id} for individual CRUD.
+
 public sealed class InventoryItemsResource : ResourceBase
 {
     internal InventoryItemsResource(NxusHttpTransport t) : base(t) { }
-    protected override string ListPath => "/api/v1/inventory-items";
-    protected override string SingularPath => "/api/v1/inventory-item/{id}";
+    protected override string ListPath => "/api/v1/items-inventory";
+    protected override string SingularPath => "/api/v1/item-inventory/{id}";
 }
 
 public sealed class ItemDiscountsResource : ResourceBase
 {
     internal ItemDiscountsResource(NxusHttpTransport t) : base(t) { }
-    protected override string ListPath => "/api/v1/item-discounts";
+    protected override string ListPath => "/api/v1/items-discount";
     protected override string SingularPath => "/api/v1/item-discount/{id}";
 }
 
 public sealed class ItemFixedAssetsResource : ResourceBase
 {
     internal ItemFixedAssetsResource(NxusHttpTransport t) : base(t) { }
-    protected override string ListPath => "/api/v1/item-fixed-assets";
+    protected override string ListPath => "/api/v1/items-fixed-asset";
     protected override string SingularPath => "/api/v1/item-fixed-asset/{id}";
 }
 
 public sealed class ItemGroupsResource : ResourceBase
 {
     internal ItemGroupsResource(NxusHttpTransport t) : base(t) { }
-    protected override string ListPath => "/api/v1/item-groups";
+    protected override string ListPath => "/api/v1/items-group";
     protected override string SingularPath => "/api/v1/item-group/{id}";
 }
 
 public sealed class ItemInventoryAssembliesResource : ResourceBase
 {
     internal ItemInventoryAssembliesResource(NxusHttpTransport t) : base(t) { }
-    protected override string ListPath => "/api/v1/item-inventory-assemblies";
+    protected override string ListPath => "/api/v1/items-inventory-assembly";
     protected override string SingularPath => "/api/v1/item-inventory-assembly/{id}";
 }
 
 public sealed class ItemNonInventoryResource : ResourceBase
 {
     internal ItemNonInventoryResource(NxusHttpTransport t) : base(t) { }
-    protected override string ListPath => "/api/v1/item-non-inventories";
+    protected override string ListPath => "/api/v1/items-non-inventory";
     protected override string SingularPath => "/api/v1/item-non-inventory/{id}";
 }
 
 public sealed class ItemOtherChargesResource : ResourceBase
 {
     internal ItemOtherChargesResource(NxusHttpTransport t) : base(t) { }
-    protected override string ListPath => "/api/v1/item-other-charges";
+    protected override string ListPath => "/api/v1/items-other-charge";
     protected override string SingularPath => "/api/v1/item-other-charge/{id}";
 }
 
@@ -395,28 +398,28 @@ public sealed class ItemPaymentsResource : ResourceBase
 public sealed class ItemSalesTaxResource : ResourceBase
 {
     internal ItemSalesTaxResource(NxusHttpTransport t) : base(t) { }
-    protected override string ListPath => "/api/v1/item-sales-taxes";
+    protected override string ListPath => "/api/v1/items-sales-tax";
     protected override string SingularPath => "/api/v1/item-sales-tax/{id}";
 }
 
 public sealed class ItemSalesTaxGroupsResource : ResourceBase
 {
     internal ItemSalesTaxGroupsResource(NxusHttpTransport t) : base(t) { }
-    protected override string ListPath => "/api/v1/item-sales-tax-groups";
+    protected override string ListPath => "/api/v1/items-sales-tax-group";
     protected override string SingularPath => "/api/v1/item-sales-tax-group/{id}";
 }
 
 public sealed class ServiceItemsResource : ResourceBase
 {
     internal ServiceItemsResource(NxusHttpTransport t) : base(t) { }
-    protected override string ListPath => "/api/v1/service-items";
-    protected override string SingularPath => "/api/v1/service-item/{id}";
+    protected override string ListPath => "/api/v1/items-service";
+    protected override string SingularPath => "/api/v1/item-service/{id}";
 }
 
 public sealed class ItemSubtotalsResource : ResourceBase
 {
     internal ItemSubtotalsResource(NxusHttpTransport t) : base(t) { }
-    protected override string ListPath => "/api/v1/item-subtotals";
+    protected override string ListPath => "/api/v1/items-subtotal";
     protected override string SingularPath => "/api/v1/item-subtotal/{id}";
 }
 
