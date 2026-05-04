@@ -10,7 +10,7 @@
 
     <!-- NuGet Package Metadata -->
     <PackageId>Nxus.Qbd</PackageId>
-    <Version>0.2.2</Version>
+    <Version>0.3.0</Version>
     <Authors>Nxus</Authors>
     <Company>Nxus</Company>
     <Description>Official .NET SDK for the Nxus QuickBooks Desktop API. Provides typed clients, cursor-based auto-pagination, and structured error handling.</Description>
