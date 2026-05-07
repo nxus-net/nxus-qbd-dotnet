@@ -33,6 +33,7 @@ public abstract class ResourceBase {
                 ? null
                 : new Dictionary<string, string>(options.Headers),
             Timeout = options.Timeout,
+            MaxRetries = options.MaxRetries,
         };
     }
 

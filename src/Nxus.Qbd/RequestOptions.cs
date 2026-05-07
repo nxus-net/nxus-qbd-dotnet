@@ -21,6 +21,12 @@ public sealed class RequestOptions {
     public TimeSpan? Timeout { get; init; }
 
     /// <summary>
+    /// Override the maximum retry count for this request. Set to 0 to disable
+    /// retries for this call.
+    /// </summary>
+    public int? MaxRetries { get; init; }
+
+    /// <summary>
     /// Override for the <c>X-Nxus-Timeout-Seconds</c> header on this request.
     /// Tells the server how long to wait for the queued QuickBooks Desktop job
     /// to complete before returning a 504. The server enforces operation-

@@ -35,6 +35,28 @@ public sealed class NxusClientOptions {
     public TimeSpan Timeout { get; init; } = TimeSpan.FromSeconds(30);
 
     /// <summary>
+    /// Maximum number of automatic retry attempts on transient failures.
+    /// Defaults to 2 (3 total attempts). Set to 0 to disable retries.
+    ///
+    /// The <c>x-should-retry</c> response header is the primary signal:
+    /// <c>true</c> opts the response into retry even for unusual statuses;
+    /// <c>false</c> vetoes retry even for normally-retryable statuses.
+    ///
+    /// When the header is absent, the SDK falls back to retrying network
+    /// errors, HTTP 408 / 429, and HTTP 5xx. <c>409</c> is intentionally not
+    /// in the fallback retry set: the API overloads it for both retryable
+    /// lock contention (<c>ObjectInUse</c>, <c>LockFailed</c>) and terminal
+    /// business-rule violations (<c>OutdatedEditSequence</c>,
+    /// <c>NameNotUnique</c>). Without <c>x-should-retry</c> to disambiguate,
+    /// the safe default is to surface the error to the caller.
+    ///
+    /// For backoff the SDK reads the standard <c>Retry-After</c> header,
+    /// falling back to <c>error.retryAfter</c> (seconds) in the JSON body.
+    /// Local timeouts and caller cancellations are not retried.
+    /// </summary>
+    public int MaxRetries { get; init; } = 2;
+
+    /// <summary>
     /// Optional default Connection ID header sent with every request.
     /// Can be overridden per-call via <see cref="RequestOptions.ConnectionId"/>.
     /// </summary>
