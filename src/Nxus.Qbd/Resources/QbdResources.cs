@@ -6,14 +6,14 @@ namespace Nxus.Qbd.Resources;
 // Transactions
 // ═══════════════════════════════════════════════════════════════════════
 
-public sealed class ArRefundCreditCardsResource : ResourceBase
+public sealed class ArRefundCreditCardsResource : VoidableResourceBase
 {
     internal ArRefundCreditCardsResource(NxusHttpTransport t) : base(t) { }
     protected override string ListPath => "/api/v1/ar-refund-credit-cards";
     protected override string SingularPath => "/api/v1/ar-refund-credit-card/{id}";
 }
 
-public sealed class BillsResource : ResourceBase
+public sealed class BillsResource : VoidableResourceBase
 {
     internal BillsResource(NxusHttpTransport t) : base(t) { }
     protected override string ListPath => "/api/v1/bills";
@@ -27,56 +27,56 @@ public sealed class BuildAssembliesResource : ResourceBase
     protected override string SingularPath => "/api/v1/build-assembly/{id}";
 }
 
-public sealed class ChargesResource : ResourceBase
+public sealed class ChargesResource : VoidableResourceBase
 {
     internal ChargesResource(NxusHttpTransport t) : base(t) { }
     protected override string ListPath => "/api/v1/charges";
     protected override string SingularPath => "/api/v1/charge/{id}";
 }
 
-public sealed class CheckBillsResource : ResourceBase
+public sealed class CheckBillsResource : VoidableResourceBase
 {
     internal CheckBillsResource(NxusHttpTransport t) : base(t) { }
     protected override string ListPath => "/api/v1/check-bills";
     protected override string SingularPath => "/api/v1/check-bill/{id}";
 }
 
-public sealed class ChecksResource : ResourceBase
+public sealed class ChecksResource : VoidableResourceBase
 {
     internal ChecksResource(NxusHttpTransport t) : base(t) { }
     protected override string ListPath => "/api/v1/checks";
     protected override string SingularPath => "/api/v1/check/{id}";
 }
 
-public sealed class CreditCardBillsResource : ResourceBase
+public sealed class CreditCardBillsResource : VoidableResourceBase
 {
     internal CreditCardBillsResource(NxusHttpTransport t) : base(t) { }
     protected override string ListPath => "/api/v1/credit-card-bills";
     protected override string SingularPath => "/api/v1/credit-card-bill/{id}";
 }
 
-public sealed class CreditCardChargesResource : ResourceBase
+public sealed class CreditCardChargesResource : VoidableResourceBase
 {
     internal CreditCardChargesResource(NxusHttpTransport t) : base(t) { }
     protected override string ListPath => "/api/v1/credit-card-charges";
     protected override string SingularPath => "/api/v1/credit-card-charge/{id}";
 }
 
-public sealed class CreditCardCreditsResource : ResourceBase
+public sealed class CreditCardCreditsResource : VoidableResourceBase
 {
     internal CreditCardCreditsResource(NxusHttpTransport t) : base(t) { }
     protected override string ListPath => "/api/v1/credit-card-credits";
     protected override string SingularPath => "/api/v1/credit-card-credit/{id}";
 }
 
-public sealed class CreditMemosResource : ResourceBase
+public sealed class CreditMemosResource : VoidableResourceBase
 {
     internal CreditMemosResource(NxusHttpTransport t) : base(t) { }
     protected override string ListPath => "/api/v1/credit-memos";
     protected override string SingularPath => "/api/v1/credit-memo/{id}";
 }
 
-public sealed class DepositsResource : ResourceBase
+public sealed class DepositsResource : VoidableResourceBase
 {
     internal DepositsResource(NxusHttpTransport t) : base(t) { }
     protected override string ListPath => "/api/v1/deposits";
@@ -90,28 +90,28 @@ public sealed class EstimatesResource : ResourceBase
     protected override string SingularPath => "/api/v1/estimate/{id}";
 }
 
-public sealed class InventoryAdjustmentsResource : ResourceBase
+public sealed class InventoryAdjustmentsResource : VoidableResourceBase
 {
     internal InventoryAdjustmentsResource(NxusHttpTransport t) : base(t) { }
     protected override string ListPath => "/api/v1/inventory-adjustments";
     protected override string SingularPath => "/api/v1/inventory-adjustment/{id}";
 }
 
-public sealed class InvoicesResource : ResourceBase
+public sealed class InvoicesResource : VoidableResourceBase
 {
     internal InvoicesResource(NxusHttpTransport t) : base(t) { }
     protected override string ListPath => "/api/v1/invoices";
     protected override string SingularPath => "/api/v1/invoice/{id}";
 }
 
-public sealed class ItemReceiptsResource : ResourceBase
+public sealed class ItemReceiptsResource : VoidableResourceBase
 {
     internal ItemReceiptsResource(NxusHttpTransport t) : base(t) { }
     protected override string ListPath => "/api/v1/item-receipts";
     protected override string SingularPath => "/api/v1/item-receipt/{id}";
 }
 
-public sealed class JournalEntriesResource : ResourceBase
+public sealed class JournalEntriesResource : VoidableResourceBase
 {
     internal JournalEntriesResource(NxusHttpTransport t) : base(t) { }
     protected override string ListPath => "/api/v1/journal-entries";
@@ -132,7 +132,7 @@ public sealed class ReceivePaymentsResource : ResourceBase
     protected override string SingularPath => "/api/v1/receive-payment/{id}";
 }
 
-public sealed class SalesReceiptsResource : ResourceBase
+public sealed class SalesReceiptsResource : VoidableResourceBase
 {
     internal SalesReceiptsResource(NxusHttpTransport t) : base(t) { }
     protected override string ListPath => "/api/v1/sales-receipts";
@@ -160,7 +160,7 @@ public sealed class TransactionsResource : ResourceBase
     protected override string SingularPath => "/api/v1/transaction/{id}";
 }
 
-public sealed class VendorCreditsResource : ResourceBase
+public sealed class VendorCreditsResource : VoidableResourceBase
 {
     internal VendorCreditsResource(NxusHttpTransport t) : base(t) { }
     protected override string ListPath => "/api/v1/vendor-credits";

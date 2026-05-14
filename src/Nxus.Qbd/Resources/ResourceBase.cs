@@ -1,4 +1,5 @@
 using System.Text.Json;
+using Nxus.Qbd.Models;
 using Nxus.Qbd.Pagination;
 using Nxus.Qbd.Transport;
 
@@ -9,7 +10,7 @@ namespace Nxus.Qbd.Resources;
 /// concrete resources compose via simple path configuration.
 /// </summary>
 public abstract class ResourceBase {
-    private readonly NxusHttpTransport _transport;
+    private protected readonly NxusHttpTransport _transport;
 
     /// <summary>Plural path for list operations (e.g. <c>/api/v1/vendors</c>).</summary>
     protected abstract string ListPath { get; }
@@ -124,4 +125,38 @@ public abstract class ResourceBase {
     /// <summary>Delete a resource by ID (async).</summary>
     public Task<JsonElement> DeleteAsync(string id, RequestOptions? options = null, CancellationToken ct = default) =>
         _transport.RequestAsync(HttpMethod.Delete, SingularPath.Replace("{id}", id), options: options, ct: ct);
+}
+
+/// <summary>
+/// Base class for transaction resources that support the
+/// <c>POST /{resource}/{id}/void</c> endpoint. The record is retained in
+/// QuickBooks but marked as voided with a zero amount.
+/// </summary>
+public abstract class VoidableResourceBase : ResourceBase {
+    internal VoidableResourceBase(NxusHttpTransport transport) : base(transport) { }
+
+    private static readonly JsonSerializerOptions VoidResponseOptions = new JsonSerializerOptions {
+        PropertyNameCaseInsensitive = true,
+    };
+
+    /// <summary>Void a transaction by ID.</summary>
+    public VoidResponse Void(string id, RequestOptions? options = null) {
+        var body = _transport.Request(
+            HttpMethod.Post,
+            SingularPath.Replace("{id}", id) + "/void",
+            options: options);
+        return body.Deserialize<VoidResponse>(VoidResponseOptions)
+            ?? throw new InvalidOperationException("Void endpoint returned no body.");
+    }
+
+    /// <summary>Void a transaction by ID (async).</summary>
+    public async Task<VoidResponse> VoidAsync(string id, RequestOptions? options = null, CancellationToken ct = default) {
+        var body = await _transport.RequestAsync(
+            HttpMethod.Post,
+            SingularPath.Replace("{id}", id) + "/void",
+            options: options,
+            ct: ct).ConfigureAwait(false);
+        return body.Deserialize<VoidResponse>(VoidResponseOptions)
+            ?? throw new InvalidOperationException("Void endpoint returned no body.");
+    }
 }
