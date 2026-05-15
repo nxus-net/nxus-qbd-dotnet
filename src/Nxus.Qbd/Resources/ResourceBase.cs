@@ -137,6 +137,7 @@ public abstract class VoidableResourceBase : ResourceBase {
 
     private static readonly JsonSerializerOptions VoidResponseOptions = new JsonSerializerOptions {
         PropertyNameCaseInsensitive = true,
+        Converters = { new VoidResponseJsonConverter() },
     };
 
     /// <summary>Void a transaction by ID.</summary>
