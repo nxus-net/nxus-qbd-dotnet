@@ -34,7 +34,7 @@ namespace Nxus.Qbd.Models
         /// Initializes a new instance of the <see cref="UpdatePurchaseOrderRequest" /> class.
         /// </summary>
         /// <param name="revisionNumber">revisionNumber</param>
-        /// <param name="vendorId">Filter by Vendor ID.</param>
+        /// <param name="vendorId">(Optional) The ListID or FullName of the Vendor for this Purchase Order. Follows the Flattened-ID Pattern for VendorRef.</param>
         /// <param name="classId">(Optional) The ListID or FullName of the class associated with the transaction header. Follows the Flattened-ID Pattern for ClassRef.</param>
         /// <param name="inventorySiteId">(Optional) The ListID or FullName of the primary inventory site for this PO. Follows the Flattened-ID Pattern for InventorySiteRef.</param>
         /// <param name="shipToEntityId">(Optional) The ListID or FullName of the entity (Customer/Vendor) where items are shipped. Follows the Flattened-ID Pattern for ShipToEntityRef.</param>
@@ -109,10 +109,9 @@ namespace Nxus.Qbd.Models
         public Option<string?> VendorIdOption { get; private set; }
 
         /// <summary>
-        /// Filter by Vendor ID.
+        /// (Optional) The ListID or FullName of the Vendor for this Purchase Order. Follows the Flattened-ID Pattern for VendorRef.
         /// </summary>
-        /// <value>Filter by Vendor ID.</value>
-        /* <example>10000001-1039043346</example> */
+        /// <value>(Optional) The ListID or FullName of the Vendor for this Purchase Order. Follows the Flattened-ID Pattern for VendorRef.</value>
         [JsonPropertyName("vendorId")]
         public string? VendorId { get { return this.VendorIdOption.Value; } set { this.VendorIdOption = new(value); } }
 
@@ -508,27 +507,33 @@ namespace Nxus.Qbd.Models
         IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
             // VendorId (string) maxLength
-            if (this.VendorId != null && this.VendorId.Length > 50)
+            if (this.VendorId != null && this.VendorId.Length > 41)
             {
-                yield return new ValidationResult("Invalid value for VendorId, length must be less than 50.", new [] { "VendorId" });
+                yield return new ValidationResult("Invalid value for VendorId, length must be less than 41.", new [] { "VendorId" });
             }
 
             // ClassId (string) maxLength
-            if (this.ClassId != null && this.ClassId.Length > 50)
+            if (this.ClassId != null && this.ClassId.Length > 159)
             {
-                yield return new ValidationResult("Invalid value for ClassId, length must be less than 50.", new [] { "ClassId" });
+                yield return new ValidationResult("Invalid value for ClassId, length must be less than 159.", new [] { "ClassId" });
             }
 
             // InventorySiteId (string) maxLength
-            if (this.InventorySiteId != null && this.InventorySiteId.Length > 50)
+            if (this.InventorySiteId != null && this.InventorySiteId.Length > 31)
             {
-                yield return new ValidationResult("Invalid value for InventorySiteId, length must be less than 50.", new [] { "InventorySiteId" });
+                yield return new ValidationResult("Invalid value for InventorySiteId, length must be less than 31.", new [] { "InventorySiteId" });
             }
 
             // ShipToEntityId (string) maxLength
-            if (this.ShipToEntityId != null && this.ShipToEntityId.Length > 50)
+            if (this.ShipToEntityId != null && this.ShipToEntityId.Length > 209)
             {
-                yield return new ValidationResult("Invalid value for ShipToEntityId, length must be less than 50.", new [] { "ShipToEntityId" });
+                yield return new ValidationResult("Invalid value for ShipToEntityId, length must be less than 209.", new [] { "ShipToEntityId" });
+            }
+
+            // TemplateId (string) maxLength
+            if (this.TemplateId != null && this.TemplateId.Length > 31)
+            {
+                yield return new ValidationResult("Invalid value for TemplateId, length must be less than 31.", new [] { "TemplateId" });
             }
 
             // RefNumber (string) maxLength
@@ -538,15 +543,15 @@ namespace Nxus.Qbd.Models
             }
 
             // TermsId (string) maxLength
-            if (this.TermsId != null && this.TermsId.Length > 50)
+            if (this.TermsId != null && this.TermsId.Length > 31)
             {
-                yield return new ValidationResult("Invalid value for TermsId, length must be less than 50.", new [] { "TermsId" });
+                yield return new ValidationResult("Invalid value for TermsId, length must be less than 31.", new [] { "TermsId" });
             }
 
             // ShipMethodId (string) maxLength
-            if (this.ShipMethodId != null && this.ShipMethodId.Length > 50)
+            if (this.ShipMethodId != null && this.ShipMethodId.Length > 15)
             {
-                yield return new ValidationResult("Invalid value for ShipMethodId, length must be less than 50.", new [] { "ShipMethodId" });
+                yield return new ValidationResult("Invalid value for ShipMethodId, length must be less than 15.", new [] { "ShipMethodId" });
             }
 
             // Fob (string) maxLength
@@ -568,9 +573,21 @@ namespace Nxus.Qbd.Models
             }
 
             // SalesTaxCodeId (string) maxLength
-            if (this.SalesTaxCodeId != null && this.SalesTaxCodeId.Length > 50)
+            if (this.SalesTaxCodeId != null && this.SalesTaxCodeId.Length > 3)
             {
-                yield return new ValidationResult("Invalid value for SalesTaxCodeId, length must be less than 50.", new [] { "SalesTaxCodeId" });
+                yield return new ValidationResult("Invalid value for SalesTaxCodeId, length must be less than 3.", new [] { "SalesTaxCodeId" });
+            }
+
+            // Other1 (string) maxLength
+            if (this.Other1 != null && this.Other1.Length > 25)
+            {
+                yield return new ValidationResult("Invalid value for Other1, length must be less than 25.", new [] { "Other1" });
+            }
+
+            // Other2 (string) maxLength
+            if (this.Other2 != null && this.Other2.Length > 29)
+            {
+                yield return new ValidationResult("Invalid value for Other2, length must be less than 29.", new [] { "Other2" });
             }
 
             yield break;

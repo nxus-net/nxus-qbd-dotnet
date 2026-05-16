@@ -516,6 +516,102 @@ namespace Nxus.Qbd.Models
         /// <returns>Validation Result</returns>
         IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
+            // CustomerId (string) maxLength
+            if (this.CustomerId != null && this.CustomerId.Length > 50)
+            {
+                yield return new ValidationResult("Invalid value for CustomerId, length must be less than 50.", new [] { "CustomerId" });
+            }
+
+            // CustomerId (string) minLength
+            if (this.CustomerId != null && this.CustomerId.Length < 1)
+            {
+                yield return new ValidationResult("Invalid value for CustomerId, length must be greater than 1.", new [] { "CustomerId" });
+            }
+
+            // ClassId (string) maxLength
+            if (this.ClassId != null && this.ClassId.Length > 50)
+            {
+                yield return new ValidationResult("Invalid value for ClassId, length must be less than 50.", new [] { "ClassId" });
+            }
+
+            // TemplateId (string) maxLength
+            if (this.TemplateId != null && this.TemplateId.Length > 50)
+            {
+                yield return new ValidationResult("Invalid value for TemplateId, length must be less than 50.", new [] { "TemplateId" });
+            }
+
+            // RefNumber (string) maxLength
+            if (this.RefNumber != null && this.RefNumber.Length > 11)
+            {
+                yield return new ValidationResult("Invalid value for RefNumber, length must be less than 11.", new [] { "RefNumber" });
+            }
+
+            // CheckNumber (string) maxLength
+            if (this.CheckNumber != null && this.CheckNumber.Length > 25)
+            {
+                yield return new ValidationResult("Invalid value for CheckNumber, length must be less than 25.", new [] { "CheckNumber" });
+            }
+
+            // PaymentMethodId (string) maxLength
+            if (this.PaymentMethodId != null && this.PaymentMethodId.Length > 50)
+            {
+                yield return new ValidationResult("Invalid value for PaymentMethodId, length must be less than 50.", new [] { "PaymentMethodId" });
+            }
+
+            // SalesRepresentativeId (string) maxLength
+            if (this.SalesRepresentativeId != null && this.SalesRepresentativeId.Length > 50)
+            {
+                yield return new ValidationResult("Invalid value for SalesRepresentativeId, length must be less than 50.", new [] { "SalesRepresentativeId" });
+            }
+
+            // ShipMethodId (string) maxLength
+            if (this.ShipMethodId != null && this.ShipMethodId.Length > 50)
+            {
+                yield return new ValidationResult("Invalid value for ShipMethodId, length must be less than 50.", new [] { "ShipMethodId" });
+            }
+
+            // ShipmentOrigin (string) maxLength
+            if (this.ShipmentOrigin != null && this.ShipmentOrigin.Length > 13)
+            {
+                yield return new ValidationResult("Invalid value for ShipmentOrigin, length must be less than 13.", new [] { "ShipmentOrigin" });
+            }
+
+            // ItemSalesTaxId (string) maxLength
+            if (this.ItemSalesTaxId != null && this.ItemSalesTaxId.Length > 50)
+            {
+                yield return new ValidationResult("Invalid value for ItemSalesTaxId, length must be less than 50.", new [] { "ItemSalesTaxId" });
+            }
+
+            // Memo (string) maxLength
+            if (this.Memo != null && this.Memo.Length > 4095)
+            {
+                yield return new ValidationResult("Invalid value for Memo, length must be less than 4095.", new [] { "Memo" });
+            }
+
+            // CustomerMessageId (string) maxLength
+            if (this.CustomerMessageId != null && this.CustomerMessageId.Length > 50)
+            {
+                yield return new ValidationResult("Invalid value for CustomerMessageId, length must be less than 50.", new [] { "CustomerMessageId" });
+            }
+
+            // CustomerSalesTaxCodeId (string) maxLength
+            if (this.CustomerSalesTaxCodeId != null && this.CustomerSalesTaxCodeId.Length > 50)
+            {
+                yield return new ValidationResult("Invalid value for CustomerSalesTaxCodeId, length must be less than 50.", new [] { "CustomerSalesTaxCodeId" });
+            }
+
+            // DepositToAccountId (string) maxLength
+            if (this.DepositToAccountId != null && this.DepositToAccountId.Length > 50)
+            {
+                yield return new ValidationResult("Invalid value for DepositToAccountId, length must be less than 50.", new [] { "DepositToAccountId" });
+            }
+
+            // OtherCustomerField (string) maxLength
+            if (this.OtherCustomerField != null && this.OtherCustomerField.Length > 29)
+            {
+                yield return new ValidationResult("Invalid value for OtherCustomerField, length must be less than 29.", new [] { "OtherCustomerField" });
+            }
+
             yield break;
         }
     }

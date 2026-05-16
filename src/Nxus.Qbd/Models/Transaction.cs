@@ -41,11 +41,11 @@ namespace Nxus.Qbd.Models
         /// <param name="transactionDate">transactionDate</param>
         /// <param name="currency">currency</param>
         /// <param name="exchangeRate">exchangeRate</param>
-        /// <param name="refNumber">refNumber</param>
+        /// <param name="refNumber">The primary reference number for the transaction (e.g., Invoice #, Check #).</param>
         /// <param name="memo">memo</param>
         /// <param name="transactionType">transactionType</param>
         /// <param name="transactionLineId">transactionLineId</param>
-        /// <param name="entity">The entity associated with this transaction (Customer, Vendor, Employee, etc.)</param>
+        /// <param name="entity">entity</param>
         /// <param name="amount">amount</param>
         /// <param name="account">account</param>
         /// <param name="amountInHomeCurrency">amountInHomeCurrency</param>
@@ -171,8 +171,9 @@ namespace Nxus.Qbd.Models
         public Option<string?> RefNumberOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets RefNumber
+        /// The primary reference number for the transaction (e.g., Invoice #, Check #).
         /// </summary>
+        /// <value>The primary reference number for the transaction (e.g., Invoice #, Check #).</value>
         [JsonPropertyName("refNumber")]
         public string? RefNumber { get { return this.RefNumberOption.Value; } set { this.RefNumberOption = new(value); } }
 
@@ -223,9 +224,8 @@ namespace Nxus.Qbd.Models
         public Option<QbdRef?> EntityOption { get; private set; }
 
         /// <summary>
-        /// The entity associated with this transaction (Customer, Vendor, Employee, etc.)
+        /// Gets or Sets Entity
         /// </summary>
-        /// <value>The entity associated with this transaction (Customer, Vendor, Employee, etc.)</value>
         [JsonPropertyName("entity")]
         public QbdRef? Entity { get { return this.EntityOption.Value; } set { this.EntityOption = new(value); } }
 

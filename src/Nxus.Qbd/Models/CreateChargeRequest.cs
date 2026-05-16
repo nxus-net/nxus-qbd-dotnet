@@ -26,7 +26,7 @@ using Nxus.Qbd.Json;
 namespace Nxus.Qbd.Models
 {
     /// <summary>
-    /// Request model for creating a new Charge transaction.  Based on the ChargeAddRq QBXML type.
+    /// Request model for creating a new Charge transaction.
     /// </summary>
     public partial class CreateChargeRequest : IValidatableObject
     {
@@ -349,6 +349,48 @@ namespace Nxus.Qbd.Models
         /// <returns>Validation Result</returns>
         IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
+            // CustomerId (string) minLength
+            if (this.CustomerId != null && this.CustomerId.Length < 1)
+            {
+                yield return new ValidationResult("Invalid value for CustomerId, length must be greater than 1.", new [] { "CustomerId" });
+            }
+
+            // ItemId (string) minLength
+            if (this.ItemId != null && this.ItemId.Length < 1)
+            {
+                yield return new ValidationResult("Invalid value for ItemId, length must be greater than 1.", new [] { "ItemId" });
+            }
+
+            // ExternalId (string) maxLength
+            if (this.ExternalId != null && this.ExternalId.Length > 36)
+            {
+                yield return new ValidationResult("Invalid value for ExternalId, length must be less than 36.", new [] { "ExternalId" });
+            }
+
+            // RefNumber (string) maxLength
+            if (this.RefNumber != null && this.RefNumber.Length > 11)
+            {
+                yield return new ValidationResult("Invalid value for RefNumber, length must be less than 11.", new [] { "RefNumber" });
+            }
+
+            // Quantity (double) minimum
+            if (this.QuantityOption.IsSet && this.QuantityOption.Value < (double)0)
+            {
+                yield return new ValidationResult("Invalid value for Quantity, must be a value greater than 0.", new [] { "Quantity" });
+            }
+
+            // UnitOfMeasure (string) maxLength
+            if (this.UnitOfMeasure != null && this.UnitOfMeasure.Length > 31)
+            {
+                yield return new ValidationResult("Invalid value for UnitOfMeasure, length must be less than 31.", new [] { "UnitOfMeasure" });
+            }
+
+            // Description (string) maxLength
+            if (this.Description != null && this.Description.Length > 4095)
+            {
+                yield return new ValidationResult("Invalid value for Description, length must be less than 4095.", new [] { "Description" });
+            }
+
             yield break;
         }
     }

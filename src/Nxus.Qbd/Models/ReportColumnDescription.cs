@@ -34,7 +34,7 @@ namespace Nxus.Qbd.Models
         /// Initializes a new instance of the <see cref="ReportColumnDescription" /> class.
         /// </summary>
         /// <param name="id">id</param>
-        /// <param name="dataType">The data type of the column.</param>
+        /// <param name="dataType">Data type of the column (e.g., \&quot;string\&quot;, \&quot;number\&quot;, \&quot;date\&quot;).</param>
         /// <param name="type">type</param>
         /// <param name="columnTitles">columnTitles</param>
         [JsonConstructor]
@@ -63,9 +63,9 @@ namespace Nxus.Qbd.Models
         public Option<string?> DataTypeOption { get; private set; }
 
         /// <summary>
-        /// The data type of the column.
+        /// Data type of the column (e.g., \&quot;string\&quot;, \&quot;number\&quot;, \&quot;date\&quot;).
         /// </summary>
-        /// <value>The data type of the column.</value>
+        /// <value>Data type of the column (e.g., \&quot;string\&quot;, \&quot;number\&quot;, \&quot;date\&quot;).</value>
         [JsonPropertyName("dataType")]
         public string? DataType { get { return this.DataTypeOption.Value; } set { this.DataTypeOption = new(value); } }
 

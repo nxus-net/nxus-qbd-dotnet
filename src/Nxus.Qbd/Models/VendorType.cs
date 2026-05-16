@@ -38,11 +38,11 @@ namespace Nxus.Qbd.Models
         /// <param name="updatedAt">updatedAt</param>
         /// <param name="revisionNumber">revisionNumber</param>
         /// <param name="objectType">objectType</param>
-        /// <param name="name">(Required) The name of the vendor type. (Max 31 characters)</param>
-        /// <param name="fullname">The fully-qualified unique name for this object, formed by combining the names of its parent objects with its own &#x60;name&#x60;, separated by colons. Not case-sensitive.</param>
+        /// <param name="name">The primary display name for the List object (e.g., Customer Name, Vendor Name).</param>
+        /// <param name="fullname">fullname</param>
         /// <param name="parent">parent</param>
         /// <param name="sublevel">sublevel</param>
-        /// <param name="isActive">(Optional) If false, this Vendor Type is inactive. Default is true.</param>
+        /// <param name="isActive">Indicates whether the list item is active. Common to all list types.</param>
         /// <param name="customFields">customFields</param>
         [JsonConstructor]
         public VendorType(string id, DateTimeOffset createdAt, DateTimeOffset updatedAt, string revisionNumber, Option<string?> objectType = default, Option<string?> name = default, Option<string?> fullname = default, Option<QbdRef?> parent = default, Option<int?> sublevel = default, Option<bool?> isActive = default, Option<List<QbdDataExt>?> customFields = default)
@@ -108,9 +108,9 @@ namespace Nxus.Qbd.Models
         public Option<string?> NameOption { get; private set; }
 
         /// <summary>
-        /// (Required) The name of the vendor type. (Max 31 characters)
+        /// The primary display name for the List object (e.g., Customer Name, Vendor Name).
         /// </summary>
-        /// <value>(Required) The name of the vendor type. (Max 31 characters)</value>
+        /// <value>The primary display name for the List object (e.g., Customer Name, Vendor Name).</value>
         [JsonPropertyName("name")]
         public string? Name { get { return this.NameOption.Value; } set { this.NameOption = new(value); } }
 
@@ -122,9 +122,8 @@ namespace Nxus.Qbd.Models
         public Option<string?> FullnameOption { get; private set; }
 
         /// <summary>
-        /// The fully-qualified unique name for this object, formed by combining the names of its parent objects with its own &#x60;name&#x60;, separated by colons. Not case-sensitive.
+        /// Gets or Sets Fullname
         /// </summary>
-        /// <value>The fully-qualified unique name for this object, formed by combining the names of its parent objects with its own &#x60;name&#x60;, separated by colons. Not case-sensitive.</value>
         [JsonPropertyName("fullname")]
         public string? Fullname { get { return this.FullnameOption.Value; } set { this.FullnameOption = new(value); } }
 
@@ -162,9 +161,9 @@ namespace Nxus.Qbd.Models
         public Option<bool?> IsActiveOption { get; private set; }
 
         /// <summary>
-        /// (Optional) If false, this Vendor Type is inactive. Default is true.
+        /// Indicates whether the list item is active. Common to all list types.
         /// </summary>
-        /// <value>(Optional) If false, this Vendor Type is inactive. Default is true.</value>
+        /// <value>Indicates whether the list item is active. Common to all list types.</value>
         [JsonPropertyName("isActive")]
         public bool? IsActive { get { return this.IsActiveOption.Value; } set { this.IsActiveOption = new(value); } }
 

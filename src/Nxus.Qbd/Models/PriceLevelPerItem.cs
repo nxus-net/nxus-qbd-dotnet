@@ -33,9 +33,9 @@ namespace Nxus.Qbd.Models
         /// <summary>
         /// Initializes a new instance of the <see cref="PriceLevelPerItem" /> class.
         /// </summary>
-        /// <param name="item">The item this pricing rule applies to.</param>
-        /// <param name="customPrice">The custom price for this item (mutually exclusive with CustomPricePercent).</param>
-        /// <param name="customPricePercent">The custom price as a percentage (mutually exclusive with CustomPrice).</param>
+        /// <param name="item">item</param>
+        /// <param name="customPrice">customPrice</param>
+        /// <param name="customPricePercent">customPricePercent</param>
         [JsonConstructor]
         public PriceLevelPerItem(Option<QbdRef?> item = default, Option<double?> customPrice = default, Option<double?> customPricePercent = default)
         {
@@ -55,9 +55,8 @@ namespace Nxus.Qbd.Models
         public Option<QbdRef?> ItemOption { get; private set; }
 
         /// <summary>
-        /// The item this pricing rule applies to.
+        /// Gets or Sets Item
         /// </summary>
-        /// <value>The item this pricing rule applies to.</value>
         [JsonPropertyName("item")]
         public QbdRef? Item { get { return this.ItemOption.Value; } set { this.ItemOption = new(value); } }
 
@@ -69,9 +68,8 @@ namespace Nxus.Qbd.Models
         public Option<double?> CustomPriceOption { get; private set; }
 
         /// <summary>
-        /// The custom price for this item (mutually exclusive with CustomPricePercent).
+        /// Gets or Sets CustomPrice
         /// </summary>
-        /// <value>The custom price for this item (mutually exclusive with CustomPricePercent).</value>
         [JsonPropertyName("customPrice")]
         public double? CustomPrice { get { return this.CustomPriceOption.Value; } set { this.CustomPriceOption = new(value); } }
 
@@ -83,9 +81,8 @@ namespace Nxus.Qbd.Models
         public Option<double?> CustomPricePercentOption { get; private set; }
 
         /// <summary>
-        /// The custom price as a percentage (mutually exclusive with CustomPrice).
+        /// Gets or Sets CustomPricePercent
         /// </summary>
-        /// <value>The custom price as a percentage (mutually exclusive with CustomPrice).</value>
         [JsonPropertyName("customPricePercent")]
         public double? CustomPricePercent { get { return this.CustomPricePercentOption.Value; } set { this.CustomPricePercentOption = new(value); } }
 

@@ -28,10 +28,10 @@ namespace Nxus.Qbd.Models
     /// <summary>
     /// Simple paginated response designed for SDK consumption  Clean, predictable structure perfect for automated pagination handling
     /// </summary>
-    public partial class BasePageResponseCheckBill : IValidatableObject
+    public partial class BasePageResponseCreditCardBillPayment : IValidatableObject
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="BasePageResponseCheckBill" /> class.
+        /// Initializes a new instance of the <see cref="BasePageResponseCreditCardBillPayment" /> class.
         /// </summary>
         /// <param name="requestId">requestId</param>
         /// <param name="success">success</param>
@@ -39,14 +39,14 @@ namespace Nxus.Qbd.Models
         /// <param name="nextCursor">nextCursor</param>
         /// <param name="page">page</param>
         /// <param name="count">count</param>
-        /// <param name="limit">The maximum number of items to return in a single response.</param>
+        /// <param name="limit">limit</param>
         /// <param name="totalCount">totalCount</param>
         /// <param name="pageCount">pageCount</param>
         /// <param name="hasMore">hasMore</param>
         /// <param name="timestamp">timestamp</param>
         /// <param name="remainingCount">remainingCount</param>
         [JsonConstructor]
-        public BasePageResponseCheckBill(Option<string?> requestId = default, Option<bool?> success = default, Option<List<CheckBill>?> data = default, Option<string?> nextCursor = default, Option<int?> page = default, Option<int?> count = default, Option<int?> limit = default, Option<int?> totalCount = default, Option<int?> pageCount = default, Option<bool?> hasMore = default, Option<DateTimeOffset?> timestamp = default, Option<int?> remainingCount = default)
+        public BasePageResponseCreditCardBillPayment(Option<string?> requestId = default, Option<bool?> success = default, Option<List<CreditCardBillPayment>?> data = default, Option<string?> nextCursor = default, Option<int?> page = default, Option<int?> count = default, Option<int?> limit = default, Option<int?> totalCount = default, Option<int?> pageCount = default, Option<bool?> hasMore = default, Option<DateTimeOffset?> timestamp = default, Option<int?> remainingCount = default)
         {
             RequestIdOption = requestId;
             SuccessOption = success;
@@ -96,13 +96,13 @@ namespace Nxus.Qbd.Models
         /// </summary>
         [JsonIgnore]
         [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<List<CheckBill>?> DataOption { get; private set; }
+        public Option<List<CreditCardBillPayment>?> DataOption { get; private set; }
 
         /// <summary>
         /// Gets or Sets Data
         /// </summary>
         [JsonPropertyName("data")]
-        public List<CheckBill>? Data { get { return this.DataOption.Value; } set { this.DataOption = new(value); } }
+        public List<CreditCardBillPayment>? Data { get { return this.DataOption.Value; } set { this.DataOption = new(value); } }
 
         /// <summary>
         /// Used to track the state of NextCursor
@@ -151,9 +151,8 @@ namespace Nxus.Qbd.Models
         public Option<int?> LimitOption { get; private set; }
 
         /// <summary>
-        /// The maximum number of items to return in a single response.
+        /// Gets or Sets Limit
         /// </summary>
-        /// <value>The maximum number of items to return in a single response.</value>
         [JsonPropertyName("limit")]
         public int? Limit { get { return this.LimitOption.Value; } set { this.LimitOption = new(value); } }
 
@@ -229,7 +228,7 @@ namespace Nxus.Qbd.Models
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append("class BasePageResponseCheckBill {\n");
+            sb.Append("class BasePageResponseCreditCardBillPayment {\n");
             sb.Append("  RequestId: ").Append(RequestId).Append("\n");
             sb.Append("  Success: ").Append(Success).Append("\n");
             sb.Append("  Data: ").Append(Data).Append("\n");
@@ -258,9 +257,9 @@ namespace Nxus.Qbd.Models
     }
 
     /// <summary>
-    /// A Json converter for type <see cref="BasePageResponseCheckBill" />
+    /// A Json converter for type <see cref="BasePageResponseCreditCardBillPayment" />
     /// </summary>
-    public class BasePageResponseCheckBillJsonConverter : JsonConverter<BasePageResponseCheckBill>
+    public class BasePageResponseCreditCardBillPaymentJsonConverter : JsonConverter<BasePageResponseCreditCardBillPayment>
     {
         /// <summary>
         /// The format to use to serialize Timestamp
@@ -268,14 +267,14 @@ namespace Nxus.Qbd.Models
         public static string TimestampFormat { get; set; } = "yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fffffffK";
 
         /// <summary>
-        /// Deserializes json to <see cref="BasePageResponseCheckBill" />
+        /// Deserializes json to <see cref="BasePageResponseCreditCardBillPayment" />
         /// </summary>
         /// <param name="utf8JsonReader"></param>
         /// <param name="typeToConvert"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <returns></returns>
         /// <exception cref="JsonException"></exception>
-        public override BasePageResponseCheckBill Read(ref Utf8JsonReader utf8JsonReader, Type typeToConvert, JsonSerializerOptions jsonSerializerOptions)
+        public override BasePageResponseCreditCardBillPayment Read(ref Utf8JsonReader utf8JsonReader, Type typeToConvert, JsonSerializerOptions jsonSerializerOptions)
         {
             int currentDepth = utf8JsonReader.CurrentDepth;
 
@@ -286,7 +285,7 @@ namespace Nxus.Qbd.Models
 
             Option<string?> requestId = default;
             Option<bool?> success = default;
-            Option<List<CheckBill>?> data = default;
+            Option<List<CreditCardBillPayment>?> data = default;
             Option<string?> nextCursor = default;
             Option<int?> page = default;
             Option<int?> count = default;
@@ -319,7 +318,7 @@ namespace Nxus.Qbd.Models
                             success = new Option<bool?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (bool?)null : utf8JsonReader.GetBoolean());
                             break;
                         case "data":
-                            data = new Option<List<CheckBill>?>(JsonSerializer.Deserialize<List<CheckBill>>(ref utf8JsonReader, jsonSerializerOptions)!);
+                            data = new Option<List<CreditCardBillPayment>?>(JsonSerializer.Deserialize<List<CreditCardBillPayment>>(ref utf8JsonReader, jsonSerializerOptions)!);
                             break;
                         case "nextCursor":
                             nextCursor = new Option<string?>(utf8JsonReader.GetString()!);
@@ -355,111 +354,111 @@ namespace Nxus.Qbd.Models
             }
 
             if (success.IsSet && success.Value == null)
-                throw new ArgumentNullException(nameof(success), "Property is not nullable for class BasePageResponseCheckBill.");
+                throw new ArgumentNullException(nameof(success), "Property is not nullable for class BasePageResponseCreditCardBillPayment.");
 
             if (data.IsSet && data.Value == null)
-                throw new ArgumentNullException(nameof(data), "Property is not nullable for class BasePageResponseCheckBill.");
+                throw new ArgumentNullException(nameof(data), "Property is not nullable for class BasePageResponseCreditCardBillPayment.");
 
             if (nextCursor.IsSet && nextCursor.Value == null)
-                throw new ArgumentNullException(nameof(nextCursor), "Property is not nullable for class BasePageResponseCheckBill.");
+                throw new ArgumentNullException(nameof(nextCursor), "Property is not nullable for class BasePageResponseCreditCardBillPayment.");
 
             if (page.IsSet && page.Value == null)
-                throw new ArgumentNullException(nameof(page), "Property is not nullable for class BasePageResponseCheckBill.");
+                throw new ArgumentNullException(nameof(page), "Property is not nullable for class BasePageResponseCreditCardBillPayment.");
 
             if (count.IsSet && count.Value == null)
-                throw new ArgumentNullException(nameof(count), "Property is not nullable for class BasePageResponseCheckBill.");
+                throw new ArgumentNullException(nameof(count), "Property is not nullable for class BasePageResponseCreditCardBillPayment.");
 
             if (limit.IsSet && limit.Value == null)
-                throw new ArgumentNullException(nameof(limit), "Property is not nullable for class BasePageResponseCheckBill.");
+                throw new ArgumentNullException(nameof(limit), "Property is not nullable for class BasePageResponseCreditCardBillPayment.");
 
             if (totalCount.IsSet && totalCount.Value == null)
-                throw new ArgumentNullException(nameof(totalCount), "Property is not nullable for class BasePageResponseCheckBill.");
+                throw new ArgumentNullException(nameof(totalCount), "Property is not nullable for class BasePageResponseCreditCardBillPayment.");
 
             if (pageCount.IsSet && pageCount.Value == null)
-                throw new ArgumentNullException(nameof(pageCount), "Property is not nullable for class BasePageResponseCheckBill.");
+                throw new ArgumentNullException(nameof(pageCount), "Property is not nullable for class BasePageResponseCreditCardBillPayment.");
 
             if (hasMore.IsSet && hasMore.Value == null)
-                throw new ArgumentNullException(nameof(hasMore), "Property is not nullable for class BasePageResponseCheckBill.");
+                throw new ArgumentNullException(nameof(hasMore), "Property is not nullable for class BasePageResponseCreditCardBillPayment.");
 
             if (timestamp.IsSet && timestamp.Value == null)
-                throw new ArgumentNullException(nameof(timestamp), "Property is not nullable for class BasePageResponseCheckBill.");
+                throw new ArgumentNullException(nameof(timestamp), "Property is not nullable for class BasePageResponseCreditCardBillPayment.");
 
             if (remainingCount.IsSet && remainingCount.Value == null)
-                throw new ArgumentNullException(nameof(remainingCount), "Property is not nullable for class BasePageResponseCheckBill.");
+                throw new ArgumentNullException(nameof(remainingCount), "Property is not nullable for class BasePageResponseCreditCardBillPayment.");
 
-            return new BasePageResponseCheckBill(requestId, success, data, nextCursor, page, count, limit, totalCount, pageCount, hasMore, timestamp, remainingCount);
+            return new BasePageResponseCreditCardBillPayment(requestId, success, data, nextCursor, page, count, limit, totalCount, pageCount, hasMore, timestamp, remainingCount);
         }
 
         /// <summary>
-        /// Serializes a <see cref="BasePageResponseCheckBill" />
+        /// Serializes a <see cref="BasePageResponseCreditCardBillPayment" />
         /// </summary>
         /// <param name="writer"></param>
-        /// <param name="basePageResponseCheckBill"></param>
+        /// <param name="basePageResponseCreditCardBillPayment"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <exception cref="NotImplementedException"></exception>
-        public override void Write(Utf8JsonWriter writer, BasePageResponseCheckBill basePageResponseCheckBill, JsonSerializerOptions jsonSerializerOptions)
+        public override void Write(Utf8JsonWriter writer, BasePageResponseCreditCardBillPayment basePageResponseCreditCardBillPayment, JsonSerializerOptions jsonSerializerOptions)
         {
             writer.WriteStartObject();
 
-            WriteProperties(writer, basePageResponseCheckBill, jsonSerializerOptions);
+            WriteProperties(writer, basePageResponseCreditCardBillPayment, jsonSerializerOptions);
             writer.WriteEndObject();
         }
 
         /// <summary>
-        /// Serializes the properties of <see cref="BasePageResponseCheckBill" />
+        /// Serializes the properties of <see cref="BasePageResponseCreditCardBillPayment" />
         /// </summary>
         /// <param name="writer"></param>
-        /// <param name="basePageResponseCheckBill"></param>
+        /// <param name="basePageResponseCreditCardBillPayment"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <exception cref="NotImplementedException"></exception>
-        public void WriteProperties(Utf8JsonWriter writer, BasePageResponseCheckBill basePageResponseCheckBill, JsonSerializerOptions jsonSerializerOptions)
+        public void WriteProperties(Utf8JsonWriter writer, BasePageResponseCreditCardBillPayment basePageResponseCreditCardBillPayment, JsonSerializerOptions jsonSerializerOptions)
         {
-            if (basePageResponseCheckBill.DataOption.IsSet && basePageResponseCheckBill.Data == null)
-                throw new ArgumentNullException(nameof(basePageResponseCheckBill.Data), "Property is required for class BasePageResponseCheckBill.");
+            if (basePageResponseCreditCardBillPayment.DataOption.IsSet && basePageResponseCreditCardBillPayment.Data == null)
+                throw new ArgumentNullException(nameof(basePageResponseCreditCardBillPayment.Data), "Property is required for class BasePageResponseCreditCardBillPayment.");
 
-            if (basePageResponseCheckBill.NextCursorOption.IsSet && basePageResponseCheckBill.NextCursor == null)
-                throw new ArgumentNullException(nameof(basePageResponseCheckBill.NextCursor), "Property is required for class BasePageResponseCheckBill.");
+            if (basePageResponseCreditCardBillPayment.NextCursorOption.IsSet && basePageResponseCreditCardBillPayment.NextCursor == null)
+                throw new ArgumentNullException(nameof(basePageResponseCreditCardBillPayment.NextCursor), "Property is required for class BasePageResponseCreditCardBillPayment.");
 
-            if (basePageResponseCheckBill.RequestIdOption.IsSet)
-                if (basePageResponseCheckBill.RequestIdOption.Value != null)
-                    writer.WriteString("requestId", basePageResponseCheckBill.RequestId);
+            if (basePageResponseCreditCardBillPayment.RequestIdOption.IsSet)
+                if (basePageResponseCreditCardBillPayment.RequestIdOption.Value != null)
+                    writer.WriteString("requestId", basePageResponseCreditCardBillPayment.RequestId);
                 else
                     writer.WriteNull("requestId");
 
-            if (basePageResponseCheckBill.SuccessOption.IsSet)
-                writer.WriteBoolean("success", basePageResponseCheckBill.SuccessOption.Value!.Value);
+            if (basePageResponseCreditCardBillPayment.SuccessOption.IsSet)
+                writer.WriteBoolean("success", basePageResponseCreditCardBillPayment.SuccessOption.Value!.Value);
 
-            if (basePageResponseCheckBill.DataOption.IsSet)
+            if (basePageResponseCreditCardBillPayment.DataOption.IsSet)
             {
                 writer.WritePropertyName("data");
-                JsonSerializer.Serialize(writer, basePageResponseCheckBill.Data, jsonSerializerOptions);
+                JsonSerializer.Serialize(writer, basePageResponseCreditCardBillPayment.Data, jsonSerializerOptions);
             }
-            if (basePageResponseCheckBill.NextCursorOption.IsSet)
-                writer.WriteString("nextCursor", basePageResponseCheckBill.NextCursor);
+            if (basePageResponseCreditCardBillPayment.NextCursorOption.IsSet)
+                writer.WriteString("nextCursor", basePageResponseCreditCardBillPayment.NextCursor);
 
-            if (basePageResponseCheckBill.PageOption.IsSet)
-                writer.WriteNumber("page", basePageResponseCheckBill.PageOption.Value!.Value);
+            if (basePageResponseCreditCardBillPayment.PageOption.IsSet)
+                writer.WriteNumber("page", basePageResponseCreditCardBillPayment.PageOption.Value!.Value);
 
-            if (basePageResponseCheckBill.CountOption.IsSet)
-                writer.WriteNumber("count", basePageResponseCheckBill.CountOption.Value!.Value);
+            if (basePageResponseCreditCardBillPayment.CountOption.IsSet)
+                writer.WriteNumber("count", basePageResponseCreditCardBillPayment.CountOption.Value!.Value);
 
-            if (basePageResponseCheckBill.LimitOption.IsSet)
-                writer.WriteNumber("limit", basePageResponseCheckBill.LimitOption.Value!.Value);
+            if (basePageResponseCreditCardBillPayment.LimitOption.IsSet)
+                writer.WriteNumber("limit", basePageResponseCreditCardBillPayment.LimitOption.Value!.Value);
 
-            if (basePageResponseCheckBill.TotalCountOption.IsSet)
-                writer.WriteNumber("totalCount", basePageResponseCheckBill.TotalCountOption.Value!.Value);
+            if (basePageResponseCreditCardBillPayment.TotalCountOption.IsSet)
+                writer.WriteNumber("totalCount", basePageResponseCreditCardBillPayment.TotalCountOption.Value!.Value);
 
-            if (basePageResponseCheckBill.PageCountOption.IsSet)
-                writer.WriteNumber("pageCount", basePageResponseCheckBill.PageCountOption.Value!.Value);
+            if (basePageResponseCreditCardBillPayment.PageCountOption.IsSet)
+                writer.WriteNumber("pageCount", basePageResponseCreditCardBillPayment.PageCountOption.Value!.Value);
 
-            if (basePageResponseCheckBill.HasMoreOption.IsSet)
-                writer.WriteBoolean("hasMore", basePageResponseCheckBill.HasMoreOption.Value!.Value);
+            if (basePageResponseCreditCardBillPayment.HasMoreOption.IsSet)
+                writer.WriteBoolean("hasMore", basePageResponseCreditCardBillPayment.HasMoreOption.Value!.Value);
 
-            if (basePageResponseCheckBill.TimestampOption.IsSet)
-                writer.WriteString("timestamp", basePageResponseCheckBill.TimestampOption.Value!.Value.ToString(TimestampFormat));
+            if (basePageResponseCreditCardBillPayment.TimestampOption.IsSet)
+                writer.WriteString("timestamp", basePageResponseCreditCardBillPayment.TimestampOption.Value!.Value.ToString(TimestampFormat));
 
-            if (basePageResponseCheckBill.RemainingCountOption.IsSet)
-                writer.WriteNumber("remainingCount", basePageResponseCheckBill.RemainingCountOption.Value!.Value);
+            if (basePageResponseCreditCardBillPayment.RemainingCountOption.IsSet)
+                writer.WriteNumber("remainingCount", basePageResponseCreditCardBillPayment.RemainingCountOption.Value!.Value);
         }
     }
 }

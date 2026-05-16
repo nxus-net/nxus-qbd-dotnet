@@ -336,9 +336,9 @@ namespace Nxus.Qbd.Models
         IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
             // RefNumber (string) maxLength
-            if (this.RefNumber != null && this.RefNumber.Length > 20)
+            if (this.RefNumber != null && this.RefNumber.Length > 11)
             {
-                yield return new ValidationResult("Invalid value for RefNumber, length must be less than 20.", new [] { "RefNumber" });
+                yield return new ValidationResult("Invalid value for RefNumber, length must be less than 11.", new [] { "RefNumber" });
             }
 
             // Memo (string) maxLength

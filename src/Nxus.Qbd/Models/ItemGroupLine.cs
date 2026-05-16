@@ -37,9 +37,9 @@ namespace Nxus.Qbd.Models
         /// <param name="objectType">objectType</param>
         /// <param name="itemGroup">itemGroup</param>
         /// <param name="description">description</param>
-        /// <param name="quantity">(Optional) Quantity of the group. QuickBooks will multiply this by the group&#39;s internal quantities.</param>
+        /// <param name="quantity">quantity</param>
         /// <param name="totalAmount">totalAmount</param>
-        /// <param name="unitOfMeasure">(Optional) Unit of measure.</param>
+        /// <param name="unitOfMeasure">unitOfMeasure</param>
         /// <param name="isPrintItemsInGroup">isPrintItemsInGroup</param>
         /// <param name="lines">lines</param>
         /// <param name="customFields">customFields</param>
@@ -114,9 +114,8 @@ namespace Nxus.Qbd.Models
         public Option<double?> QuantityOption { get; private set; }
 
         /// <summary>
-        /// (Optional) Quantity of the group. QuickBooks will multiply this by the group&#39;s internal quantities.
+        /// Gets or Sets Quantity
         /// </summary>
-        /// <value>(Optional) Quantity of the group. QuickBooks will multiply this by the group&#39;s internal quantities.</value>
         [JsonPropertyName("quantity")]
         public double? Quantity { get { return this.QuantityOption.Value; } set { this.QuantityOption = new(value); } }
 
@@ -141,9 +140,8 @@ namespace Nxus.Qbd.Models
         public Option<string?> UnitOfMeasureOption { get; private set; }
 
         /// <summary>
-        /// (Optional) Unit of measure.
+        /// Gets or Sets UnitOfMeasure
         /// </summary>
-        /// <value>(Optional) Unit of measure.</value>
         [JsonPropertyName("unitOfMeasure")]
         public string? UnitOfMeasure { get { return this.UnitOfMeasureOption.Value; } set { this.UnitOfMeasureOption = new(value); } }
 
@@ -215,12 +213,6 @@ namespace Nxus.Qbd.Models
         /// <returns>Validation Result</returns>
         IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
-            // Quantity (double) minimum
-            if (this.QuantityOption.IsSet && this.QuantityOption.Value < (double)0.01)
-            {
-                yield return new ValidationResult("Invalid value for Quantity, must be a value greater than or equal to 0.01.", new [] { "Quantity" });
-            }
-
             yield break;
         }
     }

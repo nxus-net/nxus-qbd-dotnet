@@ -26,14 +26,14 @@ using Nxus.Qbd.Json;
 namespace Nxus.Qbd.Models
 {
     /// <summary>
-    /// Request model for creating a new bill in QuickBooks.  DTD Reference: qbxmlops170.xml - BillAdd (lines 13260-13543)
+    /// Model used to create a new vendor Bill in QuickBooks Desktop.
     /// </summary>
     public partial class CreateBillRequest : IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="CreateBillRequest" /> class.
         /// </summary>
-        /// <param name="vendorId">Filter by Vendor ID.</param>
+        /// <param name="vendorId">The vendor for this bill (required).</param>
         /// <param name="transactionDate">transactionDate</param>
         /// <param name="vendorAddress">Optional vendor address override.</param>
         /// <param name="payablesAccountId">payablesAccountId</param>
@@ -74,9 +74,9 @@ namespace Nxus.Qbd.Models
         partial void OnCreated();
 
         /// <summary>
-        /// Filter by Vendor ID.
+        /// The vendor for this bill (required).
         /// </summary>
-        /// <value>Filter by Vendor ID.</value>
+        /// <value>The vendor for this bill (required).</value>
         [JsonPropertyName("vendorId")]
         public string VendorId { get; set; }
 
@@ -312,6 +312,12 @@ namespace Nxus.Qbd.Models
         /// <returns>Validation Result</returns>
         IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
+            // VendorId (string) minLength
+            if (this.VendorId != null && this.VendorId.Length < 1)
+            {
+                yield return new ValidationResult("Invalid value for VendorId, length must be greater than 1.", new [] { "VendorId" });
+            }
+
             // RefNumber (string) maxLength
             if (this.RefNumber != null && this.RefNumber.Length > 20)
             {

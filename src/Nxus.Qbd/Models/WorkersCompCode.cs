@@ -38,14 +38,14 @@ namespace Nxus.Qbd.Models
         /// <param name="updatedAt">updatedAt</param>
         /// <param name="revisionNumber">revisionNumber</param>
         /// <param name="objectType">objectType</param>
-        /// <param name="name">(Required) The name of the Workers Comp Code. Max length: 13.</param>
-        /// <param name="desc">Description of the Workers&#39; Compensation Code.</param>
-        /// <param name="currentRate">The current rate being used.</param>
-        /// <param name="currentEffectiveDate">The effective date of the current rate.</param>
-        /// <param name="nextRate">The next scheduled rate (if any).</param>
-        /// <param name="nextEffectiveDate">The effective date of the next rate.</param>
+        /// <param name="name">The primary display name for the List object (e.g., Customer Name, Vendor Name).</param>
+        /// <param name="desc">desc</param>
+        /// <param name="currentRate">currentRate</param>
+        /// <param name="currentEffectiveDate">currentEffectiveDate</param>
+        /// <param name="nextRate">nextRate</param>
+        /// <param name="nextEffectiveDate">nextEffectiveDate</param>
         /// <param name="rateHistory">rateHistory</param>
-        /// <param name="isActive">(Optional) Indicates if the code is active. Defaults to true.</param>
+        /// <param name="isActive">Indicates whether the list item is active. Common to all list types.</param>
         /// <param name="customFields">customFields</param>
         [JsonConstructor]
         public WorkersCompCode(string id, DateTimeOffset createdAt, DateTimeOffset updatedAt, string revisionNumber, Option<string?> objectType = default, Option<string?> name = default, Option<string?> desc = default, Option<double?> currentRate = default, Option<DateOnly?> currentEffectiveDate = default, Option<double?> nextRate = default, Option<DateOnly?> nextEffectiveDate = default, Option<List<RateHistory>?> rateHistory = default, Option<bool?> isActive = default, Option<List<QbdDataExt>?> customFields = default)
@@ -114,9 +114,9 @@ namespace Nxus.Qbd.Models
         public Option<string?> NameOption { get; private set; }
 
         /// <summary>
-        /// (Required) The name of the Workers Comp Code. Max length: 13.
+        /// The primary display name for the List object (e.g., Customer Name, Vendor Name).
         /// </summary>
-        /// <value>(Required) The name of the Workers Comp Code. Max length: 13.</value>
+        /// <value>The primary display name for the List object (e.g., Customer Name, Vendor Name).</value>
         [JsonPropertyName("name")]
         public string? Name { get { return this.NameOption.Value; } set { this.NameOption = new(value); } }
 
@@ -128,9 +128,8 @@ namespace Nxus.Qbd.Models
         public Option<string?> DescOption { get; private set; }
 
         /// <summary>
-        /// Description of the Workers&#39; Compensation Code.
+        /// Gets or Sets Desc
         /// </summary>
-        /// <value>Description of the Workers&#39; Compensation Code.</value>
         [JsonPropertyName("desc")]
         public string? Desc { get { return this.DescOption.Value; } set { this.DescOption = new(value); } }
 
@@ -142,9 +141,8 @@ namespace Nxus.Qbd.Models
         public Option<double?> CurrentRateOption { get; private set; }
 
         /// <summary>
-        /// The current rate being used.
+        /// Gets or Sets CurrentRate
         /// </summary>
-        /// <value>The current rate being used.</value>
         [JsonPropertyName("currentRate")]
         public double? CurrentRate { get { return this.CurrentRateOption.Value; } set { this.CurrentRateOption = new(value); } }
 
@@ -156,9 +154,8 @@ namespace Nxus.Qbd.Models
         public Option<DateOnly?> CurrentEffectiveDateOption { get; private set; }
 
         /// <summary>
-        /// The effective date of the current rate.
+        /// Gets or Sets CurrentEffectiveDate
         /// </summary>
-        /// <value>The effective date of the current rate.</value>
         [JsonPropertyName("currentEffectiveDate")]
         public DateOnly? CurrentEffectiveDate { get { return this.CurrentEffectiveDateOption.Value; } set { this.CurrentEffectiveDateOption = new(value); } }
 
@@ -170,9 +167,8 @@ namespace Nxus.Qbd.Models
         public Option<double?> NextRateOption { get; private set; }
 
         /// <summary>
-        /// The next scheduled rate (if any).
+        /// Gets or Sets NextRate
         /// </summary>
-        /// <value>The next scheduled rate (if any).</value>
         [JsonPropertyName("nextRate")]
         public double? NextRate { get { return this.NextRateOption.Value; } set { this.NextRateOption = new(value); } }
 
@@ -184,9 +180,8 @@ namespace Nxus.Qbd.Models
         public Option<DateOnly?> NextEffectiveDateOption { get; private set; }
 
         /// <summary>
-        /// The effective date of the next rate.
+        /// Gets or Sets NextEffectiveDate
         /// </summary>
-        /// <value>The effective date of the next rate.</value>
         [JsonPropertyName("nextEffectiveDate")]
         public DateOnly? NextEffectiveDate { get { return this.NextEffectiveDateOption.Value; } set { this.NextEffectiveDateOption = new(value); } }
 
@@ -211,9 +206,9 @@ namespace Nxus.Qbd.Models
         public Option<bool?> IsActiveOption { get; private set; }
 
         /// <summary>
-        /// (Optional) Indicates if the code is active. Defaults to true.
+        /// Indicates whether the list item is active. Common to all list types.
         /// </summary>
-        /// <value>(Optional) Indicates if the code is active. Defaults to true.</value>
+        /// <value>Indicates whether the list item is active. Common to all list types.</value>
         [JsonPropertyName("isActive")]
         public bool? IsActive { get { return this.IsActiveOption.Value; } set { this.IsActiveOption = new(value); } }
 

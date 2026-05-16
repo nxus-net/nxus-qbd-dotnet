@@ -28,10 +28,10 @@ namespace Nxus.Qbd.Models
     /// <summary>
     /// Request model for creating a new credit card bill payment  This is for paying existing vendor bills via credit card  Note: Only create and read operations are supported for bill payments
     /// </summary>
-    public partial class CreateCreditCardBillRequest : IValidatableObject
+    public partial class CreateCreditCardBillPaymentRequest : IValidatableObject
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="CreateCreditCardBillRequest" /> class.
+        /// Initializes a new instance of the <see cref="CreateCreditCardBillPaymentRequest" /> class.
         /// </summary>
         /// <param name="payeeId">Vendor/payee being paid (required)</param>
         /// <param name="payablesAccountId">payablesAccountId</param>
@@ -46,7 +46,7 @@ namespace Nxus.Qbd.Models
         /// <param name="externalId">externalId</param>
         /// <param name="isValidTotalAmount">Validation: Ensure total matches applied amounts</param>
         [JsonConstructor]
-        public CreateCreditCardBillRequest(string payeeId, string payablesAccountId, string creditCardAccountId, double amount, List<ApplyToTransactionRequest> applyToTransactions, Option<DateOnly?> transactionDate = default, Option<string?> refNumber = default, Option<string?> memo = default, Option<string?> currencyId = default, Option<double?> exchangeRate = default, Option<string?> externalId = default, Option<bool?> isValidTotalAmount = default)
+        public CreateCreditCardBillPaymentRequest(string payeeId, string payablesAccountId, string creditCardAccountId, double amount, List<ApplyToTransactionRequest> applyToTransactions, Option<DateOnly?> transactionDate = default, Option<string?> refNumber = default, Option<string?> memo = default, Option<string?> currencyId = default, Option<double?> exchangeRate = default, Option<string?> externalId = default, Option<bool?> isValidTotalAmount = default)
         {
             PayeeId = payeeId;
             PayablesAccountId = payablesAccountId;
@@ -201,7 +201,7 @@ namespace Nxus.Qbd.Models
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append("class CreateCreditCardBillRequest {\n");
+            sb.Append("class CreateCreditCardBillPaymentRequest {\n");
             sb.Append("  PayeeId: ").Append(PayeeId).Append("\n");
             sb.Append("  PayablesAccountId: ").Append(PayablesAccountId).Append("\n");
             sb.Append("  CreditCardAccountId: ").Append(CreditCardAccountId).Append("\n");
@@ -248,9 +248,9 @@ namespace Nxus.Qbd.Models
     }
 
     /// <summary>
-    /// A Json converter for type <see cref="CreateCreditCardBillRequest" />
+    /// A Json converter for type <see cref="CreateCreditCardBillPaymentRequest" />
     /// </summary>
-    public class CreateCreditCardBillRequestJsonConverter : JsonConverter<CreateCreditCardBillRequest>
+    public class CreateCreditCardBillPaymentRequestJsonConverter : JsonConverter<CreateCreditCardBillPaymentRequest>
     {
         /// <summary>
         /// The format to use to serialize TransactionDate
@@ -258,14 +258,14 @@ namespace Nxus.Qbd.Models
         public static string TransactionDateFormat { get; set; } = "yyyy'-'MM'-'dd";
 
         /// <summary>
-        /// Deserializes json to <see cref="CreateCreditCardBillRequest" />
+        /// Deserializes json to <see cref="CreateCreditCardBillPaymentRequest" />
         /// </summary>
         /// <param name="utf8JsonReader"></param>
         /// <param name="typeToConvert"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <returns></returns>
         /// <exception cref="JsonException"></exception>
-        public override CreateCreditCardBillRequest Read(ref Utf8JsonReader utf8JsonReader, Type typeToConvert, JsonSerializerOptions jsonSerializerOptions)
+        public override CreateCreditCardBillPaymentRequest Read(ref Utf8JsonReader utf8JsonReader, Type typeToConvert, JsonSerializerOptions jsonSerializerOptions)
         {
             int currentDepth = utf8JsonReader.CurrentDepth;
 
@@ -345,125 +345,125 @@ namespace Nxus.Qbd.Models
             }
 
             if (!payeeId.IsSet)
-                throw new ArgumentException("Property is required for class CreateCreditCardBillRequest.", nameof(payeeId));
+                throw new ArgumentException("Property is required for class CreateCreditCardBillPaymentRequest.", nameof(payeeId));
 
             if (!payablesAccountId.IsSet)
-                throw new ArgumentException("Property is required for class CreateCreditCardBillRequest.", nameof(payablesAccountId));
+                throw new ArgumentException("Property is required for class CreateCreditCardBillPaymentRequest.", nameof(payablesAccountId));
 
             if (!creditCardAccountId.IsSet)
-                throw new ArgumentException("Property is required for class CreateCreditCardBillRequest.", nameof(creditCardAccountId));
+                throw new ArgumentException("Property is required for class CreateCreditCardBillPaymentRequest.", nameof(creditCardAccountId));
 
             if (!amount.IsSet)
-                throw new ArgumentException("Property is required for class CreateCreditCardBillRequest.", nameof(amount));
+                throw new ArgumentException("Property is required for class CreateCreditCardBillPaymentRequest.", nameof(amount));
 
             if (!applyToTransactions.IsSet)
-                throw new ArgumentException("Property is required for class CreateCreditCardBillRequest.", nameof(applyToTransactions));
+                throw new ArgumentException("Property is required for class CreateCreditCardBillPaymentRequest.", nameof(applyToTransactions));
 
             if (payeeId.IsSet && payeeId.Value == null)
-                throw new ArgumentNullException(nameof(payeeId), "Property is not nullable for class CreateCreditCardBillRequest.");
+                throw new ArgumentNullException(nameof(payeeId), "Property is not nullable for class CreateCreditCardBillPaymentRequest.");
 
             if (payablesAccountId.IsSet && payablesAccountId.Value == null)
-                throw new ArgumentNullException(nameof(payablesAccountId), "Property is not nullable for class CreateCreditCardBillRequest.");
+                throw new ArgumentNullException(nameof(payablesAccountId), "Property is not nullable for class CreateCreditCardBillPaymentRequest.");
 
             if (creditCardAccountId.IsSet && creditCardAccountId.Value == null)
-                throw new ArgumentNullException(nameof(creditCardAccountId), "Property is not nullable for class CreateCreditCardBillRequest.");
+                throw new ArgumentNullException(nameof(creditCardAccountId), "Property is not nullable for class CreateCreditCardBillPaymentRequest.");
 
             if (amount.IsSet && amount.Value == null)
-                throw new ArgumentNullException(nameof(amount), "Property is not nullable for class CreateCreditCardBillRequest.");
+                throw new ArgumentNullException(nameof(amount), "Property is not nullable for class CreateCreditCardBillPaymentRequest.");
 
             if (applyToTransactions.IsSet && applyToTransactions.Value == null)
-                throw new ArgumentNullException(nameof(applyToTransactions), "Property is not nullable for class CreateCreditCardBillRequest.");
+                throw new ArgumentNullException(nameof(applyToTransactions), "Property is not nullable for class CreateCreditCardBillPaymentRequest.");
 
             if (isValidTotalAmount.IsSet && isValidTotalAmount.Value == null)
-                throw new ArgumentNullException(nameof(isValidTotalAmount), "Property is not nullable for class CreateCreditCardBillRequest.");
+                throw new ArgumentNullException(nameof(isValidTotalAmount), "Property is not nullable for class CreateCreditCardBillPaymentRequest.");
 
-            return new CreateCreditCardBillRequest(payeeId.Value!, payablesAccountId.Value!, creditCardAccountId.Value!, amount.Value!.Value!, applyToTransactions.Value!, transactionDate, refNumber, memo, currencyId, exchangeRate, externalId, isValidTotalAmount);
+            return new CreateCreditCardBillPaymentRequest(payeeId.Value!, payablesAccountId.Value!, creditCardAccountId.Value!, amount.Value!.Value!, applyToTransactions.Value!, transactionDate, refNumber, memo, currencyId, exchangeRate, externalId, isValidTotalAmount);
         }
 
         /// <summary>
-        /// Serializes a <see cref="CreateCreditCardBillRequest" />
+        /// Serializes a <see cref="CreateCreditCardBillPaymentRequest" />
         /// </summary>
         /// <param name="writer"></param>
-        /// <param name="createCreditCardBillRequest"></param>
+        /// <param name="createCreditCardBillPaymentRequest"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <exception cref="NotImplementedException"></exception>
-        public override void Write(Utf8JsonWriter writer, CreateCreditCardBillRequest createCreditCardBillRequest, JsonSerializerOptions jsonSerializerOptions)
+        public override void Write(Utf8JsonWriter writer, CreateCreditCardBillPaymentRequest createCreditCardBillPaymentRequest, JsonSerializerOptions jsonSerializerOptions)
         {
             writer.WriteStartObject();
 
-            WriteProperties(writer, createCreditCardBillRequest, jsonSerializerOptions);
+            WriteProperties(writer, createCreditCardBillPaymentRequest, jsonSerializerOptions);
             writer.WriteEndObject();
         }
 
         /// <summary>
-        /// Serializes the properties of <see cref="CreateCreditCardBillRequest" />
+        /// Serializes the properties of <see cref="CreateCreditCardBillPaymentRequest" />
         /// </summary>
         /// <param name="writer"></param>
-        /// <param name="createCreditCardBillRequest"></param>
+        /// <param name="createCreditCardBillPaymentRequest"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <exception cref="NotImplementedException"></exception>
-        public void WriteProperties(Utf8JsonWriter writer, CreateCreditCardBillRequest createCreditCardBillRequest, JsonSerializerOptions jsonSerializerOptions)
+        public void WriteProperties(Utf8JsonWriter writer, CreateCreditCardBillPaymentRequest createCreditCardBillPaymentRequest, JsonSerializerOptions jsonSerializerOptions)
         {
-            if (createCreditCardBillRequest.PayeeId == null)
-                throw new ArgumentNullException(nameof(createCreditCardBillRequest.PayeeId), "Property is required for class CreateCreditCardBillRequest.");
+            if (createCreditCardBillPaymentRequest.PayeeId == null)
+                throw new ArgumentNullException(nameof(createCreditCardBillPaymentRequest.PayeeId), "Property is required for class CreateCreditCardBillPaymentRequest.");
 
-            if (createCreditCardBillRequest.PayablesAccountId == null)
-                throw new ArgumentNullException(nameof(createCreditCardBillRequest.PayablesAccountId), "Property is required for class CreateCreditCardBillRequest.");
+            if (createCreditCardBillPaymentRequest.PayablesAccountId == null)
+                throw new ArgumentNullException(nameof(createCreditCardBillPaymentRequest.PayablesAccountId), "Property is required for class CreateCreditCardBillPaymentRequest.");
 
-            if (createCreditCardBillRequest.CreditCardAccountId == null)
-                throw new ArgumentNullException(nameof(createCreditCardBillRequest.CreditCardAccountId), "Property is required for class CreateCreditCardBillRequest.");
+            if (createCreditCardBillPaymentRequest.CreditCardAccountId == null)
+                throw new ArgumentNullException(nameof(createCreditCardBillPaymentRequest.CreditCardAccountId), "Property is required for class CreateCreditCardBillPaymentRequest.");
 
-            if (createCreditCardBillRequest.ApplyToTransactions == null)
-                throw new ArgumentNullException(nameof(createCreditCardBillRequest.ApplyToTransactions), "Property is required for class CreateCreditCardBillRequest.");
+            if (createCreditCardBillPaymentRequest.ApplyToTransactions == null)
+                throw new ArgumentNullException(nameof(createCreditCardBillPaymentRequest.ApplyToTransactions), "Property is required for class CreateCreditCardBillPaymentRequest.");
 
-            writer.WriteString("payeeId", createCreditCardBillRequest.PayeeId);
+            writer.WriteString("payeeId", createCreditCardBillPaymentRequest.PayeeId);
 
-            writer.WriteString("payablesAccountId", createCreditCardBillRequest.PayablesAccountId);
+            writer.WriteString("payablesAccountId", createCreditCardBillPaymentRequest.PayablesAccountId);
 
-            writer.WriteString("creditCardAccountId", createCreditCardBillRequest.CreditCardAccountId);
+            writer.WriteString("creditCardAccountId", createCreditCardBillPaymentRequest.CreditCardAccountId);
 
-            writer.WriteNumber("amount", createCreditCardBillRequest.Amount);
+            writer.WriteNumber("amount", createCreditCardBillPaymentRequest.Amount);
 
             writer.WritePropertyName("applyToTransactions");
-            JsonSerializer.Serialize(writer, createCreditCardBillRequest.ApplyToTransactions, jsonSerializerOptions);
-            if (createCreditCardBillRequest.TransactionDateOption.IsSet)
-                if (createCreditCardBillRequest.TransactionDateOption.Value != null)
-                    writer.WriteString("transactionDate", createCreditCardBillRequest.TransactionDateOption.Value!.Value.ToString(TransactionDateFormat));
+            JsonSerializer.Serialize(writer, createCreditCardBillPaymentRequest.ApplyToTransactions, jsonSerializerOptions);
+            if (createCreditCardBillPaymentRequest.TransactionDateOption.IsSet)
+                if (createCreditCardBillPaymentRequest.TransactionDateOption.Value != null)
+                    writer.WriteString("transactionDate", createCreditCardBillPaymentRequest.TransactionDateOption.Value!.Value.ToString(TransactionDateFormat));
                 else
                     writer.WriteNull("transactionDate");
 
-            if (createCreditCardBillRequest.RefNumberOption.IsSet)
-                if (createCreditCardBillRequest.RefNumberOption.Value != null)
-                    writer.WriteString("refNumber", createCreditCardBillRequest.RefNumber);
+            if (createCreditCardBillPaymentRequest.RefNumberOption.IsSet)
+                if (createCreditCardBillPaymentRequest.RefNumberOption.Value != null)
+                    writer.WriteString("refNumber", createCreditCardBillPaymentRequest.RefNumber);
                 else
                     writer.WriteNull("refNumber");
 
-            if (createCreditCardBillRequest.MemoOption.IsSet)
-                if (createCreditCardBillRequest.MemoOption.Value != null)
-                    writer.WriteString("memo", createCreditCardBillRequest.Memo);
+            if (createCreditCardBillPaymentRequest.MemoOption.IsSet)
+                if (createCreditCardBillPaymentRequest.MemoOption.Value != null)
+                    writer.WriteString("memo", createCreditCardBillPaymentRequest.Memo);
                 else
                     writer.WriteNull("memo");
 
-            if (createCreditCardBillRequest.CurrencyIdOption.IsSet)
-                if (createCreditCardBillRequest.CurrencyIdOption.Value != null)
-                    writer.WriteString("currencyId", createCreditCardBillRequest.CurrencyId);
+            if (createCreditCardBillPaymentRequest.CurrencyIdOption.IsSet)
+                if (createCreditCardBillPaymentRequest.CurrencyIdOption.Value != null)
+                    writer.WriteString("currencyId", createCreditCardBillPaymentRequest.CurrencyId);
                 else
                     writer.WriteNull("currencyId");
 
-            if (createCreditCardBillRequest.ExchangeRateOption.IsSet)
-                if (createCreditCardBillRequest.ExchangeRateOption.Value != null)
-                    writer.WriteNumber("exchangeRate", createCreditCardBillRequest.ExchangeRateOption.Value!.Value);
+            if (createCreditCardBillPaymentRequest.ExchangeRateOption.IsSet)
+                if (createCreditCardBillPaymentRequest.ExchangeRateOption.Value != null)
+                    writer.WriteNumber("exchangeRate", createCreditCardBillPaymentRequest.ExchangeRateOption.Value!.Value);
                 else
                     writer.WriteNull("exchangeRate");
 
-            if (createCreditCardBillRequest.ExternalIdOption.IsSet)
-                if (createCreditCardBillRequest.ExternalIdOption.Value != null)
-                    writer.WriteString("externalId", createCreditCardBillRequest.ExternalId);
+            if (createCreditCardBillPaymentRequest.ExternalIdOption.IsSet)
+                if (createCreditCardBillPaymentRequest.ExternalIdOption.Value != null)
+                    writer.WriteString("externalId", createCreditCardBillPaymentRequest.ExternalId);
                 else
                     writer.WriteNull("externalId");
 
-            if (createCreditCardBillRequest.IsValidTotalAmountOption.IsSet)
-                writer.WriteBoolean("isValidTotalAmount", createCreditCardBillRequest.IsValidTotalAmountOption.Value!.Value);
+            if (createCreditCardBillPaymentRequest.IsValidTotalAmountOption.IsSet)
+                writer.WriteBoolean("isValidTotalAmount", createCreditCardBillPaymentRequest.IsValidTotalAmountOption.Value!.Value);
         }
     }
 }

@@ -36,24 +36,24 @@ namespace Nxus.Qbd.Models
         /// <param name="txnLineId">(Required) The TxnLineID of the specific line item being modified or deleted. (IDTYPE)</param>
         /// <param name="id">id</param>
         /// <param name="objectType">objectType</param>
-        /// <param name="itemId">itemId</param>
-        /// <param name="description">description</param>
-        /// <param name="quantity">quantity</param>
-        /// <param name="unitOfMeasure">unitOfMeasure</param>
-        /// <param name="rate">rate</param>
-        /// <param name="ratePercent">ratePercent</param>
-        /// <param name="classId">classId</param>
-        /// <param name="amount">amount</param>
-        /// <param name="optionForPriceRuleConflict">optionForPriceRuleConflict</param>
-        /// <param name="inventorySiteId">inventorySiteId</param>
-        /// <param name="inventorySiteLocationId">inventorySiteLocationId</param>
-        /// <param name="salesTaxCodeId">salesTaxCodeId</param>
-        /// <param name="markupRate">markupRate</param>
-        /// <param name="markupRatePercent">markupRatePercent</param>
-        /// <param name="priceLevelId">priceLevelId</param>
-        /// <param name="overrideItemAccountId">overrideItemAccountId</param>
-        /// <param name="other1">other1</param>
-        /// <param name="other2">other2</param>
+        /// <param name="itemId">(Optional) The ListID or FullName of the item for this line. (ItemRef, Flattened-ID Pattern)</param>
+        /// <param name="description">(Optional) Description for the line item. Max 4000 chars.</param>
+        /// <param name="quantity">(Optional) Quantity of the item.</param>
+        /// <param name="unitOfMeasure">(Optional) Unit of measure for the quantity. Max 31 chars.</param>
+        /// <param name="rate">(Optional) The rate/price per item. Mutually exclusive with RatePercent, MarkupRate, MarkupRatePercent, and PriceLevelId. (PRICETYPE)</param>
+        /// <param name="ratePercent">(Optional) The percentage rate applied. Mutually exclusive with Rate, MarkupRate, MarkupRatePercent, and PriceLevelId. (PERCENTTYPE)</param>
+        /// <param name="classId">(Optional) The ListID or FullName of the class associated with this line item. (ClassRef, Flattened-ID Pattern)</param>
+        /// <param name="amount">(Optional) The total amount for the line item. Required if Rate/RatePercent is not specified. (AMTTYPE)</param>
+        /// <param name="optionForPriceRuleConflict">(Optional) How QuickBooks should handle a price rule conflict. Valid values: Zero, BasePrice.</param>
+        /// <param name="inventorySiteId">(Optional) The ListID or FullName of the Inventory Site. (InventorySiteRef, Flattened-ID Pattern)</param>
+        /// <param name="inventorySiteLocationId">(Optional) The ListID or FullName of the Inventory Site Location. (InventorySiteLocationRef, Flattened-ID Pattern)</param>
+        /// <param name="salesTaxCodeId">(Optional) The ListID or FullName of the Sales Tax Code. (SalesTaxCodeRef, Flattened-ID Pattern)</param>
+        /// <param name="markupRate">(Optional) A fixed markup rate. Mutually exclusive with MarkupRatePercent, Rate/RatePercent, and PriceLevelId. (PRICETYPE)</param>
+        /// <param name="markupRatePercent">(Optional) A percentage markup rate. Mutually exclusive with MarkupRate, Rate/RatePercent, and PriceLevelId. (PERCENTTYPE)</param>
+        /// <param name="priceLevelId">(Optional) The ListID or FullName of the Price Level. Mutually exclusive with Markup fields and Rate fields. (PriceLevelRef, Flattened-ID Pattern)</param>
+        /// <param name="overrideItemAccountId">(Optional, Add only) The ListID or FullName of the overriding Item Account. (OverrideItemAccountRef, Flattened-ID Pattern)</param>
+        /// <param name="other1">(Optional) Custom field 1. Max 29 chars.</param>
+        /// <param name="other2">(Optional) Custom field 2. Max 29 chars.</param>
         /// <param name="customFields">customFields</param>
         [JsonConstructor]
         public UpdateEstimateLineRequest(string txnLineId, Option<string?> id = default, Option<string?> objectType = default, Option<string?> itemId = default, Option<string?> description = default, Option<double?> quantity = default, Option<string?> unitOfMeasure = default, Option<double?> rate = default, Option<double?> ratePercent = default, Option<string?> classId = default, Option<double?> amount = default, Option<string?> optionForPriceRuleConflict = default, Option<string?> inventorySiteId = default, Option<string?> inventorySiteLocationId = default, Option<string?> salesTaxCodeId = default, Option<double?> markupRate = default, Option<double?> markupRatePercent = default, Option<string?> priceLevelId = default, Option<string?> overrideItemAccountId = default, Option<string?> other1 = default, Option<string?> other2 = default, Option<List<DataExtRequest>?> customFields = default)
@@ -126,8 +126,9 @@ namespace Nxus.Qbd.Models
         public Option<string?> ItemIdOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets ItemId
+        /// (Optional) The ListID or FullName of the item for this line. (ItemRef, Flattened-ID Pattern)
         /// </summary>
+        /// <value>(Optional) The ListID or FullName of the item for this line. (ItemRef, Flattened-ID Pattern)</value>
         [JsonPropertyName("itemId")]
         public string? ItemId { get { return this.ItemIdOption.Value; } set { this.ItemIdOption = new(value); } }
 
@@ -139,8 +140,9 @@ namespace Nxus.Qbd.Models
         public Option<string?> DescriptionOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets Description
+        /// (Optional) Description for the line item. Max 4000 chars.
         /// </summary>
+        /// <value>(Optional) Description for the line item. Max 4000 chars.</value>
         [JsonPropertyName("description")]
         public string? Description { get { return this.DescriptionOption.Value; } set { this.DescriptionOption = new(value); } }
 
@@ -152,8 +154,9 @@ namespace Nxus.Qbd.Models
         public Option<double?> QuantityOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets Quantity
+        /// (Optional) Quantity of the item.
         /// </summary>
+        /// <value>(Optional) Quantity of the item.</value>
         [JsonPropertyName("quantity")]
         public double? Quantity { get { return this.QuantityOption.Value; } set { this.QuantityOption = new(value); } }
 
@@ -165,8 +168,9 @@ namespace Nxus.Qbd.Models
         public Option<string?> UnitOfMeasureOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets UnitOfMeasure
+        /// (Optional) Unit of measure for the quantity. Max 31 chars.
         /// </summary>
+        /// <value>(Optional) Unit of measure for the quantity. Max 31 chars.</value>
         [JsonPropertyName("unitOfMeasure")]
         public string? UnitOfMeasure { get { return this.UnitOfMeasureOption.Value; } set { this.UnitOfMeasureOption = new(value); } }
 
@@ -178,8 +182,9 @@ namespace Nxus.Qbd.Models
         public Option<double?> RateOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets Rate
+        /// (Optional) The rate/price per item. Mutually exclusive with RatePercent, MarkupRate, MarkupRatePercent, and PriceLevelId. (PRICETYPE)
         /// </summary>
+        /// <value>(Optional) The rate/price per item. Mutually exclusive with RatePercent, MarkupRate, MarkupRatePercent, and PriceLevelId. (PRICETYPE)</value>
         [JsonPropertyName("rate")]
         public double? Rate { get { return this.RateOption.Value; } set { this.RateOption = new(value); } }
 
@@ -191,8 +196,9 @@ namespace Nxus.Qbd.Models
         public Option<double?> RatePercentOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets RatePercent
+        /// (Optional) The percentage rate applied. Mutually exclusive with Rate, MarkupRate, MarkupRatePercent, and PriceLevelId. (PERCENTTYPE)
         /// </summary>
+        /// <value>(Optional) The percentage rate applied. Mutually exclusive with Rate, MarkupRate, MarkupRatePercent, and PriceLevelId. (PERCENTTYPE)</value>
         [JsonPropertyName("ratePercent")]
         public double? RatePercent { get { return this.RatePercentOption.Value; } set { this.RatePercentOption = new(value); } }
 
@@ -204,8 +210,9 @@ namespace Nxus.Qbd.Models
         public Option<string?> ClassIdOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets ClassId
+        /// (Optional) The ListID or FullName of the class associated with this line item. (ClassRef, Flattened-ID Pattern)
         /// </summary>
+        /// <value>(Optional) The ListID or FullName of the class associated with this line item. (ClassRef, Flattened-ID Pattern)</value>
         [JsonPropertyName("classId")]
         public string? ClassId { get { return this.ClassIdOption.Value; } set { this.ClassIdOption = new(value); } }
 
@@ -217,8 +224,9 @@ namespace Nxus.Qbd.Models
         public Option<double?> AmountOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets Amount
+        /// (Optional) The total amount for the line item. Required if Rate/RatePercent is not specified. (AMTTYPE)
         /// </summary>
+        /// <value>(Optional) The total amount for the line item. Required if Rate/RatePercent is not specified. (AMTTYPE)</value>
         [JsonPropertyName("amount")]
         public double? Amount { get { return this.AmountOption.Value; } set { this.AmountOption = new(value); } }
 
@@ -230,8 +238,9 @@ namespace Nxus.Qbd.Models
         public Option<string?> OptionForPriceRuleConflictOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets OptionForPriceRuleConflict
+        /// (Optional) How QuickBooks should handle a price rule conflict. Valid values: Zero, BasePrice.
         /// </summary>
+        /// <value>(Optional) How QuickBooks should handle a price rule conflict. Valid values: Zero, BasePrice.</value>
         [JsonPropertyName("optionForPriceRuleConflict")]
         public string? OptionForPriceRuleConflict { get { return this.OptionForPriceRuleConflictOption.Value; } set { this.OptionForPriceRuleConflictOption = new(value); } }
 
@@ -243,8 +252,9 @@ namespace Nxus.Qbd.Models
         public Option<string?> InventorySiteIdOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets InventorySiteId
+        /// (Optional) The ListID or FullName of the Inventory Site. (InventorySiteRef, Flattened-ID Pattern)
         /// </summary>
+        /// <value>(Optional) The ListID or FullName of the Inventory Site. (InventorySiteRef, Flattened-ID Pattern)</value>
         [JsonPropertyName("inventorySiteId")]
         public string? InventorySiteId { get { return this.InventorySiteIdOption.Value; } set { this.InventorySiteIdOption = new(value); } }
 
@@ -256,8 +266,9 @@ namespace Nxus.Qbd.Models
         public Option<string?> InventorySiteLocationIdOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets InventorySiteLocationId
+        /// (Optional) The ListID or FullName of the Inventory Site Location. (InventorySiteLocationRef, Flattened-ID Pattern)
         /// </summary>
+        /// <value>(Optional) The ListID or FullName of the Inventory Site Location. (InventorySiteLocationRef, Flattened-ID Pattern)</value>
         [JsonPropertyName("inventorySiteLocationId")]
         public string? InventorySiteLocationId { get { return this.InventorySiteLocationIdOption.Value; } set { this.InventorySiteLocationIdOption = new(value); } }
 
@@ -269,8 +280,9 @@ namespace Nxus.Qbd.Models
         public Option<string?> SalesTaxCodeIdOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets SalesTaxCodeId
+        /// (Optional) The ListID or FullName of the Sales Tax Code. (SalesTaxCodeRef, Flattened-ID Pattern)
         /// </summary>
+        /// <value>(Optional) The ListID or FullName of the Sales Tax Code. (SalesTaxCodeRef, Flattened-ID Pattern)</value>
         [JsonPropertyName("salesTaxCodeId")]
         public string? SalesTaxCodeId { get { return this.SalesTaxCodeIdOption.Value; } set { this.SalesTaxCodeIdOption = new(value); } }
 
@@ -282,8 +294,9 @@ namespace Nxus.Qbd.Models
         public Option<double?> MarkupRateOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets MarkupRate
+        /// (Optional) A fixed markup rate. Mutually exclusive with MarkupRatePercent, Rate/RatePercent, and PriceLevelId. (PRICETYPE)
         /// </summary>
+        /// <value>(Optional) A fixed markup rate. Mutually exclusive with MarkupRatePercent, Rate/RatePercent, and PriceLevelId. (PRICETYPE)</value>
         [JsonPropertyName("markupRate")]
         public double? MarkupRate { get { return this.MarkupRateOption.Value; } set { this.MarkupRateOption = new(value); } }
 
@@ -295,8 +308,9 @@ namespace Nxus.Qbd.Models
         public Option<double?> MarkupRatePercentOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets MarkupRatePercent
+        /// (Optional) A percentage markup rate. Mutually exclusive with MarkupRate, Rate/RatePercent, and PriceLevelId. (PERCENTTYPE)
         /// </summary>
+        /// <value>(Optional) A percentage markup rate. Mutually exclusive with MarkupRate, Rate/RatePercent, and PriceLevelId. (PERCENTTYPE)</value>
         [JsonPropertyName("markupRatePercent")]
         public double? MarkupRatePercent { get { return this.MarkupRatePercentOption.Value; } set { this.MarkupRatePercentOption = new(value); } }
 
@@ -308,8 +322,9 @@ namespace Nxus.Qbd.Models
         public Option<string?> PriceLevelIdOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets PriceLevelId
+        /// (Optional) The ListID or FullName of the Price Level. Mutually exclusive with Markup fields and Rate fields. (PriceLevelRef, Flattened-ID Pattern)
         /// </summary>
+        /// <value>(Optional) The ListID or FullName of the Price Level. Mutually exclusive with Markup fields and Rate fields. (PriceLevelRef, Flattened-ID Pattern)</value>
         [JsonPropertyName("priceLevelId")]
         public string? PriceLevelId { get { return this.PriceLevelIdOption.Value; } set { this.PriceLevelIdOption = new(value); } }
 
@@ -321,8 +336,9 @@ namespace Nxus.Qbd.Models
         public Option<string?> OverrideItemAccountIdOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets OverrideItemAccountId
+        /// (Optional, Add only) The ListID or FullName of the overriding Item Account. (OverrideItemAccountRef, Flattened-ID Pattern)
         /// </summary>
+        /// <value>(Optional, Add only) The ListID or FullName of the overriding Item Account. (OverrideItemAccountRef, Flattened-ID Pattern)</value>
         [JsonPropertyName("overrideItemAccountId")]
         public string? OverrideItemAccountId { get { return this.OverrideItemAccountIdOption.Value; } set { this.OverrideItemAccountIdOption = new(value); } }
 
@@ -334,8 +350,9 @@ namespace Nxus.Qbd.Models
         public Option<string?> Other1Option { get; private set; }
 
         /// <summary>
-        /// Gets or Sets Other1
+        /// (Optional) Custom field 1. Max 29 chars.
         /// </summary>
+        /// <value>(Optional) Custom field 1. Max 29 chars.</value>
         [JsonPropertyName("other1")]
         public string? Other1 { get { return this.Other1Option.Value; } set { this.Other1Option = new(value); } }
 
@@ -347,8 +364,9 @@ namespace Nxus.Qbd.Models
         public Option<string?> Other2Option { get; private set; }
 
         /// <summary>
-        /// Gets or Sets Other2
+        /// (Optional) Custom field 2. Max 29 chars.
         /// </summary>
+        /// <value>(Optional) Custom field 2. Max 29 chars.</value>
         [JsonPropertyName("other2")]
         public string? Other2 { get { return this.Other2Option.Value; } set { this.Other2Option = new(value); } }
 

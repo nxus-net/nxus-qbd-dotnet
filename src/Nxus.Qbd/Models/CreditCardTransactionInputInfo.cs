@@ -35,12 +35,12 @@ namespace Nxus.Qbd.Models
         /// </summary>
         /// <param name="number">number</param>
         /// <param name="name">name</param>
-        /// <param name="expirationMonth">(Optional) The credit card&#39;s new expiration month (1-12).</param>
-        /// <param name="expirationYear">(Optional) The credit card&#39;s new expiration year (e.g., 2025).</param>
+        /// <param name="expirationMonth">expirationMonth</param>
+        /// <param name="expirationYear">expirationYear</param>
         /// <param name="sddress">sddress</param>
         /// <param name="postalCode">postalCode</param>
-        /// <param name="commercialCardCode">(Optional) New commercial card code. (Max 4 characters)</param>
-        /// <param name="transactionMode">(Optional) New transaction mode (0 for CardNotPresent [DEFAULT], 1 for CardPresent).</param>
+        /// <param name="commercialCardCode">commercialCardCode</param>
+        /// <param name="transactionMode">transactionMode</param>
         /// <param name="transactionType">transactionType</param>
         [JsonConstructor]
         public CreditCardTransactionInputInfo(string number, string name, int? expirationMonth = default, int? expirationYear = default, Option<string?> sddress = default, Option<string?> postalCode = default, Option<string?> commercialCardCode = default, Option<NullableTransactionMode?> transactionMode = default, Option<NullableCreditCardTransactionType?> transactionType = default)
@@ -67,9 +67,8 @@ namespace Nxus.Qbd.Models
         public Option<NullableTransactionMode?> TransactionModeOption { get; private set; }
 
         /// <summary>
-        /// (Optional) New transaction mode (0 for CardNotPresent [DEFAULT], 1 for CardPresent).
+        /// Gets or Sets TransactionMode
         /// </summary>
-        /// <value>(Optional) New transaction mode (0 for CardNotPresent [DEFAULT], 1 for CardPresent).</value>
         [JsonPropertyName("transactionMode")]
         public NullableTransactionMode? TransactionMode { get { return this.TransactionModeOption.Value; } set { this.TransactionModeOption = new(value); } }
 
@@ -99,16 +98,14 @@ namespace Nxus.Qbd.Models
         public string Name { get; set; }
 
         /// <summary>
-        /// (Optional) The credit card&#39;s new expiration month (1-12).
+        /// Gets or Sets ExpirationMonth
         /// </summary>
-        /// <value>(Optional) The credit card&#39;s new expiration month (1-12).</value>
         [JsonPropertyName("expirationMonth")]
         public int? ExpirationMonth { get; set; }
 
         /// <summary>
-        /// (Optional) The credit card&#39;s new expiration year (e.g., 2025).
+        /// Gets or Sets ExpirationYear
         /// </summary>
-        /// <value>(Optional) The credit card&#39;s new expiration year (e.g., 2025).</value>
         [JsonPropertyName("expirationYear")]
         public int? ExpirationYear { get; set; }
 
@@ -146,9 +143,8 @@ namespace Nxus.Qbd.Models
         public Option<string?> CommercialCardCodeOption { get; private set; }
 
         /// <summary>
-        /// (Optional) New commercial card code. (Max 4 characters)
+        /// Gets or Sets CommercialCardCode
         /// </summary>
-        /// <value>(Optional) New commercial card code. (Max 4 characters)</value>
         [JsonPropertyName("commercialCardCode")]
         public string? CommercialCardCode { get { return this.CommercialCardCodeOption.Value; } set { this.CommercialCardCodeOption = new(value); } }
 

@@ -41,12 +41,12 @@ namespace Nxus.Qbd.Models
         /// <param name="transactionDate">transactionDate</param>
         /// <param name="currency">currency</param>
         /// <param name="exchangeRate">exchangeRate</param>
-        /// <param name="refNumber">Reference number for the journal entry. (Max 20 characters)</param>
+        /// <param name="refNumber">The primary reference number for the transaction (e.g., Invoice #, Check #).</param>
         /// <param name="memo">memo</param>
         /// <param name="transactionNumber">transactionNumber</param>
-        /// <param name="isAdjustment">Memo/description for the journal entry. (Max 4095 characters)</param>
-        /// <param name="isHomeCurrencyAdjustment">Indicates if this is a home currency adjustment.</param>
-        /// <param name="isAmountsEnteredInHomeCurrency">Indicates if amounts are entered in home currency.</param>
+        /// <param name="isAdjustment">isAdjustment</param>
+        /// <param name="isHomeCurrencyAdjustment">isHomeCurrencyAdjustment</param>
+        /// <param name="isAmountsEnteredInHomeCurrency">isAmountsEnteredInHomeCurrency</param>
         /// <param name="debitLines">debitLines</param>
         /// <param name="creditLines">creditLines</param>
         /// <param name="amount">amount</param>
@@ -179,9 +179,9 @@ namespace Nxus.Qbd.Models
         public Option<string?> RefNumberOption { get; private set; }
 
         /// <summary>
-        /// Reference number for the journal entry. (Max 20 characters)
+        /// The primary reference number for the transaction (e.g., Invoice #, Check #).
         /// </summary>
-        /// <value>Reference number for the journal entry. (Max 20 characters)</value>
+        /// <value>The primary reference number for the transaction (e.g., Invoice #, Check #).</value>
         [JsonPropertyName("refNumber")]
         public string? RefNumber { get { return this.RefNumberOption.Value; } set { this.RefNumberOption = new(value); } }
 
@@ -219,9 +219,8 @@ namespace Nxus.Qbd.Models
         public Option<bool?> IsAdjustmentOption { get; private set; }
 
         /// <summary>
-        /// Memo/description for the journal entry. (Max 4095 characters)
+        /// Gets or Sets IsAdjustment
         /// </summary>
-        /// <value>Memo/description for the journal entry. (Max 4095 characters)</value>
         [JsonPropertyName("isAdjustment")]
         public bool? IsAdjustment { get { return this.IsAdjustmentOption.Value; } set { this.IsAdjustmentOption = new(value); } }
 
@@ -233,9 +232,8 @@ namespace Nxus.Qbd.Models
         public Option<bool?> IsHomeCurrencyAdjustmentOption { get; private set; }
 
         /// <summary>
-        /// Indicates if this is a home currency adjustment.
+        /// Gets or Sets IsHomeCurrencyAdjustment
         /// </summary>
-        /// <value>Indicates if this is a home currency adjustment.</value>
         [JsonPropertyName("isHomeCurrencyAdjustment")]
         public bool? IsHomeCurrencyAdjustment { get { return this.IsHomeCurrencyAdjustmentOption.Value; } set { this.IsHomeCurrencyAdjustmentOption = new(value); } }
 
@@ -247,9 +245,8 @@ namespace Nxus.Qbd.Models
         public Option<bool?> IsAmountsEnteredInHomeCurrencyOption { get; private set; }
 
         /// <summary>
-        /// Indicates if amounts are entered in home currency.
+        /// Gets or Sets IsAmountsEnteredInHomeCurrency
         /// </summary>
-        /// <value>Indicates if amounts are entered in home currency.</value>
         [JsonPropertyName("isAmountsEnteredInHomeCurrency")]
         public bool? IsAmountsEnteredInHomeCurrency { get { return this.IsAmountsEnteredInHomeCurrencyOption.Value; } set { this.IsAmountsEnteredInHomeCurrencyOption = new(value); } }
 

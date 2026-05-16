@@ -34,7 +34,7 @@ namespace Nxus.Qbd.Models
         /// Initializes a new instance of the <see cref="UpdateItemReceiptRequest" /> class.
         /// </summary>
         /// <param name="revisionNumber">revisionNumber</param>
-        /// <param name="vendorId">Filter by Vendor ID.</param>
+        /// <param name="vendorId">Vendor ListID (Optional for updates).</param>
         /// <param name="payablesAccountId">payablesAccountId</param>
         /// <param name="liabilityAccountId">Liability Account ListID (Optional for updates).</param>
         /// <param name="transactionDate">transactionDate</param>
@@ -83,10 +83,9 @@ namespace Nxus.Qbd.Models
         public Option<string?> VendorIdOption { get; private set; }
 
         /// <summary>
-        /// Filter by Vendor ID.
+        /// Vendor ListID (Optional for updates).
         /// </summary>
-        /// <value>Filter by Vendor ID.</value>
-        /* <example>10000001-1039043346</example> */
+        /// <value>Vendor ListID (Optional for updates).</value>
         [JsonPropertyName("vendorId")]
         public string? VendorId { get { return this.VendorIdOption.Value; } set { this.VendorIdOption = new(value); } }
 

@@ -40,11 +40,11 @@ namespace Nxus.Qbd.Models
         /// <param name="objectType">objectType</param>
         /// <param name="transactionDate">transactionDate</param>
         /// <param name="currency">currency</param>
-        /// <param name="exchangeRate">Exchange rate for multi-currency transactions (Optional).</param>
-        /// <param name="refNumber">Reference number for the transaction (Optional). MaxLength of 11 characters is based on QuickBooks Desktop&#39;s limit for RefNumber fields.</param>
-        /// <param name="memo">Memo for the transaction (Optional).</param>
+        /// <param name="exchangeRate">exchangeRate</param>
+        /// <param name="refNumber">The primary reference number for the transaction (e.g., Invoice #, Check #).</param>
+        /// <param name="memo">memo</param>
         /// <param name="transactionNumber">transactionNumber</param>
-        /// <param name="isTaxIncluded">Indicates if tax is included in the line items.</param>
+        /// <param name="isTaxIncluded">The total amount of the credit.</param>
         /// <param name="salesTaxCode">Reference to the sales tax code.</param>
         /// <param name="amount">amount</param>
         /// <param name="entity">entity</param>
@@ -160,9 +160,8 @@ namespace Nxus.Qbd.Models
         public Option<double?> ExchangeRateOption { get; private set; }
 
         /// <summary>
-        /// Exchange rate for multi-currency transactions (Optional).
+        /// Gets or Sets ExchangeRate
         /// </summary>
-        /// <value>Exchange rate for multi-currency transactions (Optional).</value>
         [JsonPropertyName("exchangeRate")]
         public double? ExchangeRate { get { return this.ExchangeRateOption.Value; } set { this.ExchangeRateOption = new(value); } }
 
@@ -174,9 +173,9 @@ namespace Nxus.Qbd.Models
         public Option<string?> RefNumberOption { get; private set; }
 
         /// <summary>
-        /// Reference number for the transaction (Optional). MaxLength of 11 characters is based on QuickBooks Desktop&#39;s limit for RefNumber fields.
+        /// The primary reference number for the transaction (e.g., Invoice #, Check #).
         /// </summary>
-        /// <value>Reference number for the transaction (Optional). MaxLength of 11 characters is based on QuickBooks Desktop&#39;s limit for RefNumber fields.</value>
+        /// <value>The primary reference number for the transaction (e.g., Invoice #, Check #).</value>
         [JsonPropertyName("refNumber")]
         public string? RefNumber { get { return this.RefNumberOption.Value; } set { this.RefNumberOption = new(value); } }
 
@@ -188,9 +187,8 @@ namespace Nxus.Qbd.Models
         public Option<string?> MemoOption { get; private set; }
 
         /// <summary>
-        /// Memo for the transaction (Optional).
+        /// Gets or Sets Memo
         /// </summary>
-        /// <value>Memo for the transaction (Optional).</value>
         [JsonPropertyName("memo")]
         public string? Memo { get { return this.MemoOption.Value; } set { this.MemoOption = new(value); } }
 
@@ -215,9 +213,9 @@ namespace Nxus.Qbd.Models
         public Option<bool?> IsTaxIncludedOption { get; private set; }
 
         /// <summary>
-        /// Indicates if tax is included in the line items.
+        /// The total amount of the credit.
         /// </summary>
-        /// <value>Indicates if tax is included in the line items.</value>
+        /// <value>The total amount of the credit.</value>
         [JsonPropertyName("isTaxIncluded")]
         public bool? IsTaxIncluded { get { return this.IsTaxIncludedOption.Value; } set { this.IsTaxIncludedOption = new(value); } }
 

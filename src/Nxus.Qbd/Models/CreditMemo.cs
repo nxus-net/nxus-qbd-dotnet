@@ -40,9 +40,9 @@ namespace Nxus.Qbd.Models
         /// <param name="objectType">objectType</param>
         /// <param name="transactionDate">transactionDate</param>
         /// <param name="currency">currency</param>
-        /// <param name="exchangeRate">(Optional) The exchange rate for the transaction.</param>
-        /// <param name="refNumber">(Optional) The reference number (e.g., Credit Memo #).</param>
-        /// <param name="memo">(Optional) A memo for the transaction.</param>
+        /// <param name="exchangeRate">exchangeRate</param>
+        /// <param name="refNumber">The primary reference number for the transaction (e.g., Invoice #, Check #).</param>
+        /// <param name="memo">memo</param>
         /// <param name="transactionNumber">transactionNumber</param>
         /// <param name="customer">customer</param>
         /// <param name="class">class</param>
@@ -52,13 +52,13 @@ namespace Nxus.Qbd.Models
         /// <param name="billingAddressBlock">billingAddressBlock</param>
         /// <param name="shippingAddress">shippingAddress</param>
         /// <param name="shippingAddressBlock">shippingAddressBlock</param>
-        /// <param name="isPending">(Optional) Indicates if the credit memo is pending.</param>
+        /// <param name="isPending">isPending</param>
         /// <param name="poNumber">poNumber</param>
         /// <param name="terms">terms</param>
-        /// <param name="dueDate">(Optional) The due date.</param>
+        /// <param name="dueDate">dueDate</param>
         /// <param name="salesRepresentative">salesRepresentative</param>
-        /// <param name="fob">(Optional) Free On Board (FOB) terms. (Max 13 characters)</param>
-        /// <param name="shipDate">(Optional) The date of shipment.</param>
+        /// <param name="fob">fob</param>
+        /// <param name="shipDate">shipDate</param>
         /// <param name="shipMethod">shipMethod</param>
         /// <param name="subtotal">subtotal</param>
         /// <param name="itemSalesTax">itemSalesTax</param>
@@ -68,11 +68,11 @@ namespace Nxus.Qbd.Models
         /// <param name="creditRemaining">creditRemaining</param>
         /// <param name="creditRemainingInHomeCurrency">creditRemainingInHomeCurrency</param>
         /// <param name="customerMsg">customerMsg</param>
-        /// <param name="isToBePrinted">(Optional) Indicates if the transaction is to be printed.</param>
-        /// <param name="isToBeEmailed">(Optional) Indicates if the transaction is to be emailed.</param>
-        /// <param name="isTaxIncluded">(Optional) Indicates if tax is included in the amounts.</param>
+        /// <param name="isToBePrinted">isToBePrinted</param>
+        /// <param name="isToBeEmailed">isToBeEmailed</param>
+        /// <param name="isTaxIncluded">isTaxIncluded</param>
         /// <param name="customerSalesTaxCode">customerSalesTaxCode</param>
-        /// <param name="other">(Optional) Other custom field. (Max 29 characters)</param>
+        /// <param name="other">other</param>
         /// <param name="lines">lines</param>
         /// <param name="lineGroups">lineGroups</param>
         /// <param name="amount">amount</param>
@@ -216,9 +216,8 @@ namespace Nxus.Qbd.Models
         public Option<double?> ExchangeRateOption { get; private set; }
 
         /// <summary>
-        /// (Optional) The exchange rate for the transaction.
+        /// Gets or Sets ExchangeRate
         /// </summary>
-        /// <value>(Optional) The exchange rate for the transaction.</value>
         [JsonPropertyName("exchangeRate")]
         public double? ExchangeRate { get { return this.ExchangeRateOption.Value; } set { this.ExchangeRateOption = new(value); } }
 
@@ -230,9 +229,9 @@ namespace Nxus.Qbd.Models
         public Option<string?> RefNumberOption { get; private set; }
 
         /// <summary>
-        /// (Optional) The reference number (e.g., Credit Memo #).
+        /// The primary reference number for the transaction (e.g., Invoice #, Check #).
         /// </summary>
-        /// <value>(Optional) The reference number (e.g., Credit Memo #).</value>
+        /// <value>The primary reference number for the transaction (e.g., Invoice #, Check #).</value>
         [JsonPropertyName("refNumber")]
         public string? RefNumber { get { return this.RefNumberOption.Value; } set { this.RefNumberOption = new(value); } }
 
@@ -244,9 +243,8 @@ namespace Nxus.Qbd.Models
         public Option<string?> MemoOption { get; private set; }
 
         /// <summary>
-        /// (Optional) A memo for the transaction.
+        /// Gets or Sets Memo
         /// </summary>
-        /// <value>(Optional) A memo for the transaction.</value>
         [JsonPropertyName("memo")]
         public string? Memo { get { return this.MemoOption.Value; } set { this.MemoOption = new(value); } }
 
@@ -375,9 +373,8 @@ namespace Nxus.Qbd.Models
         public Option<bool?> IsPendingOption { get; private set; }
 
         /// <summary>
-        /// (Optional) Indicates if the credit memo is pending.
+        /// Gets or Sets IsPending
         /// </summary>
-        /// <value>(Optional) Indicates if the credit memo is pending.</value>
         [JsonPropertyName("isPending")]
         public bool? IsPending { get { return this.IsPendingOption.Value; } set { this.IsPendingOption = new(value); } }
 
@@ -415,9 +412,8 @@ namespace Nxus.Qbd.Models
         public Option<DateOnly?> DueDateOption { get; private set; }
 
         /// <summary>
-        /// (Optional) The due date.
+        /// Gets or Sets DueDate
         /// </summary>
-        /// <value>(Optional) The due date.</value>
         [JsonPropertyName("dueDate")]
         public DateOnly? DueDate { get { return this.DueDateOption.Value; } set { this.DueDateOption = new(value); } }
 
@@ -442,9 +438,8 @@ namespace Nxus.Qbd.Models
         public Option<string?> FobOption { get; private set; }
 
         /// <summary>
-        /// (Optional) Free On Board (FOB) terms. (Max 13 characters)
+        /// Gets or Sets Fob
         /// </summary>
-        /// <value>(Optional) Free On Board (FOB) terms. (Max 13 characters)</value>
         [JsonPropertyName("fob")]
         public string? Fob { get { return this.FobOption.Value; } set { this.FobOption = new(value); } }
 
@@ -456,9 +451,8 @@ namespace Nxus.Qbd.Models
         public Option<DateOnly?> ShipDateOption { get; private set; }
 
         /// <summary>
-        /// (Optional) The date of shipment.
+        /// Gets or Sets ShipDate
         /// </summary>
-        /// <value>(Optional) The date of shipment.</value>
         [JsonPropertyName("shipDate")]
         public DateOnly? ShipDate { get { return this.ShipDateOption.Value; } set { this.ShipDateOption = new(value); } }
 
@@ -587,9 +581,8 @@ namespace Nxus.Qbd.Models
         public Option<bool?> IsToBePrintedOption { get; private set; }
 
         /// <summary>
-        /// (Optional) Indicates if the transaction is to be printed.
+        /// Gets or Sets IsToBePrinted
         /// </summary>
-        /// <value>(Optional) Indicates if the transaction is to be printed.</value>
         [JsonPropertyName("isToBePrinted")]
         public bool? IsToBePrinted { get { return this.IsToBePrintedOption.Value; } set { this.IsToBePrintedOption = new(value); } }
 
@@ -601,9 +594,8 @@ namespace Nxus.Qbd.Models
         public Option<bool?> IsToBeEmailedOption { get; private set; }
 
         /// <summary>
-        /// (Optional) Indicates if the transaction is to be emailed.
+        /// Gets or Sets IsToBeEmailed
         /// </summary>
-        /// <value>(Optional) Indicates if the transaction is to be emailed.</value>
         [JsonPropertyName("isToBeEmailed")]
         public bool? IsToBeEmailed { get { return this.IsToBeEmailedOption.Value; } set { this.IsToBeEmailedOption = new(value); } }
 
@@ -615,9 +607,8 @@ namespace Nxus.Qbd.Models
         public Option<bool?> IsTaxIncludedOption { get; private set; }
 
         /// <summary>
-        /// (Optional) Indicates if tax is included in the amounts.
+        /// Gets or Sets IsTaxIncluded
         /// </summary>
-        /// <value>(Optional) Indicates if tax is included in the amounts.</value>
         [JsonPropertyName("isTaxIncluded")]
         public bool? IsTaxIncluded { get { return this.IsTaxIncludedOption.Value; } set { this.IsTaxIncludedOption = new(value); } }
 
@@ -642,9 +633,8 @@ namespace Nxus.Qbd.Models
         public Option<string?> OtherOption { get; private set; }
 
         /// <summary>
-        /// (Optional) Other custom field. (Max 29 characters)
+        /// Gets or Sets Other
         /// </summary>
-        /// <value>(Optional) Other custom field. (Max 29 characters)</value>
         [JsonPropertyName("other")]
         public string? Other { get { return this.OtherOption.Value; } set { this.OtherOption = new(value); } }
 

@@ -34,8 +34,8 @@ namespace Nxus.Qbd.Models
         /// Initializes a new instance of the <see cref="ReportRowData" /> class.
         /// </summary>
         /// <param name="type">type</param>
-        /// <param name="value">The value of the row.</param>
-        /// <param name="rowNumber">The row number of the row.</param>
+        /// <param name="value">Optional row value or label.</param>
+        /// <param name="rowNumber">Row number (optional, for reference).</param>
         [JsonConstructor]
         public ReportRowData(Option<string?> type = default, Option<string?> value = default, Option<int?> rowNumber = default)
         {
@@ -68,9 +68,9 @@ namespace Nxus.Qbd.Models
         public Option<string?> ValueOption { get; private set; }
 
         /// <summary>
-        /// The value of the row.
+        /// Optional row value or label.
         /// </summary>
-        /// <value>The value of the row.</value>
+        /// <value>Optional row value or label.</value>
         [JsonPropertyName("value")]
         public string? Value { get { return this.ValueOption.Value; } set { this.ValueOption = new(value); } }
 
@@ -82,9 +82,9 @@ namespace Nxus.Qbd.Models
         public Option<int?> RowNumberOption { get; private set; }
 
         /// <summary>
-        /// The row number of the row.
+        /// Row number (optional, for reference).
         /// </summary>
-        /// <value>The row number of the row.</value>
+        /// <value>Row number (optional, for reference).</value>
         [JsonPropertyName("rowNumber")]
         public int? RowNumber { get { return this.RowNumberOption.Value; } set { this.RowNumberOption = new(value); } }
 

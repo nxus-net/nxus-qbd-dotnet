@@ -38,7 +38,7 @@ namespace Nxus.Qbd.Models
         /// <param name="updatedAt">updatedAt</param>
         /// <param name="revisionNumber">revisionNumber</param>
         /// <param name="objectType">objectType</param>
-        /// <param name="name">name</param>
+        /// <param name="name">The primary display name for the List object (e.g., Customer Name, Vendor Name).</param>
         /// <param name="salutation">salutation</param>
         /// <param name="firstName">firstName</param>
         /// <param name="middleName">middleName</param>
@@ -58,7 +58,7 @@ namespace Nxus.Qbd.Models
         /// <param name="fax">fax</param>
         /// <param name="ssn">ssn</param>
         /// <param name="email">email</param>
-        /// <param name="emergencyContacts">Emergency contacts for the employee (QBD only, v13.0+).</param>
+        /// <param name="emergencyContacts">emergencyContacts</param>
         /// <param name="additionalContacts">additionalContacts</param>
         /// <param name="additionalNotes">additionalNotes</param>
         /// <param name="employeeType">employeeType</param>
@@ -84,7 +84,7 @@ namespace Nxus.Qbd.Models
         /// <param name="billingRate">billingRate</param>
         /// <param name="employeePayrollInfo">employeePayrollInfo</param>
         /// <param name="externalId">externalId</param>
-        /// <param name="isActive">The employee&#39;s name (required). This is the display name in QuickBooks.</param>
+        /// <param name="isActive">Indicates whether the list item is active. Common to all list types.</param>
         /// <param name="customFields">customFields</param>
         [JsonConstructor]
         public Employee(string id, DateTimeOffset createdAt, DateTimeOffset updatedAt, string revisionNumber, Option<string?> objectType = default, Option<string?> name = default, Option<string?> salutation = default, Option<string?> firstName = default, Option<string?> middleName = default, Option<string?> lastName = default, Option<string?> jobTitle = default, Option<QbdRef?> supervisor = default, Option<string?> department = default, Option<string?> description = default, Option<double?> targetBonus = default, Option<EmployeeAddress?> employeeAddress = default, Option<string?> printAs = default, Option<string?> phone = default, Option<string?> mobile = default, Option<string?> pager = default, Option<string?> pagerPin = default, Option<string?> alternatePhone = default, Option<string?> fax = default, Option<string?> ssn = default, Option<string?> email = default, Option<EmergencyContact?> emergencyContacts = default, Option<List<CustomContactField>?> additionalContacts = default, Option<List<AdditionalNote>?> additionalNotes = default, Option<string?> employeeType = default, Option<string?> partOrFullTime = default, Option<string?> exempt = default, Option<string?> keyEmployee = default, Option<string?> gender = default, Option<DateOnly?> hiredDate = default, Option<DateOnly?> originalHireDate = default, Option<DateOnly?> adjustedServiceDate = default, Option<DateOnly?> releasedDate = default, Option<DateOnly?> birthDate = default, Option<string?> usCitizen = default, Option<string?> ethnicity = default, Option<string?> disabled = default, Option<string?> disabilityDesc = default, Option<string?> onFile = default, Option<DateOnly?> workAuthExpireDate = default, Option<string?> usVeteran = default, Option<string?> militaryStatus = default, Option<string?> accountNumber = default, Option<string?> notes = default, Option<QbdRef?> billingRate = default, Option<EmployeePayrollInfo?> employeePayrollInfo = default, Option<string?> externalId = default, Option<bool?> isActive = default, Option<List<QbdDataExt>?> customFields = default)
@@ -192,8 +192,9 @@ namespace Nxus.Qbd.Models
         public Option<string?> NameOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets Name
+        /// The primary display name for the List object (e.g., Customer Name, Vendor Name).
         /// </summary>
+        /// <value>The primary display name for the List object (e.g., Customer Name, Vendor Name).</value>
         [JsonPropertyName("name")]
         public string? Name { get { return this.NameOption.Value; } set { this.NameOption = new(value); } }
 
@@ -452,9 +453,8 @@ namespace Nxus.Qbd.Models
         public Option<EmergencyContact?> EmergencyContactsOption { get; private set; }
 
         /// <summary>
-        /// Emergency contacts for the employee (QBD only, v13.0+).
+        /// Gets or Sets EmergencyContacts
         /// </summary>
-        /// <value>Emergency contacts for the employee (QBD only, v13.0+).</value>
         [JsonPropertyName("emergencyContacts")]
         public EmergencyContact? EmergencyContacts { get { return this.EmergencyContactsOption.Value; } set { this.EmergencyContactsOption = new(value); } }
 
@@ -791,9 +791,9 @@ namespace Nxus.Qbd.Models
         public Option<bool?> IsActiveOption { get; private set; }
 
         /// <summary>
-        /// The employee&#39;s name (required). This is the display name in QuickBooks.
+        /// Indicates whether the list item is active. Common to all list types.
         /// </summary>
-        /// <value>The employee&#39;s name (required). This is the display name in QuickBooks.</value>
+        /// <value>Indicates whether the list item is active. Common to all list types.</value>
         [JsonPropertyName("isActive")]
         public bool? IsActive { get { return this.IsActiveOption.Value; } set { this.IsActiveOption = new(value); } }
 

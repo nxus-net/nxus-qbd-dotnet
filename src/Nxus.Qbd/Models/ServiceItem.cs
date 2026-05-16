@@ -38,7 +38,7 @@ namespace Nxus.Qbd.Models
         /// <param name="updatedAt">updatedAt</param>
         /// <param name="revisionNumber">revisionNumber</param>
         /// <param name="objectType">objectType</param>
-        /// <param name="name">name</param>
+        /// <param name="name">The primary display name for the List object (e.g., Customer Name, Vendor Name).</param>
         /// <param name="desc">desc</param>
         /// <param name="price">price</param>
         /// <param name="pricePercent">pricePercent</param>
@@ -51,16 +51,16 @@ namespace Nxus.Qbd.Models
         /// <param name="purchaseTaxCode">purchaseTaxCode</param>
         /// <param name="expenseAccount">expenseAccount</param>
         /// <param name="preferredVendor">preferredVendor</param>
-        /// <param name="fullname">fullname</param>
+        /// <param name="fullname">Fully qualified name including parent hierarchy (e.g., \&quot;Parent:Child\&quot;).</param>
         /// <param name="barcode">barcode</param>
-        /// <param name="class">class</param>
-        /// <param name="parent">parent</param>
-        /// <param name="sublevel">sublevel</param>
-        /// <param name="unitOfMeasureSet">unitOfMeasureSet</param>
-        /// <param name="salesTaxCode">salesTaxCode</param>
-        /// <param name="description">description</param>
+        /// <param name="class">Class reference for categorization/departmental tracking.</param>
+        /// <param name="parent">Parent item reference for hierarchical items.</param>
+        /// <param name="sublevel">Level in the item hierarchy (0 for top-level).</param>
+        /// <param name="unitOfMeasureSet">Unit of measure set reference.</param>
+        /// <param name="salesTaxCode">Sales tax code reference.</param>
+        /// <param name="description">General item description.</param>
         /// <param name="externalId">externalId</param>
-        /// <param name="isActive">isActive</param>
+        /// <param name="isActive">Indicates whether the list item is active. Common to all list types.</param>
         /// <param name="customFields">customFields</param>
         [JsonConstructor]
         public ServiceItem(string id, DateTimeOffset createdAt, DateTimeOffset updatedAt, string revisionNumber, Option<string?> objectType = default, Option<string?> name = default, Option<string?> desc = default, Option<double?> price = default, Option<double?> pricePercent = default, Option<QbdRef?> account = default, Option<string?> salesDescription = default, Option<double?> salesPrice = default, Option<QbdRef?> incomeAccount = default, Option<string?> purchaseDesc = default, Option<double?> purchaseCost = default, Option<QbdRef?> purchaseTaxCode = default, Option<QbdRef?> expenseAccount = default, Option<QbdRef?> preferredVendor = default, Option<string?> fullname = default, Option<string?> barcode = default, Option<QbdRef?> @class = default, Option<QbdRef?> parent = default, Option<int?> sublevel = default, Option<QbdRef?> unitOfMeasureSet = default, Option<QbdRef?> salesTaxCode = default, Option<string?> description = default, Option<string?> externalId = default, Option<bool?> isActive = default, Option<List<QbdDataExt>?> customFields = default)
@@ -144,8 +144,9 @@ namespace Nxus.Qbd.Models
         public Option<string?> NameOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets Name
+        /// The primary display name for the List object (e.g., Customer Name, Vendor Name).
         /// </summary>
+        /// <value>The primary display name for the List object (e.g., Customer Name, Vendor Name).</value>
         [JsonPropertyName("name")]
         public string? Name { get { return this.NameOption.Value; } set { this.NameOption = new(value); } }
 
@@ -313,8 +314,9 @@ namespace Nxus.Qbd.Models
         public Option<string?> FullnameOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets Fullname
+        /// Fully qualified name including parent hierarchy (e.g., \&quot;Parent:Child\&quot;).
         /// </summary>
+        /// <value>Fully qualified name including parent hierarchy (e.g., \&quot;Parent:Child\&quot;).</value>
         [JsonPropertyName("fullname")]
         public string? Fullname { get { return this.FullnameOption.Value; } set { this.FullnameOption = new(value); } }
 
@@ -339,8 +341,9 @@ namespace Nxus.Qbd.Models
         public Option<QbdRef?> ClassOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets Class
+        /// Class reference for categorization/departmental tracking.
         /// </summary>
+        /// <value>Class reference for categorization/departmental tracking.</value>
         [JsonPropertyName("class")]
         public QbdRef? Class { get { return this.ClassOption.Value; } set { this.ClassOption = new(value); } }
 
@@ -352,8 +355,9 @@ namespace Nxus.Qbd.Models
         public Option<QbdRef?> ParentOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets Parent
+        /// Parent item reference for hierarchical items.
         /// </summary>
+        /// <value>Parent item reference for hierarchical items.</value>
         [JsonPropertyName("parent")]
         public QbdRef? Parent { get { return this.ParentOption.Value; } set { this.ParentOption = new(value); } }
 
@@ -365,8 +369,9 @@ namespace Nxus.Qbd.Models
         public Option<int?> SublevelOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets Sublevel
+        /// Level in the item hierarchy (0 for top-level).
         /// </summary>
+        /// <value>Level in the item hierarchy (0 for top-level).</value>
         [JsonPropertyName("sublevel")]
         public int? Sublevel { get { return this.SublevelOption.Value; } set { this.SublevelOption = new(value); } }
 
@@ -378,8 +383,9 @@ namespace Nxus.Qbd.Models
         public Option<QbdRef?> UnitOfMeasureSetOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets UnitOfMeasureSet
+        /// Unit of measure set reference.
         /// </summary>
+        /// <value>Unit of measure set reference.</value>
         [JsonPropertyName("unitOfMeasureSet")]
         public QbdRef? UnitOfMeasureSet { get { return this.UnitOfMeasureSetOption.Value; } set { this.UnitOfMeasureSetOption = new(value); } }
 
@@ -391,8 +397,9 @@ namespace Nxus.Qbd.Models
         public Option<QbdRef?> SalesTaxCodeOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets SalesTaxCode
+        /// Sales tax code reference.
         /// </summary>
+        /// <value>Sales tax code reference.</value>
         [JsonPropertyName("salesTaxCode")]
         public QbdRef? SalesTaxCode { get { return this.SalesTaxCodeOption.Value; } set { this.SalesTaxCodeOption = new(value); } }
 
@@ -404,8 +411,9 @@ namespace Nxus.Qbd.Models
         public Option<string?> DescriptionOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets Description
+        /// General item description.
         /// </summary>
+        /// <value>General item description.</value>
         [JsonPropertyName("description")]
         public string? Description { get { return this.DescriptionOption.Value; } set { this.DescriptionOption = new(value); } }
 
@@ -430,8 +438,9 @@ namespace Nxus.Qbd.Models
         public Option<bool?> IsActiveOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets IsActive
+        /// Indicates whether the list item is active. Common to all list types.
         /// </summary>
+        /// <value>Indicates whether the list item is active. Common to all list types.</value>
         [JsonPropertyName("isActive")]
         public bool? IsActive { get { return this.IsActiveOption.Value; } set { this.IsActiveOption = new(value); } }
 

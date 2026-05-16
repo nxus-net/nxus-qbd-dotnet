@@ -36,20 +36,20 @@ namespace Nxus.Qbd.Models
         /// <param name="id">id</param>
         /// <param name="objectType">objectType</param>
         /// <param name="item">item</param>
-        /// <param name="description">(Optional) Description for the line item. (Max 4095 characters)</param>
-        /// <param name="quantity">(Optional) Quantity of the item.</param>
-        /// <param name="unitOfMeasure">(Optional) Unit of measure override. (Max 31 characters)</param>
+        /// <param name="description">description</param>
+        /// <param name="quantity">quantity</param>
+        /// <param name="unitOfMeasure">unitOfMeasure</param>
         /// <param name="overrideUOMSet">overrideUOMSet</param>
-        /// <param name="rate">(Optional) The direct rate per unit. Use either Rate, RatePercent, or PriceLevelId.</param>
-        /// <param name="ratePercent">(Optional) The percentage rate based on item price. Use either Rate, RatePercent, or PriceLevelId.</param>
+        /// <param name="rate">rate</param>
+        /// <param name="ratePercent">ratePercent</param>
         /// <param name="class">class</param>
-        /// <param name="amount">(Optional) Total amount for the line. Overrides calculation if Rate/RatePercent not set.</param>
+        /// <param name="amount">amount</param>
         /// <param name="inventorySite">inventorySite</param>
         /// <param name="inventorySiteLocation">inventorySiteLocation</param>
-        /// <param name="serialNumber">(Optional) Serial number for the item. Mutually exclusive with LotNumber. (Max 4095 characters)</param>
-        /// <param name="lotNumber">(Optional) Lot number for the item. Mutually exclusive with SerialNumber. (Max 40 characters)</param>
+        /// <param name="serialNumber">serialNumber</param>
+        /// <param name="lotNumber">lotNumber</param>
         /// <param name="expirationDate">expirationDate</param>
-        /// <param name="serviceDate">(Optional) The date the service was performed.</param>
+        /// <param name="serviceDate">serviceDate</param>
         /// <param name="salesTaxCode">salesTaxCode</param>
         /// <param name="otherCustomField1">otherCustomField1</param>
         /// <param name="otherCustomField2">otherCustomField2</param>
@@ -125,9 +125,8 @@ namespace Nxus.Qbd.Models
         public Option<string?> DescriptionOption { get; private set; }
 
         /// <summary>
-        /// (Optional) Description for the line item. (Max 4095 characters)
+        /// Gets or Sets Description
         /// </summary>
-        /// <value>(Optional) Description for the line item. (Max 4095 characters)</value>
         [JsonPropertyName("description")]
         public string? Description { get { return this.DescriptionOption.Value; } set { this.DescriptionOption = new(value); } }
 
@@ -139,9 +138,8 @@ namespace Nxus.Qbd.Models
         public Option<double?> QuantityOption { get; private set; }
 
         /// <summary>
-        /// (Optional) Quantity of the item.
+        /// Gets or Sets Quantity
         /// </summary>
-        /// <value>(Optional) Quantity of the item.</value>
         [JsonPropertyName("quantity")]
         public double? Quantity { get { return this.QuantityOption.Value; } set { this.QuantityOption = new(value); } }
 
@@ -153,9 +151,8 @@ namespace Nxus.Qbd.Models
         public Option<string?> UnitOfMeasureOption { get; private set; }
 
         /// <summary>
-        /// (Optional) Unit of measure override. (Max 31 characters)
+        /// Gets or Sets UnitOfMeasure
         /// </summary>
-        /// <value>(Optional) Unit of measure override. (Max 31 characters)</value>
         [JsonPropertyName("unitOfMeasure")]
         public string? UnitOfMeasure { get { return this.UnitOfMeasureOption.Value; } set { this.UnitOfMeasureOption = new(value); } }
 
@@ -180,9 +177,8 @@ namespace Nxus.Qbd.Models
         public Option<double?> RateOption { get; private set; }
 
         /// <summary>
-        /// (Optional) The direct rate per unit. Use either Rate, RatePercent, or PriceLevelId.
+        /// Gets or Sets Rate
         /// </summary>
-        /// <value>(Optional) The direct rate per unit. Use either Rate, RatePercent, or PriceLevelId.</value>
         [JsonPropertyName("rate")]
         public double? Rate { get { return this.RateOption.Value; } set { this.RateOption = new(value); } }
 
@@ -194,9 +190,8 @@ namespace Nxus.Qbd.Models
         public Option<double?> RatePercentOption { get; private set; }
 
         /// <summary>
-        /// (Optional) The percentage rate based on item price. Use either Rate, RatePercent, or PriceLevelId.
+        /// Gets or Sets RatePercent
         /// </summary>
-        /// <value>(Optional) The percentage rate based on item price. Use either Rate, RatePercent, or PriceLevelId.</value>
         [JsonPropertyName("ratePercent")]
         public double? RatePercent { get { return this.RatePercentOption.Value; } set { this.RatePercentOption = new(value); } }
 
@@ -221,9 +216,8 @@ namespace Nxus.Qbd.Models
         public Option<double?> AmountOption { get; private set; }
 
         /// <summary>
-        /// (Optional) Total amount for the line. Overrides calculation if Rate/RatePercent not set.
+        /// Gets or Sets Amount
         /// </summary>
-        /// <value>(Optional) Total amount for the line. Overrides calculation if Rate/RatePercent not set.</value>
         [JsonPropertyName("amount")]
         public double? Amount { get { return this.AmountOption.Value; } set { this.AmountOption = new(value); } }
 
@@ -261,9 +255,8 @@ namespace Nxus.Qbd.Models
         public Option<string?> SerialNumberOption { get; private set; }
 
         /// <summary>
-        /// (Optional) Serial number for the item. Mutually exclusive with LotNumber. (Max 4095 characters)
+        /// Gets or Sets SerialNumber
         /// </summary>
-        /// <value>(Optional) Serial number for the item. Mutually exclusive with LotNumber. (Max 4095 characters)</value>
         [JsonPropertyName("serialNumber")]
         public string? SerialNumber { get { return this.SerialNumberOption.Value; } set { this.SerialNumberOption = new(value); } }
 
@@ -275,9 +268,8 @@ namespace Nxus.Qbd.Models
         public Option<string?> LotNumberOption { get; private set; }
 
         /// <summary>
-        /// (Optional) Lot number for the item. Mutually exclusive with SerialNumber. (Max 40 characters)
+        /// Gets or Sets LotNumber
         /// </summary>
-        /// <value>(Optional) Lot number for the item. Mutually exclusive with SerialNumber. (Max 40 characters)</value>
         [JsonPropertyName("lotNumber")]
         public string? LotNumber { get { return this.LotNumberOption.Value; } set { this.LotNumberOption = new(value); } }
 
@@ -302,9 +294,8 @@ namespace Nxus.Qbd.Models
         public Option<DateOnly?> ServiceDateOption { get; private set; }
 
         /// <summary>
-        /// (Optional) The date the service was performed.
+        /// Gets or Sets ServiceDate
         /// </summary>
-        /// <value>(Optional) The date the service was performed.</value>
         [JsonPropertyName("serviceDate")]
         public DateOnly? ServiceDate { get { return this.ServiceDateOption.Value; } set { this.ServiceDateOption = new(value); } }
 

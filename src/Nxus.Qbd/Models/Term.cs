@@ -38,14 +38,14 @@ namespace Nxus.Qbd.Models
         /// <param name="updatedAt">updatedAt</param>
         /// <param name="revisionNumber">revisionNumber</param>
         /// <param name="objectType">objectType</param>
-        /// <param name="name">name</param>
+        /// <param name="name">The primary display name for the List object (e.g., Customer Name, Vendor Name).</param>
         /// <param name="dueDays">dueDays</param>
         /// <param name="discountDays">discountDays</param>
         /// <param name="dueDayOfMonth">dueDayOfMonth</param>
         /// <param name="gracePeriodDays">gracePeriodDays</param>
-        /// <param name="discountDayOfMonth">Day of the month for discount eligibility (Date Driven Terms).</param>
+        /// <param name="discountDayOfMonth">discountDayOfMonth</param>
         /// <param name="discountPercentage">discountPercentage</param>
-        /// <param name="isActive">isActive</param>
+        /// <param name="isActive">Indicates whether the list item is active. Common to all list types.</param>
         /// <param name="customFields">customFields</param>
         [JsonConstructor]
         public Term(string id, DateTimeOffset createdAt, DateTimeOffset updatedAt, string revisionNumber, Option<string?> objectType = default, Option<string?> name = default, Option<int?> dueDays = default, Option<int?> discountDays = default, Option<int?> dueDayOfMonth = default, Option<int?> gracePeriodDays = default, Option<int?> discountDayOfMonth = default, Option<double?> discountPercentage = default, Option<bool?> isActive = default, Option<List<QbdDataExt>?> customFields = default)
@@ -114,8 +114,9 @@ namespace Nxus.Qbd.Models
         public Option<string?> NameOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets Name
+        /// The primary display name for the List object (e.g., Customer Name, Vendor Name).
         /// </summary>
+        /// <value>The primary display name for the List object (e.g., Customer Name, Vendor Name).</value>
         [JsonPropertyName("name")]
         public string? Name { get { return this.NameOption.Value; } set { this.NameOption = new(value); } }
 
@@ -179,9 +180,8 @@ namespace Nxus.Qbd.Models
         public Option<int?> DiscountDayOfMonthOption { get; private set; }
 
         /// <summary>
-        /// Day of the month for discount eligibility (Date Driven Terms).
+        /// Gets or Sets DiscountDayOfMonth
         /// </summary>
-        /// <value>Day of the month for discount eligibility (Date Driven Terms).</value>
         [JsonPropertyName("discountDayOfMonth")]
         public int? DiscountDayOfMonth { get { return this.DiscountDayOfMonthOption.Value; } set { this.DiscountDayOfMonthOption = new(value); } }
 
@@ -206,8 +206,9 @@ namespace Nxus.Qbd.Models
         public Option<bool?> IsActiveOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets IsActive
+        /// Indicates whether the list item is active. Common to all list types.
         /// </summary>
+        /// <value>Indicates whether the list item is active. Common to all list types.</value>
         [JsonPropertyName("isActive")]
         public bool? IsActive { get { return this.IsActiveOption.Value; } set { this.IsActiveOption = new(value); } }
 

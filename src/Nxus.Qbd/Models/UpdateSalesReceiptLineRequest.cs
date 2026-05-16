@@ -388,6 +388,90 @@ namespace Nxus.Qbd.Models
         /// <returns>Validation Result</returns>
         IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
+            // ItemId (string) maxLength
+            if (this.ItemId != null && this.ItemId.Length > 50)
+            {
+                yield return new ValidationResult("Invalid value for ItemId, length must be less than 50.", new [] { "ItemId" });
+            }
+
+            // Description (string) maxLength
+            if (this.Description != null && this.Description.Length > 4095)
+            {
+                yield return new ValidationResult("Invalid value for Description, length must be less than 4095.", new [] { "Description" });
+            }
+
+            // UnitOfMeasure (string) maxLength
+            if (this.UnitOfMeasure != null && this.UnitOfMeasure.Length > 31)
+            {
+                yield return new ValidationResult("Invalid value for UnitOfMeasure, length must be less than 31.", new [] { "UnitOfMeasure" });
+            }
+
+            // OverrideUnitOfMeasureSetId (string) maxLength
+            if (this.OverrideUnitOfMeasureSetId != null && this.OverrideUnitOfMeasureSetId.Length > 50)
+            {
+                yield return new ValidationResult("Invalid value for OverrideUnitOfMeasureSetId, length must be less than 50.", new [] { "OverrideUnitOfMeasureSetId" });
+            }
+
+            // PriceLevelId (string) maxLength
+            if (this.PriceLevelId != null && this.PriceLevelId.Length > 50)
+            {
+                yield return new ValidationResult("Invalid value for PriceLevelId, length must be less than 50.", new [] { "PriceLevelId" });
+            }
+
+            // ClassId (string) maxLength
+            if (this.ClassId != null && this.ClassId.Length > 50)
+            {
+                yield return new ValidationResult("Invalid value for ClassId, length must be less than 50.", new [] { "ClassId" });
+            }
+
+            // InventorySiteId (string) maxLength
+            if (this.InventorySiteId != null && this.InventorySiteId.Length > 50)
+            {
+                yield return new ValidationResult("Invalid value for InventorySiteId, length must be less than 50.", new [] { "InventorySiteId" });
+            }
+
+            // InventorySiteLocationId (string) maxLength
+            if (this.InventorySiteLocationId != null && this.InventorySiteLocationId.Length > 50)
+            {
+                yield return new ValidationResult("Invalid value for InventorySiteLocationId, length must be less than 50.", new [] { "InventorySiteLocationId" });
+            }
+
+            // SerialNumber (string) maxLength
+            if (this.SerialNumber != null && this.SerialNumber.Length > 4095)
+            {
+                yield return new ValidationResult("Invalid value for SerialNumber, length must be less than 4095.", new [] { "SerialNumber" });
+            }
+
+            // LotNumber (string) maxLength
+            if (this.LotNumber != null && this.LotNumber.Length > 40)
+            {
+                yield return new ValidationResult("Invalid value for LotNumber, length must be less than 40.", new [] { "LotNumber" });
+            }
+
+            // ExpirationDate (string) maxLength
+            if (this.ExpirationDate != null && this.ExpirationDate.Length > 1099)
+            {
+                yield return new ValidationResult("Invalid value for ExpirationDate, length must be less than 1099.", new [] { "ExpirationDate" });
+            }
+
+            // SalesTaxCodeId (string) maxLength
+            if (this.SalesTaxCodeId != null && this.SalesTaxCodeId.Length > 50)
+            {
+                yield return new ValidationResult("Invalid value for SalesTaxCodeId, length must be less than 50.", new [] { "SalesTaxCodeId" });
+            }
+
+            // OtherCustomField1 (string) maxLength
+            if (this.OtherCustomField1 != null && this.OtherCustomField1.Length > 29)
+            {
+                yield return new ValidationResult("Invalid value for OtherCustomField1, length must be less than 29.", new [] { "OtherCustomField1" });
+            }
+
+            // OtherCustomField2 (string) maxLength
+            if (this.OtherCustomField2 != null && this.OtherCustomField2.Length > 29)
+            {
+                yield return new ValidationResult("Invalid value for OtherCustomField2, length must be less than 29.", new [] { "OtherCustomField2" });
+            }
+
             yield break;
         }
     }

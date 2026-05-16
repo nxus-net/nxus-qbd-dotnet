@@ -26,7 +26,7 @@ using Nxus.Qbd.Json;
 namespace Nxus.Qbd.Models
 {
     /// <summary>
-    /// Details for a Quantity Adjustment (changes item quantity without changing cost).  QuickBooks requires integer values for quantity fields.
+    /// Details for a Quantity Adjustment (changes item quantity without changing cost).
     /// </summary>
     public partial class QuantityAdjustmentRequest : IValidatableObject
     {

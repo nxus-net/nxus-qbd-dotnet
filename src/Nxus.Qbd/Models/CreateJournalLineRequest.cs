@@ -165,6 +165,42 @@ namespace Nxus.Qbd.Models
         /// <returns>Validation Result</returns>
         IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
+            // AccountId (string) maxLength
+            if (this.AccountId != null && this.AccountId.Length > 50)
+            {
+                yield return new ValidationResult("Invalid value for AccountId, length must be less than 50.", new [] { "AccountId" });
+            }
+
+            // AccountId (string) minLength
+            if (this.AccountId != null && this.AccountId.Length < 1)
+            {
+                yield return new ValidationResult("Invalid value for AccountId, length must be greater than 1.", new [] { "AccountId" });
+            }
+
+            // Memo (string) maxLength
+            if (this.Memo != null && this.Memo.Length > 4095)
+            {
+                yield return new ValidationResult("Invalid value for Memo, length must be less than 4095.", new [] { "Memo" });
+            }
+
+            // EntityId (string) maxLength
+            if (this.EntityId != null && this.EntityId.Length > 50)
+            {
+                yield return new ValidationResult("Invalid value for EntityId, length must be less than 50.", new [] { "EntityId" });
+            }
+
+            // ClassId (string) maxLength
+            if (this.ClassId != null && this.ClassId.Length > 50)
+            {
+                yield return new ValidationResult("Invalid value for ClassId, length must be less than 50.", new [] { "ClassId" });
+            }
+
+            // ItemSalesTaxId (string) maxLength
+            if (this.ItemSalesTaxId != null && this.ItemSalesTaxId.Length > 50)
+            {
+                yield return new ValidationResult("Invalid value for ItemSalesTaxId, length must be less than 50.", new [] { "ItemSalesTaxId" });
+            }
+
             yield break;
         }
     }

@@ -186,6 +186,36 @@ namespace Nxus.Qbd.Models
         /// <returns>Validation Result</returns>
         IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
+            // ItemGroupId (string) maxLength
+            if (this.ItemGroupId != null && this.ItemGroupId.Length > 31)
+            {
+                yield return new ValidationResult("Invalid value for ItemGroupId, length must be less than 31.", new [] { "ItemGroupId" });
+            }
+
+            // UnitOfMeasure (string) maxLength
+            if (this.UnitOfMeasure != null && this.UnitOfMeasure.Length > 31)
+            {
+                yield return new ValidationResult("Invalid value for UnitOfMeasure, length must be less than 31.", new [] { "UnitOfMeasure" });
+            }
+
+            // OverrideUnitOfMSetId (string) maxLength
+            if (this.OverrideUnitOfMSetId != null && this.OverrideUnitOfMSetId.Length > 31)
+            {
+                yield return new ValidationResult("Invalid value for OverrideUnitOfMSetId, length must be less than 31.", new [] { "OverrideUnitOfMSetId" });
+            }
+
+            // InventorySiteId (string) maxLength
+            if (this.InventorySiteId != null && this.InventorySiteId.Length > 31)
+            {
+                yield return new ValidationResult("Invalid value for InventorySiteId, length must be less than 31.", new [] { "InventorySiteId" });
+            }
+
+            // InventorySiteLocationId (string) maxLength
+            if (this.InventorySiteLocationId != null && this.InventorySiteLocationId.Length > 31)
+            {
+                yield return new ValidationResult("Invalid value for InventorySiteLocationId, length must be less than 31.", new [] { "InventorySiteLocationId" });
+            }
+
             yield break;
         }
     }

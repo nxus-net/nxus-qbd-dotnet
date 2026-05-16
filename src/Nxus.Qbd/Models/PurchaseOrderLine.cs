@@ -35,22 +35,22 @@ namespace Nxus.Qbd.Models
         /// </summary>
         /// <param name="id">id</param>
         /// <param name="item">item</param>
-        /// <param name="manufacturerPartNumber">(Optional) The manufacturer&#39;s part number for the item. (Max 31 characters)</param>
-        /// <param name="description">(Optional) Description for the line item. (Max 4095 characters)</param>
-        /// <param name="quantity">(Optional) Quantity of the item to purchase.</param>
+        /// <param name="manufacturerPartNumber">manufacturerPartNumber</param>
+        /// <param name="description">description</param>
+        /// <param name="quantity">quantity</param>
         /// <param name="unitOfMeasure">unitOfMeasure</param>
         /// <param name="overrideUnitOfMeasureSet">overrideUnitOfMeasureSet</param>
-        /// <param name="rate">(Optional) Cost/Rate per item unit.</param>
+        /// <param name="rate">rate</param>
         /// <param name="class">class</param>
-        /// <param name="amount">(Optional) Total amount for the line.</param>
+        /// <param name="amount">amount</param>
         /// <param name="inventorySiteLocation">inventorySiteLocation</param>
         /// <param name="customer">customer</param>
-        /// <param name="serviceDate">(Optional) The date the service was performed (if this is a service item).</param>
+        /// <param name="serviceDate">serviceDate</param>
         /// <param name="salesTaxCode">salesTaxCode</param>
         /// <param name="receivedQuantity">receivedQuantity</param>
         /// <param name="unbilledQuantity">unbilledQuantity</param>
         /// <param name="isBilled">isBilled</param>
-        /// <param name="isManuallyClosed">(Optional) If true, manually closes this line item.</param>
+        /// <param name="isManuallyClosed">isManuallyClosed</param>
         /// <param name="otherCustomField1">otherCustomField1</param>
         /// <param name="otherCustomField2">otherCustomField2</param>
         /// <param name="customFields">customFields</param>
@@ -110,9 +110,8 @@ namespace Nxus.Qbd.Models
         public Option<string?> ManufacturerPartNumberOption { get; private set; }
 
         /// <summary>
-        /// (Optional) The manufacturer&#39;s part number for the item. (Max 31 characters)
+        /// Gets or Sets ManufacturerPartNumber
         /// </summary>
-        /// <value>(Optional) The manufacturer&#39;s part number for the item. (Max 31 characters)</value>
         [JsonPropertyName("manufacturerPartNumber")]
         public string? ManufacturerPartNumber { get { return this.ManufacturerPartNumberOption.Value; } set { this.ManufacturerPartNumberOption = new(value); } }
 
@@ -124,9 +123,8 @@ namespace Nxus.Qbd.Models
         public Option<string?> DescriptionOption { get; private set; }
 
         /// <summary>
-        /// (Optional) Description for the line item. (Max 4095 characters)
+        /// Gets or Sets Description
         /// </summary>
-        /// <value>(Optional) Description for the line item. (Max 4095 characters)</value>
         [JsonPropertyName("description")]
         public string? Description { get { return this.DescriptionOption.Value; } set { this.DescriptionOption = new(value); } }
 
@@ -138,9 +136,8 @@ namespace Nxus.Qbd.Models
         public Option<double?> QuantityOption { get; private set; }
 
         /// <summary>
-        /// (Optional) Quantity of the item to purchase.
+        /// Gets or Sets Quantity
         /// </summary>
-        /// <value>(Optional) Quantity of the item to purchase.</value>
         [JsonPropertyName("quantity")]
         public double? Quantity { get { return this.QuantityOption.Value; } set { this.QuantityOption = new(value); } }
 
@@ -178,9 +175,8 @@ namespace Nxus.Qbd.Models
         public Option<double?> RateOption { get; private set; }
 
         /// <summary>
-        /// (Optional) Cost/Rate per item unit.
+        /// Gets or Sets Rate
         /// </summary>
-        /// <value>(Optional) Cost/Rate per item unit.</value>
         [JsonPropertyName("rate")]
         public double? Rate { get { return this.RateOption.Value; } set { this.RateOption = new(value); } }
 
@@ -205,9 +201,8 @@ namespace Nxus.Qbd.Models
         public Option<double?> AmountOption { get; private set; }
 
         /// <summary>
-        /// (Optional) Total amount for the line.
+        /// Gets or Sets Amount
         /// </summary>
-        /// <value>(Optional) Total amount for the line.</value>
         [JsonPropertyName("amount")]
         public double? Amount { get { return this.AmountOption.Value; } set { this.AmountOption = new(value); } }
 
@@ -245,9 +240,8 @@ namespace Nxus.Qbd.Models
         public Option<DateOnly?> ServiceDateOption { get; private set; }
 
         /// <summary>
-        /// (Optional) The date the service was performed (if this is a service item).
+        /// Gets or Sets ServiceDate
         /// </summary>
-        /// <value>(Optional) The date the service was performed (if this is a service item).</value>
         [JsonPropertyName("serviceDate")]
         public DateOnly? ServiceDate { get { return this.ServiceDateOption.Value; } set { this.ServiceDateOption = new(value); } }
 
@@ -311,9 +305,8 @@ namespace Nxus.Qbd.Models
         public Option<bool?> IsManuallyClosedOption { get; private set; }
 
         /// <summary>
-        /// (Optional) If true, manually closes this line item.
+        /// Gets or Sets IsManuallyClosed
         /// </summary>
-        /// <value>(Optional) If true, manually closes this line item.</value>
         [JsonPropertyName("isManuallyClosed")]
         public bool? IsManuallyClosed { get { return this.IsManuallyClosedOption.Value; } set { this.IsManuallyClosedOption = new(value); } }
 

@@ -39,18 +39,18 @@ namespace Nxus.Qbd.Models
         /// <param name="revisionNumber">revisionNumber</param>
         /// <param name="objectType">objectType</param>
         /// <param name="transactionDate">transactionDate</param>
-        /// <param name="currency">currency</param>
-        /// <param name="exchangeRate">exchangeRate</param>
-        /// <param name="refNumber">refNumber</param>
-        /// <param name="memo">memo</param>
+        /// <param name="currency">The currency used for this transaction.  Only applicable if the QuickBooks company file has multi-currency enabled.</param>
+        /// <param name="exchangeRate">The market exchange rate between the transaction&#39;s currency and the home currency.  Only applicable if multi-currency is enabled.</param>
+        /// <param name="refNumber">A user-defined reference number for this transaction (e.g., check number, invoice number).  This value is case-sensitive and appears in various QuickBooks UI forms. **Note:** This string is not guaranteed to be unique, even within the same transaction type.</param>
+        /// <param name="memo">A memo or note for the transaction that appears in registers and reports.</param>
         /// <param name="transactionNumber">transactionNumber</param>
         /// <param name="isTaxIncluded">isTaxIncluded</param>
         /// <param name="salesTaxCode">salesTaxCode</param>
-        /// <param name="amount">amount</param>
-        /// <param name="entity">entity</param>
-        /// <param name="account">account</param>
-        /// <param name="amountInHomeCurrency">amountInHomeCurrency</param>
-        /// <param name="hasValidLineItems">hasValidLineItems</param>
+        /// <param name="amount">The total monetary amount of the transaction.  Typically calculated automatically by QuickBooks based on the sum of the transaction&#39;s line items.</param>
+        /// <param name="entity">The primary entity (Customer, Vendor, or Employee) associated with this transaction.</param>
+        /// <param name="account">The bank or credit card account used for this transaction.</param>
+        /// <param name="amountInHomeCurrency">The transaction amount converted into the QuickBooks company file&#39;s home currency.</param>
+        /// <param name="hasValidLineItems">Internal validation helper to check if the transaction contains at least one valid line item.</param>
         /// <param name="externalId">externalId</param>
         /// <param name="linkedTransactions">linkedTransactions</param>
         /// <param name="expenseLines">expenseLines</param>
@@ -147,8 +147,9 @@ namespace Nxus.Qbd.Models
         public Option<QbdRef?> CurrencyOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets Currency
+        /// The currency used for this transaction.  Only applicable if the QuickBooks company file has multi-currency enabled.
         /// </summary>
+        /// <value>The currency used for this transaction.  Only applicable if the QuickBooks company file has multi-currency enabled.</value>
         [JsonPropertyName("currency")]
         public QbdRef? Currency { get { return this.CurrencyOption.Value; } set { this.CurrencyOption = new(value); } }
 
@@ -160,8 +161,10 @@ namespace Nxus.Qbd.Models
         public Option<double?> ExchangeRateOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets ExchangeRate
+        /// The market exchange rate between the transaction&#39;s currency and the home currency.  Only applicable if multi-currency is enabled.
         /// </summary>
+        /// <value>The market exchange rate between the transaction&#39;s currency and the home currency.  Only applicable if multi-currency is enabled.</value>
+        /* <example>1.25</example> */
         [JsonPropertyName("exchangeRate")]
         public double? ExchangeRate { get { return this.ExchangeRateOption.Value; } set { this.ExchangeRateOption = new(value); } }
 
@@ -173,8 +176,10 @@ namespace Nxus.Qbd.Models
         public Option<string?> RefNumberOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets RefNumber
+        /// A user-defined reference number for this transaction (e.g., check number, invoice number).  This value is case-sensitive and appears in various QuickBooks UI forms. **Note:** This string is not guaranteed to be unique, even within the same transaction type.
         /// </summary>
+        /// <value>A user-defined reference number for this transaction (e.g., check number, invoice number).  This value is case-sensitive and appears in various QuickBooks UI forms. **Note:** This string is not guaranteed to be unique, even within the same transaction type.</value>
+        /* <example>121345</example> */
         [JsonPropertyName("refNumber")]
         public string? RefNumber { get { return this.RefNumberOption.Value; } set { this.RefNumberOption = new(value); } }
 
@@ -186,8 +191,10 @@ namespace Nxus.Qbd.Models
         public Option<string?> MemoOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets Memo
+        /// A memo or note for the transaction that appears in registers and reports.
         /// </summary>
+        /// <value>A memo or note for the transaction that appears in registers and reports.</value>
+        /* <example>Refund for overpayment</example> */
         [JsonPropertyName("memo")]
         public string? Memo { get { return this.MemoOption.Value; } set { this.MemoOption = new(value); } }
 
@@ -238,8 +245,10 @@ namespace Nxus.Qbd.Models
         public Option<double?> AmountOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets Amount
+        /// The total monetary amount of the transaction.  Typically calculated automatically by QuickBooks based on the sum of the transaction&#39;s line items.
         /// </summary>
+        /// <value>The total monetary amount of the transaction.  Typically calculated automatically by QuickBooks based on the sum of the transaction&#39;s line items.</value>
+        /* <example>900.00</example> */
         [JsonPropertyName("amount")]
         public double? Amount { get { return this.AmountOption.Value; } set { this.AmountOption = new(value); } }
 
@@ -251,8 +260,9 @@ namespace Nxus.Qbd.Models
         public Option<QbdRef?> EntityOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets Entity
+        /// The primary entity (Customer, Vendor, or Employee) associated with this transaction.
         /// </summary>
+        /// <value>The primary entity (Customer, Vendor, or Employee) associated with this transaction.</value>
         [JsonPropertyName("entity")]
         public QbdRef? Entity { get { return this.EntityOption.Value; } set { this.EntityOption = new(value); } }
 
@@ -264,8 +274,9 @@ namespace Nxus.Qbd.Models
         public Option<QbdRef?> AccountOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets Account
+        /// The bank or credit card account used for this transaction.
         /// </summary>
+        /// <value>The bank or credit card account used for this transaction.</value>
         [JsonPropertyName("account")]
         public QbdRef? Account { get { return this.AccountOption.Value; } set { this.AccountOption = new(value); } }
 
@@ -277,8 +288,10 @@ namespace Nxus.Qbd.Models
         public Option<string?> AmountInHomeCurrencyOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets AmountInHomeCurrency
+        /// The transaction amount converted into the QuickBooks company file&#39;s home currency.
         /// </summary>
+        /// <value>The transaction amount converted into the QuickBooks company file&#39;s home currency.</value>
+        /* <example>1125.00</example> */
         [JsonPropertyName("amountInHomeCurrency")]
         public string? AmountInHomeCurrency { get { return this.AmountInHomeCurrencyOption.Value; } set { this.AmountInHomeCurrencyOption = new(value); } }
 
@@ -290,8 +303,9 @@ namespace Nxus.Qbd.Models
         public Option<bool?> HasValidLineItemsOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets HasValidLineItems
+        /// Internal validation helper to check if the transaction contains at least one valid line item.
         /// </summary>
+        /// <value>Internal validation helper to check if the transaction contains at least one valid line item.</value>
         [JsonPropertyName("hasValidLineItems")]
         public bool? HasValidLineItems { get { return this.HasValidLineItemsOption.Value; } set { this.HasValidLineItemsOption = new(value); } }
 

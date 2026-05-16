@@ -34,9 +34,9 @@ namespace Nxus.Qbd.Models
         /// Initializes a new instance of the <see cref="ReportColData" /> class.
         /// </summary>
         /// <param name="columnId">columnId</param>
-        /// <param name="value">The value of the column.</param>
-        /// <param name="dataType">The data type of the column.</param>
-        /// <param name="attributes">The attributes of the column.</param>
+        /// <param name="value">The data value for this cell (can be string, number, etc.).</param>
+        /// <param name="dataType">Data type of the value (e.g., \&quot;string\&quot;, \&quot;number\&quot;, \&quot;date\&quot;).</param>
+        /// <param name="attributes">Optional additional attributes (e.g., formatting hints, negative indicators).</param>
         [JsonConstructor]
         public ReportColData(Option<string?> columnId = default, Option<string?> value = default, Option<string?> dataType = default, Option<Dictionary<string, string>?> attributes = default)
         {
@@ -70,9 +70,9 @@ namespace Nxus.Qbd.Models
         public Option<string?> ValueOption { get; private set; }
 
         /// <summary>
-        /// The value of the column.
+        /// The data value for this cell (can be string, number, etc.).
         /// </summary>
-        /// <value>The value of the column.</value>
+        /// <value>The data value for this cell (can be string, number, etc.).</value>
         [JsonPropertyName("value")]
         public string? Value { get { return this.ValueOption.Value; } set { this.ValueOption = new(value); } }
 
@@ -84,9 +84,9 @@ namespace Nxus.Qbd.Models
         public Option<string?> DataTypeOption { get; private set; }
 
         /// <summary>
-        /// The data type of the column.
+        /// Data type of the value (e.g., \&quot;string\&quot;, \&quot;number\&quot;, \&quot;date\&quot;).
         /// </summary>
-        /// <value>The data type of the column.</value>
+        /// <value>Data type of the value (e.g., \&quot;string\&quot;, \&quot;number\&quot;, \&quot;date\&quot;).</value>
         [JsonPropertyName("dataType")]
         public string? DataType { get { return this.DataTypeOption.Value; } set { this.DataTypeOption = new(value); } }
 
@@ -98,9 +98,9 @@ namespace Nxus.Qbd.Models
         public Option<Dictionary<string, string>?> AttributesOption { get; private set; }
 
         /// <summary>
-        /// The attributes of the column.
+        /// Optional additional attributes (e.g., formatting hints, negative indicators).
         /// </summary>
-        /// <value>The attributes of the column.</value>
+        /// <value>Optional additional attributes (e.g., formatting hints, negative indicators).</value>
         [JsonPropertyName("attributes")]
         public Dictionary<string, string>? Attributes { get { return this.AttributesOption.Value; } set { this.AttributesOption = new(value); } }
 

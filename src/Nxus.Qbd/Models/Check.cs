@@ -40,13 +40,13 @@ namespace Nxus.Qbd.Models
         /// <param name="objectType">objectType</param>
         /// <param name="transactionDate">transactionDate</param>
         /// <param name="currency">currency</param>
-        /// <param name="exchangeRate">Exchange rate (for multi-currency)</param>
-        /// <param name="refNumber">Check number (optional - QB can auto-generate)</param>
-        /// <param name="memo">Memo/description for the check</param>
-        /// <param name="address">Payee address (optional)</param>
+        /// <param name="exchangeRate">exchangeRate</param>
+        /// <param name="refNumber">The primary reference number for the transaction (e.g., Invoice #, Check #).</param>
+        /// <param name="memo">memo</param>
+        /// <param name="address">address</param>
         /// <param name="isPending">isPending</param>
         /// <param name="isQueuedForPrint">isQueuedForPrint</param>
-        /// <param name="isTaxIncluded">If true, the amount includes sales tax.</param>
+        /// <param name="isTaxIncluded">isTaxIncluded</param>
         /// <param name="salesTaxCode">salesTaxCode</param>
         /// <param name="isVoid">isVoid</param>
         /// <param name="transactionNumber">transactionNumber</param>
@@ -168,9 +168,8 @@ namespace Nxus.Qbd.Models
         public Option<double?> ExchangeRateOption { get; private set; }
 
         /// <summary>
-        /// Exchange rate (for multi-currency)
+        /// Gets or Sets ExchangeRate
         /// </summary>
-        /// <value>Exchange rate (for multi-currency)</value>
         [JsonPropertyName("exchangeRate")]
         public double? ExchangeRate { get { return this.ExchangeRateOption.Value; } set { this.ExchangeRateOption = new(value); } }
 
@@ -182,9 +181,9 @@ namespace Nxus.Qbd.Models
         public Option<string?> RefNumberOption { get; private set; }
 
         /// <summary>
-        /// Check number (optional - QB can auto-generate)
+        /// The primary reference number for the transaction (e.g., Invoice #, Check #).
         /// </summary>
-        /// <value>Check number (optional - QB can auto-generate)</value>
+        /// <value>The primary reference number for the transaction (e.g., Invoice #, Check #).</value>
         [JsonPropertyName("refNumber")]
         public string? RefNumber { get { return this.RefNumberOption.Value; } set { this.RefNumberOption = new(value); } }
 
@@ -196,9 +195,8 @@ namespace Nxus.Qbd.Models
         public Option<string?> MemoOption { get; private set; }
 
         /// <summary>
-        /// Memo/description for the check
+        /// Gets or Sets Memo
         /// </summary>
-        /// <value>Memo/description for the check</value>
         [JsonPropertyName("memo")]
         public string? Memo { get { return this.MemoOption.Value; } set { this.MemoOption = new(value); } }
 
@@ -210,9 +208,8 @@ namespace Nxus.Qbd.Models
         public Option<Address?> AddressOption { get; private set; }
 
         /// <summary>
-        /// Payee address (optional)
+        /// Gets or Sets Address
         /// </summary>
-        /// <value>Payee address (optional)</value>
         [JsonPropertyName("address")]
         public Address? Address { get { return this.AddressOption.Value; } set { this.AddressOption = new(value); } }
 
@@ -250,9 +247,8 @@ namespace Nxus.Qbd.Models
         public Option<bool?> IsTaxIncludedOption { get; private set; }
 
         /// <summary>
-        /// If true, the amount includes sales tax.
+        /// Gets or Sets IsTaxIncluded
         /// </summary>
-        /// <value>If true, the amount includes sales tax.</value>
         [JsonPropertyName("isTaxIncluded")]
         public bool? IsTaxIncluded { get { return this.IsTaxIncludedOption.Value; } set { this.IsTaxIncludedOption = new(value); } }
 

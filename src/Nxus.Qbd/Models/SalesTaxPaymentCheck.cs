@@ -38,13 +38,13 @@ namespace Nxus.Qbd.Models
         /// <param name="updatedAt">updatedAt</param>
         /// <param name="revisionNumber">revisionNumber</param>
         /// <param name="objectType">objectType</param>
-        /// <param name="transactionDate">(Required) The date of the transaction.</param>
+        /// <param name="transactionDate">transactionDate</param>
         /// <param name="currency">currency</param>
         /// <param name="exchangeRate">exchangeRate</param>
-        /// <param name="refNumber">refNumber</param>
-        /// <param name="memo">(Optional) A memo for the transaction. Max 4095 chars.</param>
+        /// <param name="refNumber">The primary reference number for the transaction (e.g., Invoice #, Check #).</param>
+        /// <param name="memo">memo</param>
         /// <param name="transactionNumber">transactionNumber</param>
-        /// <param name="address">(Optional) The address of the payee.</param>
+        /// <param name="address">address</param>
         /// <param name="addressBlock">addressBlock</param>
         /// <param name="isQueuedForPrint">isQueuedForPrint</param>
         /// <param name="lines">lines</param>
@@ -138,9 +138,8 @@ namespace Nxus.Qbd.Models
         public Option<DateOnly?> TransactionDateOption { get; private set; }
 
         /// <summary>
-        /// (Required) The date of the transaction.
+        /// Gets or Sets TransactionDate
         /// </summary>
-        /// <value>(Required) The date of the transaction.</value>
         [JsonPropertyName("transactionDate")]
         public DateOnly? TransactionDate { get { return this.TransactionDateOption.Value; } set { this.TransactionDateOption = new(value); } }
 
@@ -178,8 +177,9 @@ namespace Nxus.Qbd.Models
         public Option<string?> RefNumberOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets RefNumber
+        /// The primary reference number for the transaction (e.g., Invoice #, Check #).
         /// </summary>
+        /// <value>The primary reference number for the transaction (e.g., Invoice #, Check #).</value>
         [JsonPropertyName("refNumber")]
         public string? RefNumber { get { return this.RefNumberOption.Value; } set { this.RefNumberOption = new(value); } }
 
@@ -191,9 +191,8 @@ namespace Nxus.Qbd.Models
         public Option<string?> MemoOption { get; private set; }
 
         /// <summary>
-        /// (Optional) A memo for the transaction. Max 4095 chars.
+        /// Gets or Sets Memo
         /// </summary>
-        /// <value>(Optional) A memo for the transaction. Max 4095 chars.</value>
         [JsonPropertyName("memo")]
         public string? Memo { get { return this.MemoOption.Value; } set { this.MemoOption = new(value); } }
 
@@ -218,9 +217,8 @@ namespace Nxus.Qbd.Models
         public Option<Address?> AddressOption { get; private set; }
 
         /// <summary>
-        /// (Optional) The address of the payee.
+        /// Gets or Sets Address
         /// </summary>
-        /// <value>(Optional) The address of the payee.</value>
         [JsonPropertyName("address")]
         public Address? Address { get { return this.AddressOption.Value; } set { this.AddressOption = new(value); } }
 

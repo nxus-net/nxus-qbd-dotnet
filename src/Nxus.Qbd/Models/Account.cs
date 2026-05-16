@@ -38,23 +38,23 @@ namespace Nxus.Qbd.Models
         /// <param name="updatedAt">updatedAt</param>
         /// <param name="revisionNumber">revisionNumber</param>
         /// <param name="objectType">objectType</param>
-        /// <param name="name">Account name (required)</param>
-        /// <param name="fullname">The fully-qualified unique name for this object, formed by combining the names of its parent objects with its own &#x60;name&#x60;, separated by colons. Not case-sensitive. Parent:Child:SubChild</param>
-        /// <param name="parent">The short name of the account as it appears in the QuickBooks UI.</param>
-        /// <param name="sublevel">Depth level of the account in the hierarchy (0 for top level).</param>
-        /// <param name="accountType">The specific type of the account.</param>
-        /// <param name="specialAccountType">Special sub-classification for the account.</param>
-        /// <param name="isTaxAccount">Whether the account is a tax account (optional, default: false) Only set to true for accounts that track tax liabilities/expenses</param>
-        /// <param name="accountNumber">Account number (optional)</param>
-        /// <param name="bankNumber">Bank account number (for bank accounts only)</param>
-        /// <param name="description">Description of the account. Maps to &#39;Desc&#39; in XML.</param>
+        /// <param name="name">The primary display name for the List object (e.g., Customer Name, Vendor Name).</param>
+        /// <param name="fullname">fullname</param>
+        /// <param name="parent">parent</param>
+        /// <param name="sublevel">sublevel</param>
+        /// <param name="accountType">accountType</param>
+        /// <param name="specialAccountType">specialAccountType</param>
+        /// <param name="isTaxAccount">isTaxAccount</param>
+        /// <param name="accountNumber">accountNumber</param>
+        /// <param name="bankNumber">bankNumber</param>
+        /// <param name="description">description</param>
         /// <param name="balance">balance</param>
         /// <param name="totalBalance">totalBalance</param>
-        /// <param name="salesTaxCode">Reference to the associated Sales Tax Code. Derived from SalesTaxCodeRef.</param>
+        /// <param name="salesTaxCode">salesTaxCode</param>
         /// <param name="taxLineDetails">taxLineDetails</param>
-        /// <param name="cashFlowClassification">Cash flow classification for the account.</param>
-        /// <param name="currency">Reference to the currency associated with the account. Derived from CurrencyRef.</param>
-        /// <param name="isActive">Whether the account is active (default: true)</param>
+        /// <param name="cashFlowClassification">cashFlowClassification</param>
+        /// <param name="currency">currency</param>
+        /// <param name="isActive">Indicates whether the list item is active. Common to all list types.</param>
         /// <param name="customFields">customFields</param>
         [JsonConstructor]
         public Account(string id, DateTimeOffset createdAt, DateTimeOffset updatedAt, string revisionNumber, Option<string?> objectType = default, Option<string?> name = default, Option<string?> fullname = default, Option<QbdRef?> parent = default, Option<int?> sublevel = default, Option<NullableAccountType?> accountType = default, Option<NullableSpecialAccountType?> specialAccountType = default, Option<bool?> isTaxAccount = default, Option<string?> accountNumber = default, Option<string?> bankNumber = default, Option<string?> description = default, Option<double?> balance = default, Option<double?> totalBalance = default, Option<QbdRef?> salesTaxCode = default, Option<TaxLineInfo?> taxLineDetails = default, Option<NullableCashFlowClassification?> cashFlowClassification = default, Option<QbdRef?> currency = default, Option<bool?> isActive = default, Option<List<QbdDataExt>?> customFields = default)
@@ -95,9 +95,8 @@ namespace Nxus.Qbd.Models
         public Option<NullableAccountType?> AccountTypeOption { get; private set; }
 
         /// <summary>
-        /// The specific type of the account.
+        /// Gets or Sets AccountType
         /// </summary>
-        /// <value>The specific type of the account.</value>
         [JsonPropertyName("accountType")]
         public NullableAccountType? AccountType { get { return this.AccountTypeOption.Value; } set { this.AccountTypeOption = new(value); } }
 
@@ -109,9 +108,8 @@ namespace Nxus.Qbd.Models
         public Option<NullableSpecialAccountType?> SpecialAccountTypeOption { get; private set; }
 
         /// <summary>
-        /// Special sub-classification for the account.
+        /// Gets or Sets SpecialAccountType
         /// </summary>
-        /// <value>Special sub-classification for the account.</value>
         [JsonPropertyName("specialAccountType")]
         public NullableSpecialAccountType? SpecialAccountType { get { return this.SpecialAccountTypeOption.Value; } set { this.SpecialAccountTypeOption = new(value); } }
 
@@ -123,9 +121,8 @@ namespace Nxus.Qbd.Models
         public Option<NullableCashFlowClassification?> CashFlowClassificationOption { get; private set; }
 
         /// <summary>
-        /// Cash flow classification for the account.
+        /// Gets or Sets CashFlowClassification
         /// </summary>
-        /// <value>Cash flow classification for the account.</value>
         [JsonPropertyName("cashFlowClassification")]
         public NullableCashFlowClassification? CashFlowClassification { get { return this.CashFlowClassificationOption.Value; } set { this.CashFlowClassificationOption = new(value); } }
 
@@ -174,9 +171,9 @@ namespace Nxus.Qbd.Models
         public Option<string?> NameOption { get; private set; }
 
         /// <summary>
-        /// Account name (required)
+        /// The primary display name for the List object (e.g., Customer Name, Vendor Name).
         /// </summary>
-        /// <value>Account name (required)</value>
+        /// <value>The primary display name for the List object (e.g., Customer Name, Vendor Name).</value>
         [JsonPropertyName("name")]
         public string? Name { get { return this.NameOption.Value; } set { this.NameOption = new(value); } }
 
@@ -188,10 +185,8 @@ namespace Nxus.Qbd.Models
         public Option<string?> FullnameOption { get; private set; }
 
         /// <summary>
-        /// The fully-qualified unique name for this object, formed by combining the names of its parent objects with its own &#x60;name&#x60;, separated by colons. Not case-sensitive. Parent:Child:SubChild
+        /// Gets or Sets Fullname
         /// </summary>
-        /// <value>The fully-qualified unique name for this object, formed by combining the names of its parent objects with its own &#x60;name&#x60;, separated by colons. Not case-sensitive. Parent:Child:SubChild</value>
-        /* <example>Bank:</example> */
         [JsonPropertyName("fullname")]
         public string? Fullname { get { return this.FullnameOption.Value; } set { this.FullnameOption = new(value); } }
 
@@ -203,9 +198,8 @@ namespace Nxus.Qbd.Models
         public Option<QbdRef?> ParentOption { get; private set; }
 
         /// <summary>
-        /// The short name of the account as it appears in the QuickBooks UI.
+        /// Gets or Sets Parent
         /// </summary>
-        /// <value>The short name of the account as it appears in the QuickBooks UI.</value>
         [JsonPropertyName("parent")]
         public QbdRef? Parent { get { return this.ParentOption.Value; } set { this.ParentOption = new(value); } }
 
@@ -217,9 +211,8 @@ namespace Nxus.Qbd.Models
         public Option<int?> SublevelOption { get; private set; }
 
         /// <summary>
-        /// Depth level of the account in the hierarchy (0 for top level).
+        /// Gets or Sets Sublevel
         /// </summary>
-        /// <value>Depth level of the account in the hierarchy (0 for top level).</value>
         [JsonPropertyName("sublevel")]
         public int? Sublevel { get { return this.SublevelOption.Value; } set { this.SublevelOption = new(value); } }
 
@@ -231,9 +224,8 @@ namespace Nxus.Qbd.Models
         public Option<bool?> IsTaxAccountOption { get; private set; }
 
         /// <summary>
-        /// Whether the account is a tax account (optional, default: false) Only set to true for accounts that track tax liabilities/expenses
+        /// Gets or Sets IsTaxAccount
         /// </summary>
-        /// <value>Whether the account is a tax account (optional, default: false) Only set to true for accounts that track tax liabilities/expenses</value>
         [JsonPropertyName("isTaxAccount")]
         public bool? IsTaxAccount { get { return this.IsTaxAccountOption.Value; } set { this.IsTaxAccountOption = new(value); } }
 
@@ -245,9 +237,8 @@ namespace Nxus.Qbd.Models
         public Option<string?> AccountNumberOption { get; private set; }
 
         /// <summary>
-        /// Account number (optional)
+        /// Gets or Sets AccountNumber
         /// </summary>
-        /// <value>Account number (optional)</value>
         [JsonPropertyName("accountNumber")]
         public string? AccountNumber { get { return this.AccountNumberOption.Value; } set { this.AccountNumberOption = new(value); } }
 
@@ -259,9 +250,8 @@ namespace Nxus.Qbd.Models
         public Option<string?> BankNumberOption { get; private set; }
 
         /// <summary>
-        /// Bank account number (for bank accounts only)
+        /// Gets or Sets BankNumber
         /// </summary>
-        /// <value>Bank account number (for bank accounts only)</value>
         [JsonPropertyName("bankNumber")]
         public string? BankNumber { get { return this.BankNumberOption.Value; } set { this.BankNumberOption = new(value); } }
 
@@ -273,9 +263,8 @@ namespace Nxus.Qbd.Models
         public Option<string?> DescriptionOption { get; private set; }
 
         /// <summary>
-        /// Description of the account. Maps to &#39;Desc&#39; in XML.
+        /// Gets or Sets Description
         /// </summary>
-        /// <value>Description of the account. Maps to &#39;Desc&#39; in XML.</value>
         [JsonPropertyName("description")]
         public string? Description { get { return this.DescriptionOption.Value; } set { this.DescriptionOption = new(value); } }
 
@@ -313,9 +302,8 @@ namespace Nxus.Qbd.Models
         public Option<QbdRef?> SalesTaxCodeOption { get; private set; }
 
         /// <summary>
-        /// Reference to the associated Sales Tax Code. Derived from SalesTaxCodeRef.
+        /// Gets or Sets SalesTaxCode
         /// </summary>
-        /// <value>Reference to the associated Sales Tax Code. Derived from SalesTaxCodeRef.</value>
         [JsonPropertyName("salesTaxCode")]
         public QbdRef? SalesTaxCode { get { return this.SalesTaxCodeOption.Value; } set { this.SalesTaxCodeOption = new(value); } }
 
@@ -340,9 +328,8 @@ namespace Nxus.Qbd.Models
         public Option<QbdRef?> CurrencyOption { get; private set; }
 
         /// <summary>
-        /// Reference to the currency associated with the account. Derived from CurrencyRef.
+        /// Gets or Sets Currency
         /// </summary>
-        /// <value>Reference to the currency associated with the account. Derived from CurrencyRef.</value>
         [JsonPropertyName("currency")]
         public QbdRef? Currency { get { return this.CurrencyOption.Value; } set { this.CurrencyOption = new(value); } }
 
@@ -354,9 +341,9 @@ namespace Nxus.Qbd.Models
         public Option<bool?> IsActiveOption { get; private set; }
 
         /// <summary>
-        /// Whether the account is active (default: true)
+        /// Indicates whether the list item is active. Common to all list types.
         /// </summary>
-        /// <value>Whether the account is active (default: true)</value>
+        /// <value>Indicates whether the list item is active. Common to all list types.</value>
         [JsonPropertyName("isActive")]
         public bool? IsActive { get { return this.IsActiveOption.Value; } set { this.IsActiveOption = new(value); } }
 

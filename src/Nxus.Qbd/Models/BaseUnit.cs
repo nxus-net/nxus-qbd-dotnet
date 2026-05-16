@@ -33,8 +33,8 @@ namespace Nxus.Qbd.Models
         /// <summary>
         /// Initializes a new instance of the <see cref="BaseUnit" /> class.
         /// </summary>
-        /// <param name="name">The case-insensitive unique name of this base unit, unique across all base units. **NOTE**: Base units do not have a &#x60;fullName&#x60; field because they are not hierarchical objects, which is why &#x60;name&#x60; is unique for them but not for objects that have parents. Maximum length: 31 characters.</param>
-        /// <param name="abbreviation">The base unit&#39;s short identifier shown in the QuickBooks U/M field on transaction line items. Maximum length: 31 characters.</param>
+        /// <param name="name">name</param>
+        /// <param name="abbreviation">abbreviation</param>
         [JsonConstructor]
         public BaseUnit(string name, string abbreviation)
         {
@@ -46,16 +46,14 @@ namespace Nxus.Qbd.Models
         partial void OnCreated();
 
         /// <summary>
-        /// The case-insensitive unique name of this base unit, unique across all base units. **NOTE**: Base units do not have a &#x60;fullName&#x60; field because they are not hierarchical objects, which is why &#x60;name&#x60; is unique for them but not for objects that have parents. Maximum length: 31 characters.
+        /// Gets or Sets Name
         /// </summary>
-        /// <value>The case-insensitive unique name of this base unit, unique across all base units. **NOTE**: Base units do not have a &#x60;fullName&#x60; field because they are not hierarchical objects, which is why &#x60;name&#x60; is unique for them but not for objects that have parents. Maximum length: 31 characters.</value>
         [JsonPropertyName("name")]
         public string Name { get; set; }
 
         /// <summary>
-        /// The base unit&#39;s short identifier shown in the QuickBooks U/M field on transaction line items. Maximum length: 31 characters.
+        /// Gets or Sets Abbreviation
         /// </summary>
-        /// <value>The base unit&#39;s short identifier shown in the QuickBooks U/M field on transaction line items. Maximum length: 31 characters.</value>
         [JsonPropertyName("abbreviation")]
         public string Abbreviation { get; set; }
 

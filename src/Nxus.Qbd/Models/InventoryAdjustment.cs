@@ -41,8 +41,8 @@ namespace Nxus.Qbd.Models
         /// <param name="transactionDate">transactionDate</param>
         /// <param name="currency">currency</param>
         /// <param name="exchangeRate">exchangeRate</param>
-        /// <param name="refNumber">(Optional) The document number. (Max 11 characters)</param>
-        /// <param name="memo">(Optional) General memo about the Inventory Adjustment. (Max 4095 characters)</param>
+        /// <param name="refNumber">The primary reference number for the transaction (e.g., Invoice #, Check #).</param>
+        /// <param name="memo">memo</param>
         /// <param name="transactionNumber">transactionNumber</param>
         /// <param name="account">account</param>
         /// <param name="inventorySite">inventorySite</param>
@@ -177,9 +177,9 @@ namespace Nxus.Qbd.Models
         public Option<string?> RefNumberOption { get; private set; }
 
         /// <summary>
-        /// (Optional) The document number. (Max 11 characters)
+        /// The primary reference number for the transaction (e.g., Invoice #, Check #).
         /// </summary>
-        /// <value>(Optional) The document number. (Max 11 characters)</value>
+        /// <value>The primary reference number for the transaction (e.g., Invoice #, Check #).</value>
         [JsonPropertyName("refNumber")]
         public string? RefNumber { get { return this.RefNumberOption.Value; } set { this.RefNumberOption = new(value); } }
 
@@ -191,9 +191,8 @@ namespace Nxus.Qbd.Models
         public Option<string?> MemoOption { get; private set; }
 
         /// <summary>
-        /// (Optional) General memo about the Inventory Adjustment. (Max 4095 characters)
+        /// Gets or Sets Memo
         /// </summary>
-        /// <value>(Optional) General memo about the Inventory Adjustment. (Max 4095 characters)</value>
         [JsonPropertyName("memo")]
         public string? Memo { get { return this.MemoOption.Value; } set { this.MemoOption = new(value); } }
 

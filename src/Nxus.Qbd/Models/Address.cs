@@ -38,11 +38,11 @@ namespace Nxus.Qbd.Models
         /// <param name="line3">line3</param>
         /// <param name="line4">line4</param>
         /// <param name="line5">line5</param>
-        /// <param name="city">City name.</param>
-        /// <param name="state">State or province code (e.g., \&quot;CA\&quot;, \&quot;NY\&quot;).</param>
-        /// <param name="postalCode">ZIP or postal code.</param>
-        /// <param name="country">Country name.</param>
-        /// <param name="note">Optional note about this address.</param>
+        /// <param name="city">city</param>
+        /// <param name="state">state</param>
+        /// <param name="postalCode">postalCode</param>
+        /// <param name="country">country</param>
+        /// <param name="note">note</param>
         [JsonConstructor]
         public Address(Option<string?> line1 = default, Option<string?> line2 = default, Option<string?> line3 = default, Option<string?> line4 = default, Option<string?> line5 = default, Option<string?> city = default, Option<string?> state = default, Option<string?> postalCode = default, Option<string?> country = default, Option<string?> note = default)
         {
@@ -134,9 +134,8 @@ namespace Nxus.Qbd.Models
         public Option<string?> CityOption { get; private set; }
 
         /// <summary>
-        /// City name.
+        /// Gets or Sets City
         /// </summary>
-        /// <value>City name.</value>
         [JsonPropertyName("city")]
         public string? City { get { return this.CityOption.Value; } set { this.CityOption = new(value); } }
 
@@ -148,9 +147,8 @@ namespace Nxus.Qbd.Models
         public Option<string?> StateOption { get; private set; }
 
         /// <summary>
-        /// State or province code (e.g., \&quot;CA\&quot;, \&quot;NY\&quot;).
+        /// Gets or Sets State
         /// </summary>
-        /// <value>State or province code (e.g., \&quot;CA\&quot;, \&quot;NY\&quot;).</value>
         [JsonPropertyName("state")]
         public string? State { get { return this.StateOption.Value; } set { this.StateOption = new(value); } }
 
@@ -162,9 +160,8 @@ namespace Nxus.Qbd.Models
         public Option<string?> PostalCodeOption { get; private set; }
 
         /// <summary>
-        /// ZIP or postal code.
+        /// Gets or Sets PostalCode
         /// </summary>
-        /// <value>ZIP or postal code.</value>
         [JsonPropertyName("postalCode")]
         public string? PostalCode { get { return this.PostalCodeOption.Value; } set { this.PostalCodeOption = new(value); } }
 
@@ -176,9 +173,8 @@ namespace Nxus.Qbd.Models
         public Option<string?> CountryOption { get; private set; }
 
         /// <summary>
-        /// Country name.
+        /// Gets or Sets Country
         /// </summary>
-        /// <value>Country name.</value>
         [JsonPropertyName("country")]
         public string? Country { get { return this.CountryOption.Value; } set { this.CountryOption = new(value); } }
 
@@ -190,9 +186,8 @@ namespace Nxus.Qbd.Models
         public Option<string?> NoteOption { get; private set; }
 
         /// <summary>
-        /// Optional note about this address.
+        /// Gets or Sets Note
         /// </summary>
-        /// <value>Optional note about this address.</value>
         [JsonPropertyName("note")]
         public string? Note { get { return this.NoteOption.Value; } set { this.NoteOption = new(value); } }
 
@@ -225,6 +220,66 @@ namespace Nxus.Qbd.Models
         /// <returns>Validation Result</returns>
         IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
+            // Line1 (string) maxLength
+            if (this.Line1 != null && this.Line1.Length > 41)
+            {
+                yield return new ValidationResult("Invalid value for Line1, length must be less than 41.", new [] { "Line1" });
+            }
+
+            // Line2 (string) maxLength
+            if (this.Line2 != null && this.Line2.Length > 41)
+            {
+                yield return new ValidationResult("Invalid value for Line2, length must be less than 41.", new [] { "Line2" });
+            }
+
+            // Line3 (string) maxLength
+            if (this.Line3 != null && this.Line3.Length > 41)
+            {
+                yield return new ValidationResult("Invalid value for Line3, length must be less than 41.", new [] { "Line3" });
+            }
+
+            // Line4 (string) maxLength
+            if (this.Line4 != null && this.Line4.Length > 41)
+            {
+                yield return new ValidationResult("Invalid value for Line4, length must be less than 41.", new [] { "Line4" });
+            }
+
+            // Line5 (string) maxLength
+            if (this.Line5 != null && this.Line5.Length > 41)
+            {
+                yield return new ValidationResult("Invalid value for Line5, length must be less than 41.", new [] { "Line5" });
+            }
+
+            // City (string) maxLength
+            if (this.City != null && this.City.Length > 31)
+            {
+                yield return new ValidationResult("Invalid value for City, length must be less than 31.", new [] { "City" });
+            }
+
+            // State (string) maxLength
+            if (this.State != null && this.State.Length > 21)
+            {
+                yield return new ValidationResult("Invalid value for State, length must be less than 21.", new [] { "State" });
+            }
+
+            // PostalCode (string) maxLength
+            if (this.PostalCode != null && this.PostalCode.Length > 13)
+            {
+                yield return new ValidationResult("Invalid value for PostalCode, length must be less than 13.", new [] { "PostalCode" });
+            }
+
+            // Country (string) maxLength
+            if (this.Country != null && this.Country.Length > 31)
+            {
+                yield return new ValidationResult("Invalid value for Country, length must be less than 31.", new [] { "Country" });
+            }
+
+            // Note (string) maxLength
+            if (this.Note != null && this.Note.Length > 41)
+            {
+                yield return new ValidationResult("Invalid value for Note, length must be less than 41.", new [] { "Note" });
+            }
+
             yield break;
         }
     }

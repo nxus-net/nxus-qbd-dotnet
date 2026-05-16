@@ -41,17 +41,17 @@ namespace Nxus.Qbd.Models
         /// <param name="transactionDate">transactionDate</param>
         /// <param name="currency">currency</param>
         /// <param name="exchangeRate">exchangeRate</param>
-        /// <param name="refNumber">(Optional) The reference number for the build.</param>
-        /// <param name="memo">(Optional) A memo for the transaction.</param>
+        /// <param name="refNumber">The primary reference number for the transaction (e.g., Invoice #, Check #).</param>
+        /// <param name="memo">memo</param>
         /// <param name="transactionNumber">transactionNumber</param>
         /// <param name="itemInventoryAssembly">Reference to the Inventory Assembly Item being built.</param>
         /// <param name="inventorySite">inventorySite</param>
         /// <param name="inventorySiteLocation">inventorySiteLocation</param>
-        /// <param name="serialNumber">(Optional) Serial number for the built assembly.</param>
-        /// <param name="lotNumber">(Optional) Lot number for the built assembly.</param>
-        /// <param name="expirationDateForSerialLotNumber">(Optional) Expiration date for the serial/lot number.</param>
+        /// <param name="serialNumber">serialNumber</param>
+        /// <param name="lotNumber">lotNumber</param>
+        /// <param name="expirationDateForSerialLotNumber">expirationDateForSerialLotNumber</param>
         /// <param name="isPending">Indicates if the build is pending.</param>
-        /// <param name="quantityToBuild">(Required) The quantity of the assembly to build.</param>
+        /// <param name="quantityToBuild">quantityToBuild</param>
         /// <param name="quantityCanBuild">quantityCanBuild</param>
         /// <param name="quantityOnHand">quantityOnHand</param>
         /// <param name="quantityOnSalesOrder">quantityOnSalesOrder</param>
@@ -193,9 +193,9 @@ namespace Nxus.Qbd.Models
         public Option<string?> RefNumberOption { get; private set; }
 
         /// <summary>
-        /// (Optional) The reference number for the build.
+        /// The primary reference number for the transaction (e.g., Invoice #, Check #).
         /// </summary>
-        /// <value>(Optional) The reference number for the build.</value>
+        /// <value>The primary reference number for the transaction (e.g., Invoice #, Check #).</value>
         [JsonPropertyName("refNumber")]
         public string? RefNumber { get { return this.RefNumberOption.Value; } set { this.RefNumberOption = new(value); } }
 
@@ -207,9 +207,8 @@ namespace Nxus.Qbd.Models
         public Option<string?> MemoOption { get; private set; }
 
         /// <summary>
-        /// (Optional) A memo for the transaction.
+        /// Gets or Sets Memo
         /// </summary>
-        /// <value>(Optional) A memo for the transaction.</value>
         [JsonPropertyName("memo")]
         public string? Memo { get { return this.MemoOption.Value; } set { this.MemoOption = new(value); } }
 
@@ -274,9 +273,8 @@ namespace Nxus.Qbd.Models
         public Option<string?> SerialNumberOption { get; private set; }
 
         /// <summary>
-        /// (Optional) Serial number for the built assembly.
+        /// Gets or Sets SerialNumber
         /// </summary>
-        /// <value>(Optional) Serial number for the built assembly.</value>
         [JsonPropertyName("serialNumber")]
         public string? SerialNumber { get { return this.SerialNumberOption.Value; } set { this.SerialNumberOption = new(value); } }
 
@@ -288,9 +286,8 @@ namespace Nxus.Qbd.Models
         public Option<string?> LotNumberOption { get; private set; }
 
         /// <summary>
-        /// (Optional) Lot number for the built assembly.
+        /// Gets or Sets LotNumber
         /// </summary>
-        /// <value>(Optional) Lot number for the built assembly.</value>
         [JsonPropertyName("lotNumber")]
         public string? LotNumber { get { return this.LotNumberOption.Value; } set { this.LotNumberOption = new(value); } }
 
@@ -302,9 +299,8 @@ namespace Nxus.Qbd.Models
         public Option<string?> ExpirationDateForSerialLotNumberOption { get; private set; }
 
         /// <summary>
-        /// (Optional) Expiration date for the serial/lot number.
+        /// Gets or Sets ExpirationDateForSerialLotNumber
         /// </summary>
-        /// <value>(Optional) Expiration date for the serial/lot number.</value>
         [JsonPropertyName("expirationDateForSerialLotNumber")]
         public string? ExpirationDateForSerialLotNumber { get { return this.ExpirationDateForSerialLotNumberOption.Value; } set { this.ExpirationDateForSerialLotNumberOption = new(value); } }
 
@@ -330,9 +326,8 @@ namespace Nxus.Qbd.Models
         public Option<double?> QuantityToBuildOption { get; private set; }
 
         /// <summary>
-        /// (Required) The quantity of the assembly to build.
+        /// Gets or Sets QuantityToBuild
         /// </summary>
-        /// <value>(Required) The quantity of the assembly to build.</value>
         [JsonPropertyName("quantityToBuild")]
         public double? QuantityToBuild { get { return this.QuantityToBuildOption.Value; } set { this.QuantityToBuildOption = new(value); } }
 

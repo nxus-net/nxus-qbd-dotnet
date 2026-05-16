@@ -38,9 +38,9 @@ namespace Nxus.Qbd.Models
         /// <param name="updatedAt">updatedAt</param>
         /// <param name="revisionNumber">revisionNumber</param>
         /// <param name="objectType">objectType</param>
-        /// <param name="name">name</param>
-        /// <param name="listType">ListType may have one of the following values: Account, Class, Customer, CustomerMsg, CustomerType, DateDrivenTerms, Employee, ItemDiscount, ItemFixedAsset, ItemGroup, ItemInventory, ItemInventoryAssembly, ItemNonInventory, ItemOtherCharge, ItemPayment, ItemSalesTax, ItemSalesTaxGroup, ItemService, ItemSubtotal, JobType, OtherName, PaymentMethod, PriceLevel, SalesRep, SalesTaxCode, ShipMethod, StandardTerms, ToDo, Vendor, VendorType</param>
-        /// <param name="isActive">isActive</param>
+        /// <param name="name">The primary display name for the List object (e.g., Customer Name, Vendor Name).</param>
+        /// <param name="listType">The type of list object associated with the barcode (e.g., ItemInventory, Employee).</param>
+        /// <param name="isActive">Indicates whether the list item is active. Common to all list types.</param>
         /// <param name="customFields">customFields</param>
         [JsonConstructor]
         public BarCode(string id, DateTimeOffset createdAt, DateTimeOffset updatedAt, string revisionNumber, Option<string?> objectType = default, Option<string?> name = default, Option<string?> listType = default, Option<bool?> isActive = default, Option<List<QbdDataExt>?> customFields = default)
@@ -104,8 +104,9 @@ namespace Nxus.Qbd.Models
         public Option<string?> NameOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets Name
+        /// The primary display name for the List object (e.g., Customer Name, Vendor Name).
         /// </summary>
+        /// <value>The primary display name for the List object (e.g., Customer Name, Vendor Name).</value>
         [JsonPropertyName("name")]
         public string? Name { get { return this.NameOption.Value; } set { this.NameOption = new(value); } }
 
@@ -117,10 +118,9 @@ namespace Nxus.Qbd.Models
         public Option<string?> ListTypeOption { get; private set; }
 
         /// <summary>
-        /// ListType may have one of the following values: Account, Class, Customer, CustomerMsg, CustomerType, DateDrivenTerms, Employee, ItemDiscount, ItemFixedAsset, ItemGroup, ItemInventory, ItemInventoryAssembly, ItemNonInventory, ItemOtherCharge, ItemPayment, ItemSalesTax, ItemSalesTaxGroup, ItemService, ItemSubtotal, JobType, OtherName, PaymentMethod, PriceLevel, SalesRep, SalesTaxCode, ShipMethod, StandardTerms, ToDo, Vendor, VendorType
+        /// The type of list object associated with the barcode (e.g., ItemInventory, Employee).
         /// </summary>
-        /// <value>ListType may have one of the following values: Account, Class, Customer, CustomerMsg, CustomerType, DateDrivenTerms, Employee, ItemDiscount, ItemFixedAsset, ItemGroup, ItemInventory, ItemInventoryAssembly, ItemNonInventory, ItemOtherCharge, ItemPayment, ItemSalesTax, ItemSalesTaxGroup, ItemService, ItemSubtotal, JobType, OtherName, PaymentMethod, PriceLevel, SalesRep, SalesTaxCode, ShipMethod, StandardTerms, ToDo, Vendor, VendorType</value>
-        /* <example>ItemInventory</example> */
+        /// <value>The type of list object associated with the barcode (e.g., ItemInventory, Employee).</value>
         [JsonPropertyName("listType")]
         public string? ListType { get { return this.ListTypeOption.Value; } set { this.ListTypeOption = new(value); } }
 
@@ -132,8 +132,9 @@ namespace Nxus.Qbd.Models
         public Option<bool?> IsActiveOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets IsActive
+        /// Indicates whether the list item is active. Common to all list types.
         /// </summary>
+        /// <value>Indicates whether the list item is active. Common to all list types.</value>
         [JsonPropertyName("isActive")]
         public bool? IsActive { get { return this.IsActiveOption.Value; } set { this.IsActiveOption = new(value); } }
 

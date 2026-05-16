@@ -26,12 +26,12 @@ using Nxus.Qbd.Json;
 namespace Nxus.Qbd.Models
 {
     /// <summary>
-    /// Request model for creating a new Check transaction to pay bills.  Based on the CheckAddRq QBXML type.    QBXML Schema Constraints (from qbxmlops170.xml):  - PayeeEntityRef: Optional, FullName max length &#x3D; 209  - AccountRef: Required (BankAccount), FullName max length &#x3D; 159  - TxnDate: Optional  - RefNumber: Optional, max length &#x3D; 11 (OR IsToBePrinted)  - APAccountRef: Optional, FullName max length &#x3D; 159  - Amount: Optional  - CurrencyRef: Optional, FullName max length &#x3D; 64  - ExchangeRate: Optional  - AmountInHomeCurrency: Optional  - Memo: Optional, max length &#x3D; 4095  - IsToBePrinted: Optional (OR RefNumber)  - ExternalGUID: Optional
+    /// Request model for creating a new Check transaction to pay bills.  Based on the CheckAddRq QBXML type.
     /// </summary>
-    public partial class CreateCheckBillRequest : IValidatableObject
+    public partial class CreateCheckBillPaymentRequest : IValidatableObject
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="CreateCheckBillRequest" /> class.
+        /// Initializes a new instance of the <see cref="CreateCheckBillPaymentRequest" /> class.
         /// </summary>
         /// <param name="payeeId">payeeId</param>
         /// <param name="bankAccountId">(Required) The ListID of the bank account from which the check is drawn. Max length: 159 characters.</param>
@@ -47,7 +47,7 @@ namespace Nxus.Qbd.Models
         /// <param name="externalId">externalId</param>
         /// <param name="appliedToTransactions">appliedToTransactions</param>
         [JsonConstructor]
-        public CreateCheckBillRequest(string payeeId, string bankAccountId, Option<DateOnly?> transactionDate = default, Option<string?> refNumber = default, Option<string?> payablesAccountId = default, Option<double?> amount = default, Option<string?> currencyId = default, Option<double?> exchangeRate = default, Option<double?> amountInHomeCurrency = default, Option<string?> memo = default, Option<bool?> isQueuedForPrint = default, Option<string?> externalId = default, Option<List<AppliedToTransactionRequest>?> appliedToTransactions = default)
+        public CreateCheckBillPaymentRequest(string payeeId, string bankAccountId, Option<DateOnly?> transactionDate = default, Option<string?> refNumber = default, Option<string?> payablesAccountId = default, Option<double?> amount = default, Option<string?> currencyId = default, Option<double?> exchangeRate = default, Option<double?> amountInHomeCurrency = default, Option<string?> memo = default, Option<bool?> isQueuedForPrint = default, Option<string?> externalId = default, Option<List<AppliedToTransactionRequest>?> appliedToTransactions = default)
         {
             PayeeId = payeeId;
             BankAccountId = bankAccountId;
@@ -237,7 +237,7 @@ namespace Nxus.Qbd.Models
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append("class CreateCheckBillRequest {\n");
+            sb.Append("class CreateCheckBillPaymentRequest {\n");
             sb.Append("  PayeeId: ").Append(PayeeId).Append("\n");
             sb.Append("  BankAccountId: ").Append(BankAccountId).Append("\n");
             sb.Append("  TransactionDate: ").Append(TransactionDate).Append("\n");
@@ -262,14 +262,68 @@ namespace Nxus.Qbd.Models
         /// <returns>Validation Result</returns>
         IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
+            // BankAccountId (string) maxLength
+            if (this.BankAccountId != null && this.BankAccountId.Length > 159)
+            {
+                yield return new ValidationResult("Invalid value for BankAccountId, length must be less than 159.", new [] { "BankAccountId" });
+            }
+
+            // BankAccountId (string) minLength
+            if (this.BankAccountId != null && this.BankAccountId.Length < 1)
+            {
+                yield return new ValidationResult("Invalid value for BankAccountId, length must be greater than 1.", new [] { "BankAccountId" });
+            }
+
+            // RefNumber (string) maxLength
+            if (this.RefNumber != null && this.RefNumber.Length > 11)
+            {
+                yield return new ValidationResult("Invalid value for RefNumber, length must be less than 11.", new [] { "RefNumber" });
+            }
+
+            // PayablesAccountId (string) maxLength
+            if (this.PayablesAccountId != null && this.PayablesAccountId.Length > 159)
+            {
+                yield return new ValidationResult("Invalid value for PayablesAccountId, length must be less than 159.", new [] { "PayablesAccountId" });
+            }
+
+            // Amount (double) minimum
+            if (this.AmountOption.IsSet && this.AmountOption.Value < (double)0)
+            {
+                yield return new ValidationResult("Invalid value for Amount, must be a value greater than or equal to 0.", new [] { "Amount" });
+            }
+
+            // CurrencyId (string) maxLength
+            if (this.CurrencyId != null && this.CurrencyId.Length > 64)
+            {
+                yield return new ValidationResult("Invalid value for CurrencyId, length must be less than 64.", new [] { "CurrencyId" });
+            }
+
+            // ExchangeRate (double) minimum
+            if (this.ExchangeRateOption.IsSet && this.ExchangeRateOption.Value < (double)0)
+            {
+                yield return new ValidationResult("Invalid value for ExchangeRate, must be a value greater than 0.", new [] { "ExchangeRate" });
+            }
+
+            // AmountInHomeCurrency (double) minimum
+            if (this.AmountInHomeCurrencyOption.IsSet && this.AmountInHomeCurrencyOption.Value < (double)0)
+            {
+                yield return new ValidationResult("Invalid value for AmountInHomeCurrency, must be a value greater than or equal to 0.", new [] { "AmountInHomeCurrency" });
+            }
+
+            // Memo (string) maxLength
+            if (this.Memo != null && this.Memo.Length > 4095)
+            {
+                yield return new ValidationResult("Invalid value for Memo, length must be less than 4095.", new [] { "Memo" });
+            }
+
             yield break;
         }
     }
 
     /// <summary>
-    /// A Json converter for type <see cref="CreateCheckBillRequest" />
+    /// A Json converter for type <see cref="CreateCheckBillPaymentRequest" />
     /// </summary>
-    public class CreateCheckBillRequestJsonConverter : JsonConverter<CreateCheckBillRequest>
+    public class CreateCheckBillPaymentRequestJsonConverter : JsonConverter<CreateCheckBillPaymentRequest>
     {
         /// <summary>
         /// The format to use to serialize TransactionDate
@@ -277,14 +331,14 @@ namespace Nxus.Qbd.Models
         public static string TransactionDateFormat { get; set; } = "yyyy'-'MM'-'dd";
 
         /// <summary>
-        /// Deserializes json to <see cref="CreateCheckBillRequest" />
+        /// Deserializes json to <see cref="CreateCheckBillPaymentRequest" />
         /// </summary>
         /// <param name="utf8JsonReader"></param>
         /// <param name="typeToConvert"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <returns></returns>
         /// <exception cref="JsonException"></exception>
-        public override CreateCheckBillRequest Read(ref Utf8JsonReader utf8JsonReader, Type typeToConvert, JsonSerializerOptions jsonSerializerOptions)
+        public override CreateCheckBillPaymentRequest Read(ref Utf8JsonReader utf8JsonReader, Type typeToConvert, JsonSerializerOptions jsonSerializerOptions)
         {
             int currentDepth = utf8JsonReader.CurrentDepth;
 
@@ -368,124 +422,124 @@ namespace Nxus.Qbd.Models
             }
 
             if (!payeeId.IsSet)
-                throw new ArgumentException("Property is required for class CreateCheckBillRequest.", nameof(payeeId));
+                throw new ArgumentException("Property is required for class CreateCheckBillPaymentRequest.", nameof(payeeId));
 
             if (!bankAccountId.IsSet)
-                throw new ArgumentException("Property is required for class CreateCheckBillRequest.", nameof(bankAccountId));
+                throw new ArgumentException("Property is required for class CreateCheckBillPaymentRequest.", nameof(bankAccountId));
 
             if (payeeId.IsSet && payeeId.Value == null)
-                throw new ArgumentNullException(nameof(payeeId), "Property is not nullable for class CreateCheckBillRequest.");
+                throw new ArgumentNullException(nameof(payeeId), "Property is not nullable for class CreateCheckBillPaymentRequest.");
 
             if (bankAccountId.IsSet && bankAccountId.Value == null)
-                throw new ArgumentNullException(nameof(bankAccountId), "Property is not nullable for class CreateCheckBillRequest.");
+                throw new ArgumentNullException(nameof(bankAccountId), "Property is not nullable for class CreateCheckBillPaymentRequest.");
 
             if (appliedToTransactions.IsSet && appliedToTransactions.Value == null)
-                throw new ArgumentNullException(nameof(appliedToTransactions), "Property is not nullable for class CreateCheckBillRequest.");
+                throw new ArgumentNullException(nameof(appliedToTransactions), "Property is not nullable for class CreateCheckBillPaymentRequest.");
 
-            return new CreateCheckBillRequest(payeeId.Value!, bankAccountId.Value!, transactionDate, refNumber, payablesAccountId, amount, currencyId, exchangeRate, amountInHomeCurrency, memo, isQueuedForPrint, externalId, appliedToTransactions);
+            return new CreateCheckBillPaymentRequest(payeeId.Value!, bankAccountId.Value!, transactionDate, refNumber, payablesAccountId, amount, currencyId, exchangeRate, amountInHomeCurrency, memo, isQueuedForPrint, externalId, appliedToTransactions);
         }
 
         /// <summary>
-        /// Serializes a <see cref="CreateCheckBillRequest" />
+        /// Serializes a <see cref="CreateCheckBillPaymentRequest" />
         /// </summary>
         /// <param name="writer"></param>
-        /// <param name="createCheckBillRequest"></param>
+        /// <param name="createCheckBillPaymentRequest"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <exception cref="NotImplementedException"></exception>
-        public override void Write(Utf8JsonWriter writer, CreateCheckBillRequest createCheckBillRequest, JsonSerializerOptions jsonSerializerOptions)
+        public override void Write(Utf8JsonWriter writer, CreateCheckBillPaymentRequest createCheckBillPaymentRequest, JsonSerializerOptions jsonSerializerOptions)
         {
             writer.WriteStartObject();
 
-            WriteProperties(writer, createCheckBillRequest, jsonSerializerOptions);
+            WriteProperties(writer, createCheckBillPaymentRequest, jsonSerializerOptions);
             writer.WriteEndObject();
         }
 
         /// <summary>
-        /// Serializes the properties of <see cref="CreateCheckBillRequest" />
+        /// Serializes the properties of <see cref="CreateCheckBillPaymentRequest" />
         /// </summary>
         /// <param name="writer"></param>
-        /// <param name="createCheckBillRequest"></param>
+        /// <param name="createCheckBillPaymentRequest"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <exception cref="NotImplementedException"></exception>
-        public void WriteProperties(Utf8JsonWriter writer, CreateCheckBillRequest createCheckBillRequest, JsonSerializerOptions jsonSerializerOptions)
+        public void WriteProperties(Utf8JsonWriter writer, CreateCheckBillPaymentRequest createCheckBillPaymentRequest, JsonSerializerOptions jsonSerializerOptions)
         {
-            if (createCheckBillRequest.PayeeId == null)
-                throw new ArgumentNullException(nameof(createCheckBillRequest.PayeeId), "Property is required for class CreateCheckBillRequest.");
+            if (createCheckBillPaymentRequest.PayeeId == null)
+                throw new ArgumentNullException(nameof(createCheckBillPaymentRequest.PayeeId), "Property is required for class CreateCheckBillPaymentRequest.");
 
-            if (createCheckBillRequest.BankAccountId == null)
-                throw new ArgumentNullException(nameof(createCheckBillRequest.BankAccountId), "Property is required for class CreateCheckBillRequest.");
+            if (createCheckBillPaymentRequest.BankAccountId == null)
+                throw new ArgumentNullException(nameof(createCheckBillPaymentRequest.BankAccountId), "Property is required for class CreateCheckBillPaymentRequest.");
 
-            if (createCheckBillRequest.AppliedToTransactionsOption.IsSet && createCheckBillRequest.AppliedToTransactions == null)
-                throw new ArgumentNullException(nameof(createCheckBillRequest.AppliedToTransactions), "Property is required for class CreateCheckBillRequest.");
+            if (createCheckBillPaymentRequest.AppliedToTransactionsOption.IsSet && createCheckBillPaymentRequest.AppliedToTransactions == null)
+                throw new ArgumentNullException(nameof(createCheckBillPaymentRequest.AppliedToTransactions), "Property is required for class CreateCheckBillPaymentRequest.");
 
-            writer.WriteString("payeeId", createCheckBillRequest.PayeeId);
+            writer.WriteString("payeeId", createCheckBillPaymentRequest.PayeeId);
 
-            writer.WriteString("bankAccountId", createCheckBillRequest.BankAccountId);
+            writer.WriteString("bankAccountId", createCheckBillPaymentRequest.BankAccountId);
 
-            if (createCheckBillRequest.TransactionDateOption.IsSet)
-                if (createCheckBillRequest.TransactionDateOption.Value != null)
-                    writer.WriteString("transactionDate", createCheckBillRequest.TransactionDateOption.Value!.Value.ToString(TransactionDateFormat));
+            if (createCheckBillPaymentRequest.TransactionDateOption.IsSet)
+                if (createCheckBillPaymentRequest.TransactionDateOption.Value != null)
+                    writer.WriteString("transactionDate", createCheckBillPaymentRequest.TransactionDateOption.Value!.Value.ToString(TransactionDateFormat));
                 else
                     writer.WriteNull("transactionDate");
 
-            if (createCheckBillRequest.RefNumberOption.IsSet)
-                if (createCheckBillRequest.RefNumberOption.Value != null)
-                    writer.WriteString("refNumber", createCheckBillRequest.RefNumber);
+            if (createCheckBillPaymentRequest.RefNumberOption.IsSet)
+                if (createCheckBillPaymentRequest.RefNumberOption.Value != null)
+                    writer.WriteString("refNumber", createCheckBillPaymentRequest.RefNumber);
                 else
                     writer.WriteNull("refNumber");
 
-            if (createCheckBillRequest.PayablesAccountIdOption.IsSet)
-                if (createCheckBillRequest.PayablesAccountIdOption.Value != null)
-                    writer.WriteString("payablesAccountId", createCheckBillRequest.PayablesAccountId);
+            if (createCheckBillPaymentRequest.PayablesAccountIdOption.IsSet)
+                if (createCheckBillPaymentRequest.PayablesAccountIdOption.Value != null)
+                    writer.WriteString("payablesAccountId", createCheckBillPaymentRequest.PayablesAccountId);
                 else
                     writer.WriteNull("payablesAccountId");
 
-            if (createCheckBillRequest.AmountOption.IsSet)
-                if (createCheckBillRequest.AmountOption.Value != null)
-                    writer.WriteNumber("amount", createCheckBillRequest.AmountOption.Value!.Value);
+            if (createCheckBillPaymentRequest.AmountOption.IsSet)
+                if (createCheckBillPaymentRequest.AmountOption.Value != null)
+                    writer.WriteNumber("amount", createCheckBillPaymentRequest.AmountOption.Value!.Value);
                 else
                     writer.WriteNull("amount");
 
-            if (createCheckBillRequest.CurrencyIdOption.IsSet)
-                if (createCheckBillRequest.CurrencyIdOption.Value != null)
-                    writer.WriteString("currencyId", createCheckBillRequest.CurrencyId);
+            if (createCheckBillPaymentRequest.CurrencyIdOption.IsSet)
+                if (createCheckBillPaymentRequest.CurrencyIdOption.Value != null)
+                    writer.WriteString("currencyId", createCheckBillPaymentRequest.CurrencyId);
                 else
                     writer.WriteNull("currencyId");
 
-            if (createCheckBillRequest.ExchangeRateOption.IsSet)
-                if (createCheckBillRequest.ExchangeRateOption.Value != null)
-                    writer.WriteNumber("exchangeRate", createCheckBillRequest.ExchangeRateOption.Value!.Value);
+            if (createCheckBillPaymentRequest.ExchangeRateOption.IsSet)
+                if (createCheckBillPaymentRequest.ExchangeRateOption.Value != null)
+                    writer.WriteNumber("exchangeRate", createCheckBillPaymentRequest.ExchangeRateOption.Value!.Value);
                 else
                     writer.WriteNull("exchangeRate");
 
-            if (createCheckBillRequest.AmountInHomeCurrencyOption.IsSet)
-                if (createCheckBillRequest.AmountInHomeCurrencyOption.Value != null)
-                    writer.WriteNumber("amountInHomeCurrency", createCheckBillRequest.AmountInHomeCurrencyOption.Value!.Value);
+            if (createCheckBillPaymentRequest.AmountInHomeCurrencyOption.IsSet)
+                if (createCheckBillPaymentRequest.AmountInHomeCurrencyOption.Value != null)
+                    writer.WriteNumber("amountInHomeCurrency", createCheckBillPaymentRequest.AmountInHomeCurrencyOption.Value!.Value);
                 else
                     writer.WriteNull("amountInHomeCurrency");
 
-            if (createCheckBillRequest.MemoOption.IsSet)
-                if (createCheckBillRequest.MemoOption.Value != null)
-                    writer.WriteString("memo", createCheckBillRequest.Memo);
+            if (createCheckBillPaymentRequest.MemoOption.IsSet)
+                if (createCheckBillPaymentRequest.MemoOption.Value != null)
+                    writer.WriteString("memo", createCheckBillPaymentRequest.Memo);
                 else
                     writer.WriteNull("memo");
 
-            if (createCheckBillRequest.IsQueuedForPrintOption.IsSet)
-                if (createCheckBillRequest.IsQueuedForPrintOption.Value != null)
-                    writer.WriteBoolean("isQueuedForPrint", createCheckBillRequest.IsQueuedForPrintOption.Value!.Value);
+            if (createCheckBillPaymentRequest.IsQueuedForPrintOption.IsSet)
+                if (createCheckBillPaymentRequest.IsQueuedForPrintOption.Value != null)
+                    writer.WriteBoolean("isQueuedForPrint", createCheckBillPaymentRequest.IsQueuedForPrintOption.Value!.Value);
                 else
                     writer.WriteNull("isQueuedForPrint");
 
-            if (createCheckBillRequest.ExternalIdOption.IsSet)
-                if (createCheckBillRequest.ExternalIdOption.Value != null)
-                    writer.WriteString("externalId", createCheckBillRequest.ExternalId);
+            if (createCheckBillPaymentRequest.ExternalIdOption.IsSet)
+                if (createCheckBillPaymentRequest.ExternalIdOption.Value != null)
+                    writer.WriteString("externalId", createCheckBillPaymentRequest.ExternalId);
                 else
                     writer.WriteNull("externalId");
 
-            if (createCheckBillRequest.AppliedToTransactionsOption.IsSet)
+            if (createCheckBillPaymentRequest.AppliedToTransactionsOption.IsSet)
             {
                 writer.WritePropertyName("appliedToTransactions");
-                JsonSerializer.Serialize(writer, createCheckBillRequest.AppliedToTransactions, jsonSerializerOptions);
+                JsonSerializer.Serialize(writer, createCheckBillPaymentRequest.AppliedToTransactions, jsonSerializerOptions);
             }
         }
     }

@@ -33,11 +33,11 @@ namespace Nxus.Qbd.Models
         /// <summary>
         /// Initializes a new instance of the <see cref="CreateItemSubtotalRequest" /> class.
         /// </summary>
-        /// <param name="name">name</param>
+        /// <param name="name">The name of the item. Max Length: 31 characters.</param>
         /// <param name="itemDesc">Description of the item. Max Length: 4095 characters.</param>
         /// <param name="specialItemType">Special Item Type. Values: FinanceCharge, ReimbursableExpenseGroup, ReimbursableExpenseSubtotal.</param>
-        /// <param name="isActive">isActive</param>
-        /// <param name="barCodeValue">barCodeValue</param>
+        /// <param name="isActive">Whether the item is active.</param>
+        /// <param name="barCodeValue">The barcode value of the item. Max Length: 50 characters.</param>
         /// <param name="barCode">barCode</param>
         /// <param name="externalId">externalId</param>
         [JsonConstructor]
@@ -56,8 +56,9 @@ namespace Nxus.Qbd.Models
         partial void OnCreated();
 
         /// <summary>
-        /// Gets or Sets Name
+        /// The name of the item. Max Length: 31 characters.
         /// </summary>
+        /// <value>The name of the item. Max Length: 31 characters.</value>
         [JsonPropertyName("name")]
         public string Name { get; set; }
 
@@ -97,8 +98,9 @@ namespace Nxus.Qbd.Models
         public Option<bool?> IsActiveOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets IsActive
+        /// Whether the item is active.
         /// </summary>
+        /// <value>Whether the item is active.</value>
         [JsonPropertyName("isActive")]
         public bool? IsActive { get { return this.IsActiveOption.Value; } set { this.IsActiveOption = new(value); } }
 
@@ -110,8 +112,9 @@ namespace Nxus.Qbd.Models
         public Option<string?> BarCodeValueOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets BarCodeValue
+        /// The barcode value of the item. Max Length: 50 characters.
         /// </summary>
+        /// <value>The barcode value of the item. Max Length: 50 characters.</value>
         [JsonPropertyName("barCodeValue")]
         public string? BarCodeValue { get { return this.BarCodeValueOption.Value; } set { this.BarCodeValueOption = new(value); } }
 
@@ -167,6 +170,12 @@ namespace Nxus.Qbd.Models
         /// <returns>Validation Result</returns>
         IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
+            // Name (string) maxLength
+            if (this.Name != null && this.Name.Length > 31)
+            {
+                yield return new ValidationResult("Invalid value for Name, length must be less than 31.", new [] { "Name" });
+            }
+
             // ItemDesc (string) maxLength
             if (this.ItemDesc != null && this.ItemDesc.Length > 4095)
             {

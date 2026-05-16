@@ -20,10 +20,12 @@ namespace Nxus.Qbd;
 /// </code>
 /// </example>
 /// </summary>
-public sealed class NxusClient : IDisposable {
+public sealed class NxusClient : IDisposable
+{
     private readonly NxusHttpTransport _transport;
 
-    public NxusClient(NxusClientOptions options) {
+    public NxusClient(NxusClientOptions options)
+    {
         ArgumentNullException.ThrowIfNull(options);
         _transport = new NxusHttpTransport(options);
 
@@ -32,9 +34,9 @@ public sealed class NxusClient : IDisposable {
         Bills = new BillsResource(_transport);
         BuildAssemblies = new BuildAssembliesResource(_transport);
         Charges = new ChargesResource(_transport);
-        CheckBills = new CheckBillsResource(_transport);
+        CheckBillPayments = new CheckBillPaymentsResource(_transport);
         Checks = new ChecksResource(_transport);
-        CreditCardBills = new CreditCardBillsResource(_transport);
+        CreditCardBillPayments = new CreditCardBillPaymentsResource(_transport);
         CreditCardCharges = new CreditCardChargesResource(_transport);
         CreditCardCredits = new CreditCardCreditsResource(_transport);
         CreditMemos = new CreditMemosResource(_transport);
@@ -122,11 +124,11 @@ public sealed class NxusClient : IDisposable {
     /// <summary>Charges — full CRUD.</summary>
     public ChargesResource Charges { get; }
     /// <summary>Check Bills — full CRUD.</summary>
-    public CheckBillsResource CheckBills { get; }
+    public CheckBillPaymentsResource CheckBillPayments { get; }
     /// <summary>Checks — full CRUD.</summary>
     public ChecksResource Checks { get; }
     /// <summary>Credit Card Bills — full CRUD.</summary>
-    public CreditCardBillsResource CreditCardBills { get; }
+    public CreditCardBillPaymentsResource CreditCardBillPayments { get; }
     /// <summary>Credit Card Charges — full CRUD.</summary>
     public CreditCardChargesResource CreditCardCharges { get; }
     /// <summary>Credit Card Credits — full CRUD.</summary>

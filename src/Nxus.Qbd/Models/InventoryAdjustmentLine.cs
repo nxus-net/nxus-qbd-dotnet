@@ -26,7 +26,7 @@ using Nxus.Qbd.Json;
 namespace Nxus.Qbd.Models
 {
     /// <summary>
-    /// Represents a single line item for an Inventory Adjustment add operation. Only ONE of the adjustment properties (Quantity, Value, SerialNumber, LotNumber) should be populated.
+    /// Represents a single line item for an Inventory Adjustment operation. Only ONE of the adjustment properties (Quantity, Value, SerialNumber, LotNumber) should be populated.
     /// </summary>
     public partial class InventoryAdjustmentLine : IValidatableObject
     {

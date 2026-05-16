@@ -33,8 +33,8 @@ namespace Nxus.Qbd.Models
         /// <summary>
         /// Initializes a new instance of the <see cref="DefaultUnit" /> class.
         /// </summary>
-        /// <param name="unitUsedFor">Where this default unit is used as the default: purchase line items, sales line items, or shipping lines.</param>
-        /// <param name="unit">The unit name for this default unit, as displayed in the U/M field. If the company file is enabled for multiple units per item, this appears as an available unit for the item. Must correspond to the base unit or a related unit defined in this set. Maximum length: 31 characters.</param>
+        /// <param name="unitUsedFor">Context for the default unit (Purchase, Sales, Shipping).</param>
+        /// <param name="unit">unit</param>
         [JsonConstructor]
         public DefaultUnit(string unitUsedFor, string unit)
         {
@@ -46,16 +46,15 @@ namespace Nxus.Qbd.Models
         partial void OnCreated();
 
         /// <summary>
-        /// Where this default unit is used as the default: purchase line items, sales line items, or shipping lines.
+        /// Context for the default unit (Purchase, Sales, Shipping).
         /// </summary>
-        /// <value>Where this default unit is used as the default: purchase line items, sales line items, or shipping lines.</value>
+        /// <value>Context for the default unit (Purchase, Sales, Shipping).</value>
         [JsonPropertyName("unitUsedFor")]
         public string UnitUsedFor { get; set; }
 
         /// <summary>
-        /// The unit name for this default unit, as displayed in the U/M field. If the company file is enabled for multiple units per item, this appears as an available unit for the item. Must correspond to the base unit or a related unit defined in this set. Maximum length: 31 characters.
+        /// Gets or Sets Unit
         /// </summary>
-        /// <value>The unit name for this default unit, as displayed in the U/M field. If the company file is enabled for multiple units per item, this appears as an available unit for the item. Must correspond to the base unit or a related unit defined in this set. Maximum length: 31 characters.</value>
         [JsonPropertyName("unit")]
         public string Unit { get; set; }
 

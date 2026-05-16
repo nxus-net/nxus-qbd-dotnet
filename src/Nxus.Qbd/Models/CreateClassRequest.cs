@@ -112,6 +112,18 @@ namespace Nxus.Qbd.Models
                 yield return new ValidationResult("Invalid value for Name, length must be less than 31.", new [] { "Name" });
             }
 
+            // Name (string) minLength
+            if (this.Name != null && this.Name.Length < 1)
+            {
+                yield return new ValidationResult("Invalid value for Name, length must be greater than 1.", new [] { "Name" });
+            }
+
+            // ParentId (string) maxLength
+            if (this.ParentId != null && this.ParentId.Length > 159)
+            {
+                yield return new ValidationResult("Invalid value for ParentId, length must be less than 159.", new [] { "ParentId" });
+            }
+
             yield break;
         }
     }

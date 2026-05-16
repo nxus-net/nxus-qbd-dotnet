@@ -136,6 +136,18 @@ namespace Nxus.Qbd.Models
         /// <returns>Validation Result</returns>
         IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
+            // ItemGroupId (string) maxLength
+            if (this.ItemGroupId != null && this.ItemGroupId.Length > 50)
+            {
+                yield return new ValidationResult("Invalid value for ItemGroupId, length must be less than 50.", new [] { "ItemGroupId" });
+            }
+
+            // UnitOfMeasure (string) maxLength
+            if (this.UnitOfMeasure != null && this.UnitOfMeasure.Length > 31)
+            {
+                yield return new ValidationResult("Invalid value for UnitOfMeasure, length must be less than 31.", new [] { "UnitOfMeasure" });
+            }
+
             yield break;
         }
     }

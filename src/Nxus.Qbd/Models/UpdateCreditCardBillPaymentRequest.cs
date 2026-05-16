@@ -28,10 +28,10 @@ namespace Nxus.Qbd.Models
     /// <summary>
     /// Request model for updating an existing credit card bill payment  Note: QuickBooks typically doesn&#39;t support modifying bill payments directly
     /// </summary>
-    public partial class UpdateCreditCardBillRequest : IValidatableObject
+    public partial class UpdateCreditCardBillPaymentRequest : IValidatableObject
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="UpdateCreditCardBillRequest" /> class.
+        /// Initializes a new instance of the <see cref="UpdateCreditCardBillPaymentRequest" /> class.
         /// </summary>
         /// <param name="revisionNumber">revisionNumber</param>
         /// <param name="refNumber">Reference number for the payment</param>
@@ -43,7 +43,7 @@ namespace Nxus.Qbd.Models
         /// <param name="memo">Memo/description for the payment</param>
         /// <param name="applyToTransactions">applyToTransactions</param>
         [JsonConstructor]
-        public UpdateCreditCardBillRequest(string revisionNumber, Option<string?> refNumber = default, Option<DateOnly?> transactionDate = default, Option<string?> payeeId = default, Option<string?> payablesAccountId = default, Option<string?> creditCardAccountId = default, Option<double?> amount = default, Option<string?> memo = default, Option<List<ApplyToTransactionRequest>?> applyToTransactions = default)
+        public UpdateCreditCardBillPaymentRequest(string revisionNumber, Option<string?> refNumber = default, Option<DateOnly?> transactionDate = default, Option<string?> payeeId = default, Option<string?> payablesAccountId = default, Option<string?> creditCardAccountId = default, Option<double?> amount = default, Option<string?> memo = default, Option<List<ApplyToTransactionRequest>?> applyToTransactions = default)
         {
             RevisionNumber = revisionNumber;
             RefNumberOption = refNumber;
@@ -181,7 +181,7 @@ namespace Nxus.Qbd.Models
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append("class UpdateCreditCardBillRequest {\n");
+            sb.Append("class UpdateCreditCardBillPaymentRequest {\n");
             sb.Append("  RevisionNumber: ").Append(RevisionNumber).Append("\n");
             sb.Append("  RefNumber: ").Append(RefNumber).Append("\n");
             sb.Append("  TransactionDate: ").Append(TransactionDate).Append("\n");
@@ -231,9 +231,9 @@ namespace Nxus.Qbd.Models
     }
 
     /// <summary>
-    /// A Json converter for type <see cref="UpdateCreditCardBillRequest" />
+    /// A Json converter for type <see cref="UpdateCreditCardBillPaymentRequest" />
     /// </summary>
-    public class UpdateCreditCardBillRequestJsonConverter : JsonConverter<UpdateCreditCardBillRequest>
+    public class UpdateCreditCardBillPaymentRequestJsonConverter : JsonConverter<UpdateCreditCardBillPaymentRequest>
     {
         /// <summary>
         /// The format to use to serialize TransactionDate
@@ -241,14 +241,14 @@ namespace Nxus.Qbd.Models
         public static string TransactionDateFormat { get; set; } = "yyyy'-'MM'-'dd";
 
         /// <summary>
-        /// Deserializes json to <see cref="UpdateCreditCardBillRequest" />
+        /// Deserializes json to <see cref="UpdateCreditCardBillPaymentRequest" />
         /// </summary>
         /// <param name="utf8JsonReader"></param>
         /// <param name="typeToConvert"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <returns></returns>
         /// <exception cref="JsonException"></exception>
-        public override UpdateCreditCardBillRequest Read(ref Utf8JsonReader utf8JsonReader, Type typeToConvert, JsonSerializerOptions jsonSerializerOptions)
+        public override UpdateCreditCardBillPaymentRequest Read(ref Utf8JsonReader utf8JsonReader, Type typeToConvert, JsonSerializerOptions jsonSerializerOptions)
         {
             int currentDepth = utf8JsonReader.CurrentDepth;
 
@@ -316,95 +316,95 @@ namespace Nxus.Qbd.Models
             }
 
             if (!revisionNumber.IsSet)
-                throw new ArgumentException("Property is required for class UpdateCreditCardBillRequest.", nameof(revisionNumber));
+                throw new ArgumentException("Property is required for class UpdateCreditCardBillPaymentRequest.", nameof(revisionNumber));
 
             if (revisionNumber.IsSet && revisionNumber.Value == null)
-                throw new ArgumentNullException(nameof(revisionNumber), "Property is not nullable for class UpdateCreditCardBillRequest.");
+                throw new ArgumentNullException(nameof(revisionNumber), "Property is not nullable for class UpdateCreditCardBillPaymentRequest.");
 
             if (applyToTransactions.IsSet && applyToTransactions.Value == null)
-                throw new ArgumentNullException(nameof(applyToTransactions), "Property is not nullable for class UpdateCreditCardBillRequest.");
+                throw new ArgumentNullException(nameof(applyToTransactions), "Property is not nullable for class UpdateCreditCardBillPaymentRequest.");
 
-            return new UpdateCreditCardBillRequest(revisionNumber.Value!, refNumber, transactionDate, payeeId, payablesAccountId, creditCardAccountId, amount, memo, applyToTransactions);
+            return new UpdateCreditCardBillPaymentRequest(revisionNumber.Value!, refNumber, transactionDate, payeeId, payablesAccountId, creditCardAccountId, amount, memo, applyToTransactions);
         }
 
         /// <summary>
-        /// Serializes a <see cref="UpdateCreditCardBillRequest" />
+        /// Serializes a <see cref="UpdateCreditCardBillPaymentRequest" />
         /// </summary>
         /// <param name="writer"></param>
-        /// <param name="updateCreditCardBillRequest"></param>
+        /// <param name="updateCreditCardBillPaymentRequest"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <exception cref="NotImplementedException"></exception>
-        public override void Write(Utf8JsonWriter writer, UpdateCreditCardBillRequest updateCreditCardBillRequest, JsonSerializerOptions jsonSerializerOptions)
+        public override void Write(Utf8JsonWriter writer, UpdateCreditCardBillPaymentRequest updateCreditCardBillPaymentRequest, JsonSerializerOptions jsonSerializerOptions)
         {
             writer.WriteStartObject();
 
-            WriteProperties(writer, updateCreditCardBillRequest, jsonSerializerOptions);
+            WriteProperties(writer, updateCreditCardBillPaymentRequest, jsonSerializerOptions);
             writer.WriteEndObject();
         }
 
         /// <summary>
-        /// Serializes the properties of <see cref="UpdateCreditCardBillRequest" />
+        /// Serializes the properties of <see cref="UpdateCreditCardBillPaymentRequest" />
         /// </summary>
         /// <param name="writer"></param>
-        /// <param name="updateCreditCardBillRequest"></param>
+        /// <param name="updateCreditCardBillPaymentRequest"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <exception cref="NotImplementedException"></exception>
-        public void WriteProperties(Utf8JsonWriter writer, UpdateCreditCardBillRequest updateCreditCardBillRequest, JsonSerializerOptions jsonSerializerOptions)
+        public void WriteProperties(Utf8JsonWriter writer, UpdateCreditCardBillPaymentRequest updateCreditCardBillPaymentRequest, JsonSerializerOptions jsonSerializerOptions)
         {
-            if (updateCreditCardBillRequest.RevisionNumber == null)
-                throw new ArgumentNullException(nameof(updateCreditCardBillRequest.RevisionNumber), "Property is required for class UpdateCreditCardBillRequest.");
+            if (updateCreditCardBillPaymentRequest.RevisionNumber == null)
+                throw new ArgumentNullException(nameof(updateCreditCardBillPaymentRequest.RevisionNumber), "Property is required for class UpdateCreditCardBillPaymentRequest.");
 
-            if (updateCreditCardBillRequest.ApplyToTransactionsOption.IsSet && updateCreditCardBillRequest.ApplyToTransactions == null)
-                throw new ArgumentNullException(nameof(updateCreditCardBillRequest.ApplyToTransactions), "Property is required for class UpdateCreditCardBillRequest.");
+            if (updateCreditCardBillPaymentRequest.ApplyToTransactionsOption.IsSet && updateCreditCardBillPaymentRequest.ApplyToTransactions == null)
+                throw new ArgumentNullException(nameof(updateCreditCardBillPaymentRequest.ApplyToTransactions), "Property is required for class UpdateCreditCardBillPaymentRequest.");
 
-            writer.WriteString("revisionNumber", updateCreditCardBillRequest.RevisionNumber);
+            writer.WriteString("revisionNumber", updateCreditCardBillPaymentRequest.RevisionNumber);
 
-            if (updateCreditCardBillRequest.RefNumberOption.IsSet)
-                if (updateCreditCardBillRequest.RefNumberOption.Value != null)
-                    writer.WriteString("refNumber", updateCreditCardBillRequest.RefNumber);
+            if (updateCreditCardBillPaymentRequest.RefNumberOption.IsSet)
+                if (updateCreditCardBillPaymentRequest.RefNumberOption.Value != null)
+                    writer.WriteString("refNumber", updateCreditCardBillPaymentRequest.RefNumber);
                 else
                     writer.WriteNull("refNumber");
 
-            if (updateCreditCardBillRequest.TransactionDateOption.IsSet)
-                if (updateCreditCardBillRequest.TransactionDateOption.Value != null)
-                    writer.WriteString("transactionDate", updateCreditCardBillRequest.TransactionDateOption.Value!.Value.ToString(TransactionDateFormat));
+            if (updateCreditCardBillPaymentRequest.TransactionDateOption.IsSet)
+                if (updateCreditCardBillPaymentRequest.TransactionDateOption.Value != null)
+                    writer.WriteString("transactionDate", updateCreditCardBillPaymentRequest.TransactionDateOption.Value!.Value.ToString(TransactionDateFormat));
                 else
                     writer.WriteNull("transactionDate");
 
-            if (updateCreditCardBillRequest.PayeeIdOption.IsSet)
-                if (updateCreditCardBillRequest.PayeeIdOption.Value != null)
-                    writer.WriteString("payeeId", updateCreditCardBillRequest.PayeeId);
+            if (updateCreditCardBillPaymentRequest.PayeeIdOption.IsSet)
+                if (updateCreditCardBillPaymentRequest.PayeeIdOption.Value != null)
+                    writer.WriteString("payeeId", updateCreditCardBillPaymentRequest.PayeeId);
                 else
                     writer.WriteNull("payeeId");
 
-            if (updateCreditCardBillRequest.PayablesAccountIdOption.IsSet)
-                if (updateCreditCardBillRequest.PayablesAccountIdOption.Value != null)
-                    writer.WriteString("payablesAccountId", updateCreditCardBillRequest.PayablesAccountId);
+            if (updateCreditCardBillPaymentRequest.PayablesAccountIdOption.IsSet)
+                if (updateCreditCardBillPaymentRequest.PayablesAccountIdOption.Value != null)
+                    writer.WriteString("payablesAccountId", updateCreditCardBillPaymentRequest.PayablesAccountId);
                 else
                     writer.WriteNull("payablesAccountId");
 
-            if (updateCreditCardBillRequest.CreditCardAccountIdOption.IsSet)
-                if (updateCreditCardBillRequest.CreditCardAccountIdOption.Value != null)
-                    writer.WriteString("creditCardAccountId", updateCreditCardBillRequest.CreditCardAccountId);
+            if (updateCreditCardBillPaymentRequest.CreditCardAccountIdOption.IsSet)
+                if (updateCreditCardBillPaymentRequest.CreditCardAccountIdOption.Value != null)
+                    writer.WriteString("creditCardAccountId", updateCreditCardBillPaymentRequest.CreditCardAccountId);
                 else
                     writer.WriteNull("creditCardAccountId");
 
-            if (updateCreditCardBillRequest.AmountOption.IsSet)
-                if (updateCreditCardBillRequest.AmountOption.Value != null)
-                    writer.WriteNumber("amount", updateCreditCardBillRequest.AmountOption.Value!.Value);
+            if (updateCreditCardBillPaymentRequest.AmountOption.IsSet)
+                if (updateCreditCardBillPaymentRequest.AmountOption.Value != null)
+                    writer.WriteNumber("amount", updateCreditCardBillPaymentRequest.AmountOption.Value!.Value);
                 else
                     writer.WriteNull("amount");
 
-            if (updateCreditCardBillRequest.MemoOption.IsSet)
-                if (updateCreditCardBillRequest.MemoOption.Value != null)
-                    writer.WriteString("memo", updateCreditCardBillRequest.Memo);
+            if (updateCreditCardBillPaymentRequest.MemoOption.IsSet)
+                if (updateCreditCardBillPaymentRequest.MemoOption.Value != null)
+                    writer.WriteString("memo", updateCreditCardBillPaymentRequest.Memo);
                 else
                     writer.WriteNull("memo");
 
-            if (updateCreditCardBillRequest.ApplyToTransactionsOption.IsSet)
+            if (updateCreditCardBillPaymentRequest.ApplyToTransactionsOption.IsSet)
             {
                 writer.WritePropertyName("applyToTransactions");
-                JsonSerializer.Serialize(writer, updateCreditCardBillRequest.ApplyToTransactions, jsonSerializerOptions);
+                JsonSerializer.Serialize(writer, updateCreditCardBillPaymentRequest.ApplyToTransactions, jsonSerializerOptions);
             }
         }
     }

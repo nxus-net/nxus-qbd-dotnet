@@ -39,7 +39,7 @@ namespace Nxus.Qbd.Models
         /// <param name="nextCursor">nextCursor</param>
         /// <param name="page">page</param>
         /// <param name="count">count</param>
-        /// <param name="limit">The maximum number of items to return in a single response.</param>
+        /// <param name="limit">limit</param>
         /// <param name="totalCount">totalCount</param>
         /// <param name="pageCount">pageCount</param>
         /// <param name="hasMore">hasMore</param>
@@ -151,9 +151,8 @@ namespace Nxus.Qbd.Models
         public Option<int?> LimitOption { get; private set; }
 
         /// <summary>
-        /// The maximum number of items to return in a single response.
+        /// Gets or Sets Limit
         /// </summary>
-        /// <value>The maximum number of items to return in a single response.</value>
         [JsonPropertyName("limit")]
         public int? Limit { get { return this.LimitOption.Value; } set { this.LimitOption = new(value); } }
 

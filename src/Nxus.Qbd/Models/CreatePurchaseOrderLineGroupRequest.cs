@@ -119,10 +119,22 @@ namespace Nxus.Qbd.Models
         /// <returns>Validation Result</returns>
         IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
-            // InventorySiteLocationId (string) maxLength
-            if (this.InventorySiteLocationId != null && this.InventorySiteLocationId.Length > 50)
+            // Quantity (double) minimum
+            if (this.QuantityOption.IsSet && this.QuantityOption.Value < (double)0)
             {
-                yield return new ValidationResult("Invalid value for InventorySiteLocationId, length must be less than 50.", new [] { "InventorySiteLocationId" });
+                yield return new ValidationResult("Invalid value for Quantity, must be a value greater than 0.", new [] { "Quantity" });
+            }
+
+            // UnitOfMeasure (string) maxLength
+            if (this.UnitOfMeasure != null && this.UnitOfMeasure.Length > 31)
+            {
+                yield return new ValidationResult("Invalid value for UnitOfMeasure, length must be less than 31.", new [] { "UnitOfMeasure" });
+            }
+
+            // InventorySiteLocationId (string) maxLength
+            if (this.InventorySiteLocationId != null && this.InventorySiteLocationId.Length > 31)
+            {
+                yield return new ValidationResult("Invalid value for InventorySiteLocationId, length must be less than 31.", new [] { "InventorySiteLocationId" });
             }
 
             yield break;

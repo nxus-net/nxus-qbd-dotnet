@@ -38,13 +38,13 @@ namespace Nxus.Qbd.Models
         /// <param name="updatedAt">updatedAt</param>
         /// <param name="revisionNumber">revisionNumber</param>
         /// <param name="objectType">objectType</param>
-        /// <param name="name">(Required) The name of the currency, displayed to the user. (Max 64 characters)</param>
-        /// <param name="currencyCode">(Required) The three-letter currency code (e.g., USD, EUR). Values are normalized to trimmed uppercase. (Max 3 characters)</param>
-        /// <param name="currencyFormat">(Optional) Specifies the formatting rules for the currency.</param>
+        /// <param name="name">The primary display name for the List object (e.g., Customer Name, Vendor Name).</param>
+        /// <param name="currencyCode">currencyCode</param>
+        /// <param name="currencyFormat">currencyFormat</param>
         /// <param name="isUserDefinedCurrency">isUserDefinedCurrency</param>
         /// <param name="exchangeRate">exchangeRate</param>
         /// <param name="asOfDate">asOfDate</param>
-        /// <param name="isActive">(Optional) If false, this Currency is inactive. Default is true.</param>
+        /// <param name="isActive">Indicates whether the list item is active. Common to all list types.</param>
         /// <param name="customFields">customFields</param>
         [JsonConstructor]
         public Currency(string id, DateTimeOffset createdAt, DateTimeOffset updatedAt, string revisionNumber, Option<string?> objectType = default, Option<string?> name = default, Option<string?> currencyCode = default, Option<CurrencyFormat?> currencyFormat = default, Option<bool?> isUserDefinedCurrency = default, Option<double?> exchangeRate = default, Option<DateOnly?> asOfDate = default, Option<bool?> isActive = default, Option<List<QbdDataExt>?> customFields = default)
@@ -112,9 +112,9 @@ namespace Nxus.Qbd.Models
         public Option<string?> NameOption { get; private set; }
 
         /// <summary>
-        /// (Required) The name of the currency, displayed to the user. (Max 64 characters)
+        /// The primary display name for the List object (e.g., Customer Name, Vendor Name).
         /// </summary>
-        /// <value>(Required) The name of the currency, displayed to the user. (Max 64 characters)</value>
+        /// <value>The primary display name for the List object (e.g., Customer Name, Vendor Name).</value>
         [JsonPropertyName("name")]
         public string? Name { get { return this.NameOption.Value; } set { this.NameOption = new(value); } }
 
@@ -126,9 +126,8 @@ namespace Nxus.Qbd.Models
         public Option<string?> CurrencyCodeOption { get; private set; }
 
         /// <summary>
-        /// (Required) The three-letter currency code (e.g., USD, EUR). Values are normalized to trimmed uppercase. (Max 3 characters)
+        /// Gets or Sets CurrencyCode
         /// </summary>
-        /// <value>(Required) The three-letter currency code (e.g., USD, EUR). Values are normalized to trimmed uppercase. (Max 3 characters)</value>
         [JsonPropertyName("currencyCode")]
         public string? CurrencyCode { get { return this.CurrencyCodeOption.Value; } set { this.CurrencyCodeOption = new(value); } }
 
@@ -140,9 +139,8 @@ namespace Nxus.Qbd.Models
         public Option<CurrencyFormat?> CurrencyFormatOption { get; private set; }
 
         /// <summary>
-        /// (Optional) Specifies the formatting rules for the currency.
+        /// Gets or Sets CurrencyFormat
         /// </summary>
-        /// <value>(Optional) Specifies the formatting rules for the currency.</value>
         [JsonPropertyName("currencyFormat")]
         public CurrencyFormat? CurrencyFormat { get { return this.CurrencyFormatOption.Value; } set { this.CurrencyFormatOption = new(value); } }
 
@@ -193,9 +191,9 @@ namespace Nxus.Qbd.Models
         public Option<bool?> IsActiveOption { get; private set; }
 
         /// <summary>
-        /// (Optional) If false, this Currency is inactive. Default is true.
+        /// Indicates whether the list item is active. Common to all list types.
         /// </summary>
-        /// <value>(Optional) If false, this Currency is inactive. Default is true.</value>
+        /// <value>Indicates whether the list item is active. Common to all list types.</value>
         [JsonPropertyName("isActive")]
         public bool? IsActive { get { return this.IsActiveOption.Value; } set { this.IsActiveOption = new(value); } }
 

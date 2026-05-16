@@ -33,9 +33,9 @@ namespace Nxus.Qbd.Models
         /// <summary>
         /// Initializes a new instance of the <see cref="BillingRatePerItem" /> class.
         /// </summary>
-        /// <param name="item">A reference to the specific service item this custom rate applies to [4, 5].</param>
-        /// <param name="customRate">A fixed hourly rate for this specific service item that overrides the item&#39;s standard rate [6].</param>
-        /// <param name="customRatePercent">A percentage adjustment higher or lower than the item&#39;s standard rate [6, 7]. A positive value indicates a higher rate, and a negative value indicates a lower rate discount (e.g., -50.0 means 50% lower than the standard rate) [7, 8].</param>
+        /// <param name="item">item</param>
+        /// <param name="customRate">The custom rate amount for this item.</param>
+        /// <param name="customRatePercent">The custom rate percentage for this item.</param>
         [JsonConstructor]
         public BillingRatePerItem(Option<QbdRef?> item = default, Option<double?> customRate = default, Option<double?> customRatePercent = default)
         {
@@ -55,9 +55,8 @@ namespace Nxus.Qbd.Models
         public Option<QbdRef?> ItemOption { get; private set; }
 
         /// <summary>
-        /// A reference to the specific service item this custom rate applies to [4, 5].
+        /// Gets or Sets Item
         /// </summary>
-        /// <value>A reference to the specific service item this custom rate applies to [4, 5].</value>
         [JsonPropertyName("item")]
         public QbdRef? Item { get { return this.ItemOption.Value; } set { this.ItemOption = new(value); } }
 
@@ -69,10 +68,9 @@ namespace Nxus.Qbd.Models
         public Option<double?> CustomRateOption { get; private set; }
 
         /// <summary>
-        /// A fixed hourly rate for this specific service item that overrides the item&#39;s standard rate [6].
+        /// The custom rate amount for this item.
         /// </summary>
-        /// <value>A fixed hourly rate for this specific service item that overrides the item&#39;s standard rate [6].</value>
-        /* <example>50.00</example> */
+        /// <value>The custom rate amount for this item.</value>
         [JsonPropertyName("customRate")]
         public double? CustomRate { get { return this.CustomRateOption.Value; } set { this.CustomRateOption = new(value); } }
 
@@ -84,10 +82,9 @@ namespace Nxus.Qbd.Models
         public Option<double?> CustomRatePercentOption { get; private set; }
 
         /// <summary>
-        /// A percentage adjustment higher or lower than the item&#39;s standard rate [6, 7]. A positive value indicates a higher rate, and a negative value indicates a lower rate discount (e.g., -50.0 means 50% lower than the standard rate) [7, 8].
+        /// The custom rate percentage for this item.
         /// </summary>
-        /// <value>A percentage adjustment higher or lower than the item&#39;s standard rate [6, 7]. A positive value indicates a higher rate, and a negative value indicates a lower rate discount (e.g., -50.0 means 50% lower than the standard rate) [7, 8].</value>
-        /* <example>-50.0</example> */
+        /// <value>The custom rate percentage for this item.</value>
         [JsonPropertyName("customRatePercent")]
         public double? CustomRatePercent { get { return this.CustomRatePercentOption.Value; } set { this.CustomRatePercentOption = new(value); } }
 

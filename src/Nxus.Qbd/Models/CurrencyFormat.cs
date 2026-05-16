@@ -33,10 +33,10 @@ namespace Nxus.Qbd.Models
         /// <summary>
         /// Initializes a new instance of the <see cref="CurrencyFormat" /> class.
         /// </summary>
-        /// <param name="thousandSeparator">Controls the thousands separator when displaying currency values (for example, \&quot;1,000,000\&quot;). Defaults to comma.</param>
-        /// <param name="thousandSeparatorGrouping">Controls how digits are grouped for thousands when displaying currency values (for example, \&quot;10,000,000\&quot;).</param>
-        /// <param name="decimalPlaces">Controls the number of decimal places displayed for currency values. Use &#x60;0&#x60; to hide decimals or &#x60;2&#x60; to display cents.</param>
-        /// <param name="decimalSeparator">Controls the decimal separator when displaying currency values (for example, \&quot;1.00\&quot; vs \&quot;1,00\&quot;). Defaults to period.</param>
+        /// <param name="thousandSeparator">thousandSeparator</param>
+        /// <param name="thousandSeparatorGrouping">thousandSeparatorGrouping</param>
+        /// <param name="decimalPlaces">decimalPlaces</param>
+        /// <param name="decimalSeparator">decimalSeparator</param>
         [JsonConstructor]
         public CurrencyFormat(Option<string?> thousandSeparator = default, Option<string?> thousandSeparatorGrouping = default, Option<string?> decimalPlaces = default, Option<string?> decimalSeparator = default)
         {
@@ -57,9 +57,8 @@ namespace Nxus.Qbd.Models
         public Option<string?> ThousandSeparatorOption { get; private set; }
 
         /// <summary>
-        /// Controls the thousands separator when displaying currency values (for example, \&quot;1,000,000\&quot;). Defaults to comma.
+        /// Gets or Sets ThousandSeparator
         /// </summary>
-        /// <value>Controls the thousands separator when displaying currency values (for example, \&quot;1,000,000\&quot;). Defaults to comma.</value>
         [JsonPropertyName("thousandSeparator")]
         public string? ThousandSeparator { get { return this.ThousandSeparatorOption.Value; } set { this.ThousandSeparatorOption = new(value); } }
 
@@ -71,9 +70,8 @@ namespace Nxus.Qbd.Models
         public Option<string?> ThousandSeparatorGroupingOption { get; private set; }
 
         /// <summary>
-        /// Controls how digits are grouped for thousands when displaying currency values (for example, \&quot;10,000,000\&quot;).
+        /// Gets or Sets ThousandSeparatorGrouping
         /// </summary>
-        /// <value>Controls how digits are grouped for thousands when displaying currency values (for example, \&quot;10,000,000\&quot;).</value>
         [JsonPropertyName("thousandSeparatorGrouping")]
         public string? ThousandSeparatorGrouping { get { return this.ThousandSeparatorGroupingOption.Value; } set { this.ThousandSeparatorGroupingOption = new(value); } }
 
@@ -85,9 +83,8 @@ namespace Nxus.Qbd.Models
         public Option<string?> DecimalPlacesOption { get; private set; }
 
         /// <summary>
-        /// Controls the number of decimal places displayed for currency values. Use &#x60;0&#x60; to hide decimals or &#x60;2&#x60; to display cents.
+        /// Gets or Sets DecimalPlaces
         /// </summary>
-        /// <value>Controls the number of decimal places displayed for currency values. Use &#x60;0&#x60; to hide decimals or &#x60;2&#x60; to display cents.</value>
         [JsonPropertyName("decimalPlaces")]
         public string? DecimalPlaces { get { return this.DecimalPlacesOption.Value; } set { this.DecimalPlacesOption = new(value); } }
 
@@ -99,9 +96,8 @@ namespace Nxus.Qbd.Models
         public Option<string?> DecimalSeparatorOption { get; private set; }
 
         /// <summary>
-        /// Controls the decimal separator when displaying currency values (for example, \&quot;1.00\&quot; vs \&quot;1,00\&quot;). Defaults to period.
+        /// Gets or Sets DecimalSeparator
         /// </summary>
-        /// <value>Controls the decimal separator when displaying currency values (for example, \&quot;1.00\&quot; vs \&quot;1,00\&quot;). Defaults to period.</value>
         [JsonPropertyName("decimalSeparator")]
         public string? DecimalSeparator { get { return this.DecimalSeparatorOption.Value; } set { this.DecimalSeparatorOption = new(value); } }
 

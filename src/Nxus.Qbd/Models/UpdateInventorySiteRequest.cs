@@ -213,6 +213,42 @@ namespace Nxus.Qbd.Models
         /// <returns>Validation Result</returns>
         IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
+            // Name (string) maxLength
+            if (this.Name != null && this.Name.Length > 31)
+            {
+                yield return new ValidationResult("Invalid value for Name, length must be less than 31.", new [] { "Name" });
+            }
+
+            // Description (string) maxLength
+            if (this.Description != null && this.Description.Length > 100)
+            {
+                yield return new ValidationResult("Invalid value for Description, length must be less than 100.", new [] { "Description" });
+            }
+
+            // Contact (string) maxLength
+            if (this.Contact != null && this.Contact.Length > 41)
+            {
+                yield return new ValidationResult("Invalid value for Contact, length must be less than 41.", new [] { "Contact" });
+            }
+
+            // Phone (string) maxLength
+            if (this.Phone != null && this.Phone.Length > 21)
+            {
+                yield return new ValidationResult("Invalid value for Phone, length must be less than 21.", new [] { "Phone" });
+            }
+
+            // Fax (string) maxLength
+            if (this.Fax != null && this.Fax.Length > 21)
+            {
+                yield return new ValidationResult("Invalid value for Fax, length must be less than 21.", new [] { "Fax" });
+            }
+
+            // Email (string) maxLength
+            if (this.Email != null && this.Email.Length > 1023)
+            {
+                yield return new ValidationResult("Invalid value for Email, length must be less than 1023.", new [] { "Email" });
+            }
+
             yield break;
         }
     }

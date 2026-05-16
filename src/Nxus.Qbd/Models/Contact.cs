@@ -39,14 +39,14 @@ namespace Nxus.Qbd.Models
         /// <param name="revisionNumber">revisionNumber</param>
         /// <param name="firstName">firstName</param>
         /// <param name="objectType">objectType</param>
-        /// <param name="name">Submitter&#39;s full name (max 100 chars).</param>
+        /// <param name="name">The primary display name for the List object (e.g., Customer Name, Vendor Name).</param>
         /// <param name="contactName">contactName</param>
         /// <param name="salutation">salutation</param>
         /// <param name="middleName">middleName</param>
         /// <param name="lastName">lastName</param>
         /// <param name="jobTitle">jobTitle</param>
         /// <param name="customContactFields">customContactFields</param>
-        /// <param name="isActive">isActive</param>
+        /// <param name="isActive">Indicates whether the list item is active. Common to all list types.</param>
         /// <param name="customFields">customFields</param>
         [JsonConstructor]
         public Contact(string id, DateTimeOffset createdAt, DateTimeOffset updatedAt, string revisionNumber, string firstName, Option<string?> objectType = default, Option<string?> name = default, Option<string?> contactName = default, Option<string?> salutation = default, Option<string?> middleName = default, Option<string?> lastName = default, Option<string?> jobTitle = default, Option<List<CustomContactField>?> customContactFields = default, Option<bool?> isActive = default, Option<List<QbdDataExt>?> customFields = default)
@@ -122,9 +122,9 @@ namespace Nxus.Qbd.Models
         public Option<string?> NameOption { get; private set; }
 
         /// <summary>
-        /// Submitter&#39;s full name (max 100 chars).
+        /// The primary display name for the List object (e.g., Customer Name, Vendor Name).
         /// </summary>
-        /// <value>Submitter&#39;s full name (max 100 chars).</value>
+        /// <value>The primary display name for the List object (e.g., Customer Name, Vendor Name).</value>
         [JsonPropertyName("name")]
         public string? Name { get { return this.NameOption.Value; } set { this.NameOption = new(value); } }
 
@@ -214,8 +214,9 @@ namespace Nxus.Qbd.Models
         public Option<bool?> IsActiveOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets IsActive
+        /// Indicates whether the list item is active. Common to all list types.
         /// </summary>
+        /// <value>Indicates whether the list item is active. Common to all list types.</value>
         [JsonPropertyName("isActive")]
         public bool? IsActive { get { return this.IsActiveOption.Value; } set { this.IsActiveOption = new(value); } }
 

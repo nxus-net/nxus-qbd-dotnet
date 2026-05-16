@@ -41,7 +41,7 @@ namespace Nxus.Qbd.Models
         /// <param name="transactionDate">transactionDate</param>
         /// <param name="currency">currency</param>
         /// <param name="exchangeRate">exchangeRate</param>
-        /// <param name="refNumber">refNumber</param>
+        /// <param name="refNumber">The primary reference number for the transaction (e.g., Invoice #, Check #).</param>
         /// <param name="memo">memo</param>
         /// <param name="transactionType">transactionType</param>
         /// <param name="payablesAccount">payablesAccount</param>
@@ -173,8 +173,9 @@ namespace Nxus.Qbd.Models
         public Option<string?> RefNumberOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets RefNumber
+        /// The primary reference number for the transaction (e.g., Invoice #, Check #).
         /// </summary>
+        /// <value>The primary reference number for the transaction (e.g., Invoice #, Check #).</value>
         [JsonPropertyName("refNumber")]
         public string? RefNumber { get { return this.RefNumberOption.Value; } set { this.RefNumberOption = new(value); } }
 

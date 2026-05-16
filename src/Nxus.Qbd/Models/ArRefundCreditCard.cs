@@ -40,12 +40,12 @@ namespace Nxus.Qbd.Models
         /// <param name="objectType">objectType</param>
         /// <param name="transactionDate">transactionDate</param>
         /// <param name="currency">currency</param>
-        /// <param name="exchangeRate">(Optional) The exchange rate for the transaction.</param>
-        /// <param name="refNumber">(Optional) The reference number for the refund.</param>
-        /// <param name="memo">(Optional) A memo for the transaction.</param>
+        /// <param name="exchangeRate">exchangeRate</param>
+        /// <param name="refNumber">The primary reference number for the transaction (e.g., Invoice #, Check #).</param>
+        /// <param name="memo">memo</param>
         /// <param name="transactionNumber">transactionNumber</param>
         /// <param name="receivablesAccount">receivablesAccount</param>
-        /// <param name="address">(Optional) Address details for the refund.</param>
+        /// <param name="address">address</param>
         /// <param name="addressBlock">addressBlock</param>
         /// <param name="paymentMethod">paymentMethod</param>
         /// <param name="creditCardTransaction">creditCardTransaction</param>
@@ -168,9 +168,8 @@ namespace Nxus.Qbd.Models
         public Option<double?> ExchangeRateOption { get; private set; }
 
         /// <summary>
-        /// (Optional) The exchange rate for the transaction.
+        /// Gets or Sets ExchangeRate
         /// </summary>
-        /// <value>(Optional) The exchange rate for the transaction.</value>
         [JsonPropertyName("exchangeRate")]
         public double? ExchangeRate { get { return this.ExchangeRateOption.Value; } set { this.ExchangeRateOption = new(value); } }
 
@@ -182,9 +181,9 @@ namespace Nxus.Qbd.Models
         public Option<string?> RefNumberOption { get; private set; }
 
         /// <summary>
-        /// (Optional) The reference number for the refund.
+        /// The primary reference number for the transaction (e.g., Invoice #, Check #).
         /// </summary>
-        /// <value>(Optional) The reference number for the refund.</value>
+        /// <value>The primary reference number for the transaction (e.g., Invoice #, Check #).</value>
         [JsonPropertyName("refNumber")]
         public string? RefNumber { get { return this.RefNumberOption.Value; } set { this.RefNumberOption = new(value); } }
 
@@ -196,9 +195,8 @@ namespace Nxus.Qbd.Models
         public Option<string?> MemoOption { get; private set; }
 
         /// <summary>
-        /// (Optional) A memo for the transaction.
+        /// Gets or Sets Memo
         /// </summary>
-        /// <value>(Optional) A memo for the transaction.</value>
         [JsonPropertyName("memo")]
         public string? Memo { get { return this.MemoOption.Value; } set { this.MemoOption = new(value); } }
 
@@ -236,9 +234,8 @@ namespace Nxus.Qbd.Models
         public Option<Address?> AddressOption { get; private set; }
 
         /// <summary>
-        /// (Optional) Address details for the refund.
+        /// Gets or Sets Address
         /// </summary>
-        /// <value>(Optional) Address details for the refund.</value>
         [JsonPropertyName("address")]
         public Address? Address { get { return this.AddressOption.Value; } set { this.AddressOption = new(value); } }
 

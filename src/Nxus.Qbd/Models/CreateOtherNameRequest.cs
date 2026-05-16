@@ -348,6 +348,90 @@ namespace Nxus.Qbd.Models
         /// <returns>Validation Result</returns>
         IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
+            // Name (string) maxLength
+            if (this.Name != null && this.Name.Length > 41)
+            {
+                yield return new ValidationResult("Invalid value for Name, length must be less than 41.", new [] { "Name" });
+            }
+
+            // CompanyName (string) maxLength
+            if (this.CompanyName != null && this.CompanyName.Length > 41)
+            {
+                yield return new ValidationResult("Invalid value for CompanyName, length must be less than 41.", new [] { "CompanyName" });
+            }
+
+            // Salutation (string) maxLength
+            if (this.Salutation != null && this.Salutation.Length > 15)
+            {
+                yield return new ValidationResult("Invalid value for Salutation, length must be less than 15.", new [] { "Salutation" });
+            }
+
+            // FirstName (string) maxLength
+            if (this.FirstName != null && this.FirstName.Length > 25)
+            {
+                yield return new ValidationResult("Invalid value for FirstName, length must be less than 25.", new [] { "FirstName" });
+            }
+
+            // MiddleName (string) maxLength
+            if (this.MiddleName != null && this.MiddleName.Length > 5)
+            {
+                yield return new ValidationResult("Invalid value for MiddleName, length must be less than 5.", new [] { "MiddleName" });
+            }
+
+            // LastName (string) maxLength
+            if (this.LastName != null && this.LastName.Length > 25)
+            {
+                yield return new ValidationResult("Invalid value for LastName, length must be less than 25.", new [] { "LastName" });
+            }
+
+            // Phone (string) maxLength
+            if (this.Phone != null && this.Phone.Length > 21)
+            {
+                yield return new ValidationResult("Invalid value for Phone, length must be less than 21.", new [] { "Phone" });
+            }
+
+            // AlternatPhone (string) maxLength
+            if (this.AlternatPhone != null && this.AlternatPhone.Length > 21)
+            {
+                yield return new ValidationResult("Invalid value for AlternatPhone, length must be less than 21.", new [] { "AlternatPhone" });
+            }
+
+            // Fax (string) maxLength
+            if (this.Fax != null && this.Fax.Length > 21)
+            {
+                yield return new ValidationResult("Invalid value for Fax, length must be less than 21.", new [] { "Fax" });
+            }
+
+            // Email (string) maxLength
+            if (this.Email != null && this.Email.Length > 1023)
+            {
+                yield return new ValidationResult("Invalid value for Email, length must be less than 1023.", new [] { "Email" });
+            }
+
+            // Contact (string) maxLength
+            if (this.Contact != null && this.Contact.Length > 41)
+            {
+                yield return new ValidationResult("Invalid value for Contact, length must be less than 41.", new [] { "Contact" });
+            }
+
+            // AlternateContact (string) maxLength
+            if (this.AlternateContact != null && this.AlternateContact.Length > 41)
+            {
+                yield return new ValidationResult("Invalid value for AlternateContact, length must be less than 41.", new [] { "AlternateContact" });
+            }
+
+            // AccountNumber (string) maxLength
+            if (this.AccountNumber != null && this.AccountNumber.Length > 99)
+            {
+                yield return new ValidationResult("Invalid value for AccountNumber, length must be less than 99.", new [] { "AccountNumber" });
+            }
+
+            // Notes (string) maxLength
+            if (this.Notes != null && this.Notes.Length > 4095)
+            {
+                yield return new ValidationResult("Invalid value for Notes, length must be less than 4095.", new [] { "Notes" });
+            }
+
             yield break;
         }
     }

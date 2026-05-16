@@ -292,6 +292,12 @@ namespace Nxus.Qbd.Models
                 yield return new ValidationResult("Invalid value for RefNumber, length must be less than 11.", new [] { "RefNumber" });
             }
 
+            // Memo (string) maxLength
+            if (this.Memo != null && this.Memo.Length > 4095)
+            {
+                yield return new ValidationResult("Invalid value for Memo, length must be less than 4095.", new [] { "Memo" });
+            }
+
             yield break;
         }
     }

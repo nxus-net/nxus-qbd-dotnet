@@ -36,7 +36,7 @@ namespace Nxus.Qbd.Models
         /// <param name="id">id</param>
         /// <param name="objectType">objectType</param>
         /// <param name="itemSalesTax">itemSalesTax</param>
-        /// <param name="amount">(Required) The amount of the payment for this line.</param>
+        /// <param name="amount">amount</param>
         [JsonConstructor]
         public SalesTaxPaymentCheckLine(string id, Option<string?> objectType = default, Option<QbdRef?> itemSalesTax = default, Option<double?> amount = default)
         {
@@ -89,9 +89,8 @@ namespace Nxus.Qbd.Models
         public Option<double?> AmountOption { get; private set; }
 
         /// <summary>
-        /// (Required) The amount of the payment for this line.
+        /// Gets or Sets Amount
         /// </summary>
-        /// <value>(Required) The amount of the payment for this line.</value>
         [JsonPropertyName("amount")]
         public double? Amount { get { return this.AmountOption.Value; } set { this.AmountOption = new(value); } }
 

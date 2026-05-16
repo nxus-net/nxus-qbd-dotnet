@@ -35,7 +35,7 @@ namespace Nxus.Qbd.Models
         /// </summary>
         /// <param name="id">id</param>
         /// <param name="amount">amount</param>
-        /// <param name="override">If true, overrides default logic for applying credits. (Optional)</param>
+        /// <param name="override">override</param>
         [JsonConstructor]
         public SetCredit(string id, double amount, Option<bool?> @override = default)
         {
@@ -67,9 +67,8 @@ namespace Nxus.Qbd.Models
         public Option<bool?> OverrideOption { get; private set; }
 
         /// <summary>
-        /// If true, overrides default logic for applying credits. (Optional)
+        /// Gets or Sets Override
         /// </summary>
-        /// <value>If true, overrides default logic for applying credits. (Optional)</value>
         [JsonPropertyName("override")]
         public bool? Override { get { return this.OverrideOption.Value; } set { this.OverrideOption = new(value); } }
 

@@ -40,14 +40,14 @@ namespace Nxus.Qbd.Models
         /// <param name="objectType">objectType</param>
         /// <param name="transactionDate">transactionDate</param>
         /// <param name="currency">currency</param>
-        /// <param name="exchangeRate">(Optional) Exchange rate if this is a foreign currency Deposit.</param>
-        /// <param name="refNumber">refNumber</param>
-        /// <param name="memo">(Optional) General memo about the Deposit. (Max 4095 characters)</param>
+        /// <param name="exchangeRate">exchangeRate</param>
+        /// <param name="refNumber">The primary reference number for the transaction (e.g., Invoice #, Check #).</param>
+        /// <param name="memo">memo</param>
         /// <param name="transactionNumber">transactionNumber</param>
         /// <param name="depositToAccount">depositToAccount</param>
         /// <param name="depositTotal">depositTotal</param>
         /// <param name="depositTotalInHomeCurrency">depositTotalInHomeCurrency</param>
-        /// <param name="cashBackInfo">(Optional) Information about cash back requested from the deposit total.</param>
+        /// <param name="cashBackInfo">cashBackInfo</param>
         /// <param name="depositLines">depositLines</param>
         /// <param name="amount">amount</param>
         /// <param name="entity">entity</param>
@@ -166,9 +166,8 @@ namespace Nxus.Qbd.Models
         public Option<double?> ExchangeRateOption { get; private set; }
 
         /// <summary>
-        /// (Optional) Exchange rate if this is a foreign currency Deposit.
+        /// Gets or Sets ExchangeRate
         /// </summary>
-        /// <value>(Optional) Exchange rate if this is a foreign currency Deposit.</value>
         [JsonPropertyName("exchangeRate")]
         public double? ExchangeRate { get { return this.ExchangeRateOption.Value; } set { this.ExchangeRateOption = new(value); } }
 
@@ -180,8 +179,9 @@ namespace Nxus.Qbd.Models
         public Option<string?> RefNumberOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets RefNumber
+        /// The primary reference number for the transaction (e.g., Invoice #, Check #).
         /// </summary>
+        /// <value>The primary reference number for the transaction (e.g., Invoice #, Check #).</value>
         [JsonPropertyName("refNumber")]
         public string? RefNumber { get { return this.RefNumberOption.Value; } set { this.RefNumberOption = new(value); } }
 
@@ -193,9 +193,8 @@ namespace Nxus.Qbd.Models
         public Option<string?> MemoOption { get; private set; }
 
         /// <summary>
-        /// (Optional) General memo about the Deposit. (Max 4095 characters)
+        /// Gets or Sets Memo
         /// </summary>
-        /// <value>(Optional) General memo about the Deposit. (Max 4095 characters)</value>
         [JsonPropertyName("memo")]
         public string? Memo { get { return this.MemoOption.Value; } set { this.MemoOption = new(value); } }
 
@@ -259,9 +258,8 @@ namespace Nxus.Qbd.Models
         public Option<CashBackInfo?> CashBackInfoOption { get; private set; }
 
         /// <summary>
-        /// (Optional) Information about cash back requested from the deposit total.
+        /// Gets or Sets CashBackInfo
         /// </summary>
-        /// <value>(Optional) Information about cash back requested from the deposit total.</value>
         [JsonPropertyName("cashBackInfo")]
         public CashBackInfo? CashBackInfo { get { return this.CashBackInfoOption.Value; } set { this.CashBackInfoOption = new(value); } }
 

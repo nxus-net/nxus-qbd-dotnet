@@ -39,7 +39,7 @@ namespace Nxus.Qbd.Models
         /// <param name="transactionDate">transactionDate</param>
         /// <param name="refNumber">refNumber</param>
         /// <param name="creditRemaining">creditRemaining</param>
-        /// <param name="refundAmount">(Required) The amount of the refund applied to this specific transaction.</param>
+        /// <param name="refundAmount">refundAmount</param>
         /// <param name="creditRemainingInHomeCurrency">creditRemainingInHomeCurrency</param>
         /// <param name="refundAmountInHomeCurrency">refundAmountInHomeCurrency</param>
         [JsonConstructor]
@@ -138,9 +138,8 @@ namespace Nxus.Qbd.Models
         public Option<double?> RefundAmountOption { get; private set; }
 
         /// <summary>
-        /// (Required) The amount of the refund applied to this specific transaction.
+        /// Gets or Sets RefundAmount
         /// </summary>
-        /// <value>(Required) The amount of the refund applied to this specific transaction.</value>
         [JsonPropertyName("refundAmount")]
         public double? RefundAmount { get { return this.RefundAmountOption.Value; } set { this.RefundAmountOption = new(value); } }
 

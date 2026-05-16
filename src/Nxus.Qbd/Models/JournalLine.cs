@@ -36,12 +36,12 @@ namespace Nxus.Qbd.Models
         /// <param name="id">id</param>
         /// <param name="objectType">objectType</param>
         /// <param name="account">account</param>
-        /// <param name="amount">(Required) Amount for the line.</param>
-        /// <param name="memo">Memo for the line. (Max 4095 characters)</param>
+        /// <param name="amount">amount</param>
+        /// <param name="memo">memo</param>
         /// <param name="entity">entity</param>
         /// <param name="class">class</param>
         /// <param name="itemSalesTax">itemSalesTax</param>
-        /// <param name="billableStatus">Billable status of the line (Billable, NotBillable, HasBeenBilled).</param>
+        /// <param name="billableStatus">billableStatus</param>
         [JsonConstructor]
         public JournalLine(string id, Option<string?> objectType = default, Option<QbdRef?> account = default, Option<double?> amount = default, Option<string?> memo = default, Option<QbdRef?> entity = default, Option<QbdRef?> @class = default, Option<QbdRef?> itemSalesTax = default, Option<string?> billableStatus = default)
         {
@@ -99,9 +99,8 @@ namespace Nxus.Qbd.Models
         public Option<double?> AmountOption { get; private set; }
 
         /// <summary>
-        /// (Required) Amount for the line.
+        /// Gets or Sets Amount
         /// </summary>
-        /// <value>(Required) Amount for the line.</value>
         [JsonPropertyName("amount")]
         public double? Amount { get { return this.AmountOption.Value; } set { this.AmountOption = new(value); } }
 
@@ -113,9 +112,8 @@ namespace Nxus.Qbd.Models
         public Option<string?> MemoOption { get; private set; }
 
         /// <summary>
-        /// Memo for the line. (Max 4095 characters)
+        /// Gets or Sets Memo
         /// </summary>
-        /// <value>Memo for the line. (Max 4095 characters)</value>
         [JsonPropertyName("memo")]
         public string? Memo { get { return this.MemoOption.Value; } set { this.MemoOption = new(value); } }
 
@@ -166,9 +164,8 @@ namespace Nxus.Qbd.Models
         public Option<string?> BillableStatusOption { get; private set; }
 
         /// <summary>
-        /// Billable status of the line (Billable, NotBillable, HasBeenBilled).
+        /// Gets or Sets BillableStatus
         /// </summary>
-        /// <value>Billable status of the line (Billable, NotBillable, HasBeenBilled).</value>
         [JsonPropertyName("billableStatus")]
         public string? BillableStatus { get { return this.BillableStatusOption.Value; } set { this.BillableStatusOption = new(value); } }
 

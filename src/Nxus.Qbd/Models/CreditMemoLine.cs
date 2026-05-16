@@ -36,20 +36,20 @@ namespace Nxus.Qbd.Models
         /// <param name="id">id</param>
         /// <param name="objectType">objectType</param>
         /// <param name="item">item</param>
-        /// <param name="description">(Optional) Description of the line item.</param>
-        /// <param name="quantity">(Optional) Quantity of the item.</param>
-        /// <param name="unitOfMeasure">(Optional) Unit of measure.</param>
+        /// <param name="description">description</param>
+        /// <param name="quantity">quantity</param>
+        /// <param name="unitOfMeasure">unitOfMeasure</param>
         /// <param name="overrideUnitOfMeasureSet">overrideUnitOfMeasureSet</param>
-        /// <param name="rate">(Optional) Rate or price per unit.</param>
-        /// <param name="ratePercent">(Optional) Rate expressed as a percentage.</param>
+        /// <param name="rate">rate</param>
+        /// <param name="ratePercent">ratePercent</param>
         /// <param name="class">class</param>
-        /// <param name="amount">(Optional) Total amount for the line.</param>
+        /// <param name="amount">amount</param>
         /// <param name="inventorySite">inventorySite</param>
         /// <param name="inventorySiteLocation">inventorySiteLocation</param>
-        /// <param name="serialNumber">(Optional) Serial number for the item.</param>
-        /// <param name="lotNumber">(Optional) Lot number for the item.</param>
+        /// <param name="serialNumber">serialNumber</param>
+        /// <param name="lotNumber">lotNumber</param>
         /// <param name="expirationDate">expirationDate</param>
-        /// <param name="serviceDate">(Optional) Service date for the item.</param>
+        /// <param name="serviceDate">serviceDate</param>
         /// <param name="salesTaxCode">salesTaxCode</param>
         /// <param name="otherCustomField1">otherCustomField1</param>
         /// <param name="otherCustomField2">otherCustomField2</param>
@@ -125,9 +125,8 @@ namespace Nxus.Qbd.Models
         public Option<string?> DescriptionOption { get; private set; }
 
         /// <summary>
-        /// (Optional) Description of the line item.
+        /// Gets or Sets Description
         /// </summary>
-        /// <value>(Optional) Description of the line item.</value>
         [JsonPropertyName("description")]
         public string? Description { get { return this.DescriptionOption.Value; } set { this.DescriptionOption = new(value); } }
 
@@ -139,9 +138,8 @@ namespace Nxus.Qbd.Models
         public Option<double?> QuantityOption { get; private set; }
 
         /// <summary>
-        /// (Optional) Quantity of the item.
+        /// Gets or Sets Quantity
         /// </summary>
-        /// <value>(Optional) Quantity of the item.</value>
         [JsonPropertyName("quantity")]
         public double? Quantity { get { return this.QuantityOption.Value; } set { this.QuantityOption = new(value); } }
 
@@ -153,9 +151,8 @@ namespace Nxus.Qbd.Models
         public Option<string?> UnitOfMeasureOption { get; private set; }
 
         /// <summary>
-        /// (Optional) Unit of measure.
+        /// Gets or Sets UnitOfMeasure
         /// </summary>
-        /// <value>(Optional) Unit of measure.</value>
         [JsonPropertyName("unitOfMeasure")]
         public string? UnitOfMeasure { get { return this.UnitOfMeasureOption.Value; } set { this.UnitOfMeasureOption = new(value); } }
 
@@ -180,9 +177,8 @@ namespace Nxus.Qbd.Models
         public Option<double?> RateOption { get; private set; }
 
         /// <summary>
-        /// (Optional) Rate or price per unit.
+        /// Gets or Sets Rate
         /// </summary>
-        /// <value>(Optional) Rate or price per unit.</value>
         [JsonPropertyName("rate")]
         public double? Rate { get { return this.RateOption.Value; } set { this.RateOption = new(value); } }
 
@@ -194,9 +190,8 @@ namespace Nxus.Qbd.Models
         public Option<double?> RatePercentOption { get; private set; }
 
         /// <summary>
-        /// (Optional) Rate expressed as a percentage.
+        /// Gets or Sets RatePercent
         /// </summary>
-        /// <value>(Optional) Rate expressed as a percentage.</value>
         [JsonPropertyName("ratePercent")]
         public double? RatePercent { get { return this.RatePercentOption.Value; } set { this.RatePercentOption = new(value); } }
 
@@ -221,9 +216,8 @@ namespace Nxus.Qbd.Models
         public Option<double?> AmountOption { get; private set; }
 
         /// <summary>
-        /// (Optional) Total amount for the line.
+        /// Gets or Sets Amount
         /// </summary>
-        /// <value>(Optional) Total amount for the line.</value>
         [JsonPropertyName("amount")]
         public double? Amount { get { return this.AmountOption.Value; } set { this.AmountOption = new(value); } }
 
@@ -261,9 +255,8 @@ namespace Nxus.Qbd.Models
         public Option<string?> SerialNumberOption { get; private set; }
 
         /// <summary>
-        /// (Optional) Serial number for the item.
+        /// Gets or Sets SerialNumber
         /// </summary>
-        /// <value>(Optional) Serial number for the item.</value>
         [JsonPropertyName("serialNumber")]
         public string? SerialNumber { get { return this.SerialNumberOption.Value; } set { this.SerialNumberOption = new(value); } }
 
@@ -275,9 +268,8 @@ namespace Nxus.Qbd.Models
         public Option<string?> LotNumberOption { get; private set; }
 
         /// <summary>
-        /// (Optional) Lot number for the item.
+        /// Gets or Sets LotNumber
         /// </summary>
-        /// <value>(Optional) Lot number for the item.</value>
         [JsonPropertyName("lotNumber")]
         public string? LotNumber { get { return this.LotNumberOption.Value; } set { this.LotNumberOption = new(value); } }
 
@@ -302,9 +294,8 @@ namespace Nxus.Qbd.Models
         public Option<DateOnly?> ServiceDateOption { get; private set; }
 
         /// <summary>
-        /// (Optional) Service date for the item.
+        /// Gets or Sets ServiceDate
         /// </summary>
-        /// <value>(Optional) Service date for the item.</value>
         [JsonPropertyName("serviceDate")]
         public DateOnly? ServiceDate { get { return this.ServiceDateOption.Value; } set { this.ServiceDateOption = new(value); } }
 

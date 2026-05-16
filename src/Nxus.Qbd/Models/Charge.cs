@@ -26,7 +26,7 @@ using Nxus.Qbd.Json;
 namespace Nxus.Qbd.Models
 {
     /// <summary>
-    /// Represents a Charge transaction.  A ChargeQuery request returns information about statement charges.
+    /// Represents a Statement Charge applied to a customer&#39;s account.
     /// </summary>
     public partial class Charge : IValidatableObject
     {
@@ -41,26 +41,26 @@ namespace Nxus.Qbd.Models
         /// <param name="transactionDate">transactionDate</param>
         /// <param name="currency">currency</param>
         /// <param name="exchangeRate">exchangeRate</param>
-        /// <param name="refNumber">(Optional) The reference number.</param>
+        /// <param name="refNumber">The primary reference number for the transaction (e.g., Invoice #, Check #).</param>
         /// <param name="memo">memo</param>
         /// <param name="transactionNumber">transactionNumber</param>
         /// <param name="customer">customer</param>
         /// <param name="item">item</param>
         /// <param name="inventorySite">inventorySite</param>
         /// <param name="inventorySiteLocation">inventorySiteLocation</param>
-        /// <param name="quantity">(Optional) Quantity of the item.</param>
-        /// <param name="unitOfMeasure">(Optional) Unit of measure.</param>
+        /// <param name="quantity">quantity</param>
+        /// <param name="unitOfMeasure">unitOfMeasure</param>
         /// <param name="overrideUnitOfMeasureSet">overrideUnitOfMeasureSet</param>
         /// <param name="overrideItemAccount">overrideItemAccount</param>
-        /// <param name="rate">(Optional) The rate or price per unit.</param>
+        /// <param name="rate">rate</param>
         /// <param name="balanceRemaining">balanceRemaining</param>
-        /// <param name="description">(Optional) Description of the charge.</param>
+        /// <param name="description">description</param>
         /// <param name="receivablesAccount">receivablesAccount</param>
         /// <param name="class">class</param>
-        /// <param name="billedDate">(Optional) The date the charge was billed.</param>
-        /// <param name="dueDate">(Optional) The due date for the charge.</param>
+        /// <param name="billedDate">billedDate</param>
+        /// <param name="dueDate">dueDate</param>
         /// <param name="isPaid">isPaid</param>
-        /// <param name="amount">(Optional) The total amount of the charge.</param>
+        /// <param name="amount">amount</param>
         /// <param name="entity">entity</param>
         /// <param name="account">account</param>
         /// <param name="amountInHomeCurrency">amountInHomeCurrency</param>
@@ -201,9 +201,9 @@ namespace Nxus.Qbd.Models
         public Option<string?> RefNumberOption { get; private set; }
 
         /// <summary>
-        /// (Optional) The reference number.
+        /// The primary reference number for the transaction (e.g., Invoice #, Check #).
         /// </summary>
-        /// <value>(Optional) The reference number.</value>
+        /// <value>The primary reference number for the transaction (e.g., Invoice #, Check #).</value>
         [JsonPropertyName("refNumber")]
         public string? RefNumber { get { return this.RefNumberOption.Value; } set { this.RefNumberOption = new(value); } }
 
@@ -293,9 +293,8 @@ namespace Nxus.Qbd.Models
         public Option<double?> QuantityOption { get; private set; }
 
         /// <summary>
-        /// (Optional) Quantity of the item.
+        /// Gets or Sets Quantity
         /// </summary>
-        /// <value>(Optional) Quantity of the item.</value>
         [JsonPropertyName("quantity")]
         public double? Quantity { get { return this.QuantityOption.Value; } set { this.QuantityOption = new(value); } }
 
@@ -307,9 +306,8 @@ namespace Nxus.Qbd.Models
         public Option<string?> UnitOfMeasureOption { get; private set; }
 
         /// <summary>
-        /// (Optional) Unit of measure.
+        /// Gets or Sets UnitOfMeasure
         /// </summary>
-        /// <value>(Optional) Unit of measure.</value>
         [JsonPropertyName("unitOfMeasure")]
         public string? UnitOfMeasure { get { return this.UnitOfMeasureOption.Value; } set { this.UnitOfMeasureOption = new(value); } }
 
@@ -347,9 +345,8 @@ namespace Nxus.Qbd.Models
         public Option<double?> RateOption { get; private set; }
 
         /// <summary>
-        /// (Optional) The rate or price per unit.
+        /// Gets or Sets Rate
         /// </summary>
-        /// <value>(Optional) The rate or price per unit.</value>
         [JsonPropertyName("rate")]
         public double? Rate { get { return this.RateOption.Value; } set { this.RateOption = new(value); } }
 
@@ -374,9 +371,8 @@ namespace Nxus.Qbd.Models
         public Option<string?> DescriptionOption { get; private set; }
 
         /// <summary>
-        /// (Optional) Description of the charge.
+        /// Gets or Sets Description
         /// </summary>
-        /// <value>(Optional) Description of the charge.</value>
         [JsonPropertyName("description")]
         public string? Description { get { return this.DescriptionOption.Value; } set { this.DescriptionOption = new(value); } }
 
@@ -414,9 +410,8 @@ namespace Nxus.Qbd.Models
         public Option<DateOnly?> BilledDateOption { get; private set; }
 
         /// <summary>
-        /// (Optional) The date the charge was billed.
+        /// Gets or Sets BilledDate
         /// </summary>
-        /// <value>(Optional) The date the charge was billed.</value>
         [JsonPropertyName("billedDate")]
         public DateOnly? BilledDate { get { return this.BilledDateOption.Value; } set { this.BilledDateOption = new(value); } }
 
@@ -428,9 +423,8 @@ namespace Nxus.Qbd.Models
         public Option<DateOnly?> DueDateOption { get; private set; }
 
         /// <summary>
-        /// (Optional) The due date for the charge.
+        /// Gets or Sets DueDate
         /// </summary>
-        /// <value>(Optional) The due date for the charge.</value>
         [JsonPropertyName("dueDate")]
         public DateOnly? DueDate { get { return this.DueDateOption.Value; } set { this.DueDateOption = new(value); } }
 
@@ -455,9 +449,8 @@ namespace Nxus.Qbd.Models
         public Option<double?> AmountOption { get; private set; }
 
         /// <summary>
-        /// (Optional) The total amount of the charge.
+        /// Gets or Sets Amount
         /// </summary>
-        /// <value>(Optional) The total amount of the charge.</value>
         [JsonPropertyName("amount")]
         public double? Amount { get { return this.AmountOption.Value; } set { this.AmountOption = new(value); } }
 

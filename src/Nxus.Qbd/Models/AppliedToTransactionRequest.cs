@@ -34,11 +34,11 @@ namespace Nxus.Qbd.Models
         /// Initializes a new instance of the <see cref="AppliedToTransactionRequest" /> class.
         /// </summary>
         /// <param name="id">id</param>
-        /// <param name="paymentAmount">Monetary amount of the payment in the transaction&#39;s currency.  Uses decimal for financial precision. Null indicates the amount is unspecified.</param>
+        /// <param name="paymentAmount">paymentAmount</param>
         /// <param name="setCredits">setCredits</param>
-        /// <param name="discountAmount">Monetary amount of any discount applied to the item or transaction.  Null when no discount is applied. Use the same currency and scale as other monetary values in the model.</param>
-        /// <param name="discountAccountId">Identifier of the account used for discounts.  Nullable; null indicates no discount account is assigned. When present, it should correspond to an account identifier in the accounting system.</param>
-        /// <param name="discountClassId">Identifier of the discount class.  Corresponds to the JSON property \&quot;discountClassId\&quot;. May be null when no discount class is assigned.</param>
+        /// <param name="discountAmount">Discount amount to apply.</param>
+        /// <param name="discountAccountId">Account to post the discount to.</param>
+        /// <param name="discountClassId">Class for the discount (if using class tracking).</param>
         [JsonConstructor]
         public AppliedToTransactionRequest(string id, Option<double?> paymentAmount = default, Option<List<SetCreditRequest>?> setCredits = default, Option<double?> discountAmount = default, Option<string?> discountAccountId = default, Option<string?> discountClassId = default)
         {
@@ -67,9 +67,8 @@ namespace Nxus.Qbd.Models
         public Option<double?> PaymentAmountOption { get; private set; }
 
         /// <summary>
-        /// Monetary amount of the payment in the transaction&#39;s currency.  Uses decimal for financial precision. Null indicates the amount is unspecified.
+        /// Gets or Sets PaymentAmount
         /// </summary>
-        /// <value>Monetary amount of the payment in the transaction&#39;s currency.  Uses decimal for financial precision. Null indicates the amount is unspecified.</value>
         [JsonPropertyName("paymentAmount")]
         public double? PaymentAmount { get { return this.PaymentAmountOption.Value; } set { this.PaymentAmountOption = new(value); } }
 
@@ -94,9 +93,9 @@ namespace Nxus.Qbd.Models
         public Option<double?> DiscountAmountOption { get; private set; }
 
         /// <summary>
-        /// Monetary amount of any discount applied to the item or transaction.  Null when no discount is applied. Use the same currency and scale as other monetary values in the model.
+        /// Discount amount to apply.
         /// </summary>
-        /// <value>Monetary amount of any discount applied to the item or transaction.  Null when no discount is applied. Use the same currency and scale as other monetary values in the model.</value>
+        /// <value>Discount amount to apply.</value>
         [JsonPropertyName("discountAmount")]
         public double? DiscountAmount { get { return this.DiscountAmountOption.Value; } set { this.DiscountAmountOption = new(value); } }
 
@@ -108,9 +107,9 @@ namespace Nxus.Qbd.Models
         public Option<string?> DiscountAccountIdOption { get; private set; }
 
         /// <summary>
-        /// Identifier of the account used for discounts.  Nullable; null indicates no discount account is assigned. When present, it should correspond to an account identifier in the accounting system.
+        /// Account to post the discount to.
         /// </summary>
-        /// <value>Identifier of the account used for discounts.  Nullable; null indicates no discount account is assigned. When present, it should correspond to an account identifier in the accounting system.</value>
+        /// <value>Account to post the discount to.</value>
         [JsonPropertyName("discountAccountId")]
         public string? DiscountAccountId { get { return this.DiscountAccountIdOption.Value; } set { this.DiscountAccountIdOption = new(value); } }
 
@@ -122,9 +121,9 @@ namespace Nxus.Qbd.Models
         public Option<string?> DiscountClassIdOption { get; private set; }
 
         /// <summary>
-        /// Identifier of the discount class.  Corresponds to the JSON property \&quot;discountClassId\&quot;. May be null when no discount class is assigned.
+        /// Class for the discount (if using class tracking).
         /// </summary>
-        /// <value>Identifier of the discount class.  Corresponds to the JSON property \&quot;discountClassId\&quot;. May be null when no discount class is assigned.</value>
+        /// <value>Class for the discount (if using class tracking).</value>
         [JsonPropertyName("discountClassId")]
         public string? DiscountClassId { get { return this.DiscountClassIdOption.Value; } set { this.DiscountClassIdOption = new(value); } }
 

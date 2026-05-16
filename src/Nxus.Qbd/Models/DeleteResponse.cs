@@ -38,7 +38,7 @@ namespace Nxus.Qbd.Models
         /// <param name="status">status</param>
         /// <param name="deleted">deleted</param>
         /// <param name="refNumber">refNumber</param>
-        /// <param name="requestId">requestId</param>
+        /// <param name="requestId">The unique identifier for this request. Include this ID when contacting support so the request can be located in server-side logs.</param>
         /// <param name="errorMessage">errorMessage</param>
         /// <param name="errorCode">errorCode</param>
         /// <param name="suggestedAction">suggestedAction</param>
@@ -113,8 +113,9 @@ namespace Nxus.Qbd.Models
         public Option<string?> RequestIdOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets RequestId
+        /// The unique identifier for this request. Include this ID when contacting support so the request can be located in server-side logs.
         /// </summary>
+        /// <value>The unique identifier for this request. Include this ID when contacting support so the request can be located in server-side logs.</value>
         [JsonPropertyName("requestId")]
         public string? RequestId { get { return this.RequestIdOption.Value; } set { this.RequestIdOption = new(value); } }
 

@@ -192,6 +192,12 @@ namespace Nxus.Qbd.Models
                 yield return new ValidationResult("Invalid value for DepositToAccountId, length must be less than 50.", new [] { "DepositToAccountId" });
             }
 
+            // DepositToAccountId (string) minLength
+            if (this.DepositToAccountId != null && this.DepositToAccountId.Length < 1)
+            {
+                yield return new ValidationResult("Invalid value for DepositToAccountId, length must be greater than 1.", new [] { "DepositToAccountId" });
+            }
+
             // Memo (string) maxLength
             if (this.Memo != null && this.Memo.Length > 4095)
             {

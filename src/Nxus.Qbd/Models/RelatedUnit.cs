@@ -33,9 +33,9 @@ namespace Nxus.Qbd.Models
         /// <summary>
         /// Initializes a new instance of the <see cref="RelatedUnit" /> class.
         /// </summary>
-        /// <param name="name">The case-insensitive unique name of this related unit, unique across all related units. **NOTE**: Related units do not have a &#x60;fullName&#x60; field because they are not hierarchical objects, which is why &#x60;name&#x60; is unique for them but not for objects that have parents. Maximum length: 31 characters.</param>
-        /// <param name="abbreviation">The related unit&#39;s short identifier shown in the QuickBooks U/M field on transaction line items. Maximum length: 31 characters.</param>
-        /// <param name="conversionRatio">The number of base units in this related unit, represented as a decimal string. For example, if the base unit is \&quot;box\&quot; and this related unit is \&quot;case\&quot; with &#x60;conversionRatio&#x60; &#x3D; \&quot;10\&quot;, that means there are 10 boxes in one case.</param>
+        /// <param name="name">name</param>
+        /// <param name="abbreviation">abbreviation</param>
+        /// <param name="conversionRatio">conversionRatio</param>
         [JsonConstructor]
         public RelatedUnit(string name, string abbreviation, Option<double?> conversionRatio = default)
         {
@@ -48,16 +48,14 @@ namespace Nxus.Qbd.Models
         partial void OnCreated();
 
         /// <summary>
-        /// The case-insensitive unique name of this related unit, unique across all related units. **NOTE**: Related units do not have a &#x60;fullName&#x60; field because they are not hierarchical objects, which is why &#x60;name&#x60; is unique for them but not for objects that have parents. Maximum length: 31 characters.
+        /// Gets or Sets Name
         /// </summary>
-        /// <value>The case-insensitive unique name of this related unit, unique across all related units. **NOTE**: Related units do not have a &#x60;fullName&#x60; field because they are not hierarchical objects, which is why &#x60;name&#x60; is unique for them but not for objects that have parents. Maximum length: 31 characters.</value>
         [JsonPropertyName("name")]
         public string Name { get; set; }
 
         /// <summary>
-        /// The related unit&#39;s short identifier shown in the QuickBooks U/M field on transaction line items. Maximum length: 31 characters.
+        /// Gets or Sets Abbreviation
         /// </summary>
-        /// <value>The related unit&#39;s short identifier shown in the QuickBooks U/M field on transaction line items. Maximum length: 31 characters.</value>
         [JsonPropertyName("abbreviation")]
         public string Abbreviation { get; set; }
 
@@ -69,9 +67,8 @@ namespace Nxus.Qbd.Models
         public Option<double?> ConversionRatioOption { get; private set; }
 
         /// <summary>
-        /// The number of base units in this related unit, represented as a decimal string. For example, if the base unit is \&quot;box\&quot; and this related unit is \&quot;case\&quot; with &#x60;conversionRatio&#x60; &#x3D; \&quot;10\&quot;, that means there are 10 boxes in one case.
+        /// Gets or Sets ConversionRatio
         /// </summary>
-        /// <value>The number of base units in this related unit, represented as a decimal string. For example, if the base unit is \&quot;box\&quot; and this related unit is \&quot;case\&quot; with &#x60;conversionRatio&#x60; &#x3D; \&quot;10\&quot;, that means there are 10 boxes in one case.</value>
         [JsonPropertyName("conversionRatio")]
         public double? ConversionRatio { get { return this.ConversionRatioOption.Value; } set { this.ConversionRatioOption = new(value); } }
 

@@ -34,11 +34,11 @@ public sealed class ChargesResource : VoidableResourceBase
     protected override string SingularPath => "/api/v1/charge/{id}";
 }
 
-public sealed class CheckBillsResource : VoidableResourceBase
+public sealed class CheckBillPaymentsResource : VoidableResourceBase
 {
-    internal CheckBillsResource(NxusHttpTransport t) : base(t) { }
-    protected override string ListPath => "/api/v1/check-bills";
-    protected override string SingularPath => "/api/v1/check-bill/{id}";
+    internal CheckBillPaymentsResource(NxusHttpTransport t) : base(t) { }
+    protected override string ListPath => "/api/v1/check-bill-payments";
+    protected override string SingularPath => "/api/v1/check-bill-payment/{id}";
 }
 
 public sealed class ChecksResource : VoidableResourceBase
@@ -48,11 +48,11 @@ public sealed class ChecksResource : VoidableResourceBase
     protected override string SingularPath => "/api/v1/check/{id}";
 }
 
-public sealed class CreditCardBillsResource : VoidableResourceBase
+public sealed class CreditCardBillPaymentsResource : VoidableResourceBase
 {
-    internal CreditCardBillsResource(NxusHttpTransport t) : base(t) { }
-    protected override string ListPath => "/api/v1/credit-card-bills";
-    protected override string SingularPath => "/api/v1/credit-card-bill/{id}";
+    internal CreditCardBillPaymentsResource(NxusHttpTransport t) : base(t) { }
+    protected override string ListPath => "/api/v1/credit-card-bill-payments";
+    protected override string SingularPath => "/api/v1/credit-card-bill-payment/{id}";
 }
 
 public sealed class CreditCardChargesResource : VoidableResourceBase

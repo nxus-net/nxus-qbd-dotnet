@@ -39,24 +39,24 @@ namespace Nxus.Qbd.Models
         /// <param name="revisionNumber">revisionNumber</param>
         /// <param name="objectType">objectType</param>
         /// <param name="transactionNumber">transactionNumber</param>
-        /// <param name="vendor">The vendor who issued the bill. When linking to a Purchase Order, this vendor must match the vendor on the Purchase Order.</param>
-        /// <param name="vendorAddress">The billing address of the vendor.</param>
+        /// <param name="vendor">vendor</param>
+        /// <param name="vendorAddress">vendorAddress</param>
         /// <param name="payablesAccount">payablesAccount</param>
         /// <param name="transactionDate">transactionDate</param>
-        /// <param name="dueDate">The date by which the bill must be paid.</param>
-        /// <param name="amountDue">The total monetary amount of the bill.</param>
+        /// <param name="dueDate">dueDate</param>
+        /// <param name="amountDue">amountDue</param>
         /// <param name="currency">currency</param>
-        /// <param name="exchangeRate">Exchange rate for multi-currency transactions (v8.0).</param>
-        /// <param name="amountDueInHomeCurrency">The total amount due expressed in the company&#39;s home currency. This is calculated and returned by QuickBooks when the multicurrency feature is enabled.</param>
-        /// <param name="refNumber">Reference number for the bill.</param>
-        /// <param name="isPending">Indicates whether the bill is currently marked as pending.</param>
-        /// <param name="terms">The payment terms associated with the bill (e.g., Net 30), which calculate the DueDate.</param>
-        /// <param name="class">The class associated with the bill, used for categorizing expenses and reporting (requires class tracking to be enabled in QuickBooks).</param>
-        /// <param name="memo">Memo/description for the bill.</param>
-        /// <param name="salesTaxCode">The sales tax code indicating the general taxability of the bill (e.g., Tax, Non).</param>
-        /// <param name="isPaid">Indicates whether the bill has been paid in full and closed.</param>
+        /// <param name="exchangeRate">exchangeRate</param>
+        /// <param name="amountDueInHomeCurrency">amountDueInHomeCurrency</param>
+        /// <param name="refNumber">The primary reference number for the transaction (e.g., Invoice #, Check #).</param>
+        /// <param name="isPending">isPending</param>
+        /// <param name="terms">terms</param>
+        /// <param name="class">class</param>
+        /// <param name="memo">memo</param>
+        /// <param name="salesTaxCode">salesTaxCode</param>
+        /// <param name="isPaid">isPaid</param>
         /// <param name="amount">amount</param>
-        /// <param name="isTaxIncluded">Indicates whether the amounts in the bill already include sales tax.</param>
+        /// <param name="isTaxIncluded">isTaxIncluded</param>
         /// <param name="account">account</param>
         /// <param name="hasValidLineItems">hasValidLineItems</param>
         /// <param name="externalId">externalId</param>
@@ -165,9 +165,8 @@ namespace Nxus.Qbd.Models
         public Option<QbdRef?> VendorOption { get; private set; }
 
         /// <summary>
-        /// The vendor who issued the bill. When linking to a Purchase Order, this vendor must match the vendor on the Purchase Order.
+        /// Gets or Sets Vendor
         /// </summary>
-        /// <value>The vendor who issued the bill. When linking to a Purchase Order, this vendor must match the vendor on the Purchase Order.</value>
         [JsonPropertyName("vendor")]
         public QbdRef? Vendor { get { return this.VendorOption.Value; } set { this.VendorOption = new(value); } }
 
@@ -179,9 +178,8 @@ namespace Nxus.Qbd.Models
         public Option<Address?> VendorAddressOption { get; private set; }
 
         /// <summary>
-        /// The billing address of the vendor.
+        /// Gets or Sets VendorAddress
         /// </summary>
-        /// <value>The billing address of the vendor.</value>
         [JsonPropertyName("vendorAddress")]
         public Address? VendorAddress { get { return this.VendorAddressOption.Value; } set { this.VendorAddressOption = new(value); } }
 
@@ -219,9 +217,8 @@ namespace Nxus.Qbd.Models
         public Option<DateOnly?> DueDateOption { get; private set; }
 
         /// <summary>
-        /// The date by which the bill must be paid.
+        /// Gets or Sets DueDate
         /// </summary>
-        /// <value>The date by which the bill must be paid.</value>
         [JsonPropertyName("dueDate")]
         public DateOnly? DueDate { get { return this.DueDateOption.Value; } set { this.DueDateOption = new(value); } }
 
@@ -233,9 +230,8 @@ namespace Nxus.Qbd.Models
         public Option<double?> AmountDueOption { get; private set; }
 
         /// <summary>
-        /// The total monetary amount of the bill.
+        /// Gets or Sets AmountDue
         /// </summary>
-        /// <value>The total monetary amount of the bill.</value>
         [JsonPropertyName("amountDue")]
         public double? AmountDue { get { return this.AmountDueOption.Value; } set { this.AmountDueOption = new(value); } }
 
@@ -260,9 +256,8 @@ namespace Nxus.Qbd.Models
         public Option<double?> ExchangeRateOption { get; private set; }
 
         /// <summary>
-        /// Exchange rate for multi-currency transactions (v8.0).
+        /// Gets or Sets ExchangeRate
         /// </summary>
-        /// <value>Exchange rate for multi-currency transactions (v8.0).</value>
         [JsonPropertyName("exchangeRate")]
         public double? ExchangeRate { get { return this.ExchangeRateOption.Value; } set { this.ExchangeRateOption = new(value); } }
 
@@ -274,10 +269,8 @@ namespace Nxus.Qbd.Models
         public Option<string?> AmountDueInHomeCurrencyOption { get; private set; }
 
         /// <summary>
-        /// The total amount due expressed in the company&#39;s home currency. This is calculated and returned by QuickBooks when the multicurrency feature is enabled.
+        /// Gets or Sets AmountDueInHomeCurrency
         /// </summary>
-        /// <value>The total amount due expressed in the company&#39;s home currency. This is calculated and returned by QuickBooks when the multicurrency feature is enabled.</value>
-        /* <example>&quot;1500.00&quot;</example> */
         [JsonPropertyName("amountDueInHomeCurrency")]
         public string? AmountDueInHomeCurrency { get { return this.AmountDueInHomeCurrencyOption.Value; } set { this.AmountDueInHomeCurrencyOption = new(value); } }
 
@@ -289,9 +282,9 @@ namespace Nxus.Qbd.Models
         public Option<string?> RefNumberOption { get; private set; }
 
         /// <summary>
-        /// Reference number for the bill.
+        /// The primary reference number for the transaction (e.g., Invoice #, Check #).
         /// </summary>
-        /// <value>Reference number for the bill.</value>
+        /// <value>The primary reference number for the transaction (e.g., Invoice #, Check #).</value>
         [JsonPropertyName("refNumber")]
         public string? RefNumber { get { return this.RefNumberOption.Value; } set { this.RefNumberOption = new(value); } }
 
@@ -303,10 +296,8 @@ namespace Nxus.Qbd.Models
         public Option<bool?> IsPendingOption { get; private set; }
 
         /// <summary>
-        /// Indicates whether the bill is currently marked as pending.
+        /// Gets or Sets IsPending
         /// </summary>
-        /// <value>Indicates whether the bill is currently marked as pending.</value>
-        /* <example>false</example> */
         [JsonPropertyName("isPending")]
         public bool? IsPending { get { return this.IsPendingOption.Value; } set { this.IsPendingOption = new(value); } }
 
@@ -318,9 +309,8 @@ namespace Nxus.Qbd.Models
         public Option<QbdRef?> TermsOption { get; private set; }
 
         /// <summary>
-        /// The payment terms associated with the bill (e.g., Net 30), which calculate the DueDate.
+        /// Gets or Sets Terms
         /// </summary>
-        /// <value>The payment terms associated with the bill (e.g., Net 30), which calculate the DueDate.</value>
         [JsonPropertyName("terms")]
         public QbdRef? Terms { get { return this.TermsOption.Value; } set { this.TermsOption = new(value); } }
 
@@ -332,9 +322,8 @@ namespace Nxus.Qbd.Models
         public Option<QbdRef?> ClassOption { get; private set; }
 
         /// <summary>
-        /// The class associated with the bill, used for categorizing expenses and reporting (requires class tracking to be enabled in QuickBooks).
+        /// Gets or Sets Class
         /// </summary>
-        /// <value>The class associated with the bill, used for categorizing expenses and reporting (requires class tracking to be enabled in QuickBooks).</value>
         [JsonPropertyName("class")]
         public QbdRef? Class { get { return this.ClassOption.Value; } set { this.ClassOption = new(value); } }
 
@@ -346,9 +335,8 @@ namespace Nxus.Qbd.Models
         public Option<string?> MemoOption { get; private set; }
 
         /// <summary>
-        /// Memo/description for the bill.
+        /// Gets or Sets Memo
         /// </summary>
-        /// <value>Memo/description for the bill.</value>
         [JsonPropertyName("memo")]
         public string? Memo { get { return this.MemoOption.Value; } set { this.MemoOption = new(value); } }
 
@@ -360,9 +348,8 @@ namespace Nxus.Qbd.Models
         public Option<QbdRef?> SalesTaxCodeOption { get; private set; }
 
         /// <summary>
-        /// The sales tax code indicating the general taxability of the bill (e.g., Tax, Non).
+        /// Gets or Sets SalesTaxCode
         /// </summary>
-        /// <value>The sales tax code indicating the general taxability of the bill (e.g., Tax, Non).</value>
         [JsonPropertyName("salesTaxCode")]
         public QbdRef? SalesTaxCode { get { return this.SalesTaxCodeOption.Value; } set { this.SalesTaxCodeOption = new(value); } }
 
@@ -374,10 +361,8 @@ namespace Nxus.Qbd.Models
         public Option<bool?> IsPaidOption { get; private set; }
 
         /// <summary>
-        /// Indicates whether the bill has been paid in full and closed.
+        /// Gets or Sets IsPaid
         /// </summary>
-        /// <value>Indicates whether the bill has been paid in full and closed.</value>
-        /* <example>false</example> */
         [JsonPropertyName("isPaid")]
         public bool? IsPaid { get { return this.IsPaidOption.Value; } set { this.IsPaidOption = new(value); } }
 
@@ -402,10 +387,8 @@ namespace Nxus.Qbd.Models
         public Option<bool?> IsTaxIncludedOption { get; private set; }
 
         /// <summary>
-        /// Indicates whether the amounts in the bill already include sales tax.
+        /// Gets or Sets IsTaxIncluded
         /// </summary>
-        /// <value>Indicates whether the amounts in the bill already include sales tax.</value>
-        /* <example>false</example> */
         [JsonPropertyName("isTaxIncluded")]
         public bool? IsTaxIncluded { get { return this.IsTaxIncludedOption.Value; } set { this.IsTaxIncludedOption = new(value); } }
 

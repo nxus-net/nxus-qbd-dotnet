@@ -224,6 +224,62 @@ namespace Nxus.Qbd.Models
         /// <returns>Validation Result</returns>
         IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
+            // EntityId (string) minLength
+            if (this.EntityId != null && this.EntityId.Length < 1)
+            {
+                yield return new ValidationResult("Invalid value for EntityId, length must be greater than 1.", new [] { "EntityId" });
+            }
+
+            // Duration (string) maxLength
+            if (this.Duration != null && this.Duration.Length > 20)
+            {
+                yield return new ValidationResult("Invalid value for Duration, length must be less than 20.", new [] { "Duration" });
+            }
+
+            // Duration (string) minLength
+            if (this.Duration != null && this.Duration.Length < 1)
+            {
+                yield return new ValidationResult("Invalid value for Duration, length must be greater than 1.", new [] { "Duration" });
+            }
+
+            if (this.Duration != null) {
+                // Duration (string) pattern
+                Regex regexDuration = new Regex(@"^PT(\d+H)?(\d+M)?(\d+S)?$", RegexOptions.CultureInvariant);
+
+                if (!regexDuration.Match(this.Duration).Success)
+                {
+                    yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Duration, must match a pattern of " + regexDuration, new [] { "Duration" });
+                }
+            }
+
+            // CustomerId (string) minLength
+            if (this.CustomerId != null && this.CustomerId.Length < 1)
+            {
+                yield return new ValidationResult("Invalid value for CustomerId, length must be greater than 1.", new [] { "CustomerId" });
+            }
+
+            // ItemServiceId (string) minLength
+            if (this.ItemServiceId != null && this.ItemServiceId.Length < 1)
+            {
+                yield return new ValidationResult("Invalid value for ItemServiceId, length must be greater than 1.", new [] { "ItemServiceId" });
+            }
+
+            // Notes (string) maxLength
+            if (this.Notes != null && this.Notes.Length > 4095)
+            {
+                yield return new ValidationResult("Invalid value for Notes, length must be less than 4095.", new [] { "Notes" });
+            }
+
+            if (this.BillableStatusOption.Value != null) {
+                // BillableStatus (string) pattern
+                Regex regexBillableStatus = new Regex(@"^(Billable|NotBillable|HasBeenBilled)$", RegexOptions.CultureInvariant);
+
+                if (this.BillableStatusOption.Value != null &&!regexBillableStatus.Match(this.BillableStatusOption.Value).Success)
+                {
+                    yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for BillableStatus, must match a pattern of " + regexBillableStatus, new [] { "BillableStatus" });
+                }
+            }
+
             yield break;
         }
     }

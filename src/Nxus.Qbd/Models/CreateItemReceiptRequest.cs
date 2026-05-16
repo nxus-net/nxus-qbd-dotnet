@@ -33,7 +33,7 @@ namespace Nxus.Qbd.Models
         /// <summary>
         /// Initializes a new instance of the <see cref="CreateItemReceiptRequest" /> class.
         /// </summary>
-        /// <param name="vendorId">Filter by Vendor ID.</param>
+        /// <param name="vendorId">vendorId</param>
         /// <param name="payablesAccountId">payablesAccountId</param>
         /// <param name="liabilityAccountId">Liability Account ListID (Optional - OR condition with APAccountId). At least one of APAccountId or LiabilityAccountId must be provided.</param>
         /// <param name="transactionDate">transactionDate</param>
@@ -72,9 +72,8 @@ namespace Nxus.Qbd.Models
         partial void OnCreated();
 
         /// <summary>
-        /// Filter by Vendor ID.
+        /// Gets or Sets VendorId
         /// </summary>
-        /// <value>Filter by Vendor ID.</value>
         [JsonPropertyName("vendorId")]
         public string VendorId { get; set; }
 

@@ -34,7 +34,7 @@ namespace Nxus.Qbd.Models
         /// Initializes a new instance of the <see cref="ComponentItemLine" /> class.
         /// </summary>
         /// <param name="objectType">objectType</param>
-        /// <param name="item">The Inventory Assembly item being created.</param>
+        /// <param name="item">item</param>
         /// <param name="inventorySite">inventorySite</param>
         /// <param name="inventorySiteLocation">inventorySiteLocation</param>
         /// <param name="serialNumber">serialNumber</param>
@@ -82,9 +82,8 @@ namespace Nxus.Qbd.Models
         public Option<QbdRef?> ItemOption { get; private set; }
 
         /// <summary>
-        /// The Inventory Assembly item being created.
+        /// Gets or Sets Item
         /// </summary>
-        /// <value>The Inventory Assembly item being created.</value>
         [JsonPropertyName("item")]
         public QbdRef? Item { get { return this.ItemOption.Value; } set { this.ItemOption = new(value); } }
 

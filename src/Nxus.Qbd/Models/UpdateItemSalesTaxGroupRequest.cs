@@ -149,6 +149,12 @@ namespace Nxus.Qbd.Models
         /// <returns>Validation Result</returns>
         IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
+            // Name (string) maxLength
+            if (this.Name != null && this.Name.Length > 31)
+            {
+                yield return new ValidationResult("Invalid value for Name, length must be less than 31.", new [] { "Name" });
+            }
+
             // Description (string) maxLength
             if (this.Description != null && this.Description.Length > 4095)
             {

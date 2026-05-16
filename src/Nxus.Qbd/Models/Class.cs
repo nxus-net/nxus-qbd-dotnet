@@ -38,11 +38,11 @@ namespace Nxus.Qbd.Models
         /// <param name="updatedAt">updatedAt</param>
         /// <param name="revisionNumber">revisionNumber</param>
         /// <param name="objectType">objectType</param>
-        /// <param name="name">(Required) The name of the class (up to 31 characters). Note: If the class is going to be a sub-class, this property should only contain the child&#39;s name, not the full hierarchical name of its ancestors.</param>
+        /// <param name="name">The primary, user-defined display name for the list object (e.g., Customer Name, Vendor Name, Item Name).  This value is often used by QuickBooks to construct the fully qualified hierarchical name (e.g., &#x60;Parent:Child&#x60;).</param>
         /// <param name="fullname">The FullName is the name prefixed by the names of each ancestor, for example Parent:Child:SubClass. FullName values are not case-sensitive.</param>
         /// <param name="parent">parent</param>
         /// <param name="sublevel">A number indicating the number of ancestors. For example, The customer job with Name &#x3D; carpets and FullName &#x3D; Jones:Building2:carpets would have a sublevel of 2.</param>
-        /// <param name="isActive">(Optional) Whether the class is active. Defaults to true.</param>
+        /// <param name="isActive">Indicates whether the list item is currently active.  **Soft Delete Behavior:** QuickBooks rarely allows hard deletions of records that have been used in transactions. Instead, they are marked as inactive (hidden from standard drop-downs and UI lists) to preserve historical data integrity.</param>
         /// <param name="customFields">customFields</param>
         [JsonConstructor]
         public Class(string id, DateTimeOffset createdAt, DateTimeOffset updatedAt, string revisionNumber, Option<string?> objectType = default, Option<string?> name = default, Option<string?> fullname = default, Option<QbdRef?> parent = default, Option<int?> sublevel = default, Option<bool?> isActive = default, Option<List<QbdDataExt>?> customFields = default)
@@ -108,10 +108,10 @@ namespace Nxus.Qbd.Models
         public Option<string?> NameOption { get; private set; }
 
         /// <summary>
-        /// (Required) The name of the class (up to 31 characters). Note: If the class is going to be a sub-class, this property should only contain the child&#39;s name, not the full hierarchical name of its ancestors.
+        /// The primary, user-defined display name for the list object (e.g., Customer Name, Vendor Name, Item Name).  This value is often used by QuickBooks to construct the fully qualified hierarchical name (e.g., &#x60;Parent:Child&#x60;).
         /// </summary>
-        /// <value>(Required) The name of the class (up to 31 characters). Note: If the class is going to be a sub-class, this property should only contain the child&#39;s name, not the full hierarchical name of its ancestors.</value>
-        /* <example>Kitchen</example> */
+        /// <value>The primary, user-defined display name for the list object (e.g., Customer Name, Vendor Name, Item Name).  This value is often used by QuickBooks to construct the fully qualified hierarchical name (e.g., &#x60;Parent:Child&#x60;).</value>
+        /* <example>Acme Corporation</example> */
         [JsonPropertyName("name")]
         public string? Name { get { return this.NameOption.Value; } set { this.NameOption = new(value); } }
 
@@ -166,9 +166,9 @@ namespace Nxus.Qbd.Models
         public Option<bool?> IsActiveOption { get; private set; }
 
         /// <summary>
-        /// (Optional) Whether the class is active. Defaults to true.
+        /// Indicates whether the list item is currently active.  **Soft Delete Behavior:** QuickBooks rarely allows hard deletions of records that have been used in transactions. Instead, they are marked as inactive (hidden from standard drop-downs and UI lists) to preserve historical data integrity.
         /// </summary>
-        /// <value>(Optional) Whether the class is active. Defaults to true.</value>
+        /// <value>Indicates whether the list item is currently active.  **Soft Delete Behavior:** QuickBooks rarely allows hard deletions of records that have been used in transactions. Instead, they are marked as inactive (hidden from standard drop-downs and UI lists) to preserve historical data integrity.</value>
         [JsonPropertyName("isActive")]
         public bool? IsActive { get { return this.IsActiveOption.Value; } set { this.IsActiveOption = new(value); } }
 

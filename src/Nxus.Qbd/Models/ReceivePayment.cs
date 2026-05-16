@@ -40,9 +40,9 @@ namespace Nxus.Qbd.Models
         /// <param name="objectType">objectType</param>
         /// <param name="transactionDate">transactionDate</param>
         /// <param name="currency">currency</param>
-        /// <param name="exchangeRate">Exchange rate for multi-currency transactions (v8.0+).</param>
-        /// <param name="refNumber">Reference number for the payment (max 20 chars).</param>
-        /// <param name="memo">Memo/description for the payment (max 4095 chars).</param>
+        /// <param name="exchangeRate">exchangeRate</param>
+        /// <param name="refNumber">The primary reference number for the transaction (e.g., Invoice #, Check #).</param>
+        /// <param name="memo">memo</param>
         /// <param name="transactionNumber">transactionNumber</param>
         /// <param name="customer">customer</param>
         /// <param name="receivablesAccount">receivablesAccount</param>
@@ -172,9 +172,8 @@ namespace Nxus.Qbd.Models
         public Option<double?> ExchangeRateOption { get; private set; }
 
         /// <summary>
-        /// Exchange rate for multi-currency transactions (v8.0+).
+        /// Gets or Sets ExchangeRate
         /// </summary>
-        /// <value>Exchange rate for multi-currency transactions (v8.0+).</value>
         [JsonPropertyName("exchangeRate")]
         public double? ExchangeRate { get { return this.ExchangeRateOption.Value; } set { this.ExchangeRateOption = new(value); } }
 
@@ -186,9 +185,9 @@ namespace Nxus.Qbd.Models
         public Option<string?> RefNumberOption { get; private set; }
 
         /// <summary>
-        /// Reference number for the payment (max 20 chars).
+        /// The primary reference number for the transaction (e.g., Invoice #, Check #).
         /// </summary>
-        /// <value>Reference number for the payment (max 20 chars).</value>
+        /// <value>The primary reference number for the transaction (e.g., Invoice #, Check #).</value>
         [JsonPropertyName("refNumber")]
         public string? RefNumber { get { return this.RefNumberOption.Value; } set { this.RefNumberOption = new(value); } }
 
@@ -200,9 +199,8 @@ namespace Nxus.Qbd.Models
         public Option<string?> MemoOption { get; private set; }
 
         /// <summary>
-        /// Memo/description for the payment (max 4095 chars).
+        /// Gets or Sets Memo
         /// </summary>
-        /// <value>Memo/description for the payment (max 4095 chars).</value>
         [JsonPropertyName("memo")]
         public string? Memo { get { return this.MemoOption.Value; } set { this.MemoOption = new(value); } }
 

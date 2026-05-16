@@ -37,11 +37,11 @@ namespace Nxus.Qbd.Models
         /// <param name="createdAt">createdAt</param>
         /// <param name="updatedAt">updatedAt</param>
         /// <param name="revisionNumber">revisionNumber</param>
-        /// <param name="wageType">(Required) The wage item type. Possible values: Bonus, Commission, HourlyOvertime, HourlyRegular, HourlySick, HourlyVacation, SalaryRegular, SalarySick, SalaryVacation.</param>
+        /// <param name="wageType">The type of wage (e.g., Bonus, Commission, HourlyOvertime, HourlyRegular, etc.).</param>
         /// <param name="expenseAccount">The expense account associated with this wage item.</param>
         /// <param name="objectType">objectType</param>
-        /// <param name="name">(Required) The name of the wage payroll item.</param>
-        /// <param name="isActive">(Optional) Indicates whether the payroll item is active.</param>
+        /// <param name="name">The primary display name for the List object (e.g., Customer Name, Vendor Name).</param>
+        /// <param name="isActive">Indicates whether the list item is active. Common to all list types.</param>
         /// <param name="customFields">customFields</param>
         [JsonConstructor]
         public PayrollItemWage(string id, DateTimeOffset createdAt, DateTimeOffset updatedAt, string revisionNumber, string wageType, QbdRef expenseAccount, Option<string?> objectType = default, Option<string?> name = default, Option<bool?> isActive = default, Option<List<QbdDataExt>?> customFields = default)
@@ -86,9 +86,9 @@ namespace Nxus.Qbd.Models
         public string RevisionNumber { get; set; }
 
         /// <summary>
-        /// (Required) The wage item type. Possible values: Bonus, Commission, HourlyOvertime, HourlyRegular, HourlySick, HourlyVacation, SalaryRegular, SalarySick, SalaryVacation.
+        /// The type of wage (e.g., Bonus, Commission, HourlyOvertime, HourlyRegular, etc.).
         /// </summary>
-        /// <value>(Required) The wage item type. Possible values: Bonus, Commission, HourlyOvertime, HourlyRegular, HourlySick, HourlyVacation, SalaryRegular, SalarySick, SalaryVacation.</value>
+        /// <value>The type of wage (e.g., Bonus, Commission, HourlyOvertime, HourlyRegular, etc.).</value>
         [JsonPropertyName("wageType")]
         public string WageType { get; set; }
 
@@ -120,9 +120,9 @@ namespace Nxus.Qbd.Models
         public Option<string?> NameOption { get; private set; }
 
         /// <summary>
-        /// (Required) The name of the wage payroll item.
+        /// The primary display name for the List object (e.g., Customer Name, Vendor Name).
         /// </summary>
-        /// <value>(Required) The name of the wage payroll item.</value>
+        /// <value>The primary display name for the List object (e.g., Customer Name, Vendor Name).</value>
         [JsonPropertyName("name")]
         public string? Name { get { return this.NameOption.Value; } set { this.NameOption = new(value); } }
 
@@ -134,9 +134,9 @@ namespace Nxus.Qbd.Models
         public Option<bool?> IsActiveOption { get; private set; }
 
         /// <summary>
-        /// (Optional) Indicates whether the payroll item is active.
+        /// Indicates whether the list item is active. Common to all list types.
         /// </summary>
-        /// <value>(Optional) Indicates whether the payroll item is active.</value>
+        /// <value>Indicates whether the list item is active. Common to all list types.</value>
         [JsonPropertyName("isActive")]
         public bool? IsActive { get { return this.IsActiveOption.Value; } set { this.IsActiveOption = new(value); } }
 

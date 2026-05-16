@@ -41,19 +41,19 @@ namespace Nxus.Qbd.Models
         /// <param name="transactionDate">transactionDate</param>
         /// <param name="currency">currency</param>
         /// <param name="exchangeRate">exchangeRate</param>
-        /// <param name="refNumber">Reference number for the invoice.</param>
-        /// <param name="memo">Memo/description for the invoice.</param>
-        /// <param name="customer">The customer to whom the invoice is addressed.</param>
-        /// <param name="class">Class Reference.</param>
+        /// <param name="refNumber">The primary reference number for the transaction (e.g., Invoice #, Check #).</param>
+        /// <param name="memo">memo</param>
+        /// <param name="customer">Reference to the Customer.</param>
+        /// <param name="class">class</param>
         /// <param name="receivablesAccount">receivablesAccount</param>
-        /// <param name="template">Reference to the visual template (e.g., \&quot;Custom Invoice\&quot;) used in QuickBooks.</param>
+        /// <param name="template">Reference to the visual template for the invoice.</param>
         /// <param name="dueDate">The date the invoice is due.</param>
         /// <param name="billingAddress">billingAddress</param>
         /// <param name="shippingAddress">shippingAddress</param>
         /// <param name="isPending">isPending</param>
         /// <param name="isFinanceCharge">isFinanceCharge</param>
         /// <param name="purchaseOrderNumber">purchaseOrderNumber</param>
-        /// <param name="terms">Reference to the payment terms (e.g., \&quot;Net 30\&quot;) applied to this invoice.</param>
+        /// <param name="terms">Reference to the payment terms (e.g., \&quot;Net 30\&quot;).</param>
         /// <param name="salesRepresentative">salesRepresentative</param>
         /// <param name="shipmentOrigin">shipmentOrigin</param>
         /// <param name="shippingDate">shippingDate</param>
@@ -65,13 +65,13 @@ namespace Nxus.Qbd.Models
         /// <param name="isTaxIncluded">isTaxIncluded</param>
         /// <param name="customerSalesTaxCode">customerSalesTaxCode</param>
         /// <param name="otherCustomField">otherCustomField</param>
-        /// <param name="subtotal">The total of all line items, before sales tax. The &#39;Amount&#39; property (from BaseTransactionDto) represents the grand total.</param>
-        /// <param name="salesTaxTotal">The total amount of sales tax calculated for the invoice.</param>
-        /// <param name="balanceRemaining">The remaining balance to be paid.</param>
-        /// <param name="isPaid">Indicates if the invoice has been paid in full.</param>
+        /// <param name="subtotal">The total of all line items before sales tax.</param>
+        /// <param name="salesTaxTotal">The total amount of sales tax.</param>
+        /// <param name="balanceRemaining">The remaining balance due on the invoice.</param>
+        /// <param name="isPaid">Indicates if the invoice has been paid in full. Changed to &#39;set&#39; to allow state to change after creation.</param>
         /// <param name="amount">amount</param>
         /// <param name="entity">entity</param>
-        /// <param name="account">The Accounts Receivable (A/R) account associated with this invoice.</param>
+        /// <param name="account">account</param>
         /// <param name="amountInHomeCurrency">amountInHomeCurrency</param>
         /// <param name="hasValidLineItems">hasValidLineItems</param>
         /// <param name="externalId">externalId</param>
@@ -219,9 +219,9 @@ namespace Nxus.Qbd.Models
         public Option<string?> RefNumberOption { get; private set; }
 
         /// <summary>
-        /// Reference number for the invoice.
+        /// The primary reference number for the transaction (e.g., Invoice #, Check #).
         /// </summary>
-        /// <value>Reference number for the invoice.</value>
+        /// <value>The primary reference number for the transaction (e.g., Invoice #, Check #).</value>
         [JsonPropertyName("refNumber")]
         public string? RefNumber { get { return this.RefNumberOption.Value; } set { this.RefNumberOption = new(value); } }
 
@@ -233,9 +233,8 @@ namespace Nxus.Qbd.Models
         public Option<string?> MemoOption { get; private set; }
 
         /// <summary>
-        /// Memo/description for the invoice.
+        /// Gets or Sets Memo
         /// </summary>
-        /// <value>Memo/description for the invoice.</value>
         [JsonPropertyName("memo")]
         public string? Memo { get { return this.MemoOption.Value; } set { this.MemoOption = new(value); } }
 
@@ -247,9 +246,9 @@ namespace Nxus.Qbd.Models
         public Option<QbdRef?> CustomerOption { get; private set; }
 
         /// <summary>
-        /// The customer to whom the invoice is addressed.
+        /// Reference to the Customer.
         /// </summary>
-        /// <value>The customer to whom the invoice is addressed.</value>
+        /// <value>Reference to the Customer.</value>
         [JsonPropertyName("customer")]
         public QbdRef? Customer { get { return this.CustomerOption.Value; } set { this.CustomerOption = new(value); } }
 
@@ -261,9 +260,8 @@ namespace Nxus.Qbd.Models
         public Option<QbdRef?> ClassOption { get; private set; }
 
         /// <summary>
-        /// Class Reference.
+        /// Gets or Sets Class
         /// </summary>
-        /// <value>Class Reference.</value>
         [JsonPropertyName("class")]
         public QbdRef? Class { get { return this.ClassOption.Value; } set { this.ClassOption = new(value); } }
 
@@ -288,9 +286,9 @@ namespace Nxus.Qbd.Models
         public Option<QbdRef?> TemplateOption { get; private set; }
 
         /// <summary>
-        /// Reference to the visual template (e.g., \&quot;Custom Invoice\&quot;) used in QuickBooks.
+        /// Reference to the visual template for the invoice.
         /// </summary>
-        /// <value>Reference to the visual template (e.g., \&quot;Custom Invoice\&quot;) used in QuickBooks.</value>
+        /// <value>Reference to the visual template for the invoice.</value>
         [JsonPropertyName("template")]
         public QbdRef? Template { get { return this.TemplateOption.Value; } set { this.TemplateOption = new(value); } }
 
@@ -381,9 +379,9 @@ namespace Nxus.Qbd.Models
         public Option<QbdRef?> TermsOption { get; private set; }
 
         /// <summary>
-        /// Reference to the payment terms (e.g., \&quot;Net 30\&quot;) applied to this invoice.
+        /// Reference to the payment terms (e.g., \&quot;Net 30\&quot;).
         /// </summary>
-        /// <value>Reference to the payment terms (e.g., \&quot;Net 30\&quot;) applied to this invoice.</value>
+        /// <value>Reference to the payment terms (e.g., \&quot;Net 30\&quot;).</value>
         [JsonPropertyName("terms")]
         public QbdRef? Terms { get { return this.TermsOption.Value; } set { this.TermsOption = new(value); } }
 
@@ -538,9 +536,9 @@ namespace Nxus.Qbd.Models
         public Option<double?> SubtotalOption { get; private set; }
 
         /// <summary>
-        /// The total of all line items, before sales tax. The &#39;Amount&#39; property (from BaseTransactionDto) represents the grand total.
+        /// The total of all line items before sales tax.
         /// </summary>
-        /// <value>The total of all line items, before sales tax. The &#39;Amount&#39; property (from BaseTransactionDto) represents the grand total.</value>
+        /// <value>The total of all line items before sales tax.</value>
         [JsonPropertyName("subtotal")]
         public double? Subtotal { get { return this.SubtotalOption.Value; } set { this.SubtotalOption = new(value); } }
 
@@ -552,9 +550,9 @@ namespace Nxus.Qbd.Models
         public Option<double?> SalesTaxTotalOption { get; private set; }
 
         /// <summary>
-        /// The total amount of sales tax calculated for the invoice.
+        /// The total amount of sales tax.
         /// </summary>
-        /// <value>The total amount of sales tax calculated for the invoice.</value>
+        /// <value>The total amount of sales tax.</value>
         [JsonPropertyName("salesTaxTotal")]
         public double? SalesTaxTotal { get { return this.SalesTaxTotalOption.Value; } set { this.SalesTaxTotalOption = new(value); } }
 
@@ -566,9 +564,9 @@ namespace Nxus.Qbd.Models
         public Option<double?> BalanceRemainingOption { get; private set; }
 
         /// <summary>
-        /// The remaining balance to be paid.
+        /// The remaining balance due on the invoice.
         /// </summary>
-        /// <value>The remaining balance to be paid.</value>
+        /// <value>The remaining balance due on the invoice.</value>
         [JsonPropertyName("balanceRemaining")]
         public double? BalanceRemaining { get { return this.BalanceRemainingOption.Value; } set { this.BalanceRemainingOption = new(value); } }
 
@@ -580,9 +578,9 @@ namespace Nxus.Qbd.Models
         public Option<bool?> IsPaidOption { get; private set; }
 
         /// <summary>
-        /// Indicates if the invoice has been paid in full.
+        /// Indicates if the invoice has been paid in full. Changed to &#39;set&#39; to allow state to change after creation.
         /// </summary>
-        /// <value>Indicates if the invoice has been paid in full.</value>
+        /// <value>Indicates if the invoice has been paid in full. Changed to &#39;set&#39; to allow state to change after creation.</value>
         [JsonPropertyName("isPaid")]
         public bool? IsPaid { get { return this.IsPaidOption.Value; } set { this.IsPaidOption = new(value); } }
 
@@ -620,9 +618,8 @@ namespace Nxus.Qbd.Models
         public Option<QbdRef?> AccountOption { get; private set; }
 
         /// <summary>
-        /// The Accounts Receivable (A/R) account associated with this invoice.
+        /// Gets or Sets Account
         /// </summary>
-        /// <value>The Accounts Receivable (A/R) account associated with this invoice.</value>
         [JsonPropertyName("account")]
         public QbdRef? Account { get { return this.AccountOption.Value; } set { this.AccountOption = new(value); } }
 

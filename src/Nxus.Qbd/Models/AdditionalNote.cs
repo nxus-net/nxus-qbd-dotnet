@@ -33,9 +33,9 @@ namespace Nxus.Qbd.Models
         /// <summary>
         /// Initializes a new instance of the <see cref="AdditionalNote" /> class.
         /// </summary>
-        /// <param name="noteId">The ID of the note to modify (required for updates).</param>
+        /// <param name="noteId">noteId</param>
         /// <param name="date">date</param>
-        /// <param name="note">The note text (max 4095 characters).</param>
+        /// <param name="note">note</param>
         [JsonConstructor]
         public AdditionalNote(Option<int?> noteId = default, Option<DateOnly?> date = default, Option<string?> note = default)
         {
@@ -55,9 +55,8 @@ namespace Nxus.Qbd.Models
         public Option<int?> NoteIdOption { get; private set; }
 
         /// <summary>
-        /// The ID of the note to modify (required for updates).
+        /// Gets or Sets NoteId
         /// </summary>
-        /// <value>The ID of the note to modify (required for updates).</value>
         [JsonPropertyName("noteId")]
         public int? NoteId { get { return this.NoteIdOption.Value; } set { this.NoteIdOption = new(value); } }
 
@@ -82,9 +81,8 @@ namespace Nxus.Qbd.Models
         public Option<string?> NoteOption { get; private set; }
 
         /// <summary>
-        /// The note text (max 4095 characters).
+        /// Gets or Sets Note
         /// </summary>
-        /// <value>The note text (max 4095 characters).</value>
         [JsonPropertyName("note")]
         public string? Note { get { return this.NoteOption.Value; } set { this.NoteOption = new(value); } }
 

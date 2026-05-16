@@ -468,6 +468,90 @@ namespace Nxus.Qbd.Models
         /// <returns>Validation Result</returns>
         IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
+            // CustomerId (string) maxLength
+            if (this.CustomerId != null && this.CustomerId.Length > 209)
+            {
+                yield return new ValidationResult("Invalid value for CustomerId, length must be less than 209.", new [] { "CustomerId" });
+            }
+
+            // CustomerId (string) minLength
+            if (this.CustomerId != null && this.CustomerId.Length < 1)
+            {
+                yield return new ValidationResult("Invalid value for CustomerId, length must be greater than 1.", new [] { "CustomerId" });
+            }
+
+            // ClassId (string) maxLength
+            if (this.ClassId != null && this.ClassId.Length > 159)
+            {
+                yield return new ValidationResult("Invalid value for ClassId, length must be less than 159.", new [] { "ClassId" });
+            }
+
+            // TemplateId (string) maxLength
+            if (this.TemplateId != null && this.TemplateId.Length > 31)
+            {
+                yield return new ValidationResult("Invalid value for TemplateId, length must be less than 31.", new [] { "TemplateId" });
+            }
+
+            // RefNumber (string) maxLength
+            if (this.RefNumber != null && this.RefNumber.Length > 11)
+            {
+                yield return new ValidationResult("Invalid value for RefNumber, length must be less than 11.", new [] { "RefNumber" });
+            }
+
+            // PurchaseOrderNumber (string) maxLength
+            if (this.PurchaseOrderNumber != null && this.PurchaseOrderNumber.Length > 25)
+            {
+                yield return new ValidationResult("Invalid value for PurchaseOrderNumber, length must be less than 25.", new [] { "PurchaseOrderNumber" });
+            }
+
+            // TermsId (string) maxLength
+            if (this.TermsId != null && this.TermsId.Length > 31)
+            {
+                yield return new ValidationResult("Invalid value for TermsId, length must be less than 31.", new [] { "TermsId" });
+            }
+
+            // SalesRepId (string) maxLength
+            if (this.SalesRepId != null && this.SalesRepId.Length > 5)
+            {
+                yield return new ValidationResult("Invalid value for SalesRepId, length must be less than 5.", new [] { "SalesRepId" });
+            }
+
+            // ShippmentOrigin (string) maxLength
+            if (this.ShippmentOrigin != null && this.ShippmentOrigin.Length > 13)
+            {
+                yield return new ValidationResult("Invalid value for ShippmentOrigin, length must be less than 13.", new [] { "ShippmentOrigin" });
+            }
+
+            // ItemSalesTaxId (string) maxLength
+            if (this.ItemSalesTaxId != null && this.ItemSalesTaxId.Length > 31)
+            {
+                yield return new ValidationResult("Invalid value for ItemSalesTaxId, length must be less than 31.", new [] { "ItemSalesTaxId" });
+            }
+
+            // Memo (string) maxLength
+            if (this.Memo != null && this.Memo.Length > 4095)
+            {
+                yield return new ValidationResult("Invalid value for Memo, length must be less than 4095.", new [] { "Memo" });
+            }
+
+            // CustomerMessageId (string) maxLength
+            if (this.CustomerMessageId != null && this.CustomerMessageId.Length > 101)
+            {
+                yield return new ValidationResult("Invalid value for CustomerMessageId, length must be less than 101.", new [] { "CustomerMessageId" });
+            }
+
+            // CustomerSalesTaxCodeId (string) maxLength
+            if (this.CustomerSalesTaxCodeId != null && this.CustomerSalesTaxCodeId.Length > 3)
+            {
+                yield return new ValidationResult("Invalid value for CustomerSalesTaxCodeId, length must be less than 3.", new [] { "CustomerSalesTaxCodeId" });
+            }
+
+            // Other (string) maxLength
+            if (this.Other != null && this.Other.Length > 29)
+            {
+                yield return new ValidationResult("Invalid value for Other, length must be less than 29.", new [] { "Other" });
+            }
+
             yield break;
         }
     }

@@ -37,8 +37,8 @@ namespace Nxus.Qbd.Models
         /// <param name="objectType">objectType</param>
         /// <param name="itemGroup">itemGroup</param>
         /// <param name="description">description</param>
-        /// <param name="quantity">(Optional) Quantity of the group.</param>
-        /// <param name="unitOfMeasure">(Optional) Unit of measure.</param>
+        /// <param name="quantity">quantity</param>
+        /// <param name="unitOfMeasure">unitOfMeasure</param>
         /// <param name="overrideUnitOfMeasureSet">overrideUnitOfMeasureSet</param>
         /// <param name="shouldPrintItemsInGroup">shouldPrintItemsInGroup</param>
         /// <param name="totalAmount">totalAmount</param>
@@ -116,9 +116,8 @@ namespace Nxus.Qbd.Models
         public Option<double?> QuantityOption { get; private set; }
 
         /// <summary>
-        /// (Optional) Quantity of the group.
+        /// Gets or Sets Quantity
         /// </summary>
-        /// <value>(Optional) Quantity of the group.</value>
         [JsonPropertyName("quantity")]
         public double? Quantity { get { return this.QuantityOption.Value; } set { this.QuantityOption = new(value); } }
 
@@ -130,9 +129,8 @@ namespace Nxus.Qbd.Models
         public Option<string?> UnitOfMeasureOption { get; private set; }
 
         /// <summary>
-        /// (Optional) Unit of measure.
+        /// Gets or Sets UnitOfMeasure
         /// </summary>
-        /// <value>(Optional) Unit of measure.</value>
         [JsonPropertyName("unitOfMeasure")]
         public string? UnitOfMeasure { get { return this.UnitOfMeasureOption.Value; } set { this.UnitOfMeasureOption = new(value); } }
 

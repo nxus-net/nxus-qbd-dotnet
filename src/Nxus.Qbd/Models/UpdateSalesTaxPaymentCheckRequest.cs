@@ -169,6 +169,24 @@ namespace Nxus.Qbd.Models
         /// <returns>Validation Result</returns>
         IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
+            // BankAccountId (string) maxLength
+            if (this.BankAccountId != null && this.BankAccountId.Length > 159)
+            {
+                yield return new ValidationResult("Invalid value for BankAccountId, length must be less than 159.", new [] { "BankAccountId" });
+            }
+
+            // RefNumber (string) maxLength
+            if (this.RefNumber != null && this.RefNumber.Length > 11)
+            {
+                yield return new ValidationResult("Invalid value for RefNumber, length must be less than 11.", new [] { "RefNumber" });
+            }
+
+            // Memo (string) maxLength
+            if (this.Memo != null && this.Memo.Length > 4095)
+            {
+                yield return new ValidationResult("Invalid value for Memo, length must be less than 4095.", new [] { "Memo" });
+            }
+
             yield break;
         }
     }

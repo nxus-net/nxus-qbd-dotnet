@@ -181,6 +181,42 @@ namespace Nxus.Qbd.Models
         /// <returns>Validation Result</returns>
         IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
+            // PayeeId (string) maxLength
+            if (this.PayeeId != null && this.PayeeId.Length > 209)
+            {
+                yield return new ValidationResult("Invalid value for PayeeId, length must be less than 209.", new [] { "PayeeId" });
+            }
+
+            // PayeeId (string) minLength
+            if (this.PayeeId != null && this.PayeeId.Length < 1)
+            {
+                yield return new ValidationResult("Invalid value for PayeeId, length must be greater than 1.", new [] { "PayeeId" });
+            }
+
+            // BankAccountId (string) maxLength
+            if (this.BankAccountId != null && this.BankAccountId.Length > 159)
+            {
+                yield return new ValidationResult("Invalid value for BankAccountId, length must be less than 159.", new [] { "BankAccountId" });
+            }
+
+            // BankAccountId (string) minLength
+            if (this.BankAccountId != null && this.BankAccountId.Length < 1)
+            {
+                yield return new ValidationResult("Invalid value for BankAccountId, length must be greater than 1.", new [] { "BankAccountId" });
+            }
+
+            // RefNumber (string) maxLength
+            if (this.RefNumber != null && this.RefNumber.Length > 11)
+            {
+                yield return new ValidationResult("Invalid value for RefNumber, length must be less than 11.", new [] { "RefNumber" });
+            }
+
+            // Memo (string) maxLength
+            if (this.Memo != null && this.Memo.Length > 4095)
+            {
+                yield return new ValidationResult("Invalid value for Memo, length must be less than 4095.", new [] { "Memo" });
+            }
+
             yield break;
         }
     }

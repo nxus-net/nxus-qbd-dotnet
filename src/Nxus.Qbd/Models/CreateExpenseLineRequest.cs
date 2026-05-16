@@ -38,7 +38,7 @@ namespace Nxus.Qbd.Models
         /// <param name="memo">(Optional) A memo specific to this line item.</param>
         /// <param name="customerId">(Optional) The ListID or FullName of the customer or job.</param>
         /// <param name="classId">(Optional) The ListID or FullName of the class.</param>
-        /// <param name="vendorId">Filter by Vendor ID.</param>
+        /// <param name="vendorId">(Optional) The ListID or FullName of the vendor.</param>
         /// <param name="salesTaxCodeId">(Optional) The ListID or FullName of the sales tax code.</param>
         /// <param name="billableStatus">(Optional) Billable status (Billable, NotBillable, HasBeenBilled).</param>
         /// <param name="salesRepresentativeId">salesRepresentativeId</param>
@@ -139,10 +139,9 @@ namespace Nxus.Qbd.Models
         public Option<string?> VendorIdOption { get; private set; }
 
         /// <summary>
-        /// Filter by Vendor ID.
+        /// (Optional) The ListID or FullName of the vendor.
         /// </summary>
-        /// <value>Filter by Vendor ID.</value>
-        /* <example>10000001-1039043346</example> */
+        /// <value>(Optional) The ListID or FullName of the vendor.</value>
         [JsonPropertyName("vendorId")]
         public string? VendorId { get { return this.VendorIdOption.Value; } set { this.VendorIdOption = new(value); } }
 
@@ -229,6 +228,18 @@ namespace Nxus.Qbd.Models
         /// <returns>Validation Result</returns>
         IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
+            // Amount (double) minimum
+            if (this.AmountOption.IsSet && this.AmountOption.Value < (double)0)
+            {
+                yield return new ValidationResult("Invalid value for Amount, must be a value greater than 0.", new [] { "Amount" });
+            }
+
+            // Memo (string) maxLength
+            if (this.Memo != null && this.Memo.Length > 4095)
+            {
+                yield return new ValidationResult("Invalid value for Memo, length must be less than 4095.", new [] { "Memo" });
+            }
+
             yield break;
         }
     }

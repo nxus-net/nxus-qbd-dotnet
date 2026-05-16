@@ -130,6 +130,24 @@ namespace Nxus.Qbd.Models
         /// <returns>Validation Result</returns>
         IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
+            // Name (string) maxLength
+            if (this.Name != null && this.Name.Length > 64)
+            {
+                yield return new ValidationResult("Invalid value for Name, length must be less than 64.", new [] { "Name" });
+            }
+
+            // Name (string) minLength
+            if (this.Name != null && this.Name.Length < 1)
+            {
+                yield return new ValidationResult("Invalid value for Name, length must be greater than 1.", new [] { "Name" });
+            }
+
+            // CurrencyCode (string) minLength
+            if (this.CurrencyCode != null && this.CurrencyCode.Length < 1)
+            {
+                yield return new ValidationResult("Invalid value for CurrencyCode, length must be greater than 1.", new [] { "CurrencyCode" });
+            }
+
             yield break;
         }
     }

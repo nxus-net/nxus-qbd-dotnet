@@ -40,9 +40,9 @@ namespace Nxus.Qbd.Models
         /// <param name="objectType">objectType</param>
         /// <param name="transactionDate">transactionDate</param>
         /// <param name="currency">currency</param>
-        /// <param name="exchangeRate">(Optional) Exchange rate if this is a foreign currency Sales Receipt.</param>
-        /// <param name="refNumber">(Optional) The document number (e.g., receipt number). (Max 11 characters)</param>
-        /// <param name="memo">(Optional) General memo about the Sales Receipt. (Max 4095 characters)</param>
+        /// <param name="exchangeRate">exchangeRate</param>
+        /// <param name="refNumber">The primary reference number for the transaction (e.g., Invoice #, Check #).</param>
+        /// <param name="memo">memo</param>
         /// <param name="transactionNumber">transactionNumber</param>
         /// <param name="customer">customer</param>
         /// <param name="class">class</param>
@@ -51,10 +51,10 @@ namespace Nxus.Qbd.Models
         /// <param name="billingAddressBlock">billingAddressBlock</param>
         /// <param name="shippingAddress">shippingAddress</param>
         /// <param name="shippingAddressBlock">shippingAddressBlock</param>
-        /// <param name="isPending">(Optional) Indicates if the transaction is pending.</param>
-        /// <param name="checkNumber">(Optional) Check number if payment method is check. (Max 25 characters)</param>
+        /// <param name="isPending">isPending</param>
+        /// <param name="checkNumber">checkNumber</param>
         /// <param name="paymentMethod">paymentMethod</param>
-        /// <param name="dueDate">(Optional) The date the payment is due (if applicable).</param>
+        /// <param name="dueDate">dueDate</param>
         /// <param name="salesRepresentative">salesRepresentative</param>
         /// <param name="shipDate">shipDate</param>
         /// <param name="shipMethod">shipMethod</param>
@@ -68,7 +68,7 @@ namespace Nxus.Qbd.Models
         /// <param name="customerMessage">customerMessage</param>
         /// <param name="isQueuedForPrint">isQueuedForPrint</param>
         /// <param name="isQueuedForEmail">isQueuedForEmail</param>
-        /// <param name="isTaxIncluded">(Optional) If true, tax is included in the item amounts (tax-inclusive pricing).</param>
+        /// <param name="isTaxIncluded">isTaxIncluded</param>
         /// <param name="customerSalesTaxCode">customerSalesTaxCode</param>
         /// <param name="depositToAccount">depositToAccount</param>
         /// <param name="creditCardTransaction">creditCardTransaction</param>
@@ -218,9 +218,8 @@ namespace Nxus.Qbd.Models
         public Option<double?> ExchangeRateOption { get; private set; }
 
         /// <summary>
-        /// (Optional) Exchange rate if this is a foreign currency Sales Receipt.
+        /// Gets or Sets ExchangeRate
         /// </summary>
-        /// <value>(Optional) Exchange rate if this is a foreign currency Sales Receipt.</value>
         [JsonPropertyName("exchangeRate")]
         public double? ExchangeRate { get { return this.ExchangeRateOption.Value; } set { this.ExchangeRateOption = new(value); } }
 
@@ -232,9 +231,9 @@ namespace Nxus.Qbd.Models
         public Option<string?> RefNumberOption { get; private set; }
 
         /// <summary>
-        /// (Optional) The document number (e.g., receipt number). (Max 11 characters)
+        /// The primary reference number for the transaction (e.g., Invoice #, Check #).
         /// </summary>
-        /// <value>(Optional) The document number (e.g., receipt number). (Max 11 characters)</value>
+        /// <value>The primary reference number for the transaction (e.g., Invoice #, Check #).</value>
         [JsonPropertyName("refNumber")]
         public string? RefNumber { get { return this.RefNumberOption.Value; } set { this.RefNumberOption = new(value); } }
 
@@ -246,9 +245,8 @@ namespace Nxus.Qbd.Models
         public Option<string?> MemoOption { get; private set; }
 
         /// <summary>
-        /// (Optional) General memo about the Sales Receipt. (Max 4095 characters)
+        /// Gets or Sets Memo
         /// </summary>
-        /// <value>(Optional) General memo about the Sales Receipt. (Max 4095 characters)</value>
         [JsonPropertyName("memo")]
         public string? Memo { get { return this.MemoOption.Value; } set { this.MemoOption = new(value); } }
 
@@ -364,9 +362,8 @@ namespace Nxus.Qbd.Models
         public Option<bool?> IsPendingOption { get; private set; }
 
         /// <summary>
-        /// (Optional) Indicates if the transaction is pending.
+        /// Gets or Sets IsPending
         /// </summary>
-        /// <value>(Optional) Indicates if the transaction is pending.</value>
         [JsonPropertyName("isPending")]
         public bool? IsPending { get { return this.IsPendingOption.Value; } set { this.IsPendingOption = new(value); } }
 
@@ -378,9 +375,8 @@ namespace Nxus.Qbd.Models
         public Option<string?> CheckNumberOption { get; private set; }
 
         /// <summary>
-        /// (Optional) Check number if payment method is check. (Max 25 characters)
+        /// Gets or Sets CheckNumber
         /// </summary>
-        /// <value>(Optional) Check number if payment method is check. (Max 25 characters)</value>
         [JsonPropertyName("checkNumber")]
         public string? CheckNumber { get { return this.CheckNumberOption.Value; } set { this.CheckNumberOption = new(value); } }
 
@@ -405,9 +401,8 @@ namespace Nxus.Qbd.Models
         public Option<DateOnly?> DueDateOption { get; private set; }
 
         /// <summary>
-        /// (Optional) The date the payment is due (if applicable).
+        /// Gets or Sets DueDate
         /// </summary>
-        /// <value>(Optional) The date the payment is due (if applicable).</value>
         [JsonPropertyName("dueDate")]
         public DateOnly? DueDate { get { return this.DueDateOption.Value; } set { this.DueDateOption = new(value); } }
 
@@ -588,9 +583,8 @@ namespace Nxus.Qbd.Models
         public Option<bool?> IsTaxIncludedOption { get; private set; }
 
         /// <summary>
-        /// (Optional) If true, tax is included in the item amounts (tax-inclusive pricing).
+        /// Gets or Sets IsTaxIncluded
         /// </summary>
-        /// <value>(Optional) If true, tax is included in the item amounts (tax-inclusive pricing).</value>
         [JsonPropertyName("isTaxIncluded")]
         public bool? IsTaxIncluded { get { return this.IsTaxIncludedOption.Value; } set { this.IsTaxIncludedOption = new(value); } }
 

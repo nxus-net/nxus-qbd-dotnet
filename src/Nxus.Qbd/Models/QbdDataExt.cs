@@ -26,7 +26,7 @@ using Nxus.Qbd.Json;
 namespace Nxus.Qbd.Models
 {
     /// <summary>
-    /// Represents a custom data extension, which can be either a public custom field (viewable and printable in the QuickBooks UI)   or private data (visible only to the application that owns the specific GUID) .   Note that private data is limited to a total of 4096 bytes per object across all applications .
+    /// Represents a custom data extension (Custom Field) in QuickBooks.
     /// </summary>
     public partial class QbdDataExt : IValidatableObject
     {
@@ -59,7 +59,7 @@ namespace Nxus.Qbd.Models
         /// <summary>
         /// Gets or Sets OwnerId
         /// </summary>
-        [JsonPropertyName("OwnerId")]
+        [JsonPropertyName("ownerId")]
         public string? OwnerId { get { return this.OwnerIdOption.Value; } set { this.OwnerIdOption = new(value); } }
 
         /// <summary>
@@ -170,7 +170,7 @@ namespace Nxus.Qbd.Models
 
                     switch (localVarJsonPropertyName)
                     {
-                        case "OwnerId":
+                        case "ownerId":
                             ownerId = new Option<string?>(utf8JsonReader.GetString());
                             break;
                         case "name":
@@ -217,9 +217,9 @@ namespace Nxus.Qbd.Models
         {
             if (qbdDataExt.OwnerIdOption.IsSet)
                 if (qbdDataExt.OwnerIdOption.Value != null)
-                    writer.WriteString("OwnerId", qbdDataExt.OwnerId);
+                    writer.WriteString("ownerId", qbdDataExt.OwnerId);
                 else
-                    writer.WriteNull("OwnerId");
+                    writer.WriteNull("ownerId");
 
             if (qbdDataExt.NameOption.IsSet)
                 if (qbdDataExt.NameOption.Value != null)

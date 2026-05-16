@@ -225,6 +225,36 @@ namespace Nxus.Qbd.Models
         /// <returns>Validation Result</returns>
         IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
+            // Line1 (string) maxLength
+            if (this.Line1 != null && this.Line1.Length > 41)
+            {
+                yield return new ValidationResult("Invalid value for Line1, length must be less than 41.", new [] { "Line1" });
+            }
+
+            // Line2 (string) maxLength
+            if (this.Line2 != null && this.Line2.Length > 41)
+            {
+                yield return new ValidationResult("Invalid value for Line2, length must be less than 41.", new [] { "Line2" });
+            }
+
+            // Line3 (string) maxLength
+            if (this.Line3 != null && this.Line3.Length > 41)
+            {
+                yield return new ValidationResult("Invalid value for Line3, length must be less than 41.", new [] { "Line3" });
+            }
+
+            // Line4 (string) maxLength
+            if (this.Line4 != null && this.Line4.Length > 41)
+            {
+                yield return new ValidationResult("Invalid value for Line4, length must be less than 41.", new [] { "Line4" });
+            }
+
+            // Line5 (string) maxLength
+            if (this.Line5 != null && this.Line5.Length > 41)
+            {
+                yield return new ValidationResult("Invalid value for Line5, length must be less than 41.", new [] { "Line5" });
+            }
+
             // City (string) maxLength
             if (this.City != null && this.City.Length > 31)
             {
@@ -250,9 +280,9 @@ namespace Nxus.Qbd.Models
             }
 
             // Note (string) maxLength
-            if (this.Note != null && this.Note.Length > 4095)
+            if (this.Note != null && this.Note.Length > 41)
             {
-                yield return new ValidationResult("Invalid value for Note, length must be less than 4095.", new [] { "Note" });
+                yield return new ValidationResult("Invalid value for Note, length must be less than 41.", new [] { "Note" });
             }
 
             yield break;

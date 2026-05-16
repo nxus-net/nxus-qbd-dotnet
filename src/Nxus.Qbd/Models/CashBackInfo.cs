@@ -35,8 +35,8 @@ namespace Nxus.Qbd.Models
         /// </summary>
         /// <param name="transactionLineId">transactionLineId</param>
         /// <param name="account">account</param>
-        /// <param name="memo">(Optional) Memo about the cash back line. (Max 4095 characters)</param>
-        /// <param name="amount">(Optional) The amount of cash back requested.</param>
+        /// <param name="memo">memo</param>
+        /// <param name="amount">amount</param>
         [JsonConstructor]
         public CashBackInfo(Option<string?> transactionLineId = default, Option<QbdRef?> account = default, Option<string?> memo = default, Option<double?> amount = default)
         {
@@ -83,9 +83,8 @@ namespace Nxus.Qbd.Models
         public Option<string?> MemoOption { get; private set; }
 
         /// <summary>
-        /// (Optional) Memo about the cash back line. (Max 4095 characters)
+        /// Gets or Sets Memo
         /// </summary>
-        /// <value>(Optional) Memo about the cash back line. (Max 4095 characters)</value>
         [JsonPropertyName("memo")]
         public string? Memo { get { return this.MemoOption.Value; } set { this.MemoOption = new(value); } }
 
@@ -97,9 +96,8 @@ namespace Nxus.Qbd.Models
         public Option<double?> AmountOption { get; private set; }
 
         /// <summary>
-        /// (Optional) The amount of cash back requested.
+        /// Gets or Sets Amount
         /// </summary>
-        /// <value>(Optional) The amount of cash back requested.</value>
         [JsonPropertyName("amount")]
         public double? Amount { get { return this.AmountOption.Value; } set { this.AmountOption = new(value); } }
 
@@ -126,6 +124,12 @@ namespace Nxus.Qbd.Models
         /// <returns>Validation Result</returns>
         IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
+            // Memo (string) maxLength
+            if (this.Memo != null && this.Memo.Length > 4095)
+            {
+                yield return new ValidationResult("Invalid value for Memo, length must be less than 4095.", new [] { "Memo" });
+            }
+
             yield break;
         }
     }

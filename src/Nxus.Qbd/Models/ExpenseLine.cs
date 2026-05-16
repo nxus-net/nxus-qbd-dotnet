@@ -35,16 +35,16 @@ namespace Nxus.Qbd.Models
         /// </summary>
         /// <param name="id">id</param>
         /// <param name="objectType">objectType</param>
-        /// <param name="account">Expense account (e.g., \&quot;Office Supplies\&quot;)</param>
-        /// <param name="amount">(Optional) The amount of the expense line.</param>
-        /// <param name="memo">(Optional) A memo specific to this line item.</param>
+        /// <param name="account">account</param>
+        /// <param name="amount">amount</param>
+        /// <param name="memo">memo</param>
         /// <param name="class">class</param>
         /// <param name="customer">customer</param>
         /// <param name="salesRepresentative">salesRepresentative</param>
         /// <param name="salesTaxCode">salesTaxCode</param>
         /// <param name="taxAmount">taxAmount</param>
         /// <param name="vendor">vendor</param>
-        /// <param name="billableStatus">(Optional) Billable status (Billable, NotBillable, HasBeenBilled).</param>
+        /// <param name="billableStatus">billableStatus</param>
         /// <param name="customFields">customFields</param>
         [JsonConstructor]
         public ExpenseLine(string id, Option<string?> objectType = default, Option<QbdRef?> account = default, Option<double?> amount = default, Option<string?> memo = default, Option<QbdRef?> @class = default, Option<QbdRef?> customer = default, Option<QbdRef?> salesRepresentative = default, Option<QbdRef?> salesTaxCode = default, Option<double?> taxAmount = default, Option<QbdRef?> vendor = default, Option<NullableBillableStatus?> billableStatus = default, Option<List<QbdDataExt>?> customFields = default)
@@ -75,9 +75,8 @@ namespace Nxus.Qbd.Models
         public Option<NullableBillableStatus?> BillableStatusOption { get; private set; }
 
         /// <summary>
-        /// (Optional) Billable status (Billable, NotBillable, HasBeenBilled).
+        /// Gets or Sets BillableStatus
         /// </summary>
-        /// <value>(Optional) Billable status (Billable, NotBillable, HasBeenBilled).</value>
         [JsonPropertyName("billableStatus")]
         public NullableBillableStatus? BillableStatus { get { return this.BillableStatusOption.Value; } set { this.BillableStatusOption = new(value); } }
 
@@ -108,9 +107,8 @@ namespace Nxus.Qbd.Models
         public Option<QbdRef?> AccountOption { get; private set; }
 
         /// <summary>
-        /// Expense account (e.g., \&quot;Office Supplies\&quot;)
+        /// Gets or Sets Account
         /// </summary>
-        /// <value>Expense account (e.g., \&quot;Office Supplies\&quot;)</value>
         [JsonPropertyName("account")]
         public QbdRef? Account { get { return this.AccountOption.Value; } set { this.AccountOption = new(value); } }
 
@@ -122,9 +120,8 @@ namespace Nxus.Qbd.Models
         public Option<double?> AmountOption { get; private set; }
 
         /// <summary>
-        /// (Optional) The amount of the expense line.
+        /// Gets or Sets Amount
         /// </summary>
-        /// <value>(Optional) The amount of the expense line.</value>
         [JsonPropertyName("amount")]
         public double? Amount { get { return this.AmountOption.Value; } set { this.AmountOption = new(value); } }
 
@@ -136,9 +133,8 @@ namespace Nxus.Qbd.Models
         public Option<string?> MemoOption { get; private set; }
 
         /// <summary>
-        /// (Optional) A memo specific to this line item.
+        /// Gets or Sets Memo
         /// </summary>
-        /// <value>(Optional) A memo specific to this line item.</value>
         [JsonPropertyName("memo")]
         public string? Memo { get { return this.MemoOption.Value; } set { this.MemoOption = new(value); } }
 

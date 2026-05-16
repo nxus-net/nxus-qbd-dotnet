@@ -397,6 +397,60 @@ namespace Nxus.Qbd.Models
         /// <returns>Validation Result</returns>
         IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
+            // Description (string) maxLength
+            if (this.Description != null && this.Description.Length > 4095)
+            {
+                yield return new ValidationResult("Invalid value for Description, length must be less than 4095.", new [] { "Description" });
+            }
+
+            // Quantity (double) minimum
+            if (this.QuantityOption.IsSet && this.QuantityOption.Value < (double)0)
+            {
+                yield return new ValidationResult("Invalid value for Quantity, must be a value greater than 0.", new [] { "Quantity" });
+            }
+
+            // UnitOfMeasure (string) maxLength
+            if (this.UnitOfMeasure != null && this.UnitOfMeasure.Length > 31)
+            {
+                yield return new ValidationResult("Invalid value for UnitOfMeasure, length must be less than 31.", new [] { "UnitOfMeasure" });
+            }
+
+            // Cost (double) minimum
+            if (this.CostOption.IsSet && this.CostOption.Value < (double)0)
+            {
+                yield return new ValidationResult("Invalid value for Cost, must be a value greater than or equal to 0.", new [] { "Cost" });
+            }
+
+            // Rate (double) minimum
+            if (this.RateOption.IsSet && this.RateOption.Value < (double)0)
+            {
+                yield return new ValidationResult("Invalid value for Rate, must be a value greater than or equal to 0.", new [] { "Rate" });
+            }
+
+            // Amount (double) minimum
+            if (this.AmountOption.IsSet && this.AmountOption.Value < (double)0)
+            {
+                yield return new ValidationResult("Invalid value for Amount, must be a value greater than 0.", new [] { "Amount" });
+            }
+
+            // SerialNumber (string) maxLength
+            if (this.SerialNumber != null && this.SerialNumber.Length > 4095)
+            {
+                yield return new ValidationResult("Invalid value for SerialNumber, length must be less than 4095.", new [] { "SerialNumber" });
+            }
+
+            // LotNumber (string) maxLength
+            if (this.LotNumber != null && this.LotNumber.Length > 40)
+            {
+                yield return new ValidationResult("Invalid value for LotNumber, length must be less than 40.", new [] { "LotNumber" });
+            }
+
+            // ExpirationDateForSerialLotNumber (string) maxLength
+            if (this.ExpirationDateForSerialLotNumber != null && this.ExpirationDateForSerialLotNumber.Length > 1099)
+            {
+                yield return new ValidationResult("Invalid value for ExpirationDateForSerialLotNumber, length must be less than 1099.", new [] { "ExpirationDateForSerialLotNumber" });
+            }
+
             yield break;
         }
     }

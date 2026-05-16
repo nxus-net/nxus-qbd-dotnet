@@ -33,7 +33,7 @@ namespace Nxus.Qbd.Models
         /// <summary>
         /// Initializes a new instance of the <see cref="ShipToAddress" /> class.
         /// </summary>
-        /// <param name="name">Name identifier for this shipping address (e.g., \&quot;Warehouse\&quot;, \&quot;Store #1\&quot;). Required for ShipToAddress. Maps to line1 in Conductor API.</param>
+        /// <param name="name">name</param>
         /// <param name="line1">line1</param>
         /// <param name="line2">line2</param>
         /// <param name="line3">line3</param>
@@ -66,9 +66,8 @@ namespace Nxus.Qbd.Models
         partial void OnCreated();
 
         /// <summary>
-        /// Name identifier for this shipping address (e.g., \&quot;Warehouse\&quot;, \&quot;Store #1\&quot;). Required for ShipToAddress. Maps to line1 in Conductor API.
+        /// Gets or Sets Name
         /// </summary>
-        /// <value>Name identifier for this shipping address (e.g., \&quot;Warehouse\&quot;, \&quot;Store #1\&quot;). Required for ShipToAddress. Maps to line1 in Conductor API.</value>
         [JsonPropertyName("name")]
         public string Name { get; set; }
 

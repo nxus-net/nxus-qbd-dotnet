@@ -26,7 +26,7 @@ using Nxus.Qbd.Json;
 namespace Nxus.Qbd.Models
 {
     /// <summary>
-    /// Defines the request model for updating an existing Bill.  DTD Reference: qbxmlops170.xml - BillMod  Qbd requires Id and EditSequence to identify the record to update.
+    /// Request model for modifying an existing Bill.
     /// </summary>
     public partial class UpdateBillRequest : IValidatableObject
     {
@@ -34,7 +34,7 @@ namespace Nxus.Qbd.Models
         /// Initializes a new instance of the <see cref="UpdateBillRequest" /> class.
         /// </summary>
         /// <param name="revisionNumber">revisionNumber</param>
-        /// <param name="vendorId">Filter by Vendor ID.</param>
+        /// <param name="vendorId">vendorId</param>
         /// <param name="vendorAddress">vendorAddress</param>
         /// <param name="payablesAccountId">payablesAccountId</param>
         /// <param name="transactionDate">transactionDate</param>
@@ -89,10 +89,8 @@ namespace Nxus.Qbd.Models
         public Option<string?> VendorIdOption { get; private set; }
 
         /// <summary>
-        /// Filter by Vendor ID.
+        /// Gets or Sets VendorId
         /// </summary>
-        /// <value>Filter by Vendor ID.</value>
-        /* <example>10000001-1039043346</example> */
         [JsonPropertyName("vendorId")]
         public string? VendorId { get { return this.VendorIdOption.Value; } set { this.VendorIdOption = new(value); } }
 
@@ -331,6 +329,18 @@ namespace Nxus.Qbd.Models
         /// <returns>Validation Result</returns>
         IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
+            // VendorId (string) minLength
+            if (this.VendorId != null && this.VendorId.Length < 1)
+            {
+                yield return new ValidationResult("Invalid value for VendorId, length must be greater than 1.", new [] { "VendorId" });
+            }
+
+            // PayablesAccountId (string) minLength
+            if (this.PayablesAccountId != null && this.PayablesAccountId.Length < 1)
+            {
+                yield return new ValidationResult("Invalid value for PayablesAccountId, length must be greater than 1.", new [] { "PayablesAccountId" });
+            }
+
             // RefNumber (string) maxLength
             if (this.RefNumber != null && this.RefNumber.Length > 20)
             {

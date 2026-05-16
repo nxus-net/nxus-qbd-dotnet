@@ -332,34 +332,58 @@ namespace Nxus.Qbd.Models
                 yield return new ValidationResult("Invalid value for Description, length must be less than 4095.", new [] { "Description" });
             }
 
+            // Quantity (double) minimum
+            if (this.QuantityOption.IsSet && this.QuantityOption.Value < (double)0)
+            {
+                yield return new ValidationResult("Invalid value for Quantity, must be a value greater than 0.", new [] { "Quantity" });
+            }
+
+            // UnitOfMeasure (string) maxLength
+            if (this.UnitOfMeasure != null && this.UnitOfMeasure.Length > 31)
+            {
+                yield return new ValidationResult("Invalid value for UnitOfMeasure, length must be less than 31.", new [] { "UnitOfMeasure" });
+            }
+
             // OverrideUOMSetId (string) maxLength
             if (this.OverrideUOMSetId != null && this.OverrideUOMSetId.Length > 50)
             {
                 yield return new ValidationResult("Invalid value for OverrideUOMSetId, length must be less than 50.", new [] { "OverrideUOMSetId" });
             }
 
-            // ClassId (string) maxLength
-            if (this.ClassId != null && this.ClassId.Length > 50)
+            // Rate (double) minimum
+            if (this.RateOption.IsSet && this.RateOption.Value < (double)0)
             {
-                yield return new ValidationResult("Invalid value for ClassId, length must be less than 50.", new [] { "ClassId" });
+                yield return new ValidationResult("Invalid value for Rate, must be a value greater than or equal to 0.", new [] { "Rate" });
+            }
+
+            // ClassId (string) maxLength
+            if (this.ClassId != null && this.ClassId.Length > 159)
+            {
+                yield return new ValidationResult("Invalid value for ClassId, length must be less than 159.", new [] { "ClassId" });
+            }
+
+            // Amount (double) minimum
+            if (this.AmountOption.IsSet && this.AmountOption.Value < (double)0)
+            {
+                yield return new ValidationResult("Invalid value for Amount, must be a value greater than or equal to 0.", new [] { "Amount" });
             }
 
             // InventorySiteLocationId (string) maxLength
-            if (this.InventorySiteLocationId != null && this.InventorySiteLocationId.Length > 50)
+            if (this.InventorySiteLocationId != null && this.InventorySiteLocationId.Length > 31)
             {
-                yield return new ValidationResult("Invalid value for InventorySiteLocationId, length must be less than 50.", new [] { "InventorySiteLocationId" });
+                yield return new ValidationResult("Invalid value for InventorySiteLocationId, length must be less than 31.", new [] { "InventorySiteLocationId" });
             }
 
             // CustomerId (string) maxLength
-            if (this.CustomerId != null && this.CustomerId.Length > 50)
+            if (this.CustomerId != null && this.CustomerId.Length > 209)
             {
-                yield return new ValidationResult("Invalid value for CustomerId, length must be less than 50.", new [] { "CustomerId" });
+                yield return new ValidationResult("Invalid value for CustomerId, length must be less than 209.", new [] { "CustomerId" });
             }
 
             // SalesTaxCodeId (string) maxLength
-            if (this.SalesTaxCodeId != null && this.SalesTaxCodeId.Length > 50)
+            if (this.SalesTaxCodeId != null && this.SalesTaxCodeId.Length > 3)
             {
-                yield return new ValidationResult("Invalid value for SalesTaxCodeId, length must be less than 50.", new [] { "SalesTaxCodeId" });
+                yield return new ValidationResult("Invalid value for SalesTaxCodeId, length must be less than 3.", new [] { "SalesTaxCodeId" });
             }
 
             // Other1 (string) maxLength

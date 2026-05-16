@@ -430,6 +430,66 @@ namespace Nxus.Qbd.Models
         /// <returns>Validation Result</returns>
         IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
+            // AcquiredAs (string) minLength
+            if (this.AcquiredAs != null && this.AcquiredAs.Length < 1)
+            {
+                yield return new ValidationResult("Invalid value for AcquiredAs, length must be greater than 1.", new [] { "AcquiredAs" });
+            }
+
+            // PurchaseDescription (string) maxLength
+            if (this.PurchaseDescription != null && this.PurchaseDescription.Length > 50)
+            {
+                yield return new ValidationResult("Invalid value for PurchaseDescription, length must be less than 50.", new [] { "PurchaseDescription" });
+            }
+
+            // PurchaseDescription (string) minLength
+            if (this.PurchaseDescription != null && this.PurchaseDescription.Length < 1)
+            {
+                yield return new ValidationResult("Invalid value for PurchaseDescription, length must be greater than 1.", new [] { "PurchaseDescription" });
+            }
+
+            // VendorOrPayeeName (string) maxLength
+            if (this.VendorOrPayeeName != null && this.VendorOrPayeeName.Length > 50)
+            {
+                yield return new ValidationResult("Invalid value for VendorOrPayeeName, length must be less than 50.", new [] { "VendorOrPayeeName" });
+            }
+
+            // AssetDescription (string) maxLength
+            if (this.AssetDescription != null && this.AssetDescription.Length > 50)
+            {
+                yield return new ValidationResult("Invalid value for AssetDescription, length must be less than 50.", new [] { "AssetDescription" });
+            }
+
+            // Location (string) maxLength
+            if (this.Location != null && this.Location.Length > 50)
+            {
+                yield return new ValidationResult("Invalid value for Location, length must be less than 50.", new [] { "Location" });
+            }
+
+            // PurchaseOrderNumber (string) maxLength
+            if (this.PurchaseOrderNumber != null && this.PurchaseOrderNumber.Length > 30)
+            {
+                yield return new ValidationResult("Invalid value for PurchaseOrderNumber, length must be less than 30.", new [] { "PurchaseOrderNumber" });
+            }
+
+            // SerialNumber (string) maxLength
+            if (this.SerialNumber != null && this.SerialNumber.Length > 30)
+            {
+                yield return new ValidationResult("Invalid value for SerialNumber, length must be less than 30.", new [] { "SerialNumber" });
+            }
+
+            // Notes (string) maxLength
+            if (this.Notes != null && this.Notes.Length > 4095)
+            {
+                yield return new ValidationResult("Invalid value for Notes, length must be less than 4095.", new [] { "Notes" });
+            }
+
+            // AssetNumber (string) maxLength
+            if (this.AssetNumber != null && this.AssetNumber.Length > 10)
+            {
+                yield return new ValidationResult("Invalid value for AssetNumber, length must be less than 10.", new [] { "AssetNumber" });
+            }
+
             yield break;
         }
     }

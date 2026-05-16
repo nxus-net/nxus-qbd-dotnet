@@ -144,9 +144,9 @@ namespace Nxus.Qbd.Models
             }
 
             // OverrideCheckNumber (string) maxLength
-            if (this.OverrideCheckNumber != null && this.OverrideCheckNumber.Length > 20)
+            if (this.OverrideCheckNumber != null && this.OverrideCheckNumber.Length > 11)
             {
-                yield return new ValidationResult("Invalid value for OverrideCheckNumber, length must be less than 20.", new [] { "OverrideCheckNumber" });
+                yield return new ValidationResult("Invalid value for OverrideCheckNumber, length must be less than 11.", new [] { "OverrideCheckNumber" });
             }
 
             yield break;

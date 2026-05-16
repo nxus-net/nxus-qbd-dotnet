@@ -33,14 +33,14 @@ namespace Nxus.Qbd.Models
         /// <summary>
         /// Initializes a new instance of the <see cref="SickHours" /> class.
         /// </summary>
-        /// <param name="hoursAvailable">The total number of sick hours currently available for the employee to use, in ISO 8601 format for time intervals (PTnHnMnS). For example, 1 hour and 30 minutes is represented as PT1H30M. Defaults to 0.</param>
-        /// <param name="accrualPeriod">How frequently the employee&#39;s sick hours are accrued.</param>
+        /// <param name="hoursAvailable">hoursAvailable</param>
+        /// <param name="accrualPeriod">accrualPeriod</param>
         /// <param name="hoursAccrued">hoursAccrued</param>
-        /// <param name="maximumHours">The maximum number of sick hours the employee can accrue, in ISO 8601 format for time intervals (PTnHnMnS). For example, 1 hour and 30 minutes is represented as PT1H30M.</param>
+        /// <param name="maximumHours">maximumHours</param>
         /// <param name="isResettingHoursEachNewYear">isResettingHoursEachNewYear</param>
-        /// <param name="hoursUsed">The number of sick hours the employee has used, in ISO 8601 format for time intervals (PTnHnMnS). For example, 1 hour and 30 minutes is represented as PT1H30M.</param>
+        /// <param name="hoursUsed">hoursUsed</param>
         /// <param name="yearBeginsDate">yearBeginsDate</param>
-        /// <param name="accrualStartDate">The date the employee&#39;s sick hours began to accrue, in ISO 8601 format (YYYY-MM-DD).</param>
+        /// <param name="accrualStartDate">accrualStartDate</param>
         [JsonConstructor]
         public SickHours(Option<string?> hoursAvailable = default, Option<string?> accrualPeriod = default, Option<string?> hoursAccrued = default, Option<string?> maximumHours = default, Option<bool?> isResettingHoursEachNewYear = default, Option<string?> hoursUsed = default, Option<DateOnly?> yearBeginsDate = default, Option<DateOnly?> accrualStartDate = default)
         {
@@ -65,9 +65,8 @@ namespace Nxus.Qbd.Models
         public Option<string?> HoursAvailableOption { get; private set; }
 
         /// <summary>
-        /// The total number of sick hours currently available for the employee to use, in ISO 8601 format for time intervals (PTnHnMnS). For example, 1 hour and 30 minutes is represented as PT1H30M. Defaults to 0.
+        /// Gets or Sets HoursAvailable
         /// </summary>
-        /// <value>The total number of sick hours currently available for the employee to use, in ISO 8601 format for time intervals (PTnHnMnS). For example, 1 hour and 30 minutes is represented as PT1H30M. Defaults to 0.</value>
         [JsonPropertyName("hoursAvailable")]
         public string? HoursAvailable { get { return this.HoursAvailableOption.Value; } set { this.HoursAvailableOption = new(value); } }
 
@@ -79,9 +78,8 @@ namespace Nxus.Qbd.Models
         public Option<string?> AccrualPeriodOption { get; private set; }
 
         /// <summary>
-        /// How frequently the employee&#39;s sick hours are accrued.
+        /// Gets or Sets AccrualPeriod
         /// </summary>
-        /// <value>How frequently the employee&#39;s sick hours are accrued.</value>
         [JsonPropertyName("accrualPeriod")]
         public string? AccrualPeriod { get { return this.AccrualPeriodOption.Value; } set { this.AccrualPeriodOption = new(value); } }
 
@@ -106,9 +104,8 @@ namespace Nxus.Qbd.Models
         public Option<string?> MaximumHoursOption { get; private set; }
 
         /// <summary>
-        /// The maximum number of sick hours the employee can accrue, in ISO 8601 format for time intervals (PTnHnMnS). For example, 1 hour and 30 minutes is represented as PT1H30M.
+        /// Gets or Sets MaximumHours
         /// </summary>
-        /// <value>The maximum number of sick hours the employee can accrue, in ISO 8601 format for time intervals (PTnHnMnS). For example, 1 hour and 30 minutes is represented as PT1H30M.</value>
         [JsonPropertyName("maximumHours")]
         public string? MaximumHours { get { return this.MaximumHoursOption.Value; } set { this.MaximumHoursOption = new(value); } }
 
@@ -133,9 +130,8 @@ namespace Nxus.Qbd.Models
         public Option<string?> HoursUsedOption { get; private set; }
 
         /// <summary>
-        /// The number of sick hours the employee has used, in ISO 8601 format for time intervals (PTnHnMnS). For example, 1 hour and 30 minutes is represented as PT1H30M.
+        /// Gets or Sets HoursUsed
         /// </summary>
-        /// <value>The number of sick hours the employee has used, in ISO 8601 format for time intervals (PTnHnMnS). For example, 1 hour and 30 minutes is represented as PT1H30M.</value>
         [JsonPropertyName("hoursUsed")]
         public string? HoursUsed { get { return this.HoursUsedOption.Value; } set { this.HoursUsedOption = new(value); } }
 
@@ -160,9 +156,8 @@ namespace Nxus.Qbd.Models
         public Option<DateOnly?> AccrualStartDateOption { get; private set; }
 
         /// <summary>
-        /// The date the employee&#39;s sick hours began to accrue, in ISO 8601 format (YYYY-MM-DD).
+        /// Gets or Sets AccrualStartDate
         /// </summary>
-        /// <value>The date the employee&#39;s sick hours began to accrue, in ISO 8601 format (YYYY-MM-DD).</value>
         [JsonPropertyName("accrualStartDate")]
         public DateOnly? AccrualStartDate { get { return this.AccrualStartDateOption.Value; } set { this.AccrualStartDateOption = new(value); } }
 

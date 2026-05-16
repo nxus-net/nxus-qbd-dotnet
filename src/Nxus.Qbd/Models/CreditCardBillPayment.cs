@@ -26,12 +26,12 @@ using Nxus.Qbd.Json;
 namespace Nxus.Qbd.Models
 {
     /// <summary>
-    /// Represents a transaction where a credit card is used to settle one or more outstanding vendor bills.  In accounting terms, this shifts a liability from the Accounts Payable (A/P) account to the credit card&#39;s balance.  A key feature is the explicit link created between this payment and the specific bills it covers,  which is essential for accurate payment tracking and maintaining correct vendor balances within QuickBooks.
+    /// Represents a payment made against one or more vendor bills using a Credit Card.
     /// </summary>
-    public partial class CreditCardBill : IValidatableObject
+    public partial class CreditCardBillPayment : IValidatableObject
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="CreditCardBill" /> class.
+        /// Initializes a new instance of the <see cref="CreditCardBillPayment" /> class.
         /// </summary>
         /// <param name="id">id</param>
         /// <param name="createdAt">createdAt</param>
@@ -40,13 +40,12 @@ namespace Nxus.Qbd.Models
         /// <param name="objectType">objectType</param>
         /// <param name="transactionDate">transactionDate</param>
         /// <param name="currency">currency</param>
-        /// <param name="exchangeRate">Exchange rate (required if currency is specified)</param>
-        /// <param name="refNumber">Reference number for the payment</param>
-        /// <param name="memo">Memo/description for the payment</param>
-        /// <param name="creditCardAccount">Credit card account being charged (required) The credit card account to which this bill credit card payment is being charged. This bill credit card payment will decrease the balance of this account.</param>
+        /// <param name="exchangeRate">exchangeRate</param>
+        /// <param name="refNumber">The primary reference number for the transaction (e.g., Invoice #, Check #).</param>
+        /// <param name="memo">memo</param>
         /// <param name="payablesAccount">payablesAccount</param>
         /// <param name="appliedToTransactions">appliedToTransactions</param>
-        /// <param name="amount">Total amount of the payment</param>
+        /// <param name="amount">amount</param>
         /// <param name="entity">entity</param>
         /// <param name="account">account</param>
         /// <param name="amountInHomeCurrency">amountInHomeCurrency</param>
@@ -56,9 +55,10 @@ namespace Nxus.Qbd.Models
         /// <param name="expenseLines">expenseLines</param>
         /// <param name="itemLines">itemLines</param>
         /// <param name="itemGroupLines">itemGroupLines</param>
+        /// <param name="creditCardAccount">creditCardAccount</param>
         /// <param name="customFields">customFields</param>
         [JsonConstructor]
-        public CreditCardBill(string id, DateTimeOffset createdAt, DateTimeOffset updatedAt, string revisionNumber, Option<string?> objectType = default, Option<DateOnly?> transactionDate = default, Option<QbdRef?> currency = default, Option<double?> exchangeRate = default, Option<string?> refNumber = default, Option<string?> memo = default, Option<QbdRef?> creditCardAccount = default, Option<QbdRef?> payablesAccount = default, Option<List<AppliedToTxn>?> appliedToTransactions = default, Option<double?> amount = default, Option<QbdRef?> entity = default, Option<QbdRef?> account = default, Option<string?> amountInHomeCurrency = default, Option<bool?> hasValidLineItems = default, Option<string?> externalId = default, Option<List<LinkedTransaction>?> linkedTransactions = default, Option<List<ExpenseLine>?> expenseLines = default, Option<List<ItemLine>?> itemLines = default, Option<List<ItemGroupLine>?> itemGroupLines = default, Option<List<QbdDataExt>?> customFields = default)
+        public CreditCardBillPayment(string id, DateTimeOffset createdAt, DateTimeOffset updatedAt, string revisionNumber, Option<string?> objectType = default, Option<DateOnly?> transactionDate = default, Option<QbdRef?> currency = default, Option<double?> exchangeRate = default, Option<string?> refNumber = default, Option<string?> memo = default, Option<QbdRef?> payablesAccount = default, Option<List<AppliedToTxn>?> appliedToTransactions = default, Option<double?> amount = default, Option<QbdRef?> entity = default, Option<QbdRef?> account = default, Option<string?> amountInHomeCurrency = default, Option<bool?> hasValidLineItems = default, Option<string?> externalId = default, Option<List<LinkedTransaction>?> linkedTransactions = default, Option<List<ExpenseLine>?> expenseLines = default, Option<List<ItemLine>?> itemLines = default, Option<List<ItemGroupLine>?> itemGroupLines = default, QbdRef? creditCardAccount = default, Option<List<QbdDataExt>?> customFields = default)
         {
             Id = id;
             CreatedAt = createdAt;
@@ -70,7 +70,6 @@ namespace Nxus.Qbd.Models
             ExchangeRateOption = exchangeRate;
             RefNumberOption = refNumber;
             MemoOption = memo;
-            CreditCardAccountOption = creditCardAccount;
             PayablesAccountOption = payablesAccount;
             AppliedToTransactionsOption = appliedToTransactions;
             AmountOption = amount;
@@ -83,6 +82,7 @@ namespace Nxus.Qbd.Models
             ExpenseLinesOption = expenseLines;
             ItemLinesOption = itemLines;
             ItemGroupLinesOption = itemGroupLines;
+            CreditCardAccount = creditCardAccount;
             CustomFieldsOption = customFields;
             OnCreated();
         }
@@ -160,9 +160,8 @@ namespace Nxus.Qbd.Models
         public Option<double?> ExchangeRateOption { get; private set; }
 
         /// <summary>
-        /// Exchange rate (required if currency is specified)
+        /// Gets or Sets ExchangeRate
         /// </summary>
-        /// <value>Exchange rate (required if currency is specified)</value>
         [JsonPropertyName("exchangeRate")]
         public double? ExchangeRate { get { return this.ExchangeRateOption.Value; } set { this.ExchangeRateOption = new(value); } }
 
@@ -174,9 +173,9 @@ namespace Nxus.Qbd.Models
         public Option<string?> RefNumberOption { get; private set; }
 
         /// <summary>
-        /// Reference number for the payment
+        /// The primary reference number for the transaction (e.g., Invoice #, Check #).
         /// </summary>
-        /// <value>Reference number for the payment</value>
+        /// <value>The primary reference number for the transaction (e.g., Invoice #, Check #).</value>
         [JsonPropertyName("refNumber")]
         public string? RefNumber { get { return this.RefNumberOption.Value; } set { this.RefNumberOption = new(value); } }
 
@@ -188,25 +187,10 @@ namespace Nxus.Qbd.Models
         public Option<string?> MemoOption { get; private set; }
 
         /// <summary>
-        /// Memo/description for the payment
+        /// Gets or Sets Memo
         /// </summary>
-        /// <value>Memo/description for the payment</value>
         [JsonPropertyName("memo")]
         public string? Memo { get { return this.MemoOption.Value; } set { this.MemoOption = new(value); } }
-
-        /// <summary>
-        /// Used to track the state of CreditCardAccount
-        /// </summary>
-        [JsonIgnore]
-        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<QbdRef?> CreditCardAccountOption { get; private set; }
-
-        /// <summary>
-        /// Credit card account being charged (required) The credit card account to which this bill credit card payment is being charged. This bill credit card payment will decrease the balance of this account.
-        /// </summary>
-        /// <value>Credit card account being charged (required) The credit card account to which this bill credit card payment is being charged. This bill credit card payment will decrease the balance of this account.</value>
-        [JsonPropertyName("creditCardAccount")]
-        public QbdRef? CreditCardAccount { get { return this.CreditCardAccountOption.Value; } set { this.CreditCardAccountOption = new(value); } }
 
         /// <summary>
         /// Used to track the state of PayablesAccount
@@ -242,9 +226,8 @@ namespace Nxus.Qbd.Models
         public Option<double?> AmountOption { get; private set; }
 
         /// <summary>
-        /// Total amount of the payment
+        /// Gets or Sets Amount
         /// </summary>
-        /// <value>Total amount of the payment</value>
         [JsonPropertyName("amount")]
         public double? Amount { get { return this.AmountOption.Value; } set { this.AmountOption = new(value); } }
 
@@ -366,6 +349,12 @@ namespace Nxus.Qbd.Models
         public List<ItemGroupLine>? ItemGroupLines { get { return this.ItemGroupLinesOption.Value; } set { this.ItemGroupLinesOption = new(value); } }
 
         /// <summary>
+        /// Gets or Sets CreditCardAccount
+        /// </summary>
+        [JsonPropertyName("creditCardAccount")]
+        public QbdRef? CreditCardAccount { get; set; }
+
+        /// <summary>
         /// Used to track the state of CustomFields
         /// </summary>
         [JsonIgnore]
@@ -385,7 +374,7 @@ namespace Nxus.Qbd.Models
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append("class CreditCardBill {\n");
+            sb.Append("class CreditCardBillPayment {\n");
             sb.Append("  Id: ").Append(Id).Append("\n");
             sb.Append("  CreatedAt: ").Append(CreatedAt).Append("\n");
             sb.Append("  UpdatedAt: ").Append(UpdatedAt).Append("\n");
@@ -396,7 +385,6 @@ namespace Nxus.Qbd.Models
             sb.Append("  ExchangeRate: ").Append(ExchangeRate).Append("\n");
             sb.Append("  RefNumber: ").Append(RefNumber).Append("\n");
             sb.Append("  Memo: ").Append(Memo).Append("\n");
-            sb.Append("  CreditCardAccount: ").Append(CreditCardAccount).Append("\n");
             sb.Append("  PayablesAccount: ").Append(PayablesAccount).Append("\n");
             sb.Append("  AppliedToTransactions: ").Append(AppliedToTransactions).Append("\n");
             sb.Append("  Amount: ").Append(Amount).Append("\n");
@@ -409,6 +397,7 @@ namespace Nxus.Qbd.Models
             sb.Append("  ExpenseLines: ").Append(ExpenseLines).Append("\n");
             sb.Append("  ItemLines: ").Append(ItemLines).Append("\n");
             sb.Append("  ItemGroupLines: ").Append(ItemGroupLines).Append("\n");
+            sb.Append("  CreditCardAccount: ").Append(CreditCardAccount).Append("\n");
             sb.Append("  CustomFields: ").Append(CustomFields).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -426,9 +415,9 @@ namespace Nxus.Qbd.Models
     }
 
     /// <summary>
-    /// A Json converter for type <see cref="CreditCardBill" />
+    /// A Json converter for type <see cref="CreditCardBillPayment" />
     /// </summary>
-    public class CreditCardBillJsonConverter : JsonConverter<CreditCardBill>
+    public class CreditCardBillPaymentJsonConverter : JsonConverter<CreditCardBillPayment>
     {
         /// <summary>
         /// The format to use to serialize CreatedAt
@@ -446,14 +435,14 @@ namespace Nxus.Qbd.Models
         public static string TransactionDateFormat { get; set; } = "yyyy'-'MM'-'dd";
 
         /// <summary>
-        /// Deserializes json to <see cref="CreditCardBill" />
+        /// Deserializes json to <see cref="CreditCardBillPayment" />
         /// </summary>
         /// <param name="utf8JsonReader"></param>
         /// <param name="typeToConvert"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <returns></returns>
         /// <exception cref="JsonException"></exception>
-        public override CreditCardBill Read(ref Utf8JsonReader utf8JsonReader, Type typeToConvert, JsonSerializerOptions jsonSerializerOptions)
+        public override CreditCardBillPayment Read(ref Utf8JsonReader utf8JsonReader, Type typeToConvert, JsonSerializerOptions jsonSerializerOptions)
         {
             int currentDepth = utf8JsonReader.CurrentDepth;
 
@@ -472,7 +461,6 @@ namespace Nxus.Qbd.Models
             Option<double?> exchangeRate = default;
             Option<string?> refNumber = default;
             Option<string?> memo = default;
-            Option<QbdRef?> creditCardAccount = default;
             Option<QbdRef?> payablesAccount = default;
             Option<List<AppliedToTxn>?> appliedToTransactions = default;
             Option<double?> amount = default;
@@ -485,6 +473,7 @@ namespace Nxus.Qbd.Models
             Option<List<ExpenseLine>?> expenseLines = default;
             Option<List<ItemLine>?> itemLines = default;
             Option<List<ItemGroupLine>?> itemGroupLines = default;
+            Option<QbdRef?> creditCardAccount = default;
             Option<List<QbdDataExt>?> customFields = default;
 
             while (utf8JsonReader.Read())
@@ -532,9 +521,6 @@ namespace Nxus.Qbd.Models
                         case "memo":
                             memo = new Option<string?>(utf8JsonReader.GetString());
                             break;
-                        case "creditCardAccount":
-                            creditCardAccount = new Option<QbdRef?>(JsonSerializer.Deserialize<QbdRef>(ref utf8JsonReader, jsonSerializerOptions));
-                            break;
                         case "payablesAccount":
                             payablesAccount = new Option<QbdRef?>(JsonSerializer.Deserialize<QbdRef>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
@@ -571,6 +557,9 @@ namespace Nxus.Qbd.Models
                         case "itemGroupLines":
                             itemGroupLines = new Option<List<ItemGroupLine>?>(JsonSerializer.Deserialize<List<ItemGroupLine>>(ref utf8JsonReader, jsonSerializerOptions)!);
                             break;
+                        case "creditCardAccount":
+                            creditCardAccount = new Option<QbdRef?>(JsonSerializer.Deserialize<QbdRef>(ref utf8JsonReader, jsonSerializerOptions));
+                            break;
                         case "customFields":
                             customFields = new Option<List<QbdDataExt>?>(JsonSerializer.Deserialize<List<QbdDataExt>>(ref utf8JsonReader, jsonSerializerOptions)!);
                             break;
@@ -581,232 +570,234 @@ namespace Nxus.Qbd.Models
             }
 
             if (!id.IsSet)
-                throw new ArgumentException("Property is required for class CreditCardBill.", nameof(id));
+                throw new ArgumentException("Property is required for class CreditCardBillPayment.", nameof(id));
 
             if (!createdAt.IsSet)
-                throw new ArgumentException("Property is required for class CreditCardBill.", nameof(createdAt));
+                throw new ArgumentException("Property is required for class CreditCardBillPayment.", nameof(createdAt));
 
             if (!updatedAt.IsSet)
-                throw new ArgumentException("Property is required for class CreditCardBill.", nameof(updatedAt));
+                throw new ArgumentException("Property is required for class CreditCardBillPayment.", nameof(updatedAt));
 
             if (!revisionNumber.IsSet)
-                throw new ArgumentException("Property is required for class CreditCardBill.", nameof(revisionNumber));
+                throw new ArgumentException("Property is required for class CreditCardBillPayment.", nameof(revisionNumber));
+
+            if (!creditCardAccount.IsSet)
+                throw new ArgumentException("Property is required for class CreditCardBillPayment.", nameof(creditCardAccount));
 
             if (id.IsSet && id.Value == null)
-                throw new ArgumentNullException(nameof(id), "Property is not nullable for class CreditCardBill.");
+                throw new ArgumentNullException(nameof(id), "Property is not nullable for class CreditCardBillPayment.");
 
             if (createdAt.IsSet && createdAt.Value == null)
-                throw new ArgumentNullException(nameof(createdAt), "Property is not nullable for class CreditCardBill.");
+                throw new ArgumentNullException(nameof(createdAt), "Property is not nullable for class CreditCardBillPayment.");
 
             if (updatedAt.IsSet && updatedAt.Value == null)
-                throw new ArgumentNullException(nameof(updatedAt), "Property is not nullable for class CreditCardBill.");
+                throw new ArgumentNullException(nameof(updatedAt), "Property is not nullable for class CreditCardBillPayment.");
 
             if (revisionNumber.IsSet && revisionNumber.Value == null)
-                throw new ArgumentNullException(nameof(revisionNumber), "Property is not nullable for class CreditCardBill.");
+                throw new ArgumentNullException(nameof(revisionNumber), "Property is not nullable for class CreditCardBillPayment.");
 
             if (objectType.IsSet && objectType.Value == null)
-                throw new ArgumentNullException(nameof(objectType), "Property is not nullable for class CreditCardBill.");
+                throw new ArgumentNullException(nameof(objectType), "Property is not nullable for class CreditCardBillPayment.");
 
             if (appliedToTransactions.IsSet && appliedToTransactions.Value == null)
-                throw new ArgumentNullException(nameof(appliedToTransactions), "Property is not nullable for class CreditCardBill.");
+                throw new ArgumentNullException(nameof(appliedToTransactions), "Property is not nullable for class CreditCardBillPayment.");
 
             if (hasValidLineItems.IsSet && hasValidLineItems.Value == null)
-                throw new ArgumentNullException(nameof(hasValidLineItems), "Property is not nullable for class CreditCardBill.");
+                throw new ArgumentNullException(nameof(hasValidLineItems), "Property is not nullable for class CreditCardBillPayment.");
 
             if (linkedTransactions.IsSet && linkedTransactions.Value == null)
-                throw new ArgumentNullException(nameof(linkedTransactions), "Property is not nullable for class CreditCardBill.");
+                throw new ArgumentNullException(nameof(linkedTransactions), "Property is not nullable for class CreditCardBillPayment.");
 
             if (expenseLines.IsSet && expenseLines.Value == null)
-                throw new ArgumentNullException(nameof(expenseLines), "Property is not nullable for class CreditCardBill.");
+                throw new ArgumentNullException(nameof(expenseLines), "Property is not nullable for class CreditCardBillPayment.");
 
             if (itemLines.IsSet && itemLines.Value == null)
-                throw new ArgumentNullException(nameof(itemLines), "Property is not nullable for class CreditCardBill.");
+                throw new ArgumentNullException(nameof(itemLines), "Property is not nullable for class CreditCardBillPayment.");
 
             if (itemGroupLines.IsSet && itemGroupLines.Value == null)
-                throw new ArgumentNullException(nameof(itemGroupLines), "Property is not nullable for class CreditCardBill.");
+                throw new ArgumentNullException(nameof(itemGroupLines), "Property is not nullable for class CreditCardBillPayment.");
 
             if (customFields.IsSet && customFields.Value == null)
-                throw new ArgumentNullException(nameof(customFields), "Property is not nullable for class CreditCardBill.");
+                throw new ArgumentNullException(nameof(customFields), "Property is not nullable for class CreditCardBillPayment.");
 
-            return new CreditCardBill(id.Value!, createdAt.Value!.Value!, updatedAt.Value!.Value!, revisionNumber.Value!, objectType, transactionDate, currency, exchangeRate, refNumber, memo, creditCardAccount, payablesAccount, appliedToTransactions, amount, entity, account, amountInHomeCurrency, hasValidLineItems, externalId, linkedTransactions, expenseLines, itemLines, itemGroupLines, customFields);
+            return new CreditCardBillPayment(id.Value!, createdAt.Value!.Value!, updatedAt.Value!.Value!, revisionNumber.Value!, objectType, transactionDate, currency, exchangeRate, refNumber, memo, payablesAccount, appliedToTransactions, amount, entity, account, amountInHomeCurrency, hasValidLineItems, externalId, linkedTransactions, expenseLines, itemLines, itemGroupLines, creditCardAccount.Value!, customFields);
         }
 
         /// <summary>
-        /// Serializes a <see cref="CreditCardBill" />
+        /// Serializes a <see cref="CreditCardBillPayment" />
         /// </summary>
         /// <param name="writer"></param>
-        /// <param name="creditCardBill"></param>
+        /// <param name="creditCardBillPayment"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <exception cref="NotImplementedException"></exception>
-        public override void Write(Utf8JsonWriter writer, CreditCardBill creditCardBill, JsonSerializerOptions jsonSerializerOptions)
+        public override void Write(Utf8JsonWriter writer, CreditCardBillPayment creditCardBillPayment, JsonSerializerOptions jsonSerializerOptions)
         {
             writer.WriteStartObject();
 
-            WriteProperties(writer, creditCardBill, jsonSerializerOptions);
+            WriteProperties(writer, creditCardBillPayment, jsonSerializerOptions);
             writer.WriteEndObject();
         }
 
         /// <summary>
-        /// Serializes the properties of <see cref="CreditCardBill" />
+        /// Serializes the properties of <see cref="CreditCardBillPayment" />
         /// </summary>
         /// <param name="writer"></param>
-        /// <param name="creditCardBill"></param>
+        /// <param name="creditCardBillPayment"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <exception cref="NotImplementedException"></exception>
-        public void WriteProperties(Utf8JsonWriter writer, CreditCardBill creditCardBill, JsonSerializerOptions jsonSerializerOptions)
+        public void WriteProperties(Utf8JsonWriter writer, CreditCardBillPayment creditCardBillPayment, JsonSerializerOptions jsonSerializerOptions)
         {
-            if (creditCardBill.Id == null)
-                throw new ArgumentNullException(nameof(creditCardBill.Id), "Property is required for class CreditCardBill.");
+            if (creditCardBillPayment.Id == null)
+                throw new ArgumentNullException(nameof(creditCardBillPayment.Id), "Property is required for class CreditCardBillPayment.");
 
-            if (creditCardBill.RevisionNumber == null)
-                throw new ArgumentNullException(nameof(creditCardBill.RevisionNumber), "Property is required for class CreditCardBill.");
+            if (creditCardBillPayment.RevisionNumber == null)
+                throw new ArgumentNullException(nameof(creditCardBillPayment.RevisionNumber), "Property is required for class CreditCardBillPayment.");
 
-            if (creditCardBill.ObjectTypeOption.IsSet && creditCardBill.ObjectType == null)
-                throw new ArgumentNullException(nameof(creditCardBill.ObjectType), "Property is required for class CreditCardBill.");
+            if (creditCardBillPayment.ObjectTypeOption.IsSet && creditCardBillPayment.ObjectType == null)
+                throw new ArgumentNullException(nameof(creditCardBillPayment.ObjectType), "Property is required for class CreditCardBillPayment.");
 
-            if (creditCardBill.AppliedToTransactionsOption.IsSet && creditCardBill.AppliedToTransactions == null)
-                throw new ArgumentNullException(nameof(creditCardBill.AppliedToTransactions), "Property is required for class CreditCardBill.");
+            if (creditCardBillPayment.AppliedToTransactionsOption.IsSet && creditCardBillPayment.AppliedToTransactions == null)
+                throw new ArgumentNullException(nameof(creditCardBillPayment.AppliedToTransactions), "Property is required for class CreditCardBillPayment.");
 
-            if (creditCardBill.LinkedTransactionsOption.IsSet && creditCardBill.LinkedTransactions == null)
-                throw new ArgumentNullException(nameof(creditCardBill.LinkedTransactions), "Property is required for class CreditCardBill.");
+            if (creditCardBillPayment.LinkedTransactionsOption.IsSet && creditCardBillPayment.LinkedTransactions == null)
+                throw new ArgumentNullException(nameof(creditCardBillPayment.LinkedTransactions), "Property is required for class CreditCardBillPayment.");
 
-            if (creditCardBill.ExpenseLinesOption.IsSet && creditCardBill.ExpenseLines == null)
-                throw new ArgumentNullException(nameof(creditCardBill.ExpenseLines), "Property is required for class CreditCardBill.");
+            if (creditCardBillPayment.ExpenseLinesOption.IsSet && creditCardBillPayment.ExpenseLines == null)
+                throw new ArgumentNullException(nameof(creditCardBillPayment.ExpenseLines), "Property is required for class CreditCardBillPayment.");
 
-            if (creditCardBill.ItemLinesOption.IsSet && creditCardBill.ItemLines == null)
-                throw new ArgumentNullException(nameof(creditCardBill.ItemLines), "Property is required for class CreditCardBill.");
+            if (creditCardBillPayment.ItemLinesOption.IsSet && creditCardBillPayment.ItemLines == null)
+                throw new ArgumentNullException(nameof(creditCardBillPayment.ItemLines), "Property is required for class CreditCardBillPayment.");
 
-            if (creditCardBill.ItemGroupLinesOption.IsSet && creditCardBill.ItemGroupLines == null)
-                throw new ArgumentNullException(nameof(creditCardBill.ItemGroupLines), "Property is required for class CreditCardBill.");
+            if (creditCardBillPayment.ItemGroupLinesOption.IsSet && creditCardBillPayment.ItemGroupLines == null)
+                throw new ArgumentNullException(nameof(creditCardBillPayment.ItemGroupLines), "Property is required for class CreditCardBillPayment.");
 
-            if (creditCardBill.CustomFieldsOption.IsSet && creditCardBill.CustomFields == null)
-                throw new ArgumentNullException(nameof(creditCardBill.CustomFields), "Property is required for class CreditCardBill.");
+            if (creditCardBillPayment.CustomFieldsOption.IsSet && creditCardBillPayment.CustomFields == null)
+                throw new ArgumentNullException(nameof(creditCardBillPayment.CustomFields), "Property is required for class CreditCardBillPayment.");
 
-            writer.WriteString("id", creditCardBill.Id);
+            writer.WriteString("id", creditCardBillPayment.Id);
 
-            writer.WriteString("createdAt", creditCardBill.CreatedAt.ToString(CreatedAtFormat));
+            writer.WriteString("createdAt", creditCardBillPayment.CreatedAt.ToString(CreatedAtFormat));
 
-            writer.WriteString("updatedAt", creditCardBill.UpdatedAt.ToString(UpdatedAtFormat));
+            writer.WriteString("updatedAt", creditCardBillPayment.UpdatedAt.ToString(UpdatedAtFormat));
 
-            writer.WriteString("revisionNumber", creditCardBill.RevisionNumber);
+            writer.WriteString("revisionNumber", creditCardBillPayment.RevisionNumber);
 
-            if (creditCardBill.ObjectTypeOption.IsSet)
-                writer.WriteString("objectType", creditCardBill.ObjectType);
+            if (creditCardBillPayment.ObjectTypeOption.IsSet)
+                writer.WriteString("objectType", creditCardBillPayment.ObjectType);
 
-            if (creditCardBill.TransactionDateOption.IsSet)
-                if (creditCardBill.TransactionDateOption.Value != null)
-                    writer.WriteString("transactionDate", creditCardBill.TransactionDateOption.Value!.Value.ToString(TransactionDateFormat));
+            if (creditCardBillPayment.TransactionDateOption.IsSet)
+                if (creditCardBillPayment.TransactionDateOption.Value != null)
+                    writer.WriteString("transactionDate", creditCardBillPayment.TransactionDateOption.Value!.Value.ToString(TransactionDateFormat));
                 else
                     writer.WriteNull("transactionDate");
 
-            if (creditCardBill.CurrencyOption.IsSet)
-                if (creditCardBill.CurrencyOption.Value != null)
+            if (creditCardBillPayment.CurrencyOption.IsSet)
+                if (creditCardBillPayment.CurrencyOption.Value != null)
                 {
                     writer.WritePropertyName("currency");
-                    JsonSerializer.Serialize(writer, creditCardBill.Currency, jsonSerializerOptions);
+                    JsonSerializer.Serialize(writer, creditCardBillPayment.Currency, jsonSerializerOptions);
                 }
                 else
                     writer.WriteNull("currency");
-            if (creditCardBill.ExchangeRateOption.IsSet)
-                if (creditCardBill.ExchangeRateOption.Value != null)
-                    writer.WriteNumber("exchangeRate", creditCardBill.ExchangeRateOption.Value!.Value);
+            if (creditCardBillPayment.ExchangeRateOption.IsSet)
+                if (creditCardBillPayment.ExchangeRateOption.Value != null)
+                    writer.WriteNumber("exchangeRate", creditCardBillPayment.ExchangeRateOption.Value!.Value);
                 else
                     writer.WriteNull("exchangeRate");
 
-            if (creditCardBill.RefNumberOption.IsSet)
-                if (creditCardBill.RefNumberOption.Value != null)
-                    writer.WriteString("refNumber", creditCardBill.RefNumber);
+            if (creditCardBillPayment.RefNumberOption.IsSet)
+                if (creditCardBillPayment.RefNumberOption.Value != null)
+                    writer.WriteString("refNumber", creditCardBillPayment.RefNumber);
                 else
                     writer.WriteNull("refNumber");
 
-            if (creditCardBill.MemoOption.IsSet)
-                if (creditCardBill.MemoOption.Value != null)
-                    writer.WriteString("memo", creditCardBill.Memo);
+            if (creditCardBillPayment.MemoOption.IsSet)
+                if (creditCardBillPayment.MemoOption.Value != null)
+                    writer.WriteString("memo", creditCardBillPayment.Memo);
                 else
                     writer.WriteNull("memo");
 
-            if (creditCardBill.CreditCardAccountOption.IsSet)
-                if (creditCardBill.CreditCardAccountOption.Value != null)
-                {
-                    writer.WritePropertyName("creditCardAccount");
-                    JsonSerializer.Serialize(writer, creditCardBill.CreditCardAccount, jsonSerializerOptions);
-                }
-                else
-                    writer.WriteNull("creditCardAccount");
-            if (creditCardBill.PayablesAccountOption.IsSet)
-                if (creditCardBill.PayablesAccountOption.Value != null)
+            if (creditCardBillPayment.PayablesAccountOption.IsSet)
+                if (creditCardBillPayment.PayablesAccountOption.Value != null)
                 {
                     writer.WritePropertyName("payablesAccount");
-                    JsonSerializer.Serialize(writer, creditCardBill.PayablesAccount, jsonSerializerOptions);
+                    JsonSerializer.Serialize(writer, creditCardBillPayment.PayablesAccount, jsonSerializerOptions);
                 }
                 else
                     writer.WriteNull("payablesAccount");
-            if (creditCardBill.AppliedToTransactionsOption.IsSet)
+            if (creditCardBillPayment.AppliedToTransactionsOption.IsSet)
             {
                 writer.WritePropertyName("appliedToTransactions");
-                JsonSerializer.Serialize(writer, creditCardBill.AppliedToTransactions, jsonSerializerOptions);
+                JsonSerializer.Serialize(writer, creditCardBillPayment.AppliedToTransactions, jsonSerializerOptions);
             }
-            if (creditCardBill.AmountOption.IsSet)
-                if (creditCardBill.AmountOption.Value != null)
-                    writer.WriteNumber("amount", creditCardBill.AmountOption.Value!.Value);
+            if (creditCardBillPayment.AmountOption.IsSet)
+                if (creditCardBillPayment.AmountOption.Value != null)
+                    writer.WriteNumber("amount", creditCardBillPayment.AmountOption.Value!.Value);
                 else
                     writer.WriteNull("amount");
 
-            if (creditCardBill.EntityOption.IsSet)
-                if (creditCardBill.EntityOption.Value != null)
+            if (creditCardBillPayment.EntityOption.IsSet)
+                if (creditCardBillPayment.EntityOption.Value != null)
                 {
                     writer.WritePropertyName("entity");
-                    JsonSerializer.Serialize(writer, creditCardBill.Entity, jsonSerializerOptions);
+                    JsonSerializer.Serialize(writer, creditCardBillPayment.Entity, jsonSerializerOptions);
                 }
                 else
                     writer.WriteNull("entity");
-            if (creditCardBill.AccountOption.IsSet)
-                if (creditCardBill.AccountOption.Value != null)
+            if (creditCardBillPayment.AccountOption.IsSet)
+                if (creditCardBillPayment.AccountOption.Value != null)
                 {
                     writer.WritePropertyName("account");
-                    JsonSerializer.Serialize(writer, creditCardBill.Account, jsonSerializerOptions);
+                    JsonSerializer.Serialize(writer, creditCardBillPayment.Account, jsonSerializerOptions);
                 }
                 else
                     writer.WriteNull("account");
-            if (creditCardBill.AmountInHomeCurrencyOption.IsSet)
-                if (creditCardBill.AmountInHomeCurrencyOption.Value != null)
-                    writer.WriteString("amountInHomeCurrency", creditCardBill.AmountInHomeCurrency);
+            if (creditCardBillPayment.AmountInHomeCurrencyOption.IsSet)
+                if (creditCardBillPayment.AmountInHomeCurrencyOption.Value != null)
+                    writer.WriteString("amountInHomeCurrency", creditCardBillPayment.AmountInHomeCurrency);
                 else
                     writer.WriteNull("amountInHomeCurrency");
 
-            if (creditCardBill.HasValidLineItemsOption.IsSet)
-                writer.WriteBoolean("hasValidLineItems", creditCardBill.HasValidLineItemsOption.Value!.Value);
+            if (creditCardBillPayment.HasValidLineItemsOption.IsSet)
+                writer.WriteBoolean("hasValidLineItems", creditCardBillPayment.HasValidLineItemsOption.Value!.Value);
 
-            if (creditCardBill.ExternalIdOption.IsSet)
-                if (creditCardBill.ExternalIdOption.Value != null)
-                    writer.WriteString("externalId", creditCardBill.ExternalId);
+            if (creditCardBillPayment.ExternalIdOption.IsSet)
+                if (creditCardBillPayment.ExternalIdOption.Value != null)
+                    writer.WriteString("externalId", creditCardBillPayment.ExternalId);
                 else
                     writer.WriteNull("externalId");
 
-            if (creditCardBill.LinkedTransactionsOption.IsSet)
+            if (creditCardBillPayment.LinkedTransactionsOption.IsSet)
             {
                 writer.WritePropertyName("linkedTransactions");
-                JsonSerializer.Serialize(writer, creditCardBill.LinkedTransactions, jsonSerializerOptions);
+                JsonSerializer.Serialize(writer, creditCardBillPayment.LinkedTransactions, jsonSerializerOptions);
             }
-            if (creditCardBill.ExpenseLinesOption.IsSet)
+            if (creditCardBillPayment.ExpenseLinesOption.IsSet)
             {
                 writer.WritePropertyName("expenseLines");
-                JsonSerializer.Serialize(writer, creditCardBill.ExpenseLines, jsonSerializerOptions);
+                JsonSerializer.Serialize(writer, creditCardBillPayment.ExpenseLines, jsonSerializerOptions);
             }
-            if (creditCardBill.ItemLinesOption.IsSet)
+            if (creditCardBillPayment.ItemLinesOption.IsSet)
             {
                 writer.WritePropertyName("itemLines");
-                JsonSerializer.Serialize(writer, creditCardBill.ItemLines, jsonSerializerOptions);
+                JsonSerializer.Serialize(writer, creditCardBillPayment.ItemLines, jsonSerializerOptions);
             }
-            if (creditCardBill.ItemGroupLinesOption.IsSet)
+            if (creditCardBillPayment.ItemGroupLinesOption.IsSet)
             {
                 writer.WritePropertyName("itemGroupLines");
-                JsonSerializer.Serialize(writer, creditCardBill.ItemGroupLines, jsonSerializerOptions);
+                JsonSerializer.Serialize(writer, creditCardBillPayment.ItemGroupLines, jsonSerializerOptions);
             }
-            if (creditCardBill.CustomFieldsOption.IsSet)
+            if (creditCardBillPayment.CreditCardAccount != null)
+            {
+                writer.WritePropertyName("creditCardAccount");
+                JsonSerializer.Serialize(writer, creditCardBillPayment.CreditCardAccount, jsonSerializerOptions);
+            }
+            else
+                writer.WriteNull("creditCardAccount");
+            if (creditCardBillPayment.CustomFieldsOption.IsSet)
             {
                 writer.WritePropertyName("customFields");
-                JsonSerializer.Serialize(writer, creditCardBill.CustomFields, jsonSerializerOptions);
+                JsonSerializer.Serialize(writer, creditCardBillPayment.CustomFields, jsonSerializerOptions);
             }
         }
     }

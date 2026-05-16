@@ -40,31 +40,31 @@ namespace Nxus.Qbd.Models
         /// <param name="objectType">objectType</param>
         /// <param name="transactionDate">transactionDate</param>
         /// <param name="currency">currency</param>
-        /// <param name="exchangeRate">(Optional) Exchange rate if this is a foreign currency Purchase Order.</param>
-        /// <param name="refNumber">(Optional) The document number. (Max 11 characters)</param>
-        /// <param name="memo">(Optional) Memo about the transaction. (Max 4095 characters)</param>
+        /// <param name="exchangeRate">exchangeRate</param>
+        /// <param name="refNumber">The primary reference number for the transaction (e.g., Invoice #, Check #).</param>
+        /// <param name="memo">memo</param>
         /// <param name="transactionNumber">transactionNumber</param>
         /// <param name="vendor">vendor</param>
         /// <param name="class">class</param>
         /// <param name="inventorySite">inventorySite</param>
         /// <param name="shipToEntity">shipToEntity</param>
         /// <param name="template">template</param>
-        /// <param name="vendorAddress">(Optional) The primary address for the Vendor on this Purchase Order.</param>
+        /// <param name="vendorAddress">vendorAddress</param>
         /// <param name="vendorAddressBlock">vendorAddressBlock</param>
-        /// <param name="shipAddress">(Optional) The shipping address for the Purchase Order.</param>
+        /// <param name="shipAddress">shipAddress</param>
         /// <param name="shipAddressBlock">shipAddressBlock</param>
         /// <param name="terms">terms</param>
-        /// <param name="dueDate">(Optional) The date the payment is due based on terms.</param>
-        /// <param name="expectedDate">(Optional) The date the vendor is expected to deliver the item.</param>
+        /// <param name="dueDate">dueDate</param>
+        /// <param name="expectedDate">expectedDate</param>
         /// <param name="shipmentMethod">shipmentMethod</param>
         /// <param name="shipmentOrigin">shipmentOrigin</param>
         /// <param name="totalAmount">totalAmount</param>
-        /// <param name="isManuallyClosed">(Optional) If true, the Purchase Order is considered manually closed (Cannot be cleared if modifying existing value).</param>
+        /// <param name="isManuallyClosed">isManuallyClosed</param>
         /// <param name="isFullyReceived">isFullyReceived</param>
         /// <param name="vendorMessage">vendorMessage</param>
         /// <param name="isQueuedForPrint">isQueuedForPrint</param>
         /// <param name="isQueuedForEmailed">isQueuedForEmailed</param>
-        /// <param name="isTaxIncluded">(Optional) If true, the line item rates/amounts are inclusive of sales tax.</param>
+        /// <param name="isTaxIncluded">isTaxIncluded</param>
         /// <param name="salesTaxCode">salesTaxCode</param>
         /// <param name="otherCustomField1">otherCustomField1</param>
         /// <param name="otherCustomField2">otherCustomField2</param>
@@ -208,9 +208,8 @@ namespace Nxus.Qbd.Models
         public Option<double?> ExchangeRateOption { get; private set; }
 
         /// <summary>
-        /// (Optional) Exchange rate if this is a foreign currency Purchase Order.
+        /// Gets or Sets ExchangeRate
         /// </summary>
-        /// <value>(Optional) Exchange rate if this is a foreign currency Purchase Order.</value>
         [JsonPropertyName("exchangeRate")]
         public double? ExchangeRate { get { return this.ExchangeRateOption.Value; } set { this.ExchangeRateOption = new(value); } }
 
@@ -222,9 +221,9 @@ namespace Nxus.Qbd.Models
         public Option<string?> RefNumberOption { get; private set; }
 
         /// <summary>
-        /// (Optional) The document number. (Max 11 characters)
+        /// The primary reference number for the transaction (e.g., Invoice #, Check #).
         /// </summary>
-        /// <value>(Optional) The document number. (Max 11 characters)</value>
+        /// <value>The primary reference number for the transaction (e.g., Invoice #, Check #).</value>
         [JsonPropertyName("refNumber")]
         public string? RefNumber { get { return this.RefNumberOption.Value; } set { this.RefNumberOption = new(value); } }
 
@@ -236,9 +235,8 @@ namespace Nxus.Qbd.Models
         public Option<string?> MemoOption { get; private set; }
 
         /// <summary>
-        /// (Optional) Memo about the transaction. (Max 4095 characters)
+        /// Gets or Sets Memo
         /// </summary>
-        /// <value>(Optional) Memo about the transaction. (Max 4095 characters)</value>
         [JsonPropertyName("memo")]
         public string? Memo { get { return this.MemoOption.Value; } set { this.MemoOption = new(value); } }
 
@@ -328,9 +326,8 @@ namespace Nxus.Qbd.Models
         public Option<Address?> VendorAddressOption { get; private set; }
 
         /// <summary>
-        /// (Optional) The primary address for the Vendor on this Purchase Order.
+        /// Gets or Sets VendorAddress
         /// </summary>
-        /// <value>(Optional) The primary address for the Vendor on this Purchase Order.</value>
         [JsonPropertyName("vendorAddress")]
         public Address? VendorAddress { get { return this.VendorAddressOption.Value; } set { this.VendorAddressOption = new(value); } }
 
@@ -355,9 +352,8 @@ namespace Nxus.Qbd.Models
         public Option<Address?> ShipAddressOption { get; private set; }
 
         /// <summary>
-        /// (Optional) The shipping address for the Purchase Order.
+        /// Gets or Sets ShipAddress
         /// </summary>
-        /// <value>(Optional) The shipping address for the Purchase Order.</value>
         [JsonPropertyName("shipAddress")]
         public Address? ShipAddress { get { return this.ShipAddressOption.Value; } set { this.ShipAddressOption = new(value); } }
 
@@ -395,9 +391,8 @@ namespace Nxus.Qbd.Models
         public Option<DateOnly?> DueDateOption { get; private set; }
 
         /// <summary>
-        /// (Optional) The date the payment is due based on terms.
+        /// Gets or Sets DueDate
         /// </summary>
-        /// <value>(Optional) The date the payment is due based on terms.</value>
         [JsonPropertyName("dueDate")]
         public DateOnly? DueDate { get { return this.DueDateOption.Value; } set { this.DueDateOption = new(value); } }
 
@@ -409,9 +404,8 @@ namespace Nxus.Qbd.Models
         public Option<DateOnly?> ExpectedDateOption { get; private set; }
 
         /// <summary>
-        /// (Optional) The date the vendor is expected to deliver the item.
+        /// Gets or Sets ExpectedDate
         /// </summary>
-        /// <value>(Optional) The date the vendor is expected to deliver the item.</value>
         [JsonPropertyName("expectedDate")]
         public DateOnly? ExpectedDate { get { return this.ExpectedDateOption.Value; } set { this.ExpectedDateOption = new(value); } }
 
@@ -462,9 +456,8 @@ namespace Nxus.Qbd.Models
         public Option<bool?> IsManuallyClosedOption { get; private set; }
 
         /// <summary>
-        /// (Optional) If true, the Purchase Order is considered manually closed (Cannot be cleared if modifying existing value).
+        /// Gets or Sets IsManuallyClosed
         /// </summary>
-        /// <value>(Optional) If true, the Purchase Order is considered manually closed (Cannot be cleared if modifying existing value).</value>
         [JsonPropertyName("isManuallyClosed")]
         public bool? IsManuallyClosed { get { return this.IsManuallyClosedOption.Value; } set { this.IsManuallyClosedOption = new(value); } }
 
@@ -528,9 +521,8 @@ namespace Nxus.Qbd.Models
         public Option<bool?> IsTaxIncludedOption { get; private set; }
 
         /// <summary>
-        /// (Optional) If true, the line item rates/amounts are inclusive of sales tax.
+        /// Gets or Sets IsTaxIncluded
         /// </summary>
-        /// <value>(Optional) If true, the line item rates/amounts are inclusive of sales tax.</value>
         [JsonPropertyName("isTaxIncluded")]
         public bool? IsTaxIncluded { get { return this.IsTaxIncludedOption.Value; } set { this.IsTaxIncludedOption = new(value); } }
 

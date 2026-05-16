@@ -41,17 +41,17 @@ namespace Nxus.Qbd.Models
         /// <param name="transactionDate">transactionDate</param>
         /// <param name="currency">currency</param>
         /// <param name="exchangeRate">exchangeRate</param>
-        /// <param name="refNumber">refNumber</param>
+        /// <param name="refNumber">The primary reference number for the transaction (e.g., Invoice #, Check #).</param>
         /// <param name="memo">memo</param>
         /// <param name="transactionNumber">transactionNumber</param>
         /// <param name="customer">customer</param>
         /// <param name="itemService">itemService</param>
-        /// <param name="duration">(Required) The duration of the work performed, formatted as an XML TimeIntervalType string (e.g., \&quot;PT8H0M0S\&quot; for 8 hours).</param>
+        /// <param name="duration">duration</param>
         /// <param name="class">class</param>
         /// <param name="payrollItemWage">payrollItemWage</param>
-        /// <param name="notes">(Optional) General notes about the time entry. Max 4095 chars.</param>
-        /// <param name="billableStatus">(Optional) Status indicating if the time is billable (Billable, NotBillable, HasBeenBilled).</param>
-        /// <param name="isBillable">(Optional) Legacy flag to set time as billable. Use BillableStatus instead if possible.</param>
+        /// <param name="notes">notes</param>
+        /// <param name="billableStatus">billableStatus</param>
+        /// <param name="isBillable">isBillable</param>
         /// <param name="isBilled">isBilled</param>
         /// <param name="amount">amount</param>
         /// <param name="entity">entity</param>
@@ -187,8 +187,9 @@ namespace Nxus.Qbd.Models
         public Option<string?> RefNumberOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets RefNumber
+        /// The primary reference number for the transaction (e.g., Invoice #, Check #).
         /// </summary>
+        /// <value>The primary reference number for the transaction (e.g., Invoice #, Check #).</value>
         [JsonPropertyName("refNumber")]
         public string? RefNumber { get { return this.RefNumberOption.Value; } set { this.RefNumberOption = new(value); } }
 
@@ -252,9 +253,8 @@ namespace Nxus.Qbd.Models
         public Option<string?> DurationOption { get; private set; }
 
         /// <summary>
-        /// (Required) The duration of the work performed, formatted as an XML TimeIntervalType string (e.g., \&quot;PT8H0M0S\&quot; for 8 hours).
+        /// Gets or Sets Duration
         /// </summary>
-        /// <value>(Required) The duration of the work performed, formatted as an XML TimeIntervalType string (e.g., \&quot;PT8H0M0S\&quot; for 8 hours).</value>
         [JsonPropertyName("duration")]
         public string? Duration { get { return this.DurationOption.Value; } set { this.DurationOption = new(value); } }
 
@@ -292,9 +292,8 @@ namespace Nxus.Qbd.Models
         public Option<string?> NotesOption { get; private set; }
 
         /// <summary>
-        /// (Optional) General notes about the time entry. Max 4095 chars.
+        /// Gets or Sets Notes
         /// </summary>
-        /// <value>(Optional) General notes about the time entry. Max 4095 chars.</value>
         [JsonPropertyName("notes")]
         public string? Notes { get { return this.NotesOption.Value; } set { this.NotesOption = new(value); } }
 
@@ -306,9 +305,8 @@ namespace Nxus.Qbd.Models
         public Option<string?> BillableStatusOption { get; private set; }
 
         /// <summary>
-        /// (Optional) Status indicating if the time is billable (Billable, NotBillable, HasBeenBilled).
+        /// Gets or Sets BillableStatus
         /// </summary>
-        /// <value>(Optional) Status indicating if the time is billable (Billable, NotBillable, HasBeenBilled).</value>
         [JsonPropertyName("billableStatus")]
         public string? BillableStatus { get { return this.BillableStatusOption.Value; } set { this.BillableStatusOption = new(value); } }
 
@@ -320,9 +318,8 @@ namespace Nxus.Qbd.Models
         public Option<bool?> IsBillableOption { get; private set; }
 
         /// <summary>
-        /// (Optional) Legacy flag to set time as billable. Use BillableStatus instead if possible.
+        /// Gets or Sets IsBillable
         /// </summary>
-        /// <value>(Optional) Legacy flag to set time as billable. Use BillableStatus instead if possible.</value>
         [JsonPropertyName("isBillable")]
         public bool? IsBillable { get { return this.IsBillableOption.Value; } set { this.IsBillableOption = new(value); } }
 

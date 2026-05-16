@@ -120,6 +120,18 @@ namespace Nxus.Qbd.Models
         /// <returns>Validation Result</returns>
         IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
+            // UnitOfMeasure (string) maxLength
+            if (this.UnitOfMeasure != null && this.UnitOfMeasure.Length > 31)
+            {
+                yield return new ValidationResult("Invalid value for UnitOfMeasure, length must be less than 31.", new [] { "UnitOfMeasure" });
+            }
+
+            // InventorySiteId (string) maxLength
+            if (this.InventorySiteId != null && this.InventorySiteId.Length > 50)
+            {
+                yield return new ValidationResult("Invalid value for InventorySiteId, length must be less than 50.", new [] { "InventorySiteId" });
+            }
+
             yield break;
         }
     }

@@ -33,8 +33,8 @@ namespace Nxus.Qbd.Models
         /// <summary>
         /// Initializes a new instance of the <see cref="ReportColumnTitle" /> class.
         /// </summary>
-        /// <param name="titleRow">The title row of the column.</param>
-        /// <param name="value">The value of the column title.</param>
+        /// <param name="titleRow">The title row number (for multi-row headers).</param>
+        /// <param name="value">The title text for this column or column group.</param>
         /// <param name="subTitles">subTitles</param>
         [JsonConstructor]
         public ReportColumnTitle(Option<int?> titleRow = default, Option<string?> value = default, Option<List<ReportColumnTitle>?> subTitles = default)
@@ -55,9 +55,9 @@ namespace Nxus.Qbd.Models
         public Option<int?> TitleRowOption { get; private set; }
 
         /// <summary>
-        /// The title row of the column.
+        /// The title row number (for multi-row headers).
         /// </summary>
-        /// <value>The title row of the column.</value>
+        /// <value>The title row number (for multi-row headers).</value>
         [JsonPropertyName("titleRow")]
         public int? TitleRow { get { return this.TitleRowOption.Value; } set { this.TitleRowOption = new(value); } }
 
@@ -69,9 +69,9 @@ namespace Nxus.Qbd.Models
         public Option<string?> ValueOption { get; private set; }
 
         /// <summary>
-        /// The value of the column title.
+        /// The title text for this column or column group.
         /// </summary>
-        /// <value>The value of the column title.</value>
+        /// <value>The title text for this column or column group.</value>
         [JsonPropertyName("value")]
         public string? Value { get { return this.ValueOption.Value; } set { this.ValueOption = new(value); } }
 

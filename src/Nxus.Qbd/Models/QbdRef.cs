@@ -34,7 +34,7 @@ namespace Nxus.Qbd.Models
         /// Initializes a new instance of the <see cref="QbdRef" /> class.
         /// </summary>
         /// <param name="id">id</param>
-        /// <param name="fullname">The fully-qualified name of the referenced object, including any parent names separated by colons. Case-sensitive.  Includes the entire parent hierarchy, with each level separated by colons, ending in the object&#39;s own name. For nested sub-items, it would be \&quot;Grandparent:Parent:Child\&quot;</param>
+        /// <param name="fullname">fullname</param>
         [JsonConstructor]
         public QbdRef(string id, Option<string?> fullname = default)
         {
@@ -59,10 +59,8 @@ namespace Nxus.Qbd.Models
         public Option<string?> FullnameOption { get; private set; }
 
         /// <summary>
-        /// The fully-qualified name of the referenced object, including any parent names separated by colons. Case-sensitive.  Includes the entire parent hierarchy, with each level separated by colons, ending in the object&#39;s own name. For nested sub-items, it would be \&quot;Grandparent:Parent:Child\&quot;
+        /// Gets or Sets Fullname
         /// </summary>
-        /// <value>The fully-qualified name of the referenced object, including any parent names separated by colons. Case-sensitive.  Includes the entire parent hierarchy, with each level separated by colons, ending in the object&#39;s own name. For nested sub-items, it would be \&quot;Grandparent:Parent:Child\&quot;</value>
-        /* <example>&quot;Suppliers:ABC Office Supplies&quot;</example> */
         [JsonPropertyName("fullname")]
         public string? Fullname { get { return this.FullnameOption.Value; } set { this.FullnameOption = new(value); } }
 

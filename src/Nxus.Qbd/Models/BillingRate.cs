@@ -38,11 +38,11 @@ namespace Nxus.Qbd.Models
         /// <param name="updatedAt">updatedAt</param>
         /// <param name="revisionNumber">revisionNumber</param>
         /// <param name="objectType">objectType</param>
-        /// <param name="name">(Required) The name of the billing rate.</param>
-        /// <param name="billingRateType">Indicates whether the billing rate applies a fixed rate to all service items or custom rates per individual service item [2-4].</param>
-        /// <param name="fixedBillingRate">A simple fixed rate that will override all the standard rates for service items performed by the entity assigned this billing rate [2, 3].</param>
+        /// <param name="name">The primary display name for the List object (e.g., Customer Name, Vendor Name).</param>
+        /// <param name="billingRateType">The type of billing rate (e.g., FixedRate, PerItem).</param>
+        /// <param name="fixedBillingRate">The fixed rate amount if the BillingRateType is FixedRate.</param>
         /// <param name="billingRatePerItems">billingRatePerItems</param>
-        /// <param name="isActive">isActive</param>
+        /// <param name="isActive">Indicates whether the list item is active. Common to all list types.</param>
         /// <param name="customFields">customFields</param>
         [JsonConstructor]
         public BillingRate(string id, DateTimeOffset createdAt, DateTimeOffset updatedAt, string revisionNumber, Option<string?> objectType = default, Option<string?> name = default, Option<string?> billingRateType = default, Option<double?> fixedBillingRate = default, Option<List<BillingRatePerItem>?> billingRatePerItems = default, Option<bool?> isActive = default, Option<List<QbdDataExt>?> customFields = default)
@@ -108,9 +108,9 @@ namespace Nxus.Qbd.Models
         public Option<string?> NameOption { get; private set; }
 
         /// <summary>
-        /// (Required) The name of the billing rate.
+        /// The primary display name for the List object (e.g., Customer Name, Vendor Name).
         /// </summary>
-        /// <value>(Required) The name of the billing rate.</value>
+        /// <value>The primary display name for the List object (e.g., Customer Name, Vendor Name).</value>
         [JsonPropertyName("name")]
         public string? Name { get { return this.NameOption.Value; } set { this.NameOption = new(value); } }
 
@@ -122,10 +122,9 @@ namespace Nxus.Qbd.Models
         public Option<string?> BillingRateTypeOption { get; private set; }
 
         /// <summary>
-        /// Indicates whether the billing rate applies a fixed rate to all service items or custom rates per individual service item [2-4].
+        /// The type of billing rate (e.g., FixedRate, PerItem).
         /// </summary>
-        /// <value>Indicates whether the billing rate applies a fixed rate to all service items or custom rates per individual service item [2-4].</value>
-        /* <example>FixedBilling | PerItem</example> */
+        /// <value>The type of billing rate (e.g., FixedRate, PerItem).</value>
         [JsonPropertyName("billingRateType")]
         public string? BillingRateType { get { return this.BillingRateTypeOption.Value; } set { this.BillingRateTypeOption = new(value); } }
 
@@ -137,10 +136,9 @@ namespace Nxus.Qbd.Models
         public Option<double?> FixedBillingRateOption { get; private set; }
 
         /// <summary>
-        /// A simple fixed rate that will override all the standard rates for service items performed by the entity assigned this billing rate [2, 3].
+        /// The fixed rate amount if the BillingRateType is FixedRate.
         /// </summary>
-        /// <value>A simple fixed rate that will override all the standard rates for service items performed by the entity assigned this billing rate [2, 3].</value>
-        /* <example>100.00</example> */
+        /// <value>The fixed rate amount if the BillingRateType is FixedRate.</value>
         [JsonPropertyName("fixedBillingRate")]
         public double? FixedBillingRate { get { return this.FixedBillingRateOption.Value; } set { this.FixedBillingRateOption = new(value); } }
 
@@ -165,8 +163,9 @@ namespace Nxus.Qbd.Models
         public Option<bool?> IsActiveOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets IsActive
+        /// Indicates whether the list item is active. Common to all list types.
         /// </summary>
+        /// <value>Indicates whether the list item is active. Common to all list types.</value>
         [JsonPropertyName("isActive")]
         public bool? IsActive { get { return this.IsActiveOption.Value; } set { this.IsActiveOption = new(value); } }
 

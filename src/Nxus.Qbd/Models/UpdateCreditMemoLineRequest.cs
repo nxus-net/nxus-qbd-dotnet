@@ -390,6 +390,42 @@ namespace Nxus.Qbd.Models
         /// <returns>Validation Result</returns>
         IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
+            // Description (string) maxLength
+            if (this.Description != null && this.Description.Length > 4095)
+            {
+                yield return new ValidationResult("Invalid value for Description, length must be less than 4095.", new [] { "Description" });
+            }
+
+            // UnitOfMeasure (string) maxLength
+            if (this.UnitOfMeasure != null && this.UnitOfMeasure.Length > 31)
+            {
+                yield return new ValidationResult("Invalid value for UnitOfMeasure, length must be less than 31.", new [] { "UnitOfMeasure" });
+            }
+
+            // SerialNumber (string) maxLength
+            if (this.SerialNumber != null && this.SerialNumber.Length > 4095)
+            {
+                yield return new ValidationResult("Invalid value for SerialNumber, length must be less than 4095.", new [] { "SerialNumber" });
+            }
+
+            // LotNumber (string) maxLength
+            if (this.LotNumber != null && this.LotNumber.Length > 40)
+            {
+                yield return new ValidationResult("Invalid value for LotNumber, length must be less than 40.", new [] { "LotNumber" });
+            }
+
+            // OtherCustomField1 (string) maxLength
+            if (this.OtherCustomField1 != null && this.OtherCustomField1.Length > 29)
+            {
+                yield return new ValidationResult("Invalid value for OtherCustomField1, length must be less than 29.", new [] { "OtherCustomField1" });
+            }
+
+            // OtherCustomField2 (string) maxLength
+            if (this.OtherCustomField2 != null && this.OtherCustomField2.Length > 29)
+            {
+                yield return new ValidationResult("Invalid value for OtherCustomField2, length must be less than 29.", new [] { "OtherCustomField2" });
+            }
+
             yield break;
         }
     }

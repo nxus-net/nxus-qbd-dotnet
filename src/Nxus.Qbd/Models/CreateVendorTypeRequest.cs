@@ -127,9 +127,9 @@ namespace Nxus.Qbd.Models
             }
 
             // ParentId (string) maxLength
-            if (this.ParentId != null && this.ParentId.Length > 50)
+            if (this.ParentId != null && this.ParentId.Length > 159)
             {
-                yield return new ValidationResult("Invalid value for ParentId, length must be less than 50.", new [] { "ParentId" });
+                yield return new ValidationResult("Invalid value for ParentId, length must be less than 159.", new [] { "ParentId" });
             }
 
             yield break;

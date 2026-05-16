@@ -246,6 +246,48 @@ namespace Nxus.Qbd.Models
         /// <returns>Validation Result</returns>
         IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
+            // QuantityToBuild (double) minimum
+            if (this.QuantityToBuild < (double)0)
+            {
+                yield return new ValidationResult("Invalid value for QuantityToBuild, must be a value greater than 0.", new [] { "QuantityToBuild" });
+            }
+
+            // SerialNumber (string) maxLength
+            if (this.SerialNumber != null && this.SerialNumber.Length > 4095)
+            {
+                yield return new ValidationResult("Invalid value for SerialNumber, length must be less than 4095.", new [] { "SerialNumber" });
+            }
+
+            // LotNumber (string) maxLength
+            if (this.LotNumber != null && this.LotNumber.Length > 40)
+            {
+                yield return new ValidationResult("Invalid value for LotNumber, length must be less than 40.", new [] { "LotNumber" });
+            }
+
+            // ExpirationDate (string) maxLength
+            if (this.ExpirationDate != null && this.ExpirationDate.Length > 1099)
+            {
+                yield return new ValidationResult("Invalid value for ExpirationDate, length must be less than 1099.", new [] { "ExpirationDate" });
+            }
+
+            // RefNumber (string) maxLength
+            if (this.RefNumber != null && this.RefNumber.Length > 11)
+            {
+                yield return new ValidationResult("Invalid value for RefNumber, length must be less than 11.", new [] { "RefNumber" });
+            }
+
+            // Memo (string) maxLength
+            if (this.Memo != null && this.Memo.Length > 4095)
+            {
+                yield return new ValidationResult("Invalid value for Memo, length must be less than 4095.", new [] { "Memo" });
+            }
+
+            // ExternalId (string) maxLength
+            if (this.ExternalId != null && this.ExternalId.Length > 36)
+            {
+                yield return new ValidationResult("Invalid value for ExternalId, length must be less than 36.", new [] { "ExternalId" });
+            }
+
             yield break;
         }
     }

@@ -26,7 +26,7 @@ using Nxus.Qbd.Json;
 namespace Nxus.Qbd.Models
 {
     /// <summary>
-    /// Represents a single line item for an Inventory Adjustment add operation.  Only ONE of the adjustment properties (Quantity, Value, SerialNumber, LotNumber) should be populated.
+    /// Represents a single line item for an Inventory Adjustment operation.  Only ONE of the adjustment properties (Quantity, Value, SerialNumber, LotNumber) should be populated.
     /// </summary>
     public partial class CreateInventoryAdjustmentLineRequest : IValidatableObject
     {
@@ -34,16 +34,14 @@ namespace Nxus.Qbd.Models
         /// Initializes a new instance of the <see cref="CreateInventoryAdjustmentLineRequest" /> class.
         /// </summary>
         /// <param name="itemId">itemId</param>
-        /// <param name="memo">memo</param>
         /// <param name="quantityAdjustment">quantityAdjustment</param>
         /// <param name="valueAdjustment">valueAdjustment</param>
         /// <param name="serialNumberAdjustment">serialNumberAdjustment</param>
         /// <param name="lotNumberAdjustment">lotNumberAdjustment</param>
         [JsonConstructor]
-        public CreateInventoryAdjustmentLineRequest(string itemId, Option<string?> memo = default, Option<QuantityAdjustmentRequest?> quantityAdjustment = default, Option<ValueAdjustmentRequest?> valueAdjustment = default, Option<SerialNumberAdjustmentRequest?> serialNumberAdjustment = default, Option<LotNumberAdjustmentRequest?> lotNumberAdjustment = default)
+        public CreateInventoryAdjustmentLineRequest(string itemId, Option<QuantityAdjustmentRequest?> quantityAdjustment = default, Option<ValueAdjustmentRequest?> valueAdjustment = default, Option<SerialNumberAdjustmentRequest?> serialNumberAdjustment = default, Option<LotNumberAdjustmentRequest?> lotNumberAdjustment = default)
         {
             ItemId = itemId;
-            MemoOption = memo;
             QuantityAdjustmentOption = quantityAdjustment;
             ValueAdjustmentOption = valueAdjustment;
             SerialNumberAdjustmentOption = serialNumberAdjustment;
@@ -58,19 +56,6 @@ namespace Nxus.Qbd.Models
         /// </summary>
         [JsonPropertyName("itemId")]
         public string ItemId { get; set; }
-
-        /// <summary>
-        /// Used to track the state of Memo
-        /// </summary>
-        [JsonIgnore]
-        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<string?> MemoOption { get; private set; }
-
-        /// <summary>
-        /// Gets or Sets Memo
-        /// </summary>
-        [JsonPropertyName("memo")]
-        public string? Memo { get { return this.MemoOption.Value; } set { this.MemoOption = new(value); } }
 
         /// <summary>
         /// Used to track the state of QuantityAdjustment
@@ -133,7 +118,6 @@ namespace Nxus.Qbd.Models
             StringBuilder sb = new StringBuilder();
             sb.Append("class CreateInventoryAdjustmentLineRequest {\n");
             sb.Append("  ItemId: ").Append(ItemId).Append("\n");
-            sb.Append("  Memo: ").Append(Memo).Append("\n");
             sb.Append("  QuantityAdjustment: ").Append(QuantityAdjustment).Append("\n");
             sb.Append("  ValueAdjustment: ").Append(ValueAdjustment).Append("\n");
             sb.Append("  SerialNumberAdjustment: ").Append(SerialNumberAdjustment).Append("\n");
@@ -176,7 +160,6 @@ namespace Nxus.Qbd.Models
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
             Option<string?> itemId = default;
-            Option<string?> memo = default;
             Option<QuantityAdjustmentRequest?> quantityAdjustment = default;
             Option<ValueAdjustmentRequest?> valueAdjustment = default;
             Option<SerialNumberAdjustmentRequest?> serialNumberAdjustment = default;
@@ -199,9 +182,6 @@ namespace Nxus.Qbd.Models
                     {
                         case "itemId":
                             itemId = new Option<string?>(utf8JsonReader.GetString()!);
-                            break;
-                        case "memo":
-                            memo = new Option<string?>(utf8JsonReader.GetString());
                             break;
                         case "quantityAdjustment":
                             quantityAdjustment = new Option<QuantityAdjustmentRequest?>(JsonSerializer.Deserialize<QuantityAdjustmentRequest>(ref utf8JsonReader, jsonSerializerOptions));
@@ -227,7 +207,7 @@ namespace Nxus.Qbd.Models
             if (itemId.IsSet && itemId.Value == null)
                 throw new ArgumentNullException(nameof(itemId), "Property is not nullable for class CreateInventoryAdjustmentLineRequest.");
 
-            return new CreateInventoryAdjustmentLineRequest(itemId.Value!, memo, quantityAdjustment, valueAdjustment, serialNumberAdjustment, lotNumberAdjustment);
+            return new CreateInventoryAdjustmentLineRequest(itemId.Value!, quantityAdjustment, valueAdjustment, serialNumberAdjustment, lotNumberAdjustment);
         }
 
         /// <summary>
@@ -258,12 +238,6 @@ namespace Nxus.Qbd.Models
                 throw new ArgumentNullException(nameof(createInventoryAdjustmentLineRequest.ItemId), "Property is required for class CreateInventoryAdjustmentLineRequest.");
 
             writer.WriteString("itemId", createInventoryAdjustmentLineRequest.ItemId);
-
-            if (createInventoryAdjustmentLineRequest.MemoOption.IsSet)
-                if (createInventoryAdjustmentLineRequest.MemoOption.Value != null)
-                    writer.WriteString("memo", createInventoryAdjustmentLineRequest.Memo);
-                else
-                    writer.WriteNull("memo");
 
             if (createInventoryAdjustmentLineRequest.QuantityAdjustmentOption.IsSet)
                 if (createInventoryAdjustmentLineRequest.QuantityAdjustmentOption.Value != null)

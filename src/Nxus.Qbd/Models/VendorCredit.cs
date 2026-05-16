@@ -38,19 +38,19 @@ namespace Nxus.Qbd.Models
         /// <param name="updatedAt">updatedAt</param>
         /// <param name="revisionNumber">revisionNumber</param>
         /// <param name="objectType">objectType</param>
-        /// <param name="transactionDate">(Optional) The date of the transaction. Defaults to the current date.</param>
+        /// <param name="transactionDate">transactionDate</param>
         /// <param name="currency">currency</param>
-        /// <param name="exchangeRate">(Optional) The exchange rate, if using multi-currency.</param>
-        /// <param name="refNumber">(Optional) The reference number (e.g., credit memo number from vendor). Max 20 chars.</param>
-        /// <param name="memo">(Optional) A memo for the entire transaction. Max 4095 chars.</param>
+        /// <param name="exchangeRate">exchangeRate</param>
+        /// <param name="refNumber">The primary reference number for the transaction (e.g., Invoice #, Check #).</param>
+        /// <param name="memo">memo</param>
         /// <param name="transactionNumber">transactionNumber</param>
-        /// <param name="entity">Refers to the Vendor. Note: The base Entity is for PayeeEntityRef.</param>
+        /// <param name="entity">entity</param>
         /// <param name="vendor">Refers to the Vendor.</param>
-        /// <param name="account">Refers to the Payables Account. Note: The base Account is for PayeeAccountRef.</param>
+        /// <param name="account">account</param>
         /// <param name="payablesAccount">payablesAccount</param>
         /// <param name="creditAmount">The total amount of the credit.</param>
-        /// <param name="creditAmountInHomeCurrency">Note: The base AmountInHomeCurrency is a string. This is a decimal.</param>
-        /// <param name="isTaxIncluded">(Optional) If true, the amount includes sales tax.</param>
+        /// <param name="creditAmountInHomeCurrency">creditAmountInHomeCurrency</param>
+        /// <param name="isTaxIncluded">isTaxIncluded</param>
         /// <param name="salesTaxCode">salesTaxCode</param>
         /// <param name="openAmount">The amount of this credit that has not yet been applied.</param>
         /// <param name="amountInHomeCurrency">amountInHomeCurrency</param>
@@ -142,10 +142,8 @@ namespace Nxus.Qbd.Models
         public Option<DateOnly?> TransactionDateOption { get; private set; }
 
         /// <summary>
-        /// (Optional) The date of the transaction. Defaults to the current date.
+        /// Gets or Sets TransactionDate
         /// </summary>
-        /// <value>(Optional) The date of the transaction. Defaults to the current date.</value>
-        /* <example>Tue Dec 31 19:00:00 EST 2024</example> */
         [JsonPropertyName("transactionDate")]
         public DateOnly? TransactionDate { get { return this.TransactionDateOption.Value; } set { this.TransactionDateOption = new(value); } }
 
@@ -170,10 +168,8 @@ namespace Nxus.Qbd.Models
         public Option<double?> ExchangeRateOption { get; private set; }
 
         /// <summary>
-        /// (Optional) The exchange rate, if using multi-currency.
+        /// Gets or Sets ExchangeRate
         /// </summary>
-        /// <value>(Optional) The exchange rate, if using multi-currency.</value>
-        /* <example>1.25</example> */
         [JsonPropertyName("exchangeRate")]
         public double? ExchangeRate { get { return this.ExchangeRateOption.Value; } set { this.ExchangeRateOption = new(value); } }
 
@@ -185,10 +181,9 @@ namespace Nxus.Qbd.Models
         public Option<string?> RefNumberOption { get; private set; }
 
         /// <summary>
-        /// (Optional) The reference number (e.g., credit memo number from vendor). Max 20 chars.
+        /// The primary reference number for the transaction (e.g., Invoice #, Check #).
         /// </summary>
-        /// <value>(Optional) The reference number (e.g., credit memo number from vendor). Max 20 chars.</value>
-        /* <example>REF12345</example> */
+        /// <value>The primary reference number for the transaction (e.g., Invoice #, Check #).</value>
         [JsonPropertyName("refNumber")]
         public string? RefNumber { get { return this.RefNumberOption.Value; } set { this.RefNumberOption = new(value); } }
 
@@ -200,10 +195,8 @@ namespace Nxus.Qbd.Models
         public Option<string?> MemoOption { get; private set; }
 
         /// <summary>
-        /// (Optional) A memo for the entire transaction. Max 4095 chars.
+        /// Gets or Sets Memo
         /// </summary>
-        /// <value>(Optional) A memo for the entire transaction. Max 4095 chars.</value>
-        /* <example>Memo for the vendor credit</example> */
         [JsonPropertyName("memo")]
         public string? Memo { get { return this.MemoOption.Value; } set { this.MemoOption = new(value); } }
 
@@ -228,9 +221,8 @@ namespace Nxus.Qbd.Models
         public Option<QbdRef?> EntityOption { get; private set; }
 
         /// <summary>
-        /// Refers to the Vendor. Note: The base Entity is for PayeeEntityRef.
+        /// Gets or Sets Entity
         /// </summary>
-        /// <value>Refers to the Vendor. Note: The base Entity is for PayeeEntityRef.</value>
         [JsonPropertyName("entity")]
         public QbdRef? Entity { get { return this.EntityOption.Value; } set { this.EntityOption = new(value); } }
 
@@ -256,9 +248,8 @@ namespace Nxus.Qbd.Models
         public Option<QbdRef?> AccountOption { get; private set; }
 
         /// <summary>
-        /// Refers to the Payables Account. Note: The base Account is for PayeeAccountRef.
+        /// Gets or Sets Account
         /// </summary>
-        /// <value>Refers to the Payables Account. Note: The base Account is for PayeeAccountRef.</value>
         [JsonPropertyName("account")]
         public QbdRef? Account { get { return this.AccountOption.Value; } set { this.AccountOption = new(value); } }
 
@@ -297,9 +288,8 @@ namespace Nxus.Qbd.Models
         public Option<double?> CreditAmountInHomeCurrencyOption { get; private set; }
 
         /// <summary>
-        /// Note: The base AmountInHomeCurrency is a string. This is a decimal.
+        /// Gets or Sets CreditAmountInHomeCurrency
         /// </summary>
-        /// <value>Note: The base AmountInHomeCurrency is a string. This is a decimal.</value>
         [JsonPropertyName("creditAmountInHomeCurrency")]
         public double? CreditAmountInHomeCurrency { get { return this.CreditAmountInHomeCurrencyOption.Value; } set { this.CreditAmountInHomeCurrencyOption = new(value); } }
 
@@ -311,9 +301,8 @@ namespace Nxus.Qbd.Models
         public Option<bool?> IsTaxIncludedOption { get; private set; }
 
         /// <summary>
-        /// (Optional) If true, the amount includes sales tax.
+        /// Gets or Sets IsTaxIncluded
         /// </summary>
-        /// <value>(Optional) If true, the amount includes sales tax.</value>
         [JsonPropertyName("isTaxIncluded")]
         public bool? IsTaxIncluded { get { return this.IsTaxIncludedOption.Value; } set { this.IsTaxIncludedOption = new(value); } }
 

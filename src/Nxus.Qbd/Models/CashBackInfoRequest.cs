@@ -111,6 +111,12 @@ namespace Nxus.Qbd.Models
         /// <returns>Validation Result</returns>
         IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
+            // AccountId (string) minLength
+            if (this.AccountId != null && this.AccountId.Length < 1)
+            {
+                yield return new ValidationResult("Invalid value for AccountId, length must be greater than 1.", new [] { "AccountId" });
+            }
+
             // Memo (string) maxLength
             if (this.Memo != null && this.Memo.Length > 4095)
             {

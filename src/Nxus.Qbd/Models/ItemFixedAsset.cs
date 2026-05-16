@@ -38,34 +38,34 @@ namespace Nxus.Qbd.Models
         /// <param name="updatedAt">updatedAt</param>
         /// <param name="revisionNumber">revisionNumber</param>
         /// <param name="objectType">objectType</param>
-        /// <param name="name">name</param>
-        /// <param name="acquiredAs">Indicates the condition of the asset at the time of acquisition (e.g., \&quot;New\&quot; or \&quot;Used\&quot;).</param>
-        /// <param name="purchaseDesc">A description of the asset specifically related to its purchase.</param>
-        /// <param name="purchaseDate">The date on which the business purchased or acquired the asset.</param>
-        /// <param name="purchaseCost">The date on which the business purchased or acquired the asset.</param>
-        /// <param name="vendorOrPayeeName">The original purchase price or cost of acquiring the asset.</param>
-        /// <param name="assetAccount">A reference to the specific Fixed Asset account in the Chart of Accounts used to track this asset&#39;s financial value.</param>
+        /// <param name="name">The primary display name for the List object (e.g., Customer Name, Vendor Name).</param>
+        /// <param name="acquiredAs">acquiredAs</param>
+        /// <param name="purchaseDesc">purchaseDesc</param>
+        /// <param name="purchaseDate">purchaseDate</param>
+        /// <param name="purchaseCost">purchaseCost</param>
+        /// <param name="vendorOrPayeeName">vendorOrPayeeName</param>
+        /// <param name="assetAccount">assetAccount</param>
         /// <param name="salesInfo">salesInfo</param>
-        /// <param name="assetDesc">A general description of the fixed asset.</param>
-        /// <param name="location">The physical location or department where the asset is currently kept.</param>
-        /// <param name="poNumber">The Purchase Order number associated with the acquisition of the asset.</param>
-        /// <param name="serialNumber">The serial number or vehicle identification number (VIN) of the asset.</param>
-        /// <param name="warrantyExpDate">The date on which the manufacturer&#39;s or vendor&#39;s warranty for the asset expires.</param>
-        /// <param name="notes">Additional free-form notes or comments regarding the asset.</param>
-        /// <param name="assetNumber">A unique, company-assigned tracking number or barcode number for the asset.</param>
-        /// <param name="costBasis">The cost basis of the asset used for calculating tax and depreciation (often includes purchase price plus freight, installation, etc.).</param>
-        /// <param name="yearEndAccumulatedDepreciation">The total amount of depreciation accumulated for this asset up to the end of the most recent fiscal year.</param>
-        /// <param name="yearEndBookValue">The net book value of the asset at the end of the fiscal year (typically Cost Basis minus Accumulated Depreciation).</param>
-        /// <param name="fullname">fullname</param>
+        /// <param name="assetDesc">assetDesc</param>
+        /// <param name="location">location</param>
+        /// <param name="poNumber">poNumber</param>
+        /// <param name="serialNumber">serialNumber</param>
+        /// <param name="warrantyExpDate">warrantyExpDate</param>
+        /// <param name="notes">notes</param>
+        /// <param name="assetNumber">assetNumber</param>
+        /// <param name="costBasis">costBasis</param>
+        /// <param name="yearEndAccumulatedDepreciation">yearEndAccumulatedDepreciation</param>
+        /// <param name="yearEndBookValue">yearEndBookValue</param>
+        /// <param name="fullname">Fully qualified name including parent hierarchy (e.g., \&quot;Parent:Child\&quot;).</param>
         /// <param name="barcode">barcode</param>
-        /// <param name="class">class</param>
-        /// <param name="parent">parent</param>
-        /// <param name="sublevel">sublevel</param>
-        /// <param name="unitOfMeasureSet">unitOfMeasureSet</param>
-        /// <param name="salesTaxCode">salesTaxCode</param>
-        /// <param name="description">description</param>
+        /// <param name="class">Class reference for categorization/departmental tracking.</param>
+        /// <param name="parent">Parent item reference for hierarchical items.</param>
+        /// <param name="sublevel">Level in the item hierarchy (0 for top-level).</param>
+        /// <param name="unitOfMeasureSet">Unit of measure set reference.</param>
+        /// <param name="salesTaxCode">Sales tax code reference.</param>
+        /// <param name="description">General item description.</param>
         /// <param name="externalId">externalId</param>
-        /// <param name="isActive">isActive</param>
+        /// <param name="isActive">Indicates whether the list item is active. Common to all list types.</param>
         /// <param name="customFields">customFields</param>
         [JsonConstructor]
         public ItemFixedAsset(string id, DateTimeOffset createdAt, DateTimeOffset updatedAt, string revisionNumber, Option<string?> objectType = default, Option<string?> name = default, Option<string?> acquiredAs = default, Option<string?> purchaseDesc = default, Option<DateOnly?> purchaseDate = default, Option<double?> purchaseCost = default, Option<string?> vendorOrPayeeName = default, Option<QbdRef?> assetAccount = default, Option<FixedAssetSalesInfo?> salesInfo = default, Option<string?> assetDesc = default, Option<string?> location = default, Option<string?> poNumber = default, Option<string?> serialNumber = default, Option<DateOnly?> warrantyExpDate = default, Option<string?> notes = default, Option<string?> assetNumber = default, Option<double?> costBasis = default, Option<double?> yearEndAccumulatedDepreciation = default, Option<double?> yearEndBookValue = default, Option<string?> fullname = default, Option<string?> barcode = default, Option<QbdRef?> @class = default, Option<QbdRef?> parent = default, Option<int?> sublevel = default, Option<QbdRef?> unitOfMeasureSet = default, Option<QbdRef?> salesTaxCode = default, Option<string?> description = default, Option<string?> externalId = default, Option<bool?> isActive = default, Option<List<QbdDataExt>?> customFields = default)
@@ -154,8 +154,9 @@ namespace Nxus.Qbd.Models
         public Option<string?> NameOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets Name
+        /// The primary display name for the List object (e.g., Customer Name, Vendor Name).
         /// </summary>
+        /// <value>The primary display name for the List object (e.g., Customer Name, Vendor Name).</value>
         [JsonPropertyName("name")]
         public string? Name { get { return this.NameOption.Value; } set { this.NameOption = new(value); } }
 
@@ -167,10 +168,8 @@ namespace Nxus.Qbd.Models
         public Option<string?> AcquiredAsOption { get; private set; }
 
         /// <summary>
-        /// Indicates the condition of the asset at the time of acquisition (e.g., \&quot;New\&quot; or \&quot;Used\&quot;).
+        /// Gets or Sets AcquiredAs
         /// </summary>
-        /// <value>Indicates the condition of the asset at the time of acquisition (e.g., \&quot;New\&quot; or \&quot;Used\&quot;).</value>
-        /* <example>New</example> */
         [JsonPropertyName("acquiredAs")]
         public string? AcquiredAs { get { return this.AcquiredAsOption.Value; } set { this.AcquiredAsOption = new(value); } }
 
@@ -182,10 +181,8 @@ namespace Nxus.Qbd.Models
         public Option<string?> PurchaseDescOption { get; private set; }
 
         /// <summary>
-        /// A description of the asset specifically related to its purchase.
+        /// Gets or Sets PurchaseDesc
         /// </summary>
-        /// <value>A description of the asset specifically related to its purchase.</value>
-        /* <example>Purchased from local dealership for logistics team</example> */
         [JsonPropertyName("purchaseDesc")]
         public string? PurchaseDesc { get { return this.PurchaseDescOption.Value; } set { this.PurchaseDescOption = new(value); } }
 
@@ -197,9 +194,8 @@ namespace Nxus.Qbd.Models
         public Option<DateOnly?> PurchaseDateOption { get; private set; }
 
         /// <summary>
-        /// The date on which the business purchased or acquired the asset.
+        /// Gets or Sets PurchaseDate
         /// </summary>
-        /// <value>The date on which the business purchased or acquired the asset.</value>
         [JsonPropertyName("purchaseDate")]
         public DateOnly? PurchaseDate { get { return this.PurchaseDateOption.Value; } set { this.PurchaseDateOption = new(value); } }
 
@@ -211,9 +207,8 @@ namespace Nxus.Qbd.Models
         public Option<double?> PurchaseCostOption { get; private set; }
 
         /// <summary>
-        /// The date on which the business purchased or acquired the asset.
+        /// Gets or Sets PurchaseCost
         /// </summary>
-        /// <value>The date on which the business purchased or acquired the asset.</value>
         [JsonPropertyName("purchaseCost")]
         public double? PurchaseCost { get { return this.PurchaseCostOption.Value; } set { this.PurchaseCostOption = new(value); } }
 
@@ -225,10 +220,8 @@ namespace Nxus.Qbd.Models
         public Option<string?> VendorOrPayeeNameOption { get; private set; }
 
         /// <summary>
-        /// The original purchase price or cost of acquiring the asset.
+        /// Gets or Sets VendorOrPayeeName
         /// </summary>
-        /// <value>The original purchase price or cost of acquiring the asset.</value>
-        /* <example>35000.00</example> */
         [JsonPropertyName("vendorOrPayeeName")]
         public string? VendorOrPayeeName { get { return this.VendorOrPayeeNameOption.Value; } set { this.VendorOrPayeeNameOption = new(value); } }
 
@@ -240,9 +233,8 @@ namespace Nxus.Qbd.Models
         public Option<QbdRef?> AssetAccountOption { get; private set; }
 
         /// <summary>
-        /// A reference to the specific Fixed Asset account in the Chart of Accounts used to track this asset&#39;s financial value.
+        /// Gets or Sets AssetAccount
         /// </summary>
-        /// <value>A reference to the specific Fixed Asset account in the Chart of Accounts used to track this asset&#39;s financial value.</value>
         [JsonPropertyName("assetAccount")]
         public QbdRef? AssetAccount { get { return this.AssetAccountOption.Value; } set { this.AssetAccountOption = new(value); } }
 
@@ -267,10 +259,8 @@ namespace Nxus.Qbd.Models
         public Option<string?> AssetDescOption { get; private set; }
 
         /// <summary>
-        /// A general description of the fixed asset.
+        /// Gets or Sets AssetDesc
         /// </summary>
-        /// <value>A general description of the fixed asset.</value>
-        /* <example>Company Delivery Van - North Region</example> */
         [JsonPropertyName("assetDesc")]
         public string? AssetDesc { get { return this.AssetDescOption.Value; } set { this.AssetDescOption = new(value); } }
 
@@ -282,10 +272,8 @@ namespace Nxus.Qbd.Models
         public Option<string?> LocationOption { get; private set; }
 
         /// <summary>
-        /// The physical location or department where the asset is currently kept.
+        /// Gets or Sets Location
         /// </summary>
-        /// <value>The physical location or department where the asset is currently kept.</value>
-        /* <example>Warehouse A</example> */
         [JsonPropertyName("location")]
         public string? Location { get { return this.LocationOption.Value; } set { this.LocationOption = new(value); } }
 
@@ -297,10 +285,8 @@ namespace Nxus.Qbd.Models
         public Option<string?> PoNumberOption { get; private set; }
 
         /// <summary>
-        /// The Purchase Order number associated with the acquisition of the asset.
+        /// Gets or Sets PoNumber
         /// </summary>
-        /// <value>The Purchase Order number associated with the acquisition of the asset.</value>
-        /* <example>PO-2018-405</example> */
         [JsonPropertyName("poNumber")]
         public string? PoNumber { get { return this.PoNumberOption.Value; } set { this.PoNumberOption = new(value); } }
 
@@ -312,10 +298,8 @@ namespace Nxus.Qbd.Models
         public Option<string?> SerialNumberOption { get; private set; }
 
         /// <summary>
-        /// The serial number or vehicle identification number (VIN) of the asset.
+        /// Gets or Sets SerialNumber
         /// </summary>
-        /// <value>The serial number or vehicle identification number (VIN) of the asset.</value>
-        /* <example>1FTNE04C49HA12345</example> */
         [JsonPropertyName("serialNumber")]
         public string? SerialNumber { get { return this.SerialNumberOption.Value; } set { this.SerialNumberOption = new(value); } }
 
@@ -327,9 +311,8 @@ namespace Nxus.Qbd.Models
         public Option<DateOnly?> WarrantyExpDateOption { get; private set; }
 
         /// <summary>
-        /// The date on which the manufacturer&#39;s or vendor&#39;s warranty for the asset expires.
+        /// Gets or Sets WarrantyExpDate
         /// </summary>
-        /// <value>The date on which the manufacturer&#39;s or vendor&#39;s warranty for the asset expires.</value>
         [JsonPropertyName("warrantyExpDate")]
         public DateOnly? WarrantyExpDate { get { return this.WarrantyExpDateOption.Value; } set { this.WarrantyExpDateOption = new(value); } }
 
@@ -341,10 +324,8 @@ namespace Nxus.Qbd.Models
         public Option<string?> NotesOption { get; private set; }
 
         /// <summary>
-        /// Additional free-form notes or comments regarding the asset.
+        /// Gets or Sets Notes
         /// </summary>
-        /// <value>Additional free-form notes or comments regarding the asset.</value>
-        /* <example>Minor scratch on passenger side door from 2020.</example> */
         [JsonPropertyName("notes")]
         public string? Notes { get { return this.NotesOption.Value; } set { this.NotesOption = new(value); } }
 
@@ -356,10 +337,8 @@ namespace Nxus.Qbd.Models
         public Option<string?> AssetNumberOption { get; private set; }
 
         /// <summary>
-        /// A unique, company-assigned tracking number or barcode number for the asset.
+        /// Gets or Sets AssetNumber
         /// </summary>
-        /// <value>A unique, company-assigned tracking number or barcode number for the asset.</value>
-        /* <example>FA-1004</example> */
         [JsonPropertyName("assetNumber")]
         public string? AssetNumber { get { return this.AssetNumberOption.Value; } set { this.AssetNumberOption = new(value); } }
 
@@ -371,10 +350,8 @@ namespace Nxus.Qbd.Models
         public Option<double?> CostBasisOption { get; private set; }
 
         /// <summary>
-        /// The cost basis of the asset used for calculating tax and depreciation (often includes purchase price plus freight, installation, etc.).
+        /// Gets or Sets CostBasis
         /// </summary>
-        /// <value>The cost basis of the asset used for calculating tax and depreciation (often includes purchase price plus freight, installation, etc.).</value>
-        /* <example>36500.00</example> */
         [JsonPropertyName("costBasis")]
         public double? CostBasis { get { return this.CostBasisOption.Value; } set { this.CostBasisOption = new(value); } }
 
@@ -386,10 +363,8 @@ namespace Nxus.Qbd.Models
         public Option<double?> YearEndAccumulatedDepreciationOption { get; private set; }
 
         /// <summary>
-        /// The total amount of depreciation accumulated for this asset up to the end of the most recent fiscal year.
+        /// Gets or Sets YearEndAccumulatedDepreciation
         /// </summary>
-        /// <value>The total amount of depreciation accumulated for this asset up to the end of the most recent fiscal year.</value>
-        /* <example>18000.00</example> */
         [JsonPropertyName("yearEndAccumulatedDepreciation")]
         public double? YearEndAccumulatedDepreciation { get { return this.YearEndAccumulatedDepreciationOption.Value; } set { this.YearEndAccumulatedDepreciationOption = new(value); } }
 
@@ -401,10 +376,8 @@ namespace Nxus.Qbd.Models
         public Option<double?> YearEndBookValueOption { get; private set; }
 
         /// <summary>
-        /// The net book value of the asset at the end of the fiscal year (typically Cost Basis minus Accumulated Depreciation).
+        /// Gets or Sets YearEndBookValue
         /// </summary>
-        /// <value>The net book value of the asset at the end of the fiscal year (typically Cost Basis minus Accumulated Depreciation).</value>
-        /* <example>18500.00</example> */
         [JsonPropertyName("yearEndBookValue")]
         public double? YearEndBookValue { get { return this.YearEndBookValueOption.Value; } set { this.YearEndBookValueOption = new(value); } }
 
@@ -416,8 +389,9 @@ namespace Nxus.Qbd.Models
         public Option<string?> FullnameOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets Fullname
+        /// Fully qualified name including parent hierarchy (e.g., \&quot;Parent:Child\&quot;).
         /// </summary>
+        /// <value>Fully qualified name including parent hierarchy (e.g., \&quot;Parent:Child\&quot;).</value>
         [JsonPropertyName("fullname")]
         public string? Fullname { get { return this.FullnameOption.Value; } set { this.FullnameOption = new(value); } }
 
@@ -442,8 +416,9 @@ namespace Nxus.Qbd.Models
         public Option<QbdRef?> ClassOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets Class
+        /// Class reference for categorization/departmental tracking.
         /// </summary>
+        /// <value>Class reference for categorization/departmental tracking.</value>
         [JsonPropertyName("class")]
         public QbdRef? Class { get { return this.ClassOption.Value; } set { this.ClassOption = new(value); } }
 
@@ -455,8 +430,9 @@ namespace Nxus.Qbd.Models
         public Option<QbdRef?> ParentOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets Parent
+        /// Parent item reference for hierarchical items.
         /// </summary>
+        /// <value>Parent item reference for hierarchical items.</value>
         [JsonPropertyName("parent")]
         public QbdRef? Parent { get { return this.ParentOption.Value; } set { this.ParentOption = new(value); } }
 
@@ -468,8 +444,9 @@ namespace Nxus.Qbd.Models
         public Option<int?> SublevelOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets Sublevel
+        /// Level in the item hierarchy (0 for top-level).
         /// </summary>
+        /// <value>Level in the item hierarchy (0 for top-level).</value>
         [JsonPropertyName("sublevel")]
         public int? Sublevel { get { return this.SublevelOption.Value; } set { this.SublevelOption = new(value); } }
 
@@ -481,8 +458,9 @@ namespace Nxus.Qbd.Models
         public Option<QbdRef?> UnitOfMeasureSetOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets UnitOfMeasureSet
+        /// Unit of measure set reference.
         /// </summary>
+        /// <value>Unit of measure set reference.</value>
         [JsonPropertyName("unitOfMeasureSet")]
         public QbdRef? UnitOfMeasureSet { get { return this.UnitOfMeasureSetOption.Value; } set { this.UnitOfMeasureSetOption = new(value); } }
 
@@ -494,8 +472,9 @@ namespace Nxus.Qbd.Models
         public Option<QbdRef?> SalesTaxCodeOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets SalesTaxCode
+        /// Sales tax code reference.
         /// </summary>
+        /// <value>Sales tax code reference.</value>
         [JsonPropertyName("salesTaxCode")]
         public QbdRef? SalesTaxCode { get { return this.SalesTaxCodeOption.Value; } set { this.SalesTaxCodeOption = new(value); } }
 
@@ -507,8 +486,9 @@ namespace Nxus.Qbd.Models
         public Option<string?> DescriptionOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets Description
+        /// General item description.
         /// </summary>
+        /// <value>General item description.</value>
         [JsonPropertyName("description")]
         public string? Description { get { return this.DescriptionOption.Value; } set { this.DescriptionOption = new(value); } }
 
@@ -533,8 +513,9 @@ namespace Nxus.Qbd.Models
         public Option<bool?> IsActiveOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets IsActive
+        /// Indicates whether the list item is active. Common to all list types.
         /// </summary>
+        /// <value>Indicates whether the list item is active. Common to all list types.</value>
         [JsonPropertyName("isActive")]
         public bool? IsActive { get { return this.IsActiveOption.Value; } set { this.IsActiveOption = new(value); } }
 

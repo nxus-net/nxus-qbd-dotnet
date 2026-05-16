@@ -33,8 +33,8 @@ namespace Nxus.Qbd.Models
         /// <summary>
         /// Initializes a new instance of the <see cref="EmergencyContact" /> class.
         /// </summary>
-        /// <param name="primaryContact">The employee&#39;s primary emergency contact.</param>
-        /// <param name="secondaryContact">The employee&#39;s secondary emergency contact.</param>
+        /// <param name="primaryContact">primaryContact</param>
+        /// <param name="secondaryContact">secondaryContact</param>
         [JsonConstructor]
         public EmergencyContact(Option<AdditionalContact?> primaryContact = default, Option<AdditionalContact?> secondaryContact = default)
         {
@@ -53,9 +53,8 @@ namespace Nxus.Qbd.Models
         public Option<AdditionalContact?> PrimaryContactOption { get; private set; }
 
         /// <summary>
-        /// The employee&#39;s primary emergency contact.
+        /// Gets or Sets PrimaryContact
         /// </summary>
-        /// <value>The employee&#39;s primary emergency contact.</value>
         [JsonPropertyName("primaryContact")]
         public AdditionalContact? PrimaryContact { get { return this.PrimaryContactOption.Value; } set { this.PrimaryContactOption = new(value); } }
 
@@ -67,9 +66,8 @@ namespace Nxus.Qbd.Models
         public Option<AdditionalContact?> SecondaryContactOption { get; private set; }
 
         /// <summary>
-        /// The employee&#39;s secondary emergency contact.
+        /// Gets or Sets SecondaryContact
         /// </summary>
-        /// <value>The employee&#39;s secondary emergency contact.</value>
         [JsonPropertyName("secondaryContact")]
         public AdditionalContact? SecondaryContact { get { return this.SecondaryContactOption.Value; } set { this.SecondaryContactOption = new(value); } }
 

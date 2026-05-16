@@ -110,6 +110,22 @@ namespace Nxus.Qbd.Models
                 yield return new ValidationResult("Invalid value for Name, length must be less than 31.", new [] { "Name" });
             }
 
+            // Name (string) minLength
+            if (this.Name != null && this.Name.Length < 1)
+            {
+                yield return new ValidationResult("Invalid value for Name, length must be greater than 1.", new [] { "Name" });
+            }
+
+            if (this.PaymentMethodTypeOption.Value != null) {
+                // PaymentMethodType (string) pattern
+                Regex regexPaymentMethodType = new Regex(@"^(american_express|cash|check|debit_card|discover|e_check|gift_card|master_card|other|other_credit_card|visa)$", RegexOptions.CultureInvariant);
+
+                if (this.PaymentMethodTypeOption.Value != null &&!regexPaymentMethodType.Match(this.PaymentMethodTypeOption.Value).Success)
+                {
+                    yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for PaymentMethodType, must match a pattern of " + regexPaymentMethodType, new [] { "PaymentMethodType" });
+                }
+            }
+
             yield break;
         }
     }

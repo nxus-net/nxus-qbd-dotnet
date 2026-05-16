@@ -33,10 +33,10 @@ namespace Nxus.Qbd.Models
         /// <summary>
         /// Initializes a new instance of the <see cref="FixedAssetSalesInfo" /> class.
         /// </summary>
-        /// <param name="salesDesc">A description of the sales transaction or the reason for the asset&#39;s disposal.</param>
-        /// <param name="salesDate">The date on which the asset was sold or disposed of.</param>
-        /// <param name="salesPrice">The final price for which the asset was sold.</param>
-        /// <param name="salesExpense">Any expenses directly incurred in order to sell the asset (e.g., broker fees, delivery costs).</param>
+        /// <param name="salesDesc">Description of the sale.</param>
+        /// <param name="salesDate">Date the fixed asset was sold.</param>
+        /// <param name="salesPrice">Sale price of the fixed asset.</param>
+        /// <param name="salesExpense">Expenses associated with the sale.</param>
         [JsonConstructor]
         public FixedAssetSalesInfo(Option<string?> salesDesc = default, Option<DateOnly?> salesDate = default, Option<double?> salesPrice = default, Option<double?> salesExpense = default)
         {
@@ -57,10 +57,9 @@ namespace Nxus.Qbd.Models
         public Option<string?> SalesDescOption { get; private set; }
 
         /// <summary>
-        /// A description of the sales transaction or the reason for the asset&#39;s disposal.
+        /// Description of the sale.
         /// </summary>
-        /// <value>A description of the sales transaction or the reason for the asset&#39;s disposal.</value>
-        /* <example>Sold to secondary logistics firm</example> */
+        /// <value>Description of the sale.</value>
         [JsonPropertyName("salesDesc")]
         public string? SalesDesc { get { return this.SalesDescOption.Value; } set { this.SalesDescOption = new(value); } }
 
@@ -72,9 +71,9 @@ namespace Nxus.Qbd.Models
         public Option<DateOnly?> SalesDateOption { get; private set; }
 
         /// <summary>
-        /// The date on which the asset was sold or disposed of.
+        /// Date the fixed asset was sold.
         /// </summary>
-        /// <value>The date on which the asset was sold or disposed of.</value>
+        /// <value>Date the fixed asset was sold.</value>
         [JsonPropertyName("salesDate")]
         public DateOnly? SalesDate { get { return this.SalesDateOption.Value; } set { this.SalesDateOption = new(value); } }
 
@@ -86,10 +85,9 @@ namespace Nxus.Qbd.Models
         public Option<double?> SalesPriceOption { get; private set; }
 
         /// <summary>
-        /// The final price for which the asset was sold.
+        /// Sale price of the fixed asset.
         /// </summary>
-        /// <value>The final price for which the asset was sold.</value>
-        /* <example>14000.00</example> */
+        /// <value>Sale price of the fixed asset.</value>
         [JsonPropertyName("salesPrice")]
         public double? SalesPrice { get { return this.SalesPriceOption.Value; } set { this.SalesPriceOption = new(value); } }
 
@@ -101,10 +99,9 @@ namespace Nxus.Qbd.Models
         public Option<double?> SalesExpenseOption { get; private set; }
 
         /// <summary>
-        /// Any expenses directly incurred in order to sell the asset (e.g., broker fees, delivery costs).
+        /// Expenses associated with the sale.
         /// </summary>
-        /// <value>Any expenses directly incurred in order to sell the asset (e.g., broker fees, delivery costs).</value>
-        /* <example>500.00</example> */
+        /// <value>Expenses associated with the sale.</value>
         [JsonPropertyName("salesExpense")]
         public double? SalesExpense { get { return this.SalesExpenseOption.Value; } set { this.SalesExpenseOption = new(value); } }
 

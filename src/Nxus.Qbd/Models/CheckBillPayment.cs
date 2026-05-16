@@ -26,12 +26,12 @@ using Nxus.Qbd.Json;
 namespace Nxus.Qbd.Models
 {
     /// <summary>
-    /// Request model for creating a new Check transaction to pay bills. Based on the CheckAddRq QBXML type.  QBXML Schema Constraints (from qbxmlops170.xml): - PayeeEntityRef: Optional, FullName max length &#x3D; 209 - AccountRef: Required (BankAccount), FullName max length &#x3D; 159 - TxnDate: Optional - RefNumber: Optional, max length &#x3D; 11 (OR IsToBePrinted) - APAccountRef: Optional, FullName max length &#x3D; 159 - Amount: Optional - CurrencyRef: Optional, FullName max length &#x3D; 64 - ExchangeRate: Optional - AmountInHomeCurrency: Optional - Memo: Optional, max length &#x3D; 4095 - IsToBePrinted: Optional (OR RefNumber) - ExternalGUID: Optional
+    /// Request model for creating a new Check transaction to pay bills. Based on the CheckAddRq QBXML type.
     /// </summary>
-    public partial class CheckBill : IValidatableObject
+    public partial class CheckBillPayment : IValidatableObject
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="CheckBill" /> class.
+        /// Initializes a new instance of the <see cref="CheckBillPayment" /> class.
         /// </summary>
         /// <param name="id">id</param>
         /// <param name="createdAt">createdAt</param>
@@ -40,19 +40,19 @@ namespace Nxus.Qbd.Models
         /// <param name="objectType">objectType</param>
         /// <param name="transactionDate">transactionDate</param>
         /// <param name="currency">currency</param>
-        /// <param name="exchangeRate">(Optional) The currency exchange rate.</param>
-        /// <param name="refNumber">(Optional) The reference number (e.g., Check #). Max length: 11 characters. Note: Cannot be specified with IsToBePrinted&#x3D;true.</param>
-        /// <param name="memo">(Optional) A memo for the check. Max length: 4095 characters.</param>
+        /// <param name="exchangeRate">exchangeRate</param>
+        /// <param name="refNumber">The primary reference number for the transaction (e.g., Invoice #, Check #).</param>
+        /// <param name="memo">memo</param>
         /// <param name="transactionNumber">transactionNumber</param>
         /// <param name="payablesAccount">payablesAccount</param>
-        /// <param name="address">The payee&#39;s full address.</param>
-        /// <param name="addressBlock">The address block formatted for printing on the check.</param>
+        /// <param name="address">The total amount of the check.</param>
+        /// <param name="addressBlock">The payee&#39;s address formatted as a 5-line block.</param>
         /// <param name="isQueuedForPrint">isQueuedForPrint</param>
         /// <param name="appliedToTransactions">appliedToTransactions</param>
-        /// <param name="amount">(Optional) The total amount of the check.</param>
+        /// <param name="amount">amount</param>
         /// <param name="entity">entity</param>
         /// <param name="account">account</param>
-        /// <param name="amountInHomeCurrency">(Optional) The amount in the home currency.</param>
+        /// <param name="amountInHomeCurrency">amountInHomeCurrency</param>
         /// <param name="hasValidLineItems">hasValidLineItems</param>
         /// <param name="externalId">externalId</param>
         /// <param name="linkedTransactions">linkedTransactions</param>
@@ -61,7 +61,7 @@ namespace Nxus.Qbd.Models
         /// <param name="itemGroupLines">itemGroupLines</param>
         /// <param name="customFields">customFields</param>
         [JsonConstructor]
-        public CheckBill(string id, DateTimeOffset createdAt, DateTimeOffset updatedAt, string revisionNumber, Option<string?> objectType = default, Option<DateOnly?> transactionDate = default, Option<QbdRef?> currency = default, Option<double?> exchangeRate = default, Option<string?> refNumber = default, Option<string?> memo = default, Option<int?> transactionNumber = default, Option<QbdRef?> payablesAccount = default, Option<Address?> address = default, Option<AddressBlock?> addressBlock = default, Option<bool?> isQueuedForPrint = default, Option<List<AppliedToTxn>?> appliedToTransactions = default, Option<double?> amount = default, Option<QbdRef?> entity = default, Option<QbdRef?> account = default, Option<string?> amountInHomeCurrency = default, Option<bool?> hasValidLineItems = default, Option<string?> externalId = default, Option<List<LinkedTransaction>?> linkedTransactions = default, Option<List<ExpenseLine>?> expenseLines = default, Option<List<ItemLine>?> itemLines = default, Option<List<ItemGroupLine>?> itemGroupLines = default, Option<List<QbdDataExt>?> customFields = default)
+        public CheckBillPayment(string id, DateTimeOffset createdAt, DateTimeOffset updatedAt, string revisionNumber, Option<string?> objectType = default, Option<DateOnly?> transactionDate = default, Option<QbdRef?> currency = default, Option<double?> exchangeRate = default, Option<string?> refNumber = default, Option<string?> memo = default, Option<int?> transactionNumber = default, Option<QbdRef?> payablesAccount = default, Option<Address?> address = default, Option<AddressBlock?> addressBlock = default, Option<bool?> isQueuedForPrint = default, Option<List<AppliedToTxn>?> appliedToTransactions = default, Option<double?> amount = default, Option<QbdRef?> entity = default, Option<QbdRef?> account = default, Option<string?> amountInHomeCurrency = default, Option<bool?> hasValidLineItems = default, Option<string?> externalId = default, Option<List<LinkedTransaction>?> linkedTransactions = default, Option<List<ExpenseLine>?> expenseLines = default, Option<List<ItemLine>?> itemLines = default, Option<List<ItemGroupLine>?> itemGroupLines = default, Option<List<QbdDataExt>?> customFields = default)
         {
             Id = id;
             CreatedAt = createdAt;
@@ -166,9 +166,8 @@ namespace Nxus.Qbd.Models
         public Option<double?> ExchangeRateOption { get; private set; }
 
         /// <summary>
-        /// (Optional) The currency exchange rate.
+        /// Gets or Sets ExchangeRate
         /// </summary>
-        /// <value>(Optional) The currency exchange rate.</value>
         [JsonPropertyName("exchangeRate")]
         public double? ExchangeRate { get { return this.ExchangeRateOption.Value; } set { this.ExchangeRateOption = new(value); } }
 
@@ -180,9 +179,9 @@ namespace Nxus.Qbd.Models
         public Option<string?> RefNumberOption { get; private set; }
 
         /// <summary>
-        /// (Optional) The reference number (e.g., Check #). Max length: 11 characters. Note: Cannot be specified with IsToBePrinted&#x3D;true.
+        /// The primary reference number for the transaction (e.g., Invoice #, Check #).
         /// </summary>
-        /// <value>(Optional) The reference number (e.g., Check #). Max length: 11 characters. Note: Cannot be specified with IsToBePrinted&#x3D;true.</value>
+        /// <value>The primary reference number for the transaction (e.g., Invoice #, Check #).</value>
         [JsonPropertyName("refNumber")]
         public string? RefNumber { get { return this.RefNumberOption.Value; } set { this.RefNumberOption = new(value); } }
 
@@ -194,9 +193,8 @@ namespace Nxus.Qbd.Models
         public Option<string?> MemoOption { get; private set; }
 
         /// <summary>
-        /// (Optional) A memo for the check. Max length: 4095 characters.
+        /// Gets or Sets Memo
         /// </summary>
-        /// <value>(Optional) A memo for the check. Max length: 4095 characters.</value>
         [JsonPropertyName("memo")]
         public string? Memo { get { return this.MemoOption.Value; } set { this.MemoOption = new(value); } }
 
@@ -234,9 +232,9 @@ namespace Nxus.Qbd.Models
         public Option<Address?> AddressOption { get; private set; }
 
         /// <summary>
-        /// The payee&#39;s full address.
+        /// The total amount of the check.
         /// </summary>
-        /// <value>The payee&#39;s full address.</value>
+        /// <value>The total amount of the check.</value>
         [JsonPropertyName("address")]
         public Address? Address { get { return this.AddressOption.Value; } set { this.AddressOption = new(value); } }
 
@@ -248,9 +246,9 @@ namespace Nxus.Qbd.Models
         public Option<AddressBlock?> AddressBlockOption { get; private set; }
 
         /// <summary>
-        /// The address block formatted for printing on the check.
+        /// The payee&#39;s address formatted as a 5-line block.
         /// </summary>
-        /// <value>The address block formatted for printing on the check.</value>
+        /// <value>The payee&#39;s address formatted as a 5-line block.</value>
         [JsonPropertyName("addressBlock")]
         public AddressBlock? AddressBlock { get { return this.AddressBlockOption.Value; } set { this.AddressBlockOption = new(value); } }
 
@@ -288,9 +286,8 @@ namespace Nxus.Qbd.Models
         public Option<double?> AmountOption { get; private set; }
 
         /// <summary>
-        /// (Optional) The total amount of the check.
+        /// Gets or Sets Amount
         /// </summary>
-        /// <value>(Optional) The total amount of the check.</value>
         [JsonPropertyName("amount")]
         public double? Amount { get { return this.AmountOption.Value; } set { this.AmountOption = new(value); } }
 
@@ -328,9 +325,8 @@ namespace Nxus.Qbd.Models
         public Option<string?> AmountInHomeCurrencyOption { get; private set; }
 
         /// <summary>
-        /// (Optional) The amount in the home currency.
+        /// Gets or Sets AmountInHomeCurrency
         /// </summary>
-        /// <value>(Optional) The amount in the home currency.</value>
         [JsonPropertyName("amountInHomeCurrency")]
         public string? AmountInHomeCurrency { get { return this.AmountInHomeCurrencyOption.Value; } set { this.AmountInHomeCurrencyOption = new(value); } }
 
@@ -432,7 +428,7 @@ namespace Nxus.Qbd.Models
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append("class CheckBill {\n");
+            sb.Append("class CheckBillPayment {\n");
             sb.Append("  Id: ").Append(Id).Append("\n");
             sb.Append("  CreatedAt: ").Append(CreatedAt).Append("\n");
             sb.Append("  UpdatedAt: ").Append(UpdatedAt).Append("\n");
@@ -476,9 +472,9 @@ namespace Nxus.Qbd.Models
     }
 
     /// <summary>
-    /// A Json converter for type <see cref="CheckBill" />
+    /// A Json converter for type <see cref="CheckBillPayment" />
     /// </summary>
-    public class CheckBillJsonConverter : JsonConverter<CheckBill>
+    public class CheckBillPaymentJsonConverter : JsonConverter<CheckBillPayment>
     {
         /// <summary>
         /// The format to use to serialize CreatedAt
@@ -496,14 +492,14 @@ namespace Nxus.Qbd.Models
         public static string TransactionDateFormat { get; set; } = "yyyy'-'MM'-'dd";
 
         /// <summary>
-        /// Deserializes json to <see cref="CheckBill" />
+        /// Deserializes json to <see cref="CheckBillPayment" />
         /// </summary>
         /// <param name="utf8JsonReader"></param>
         /// <param name="typeToConvert"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <returns></returns>
         /// <exception cref="JsonException"></exception>
-        public override CheckBill Read(ref Utf8JsonReader utf8JsonReader, Type typeToConvert, JsonSerializerOptions jsonSerializerOptions)
+        public override CheckBillPayment Read(ref Utf8JsonReader utf8JsonReader, Type typeToConvert, JsonSerializerOptions jsonSerializerOptions)
         {
             int currentDepth = utf8JsonReader.CurrentDepth;
 
@@ -643,252 +639,252 @@ namespace Nxus.Qbd.Models
             }
 
             if (!id.IsSet)
-                throw new ArgumentException("Property is required for class CheckBill.", nameof(id));
+                throw new ArgumentException("Property is required for class CheckBillPayment.", nameof(id));
 
             if (!createdAt.IsSet)
-                throw new ArgumentException("Property is required for class CheckBill.", nameof(createdAt));
+                throw new ArgumentException("Property is required for class CheckBillPayment.", nameof(createdAt));
 
             if (!updatedAt.IsSet)
-                throw new ArgumentException("Property is required for class CheckBill.", nameof(updatedAt));
+                throw new ArgumentException("Property is required for class CheckBillPayment.", nameof(updatedAt));
 
             if (!revisionNumber.IsSet)
-                throw new ArgumentException("Property is required for class CheckBill.", nameof(revisionNumber));
+                throw new ArgumentException("Property is required for class CheckBillPayment.", nameof(revisionNumber));
 
             if (id.IsSet && id.Value == null)
-                throw new ArgumentNullException(nameof(id), "Property is not nullable for class CheckBill.");
+                throw new ArgumentNullException(nameof(id), "Property is not nullable for class CheckBillPayment.");
 
             if (createdAt.IsSet && createdAt.Value == null)
-                throw new ArgumentNullException(nameof(createdAt), "Property is not nullable for class CheckBill.");
+                throw new ArgumentNullException(nameof(createdAt), "Property is not nullable for class CheckBillPayment.");
 
             if (updatedAt.IsSet && updatedAt.Value == null)
-                throw new ArgumentNullException(nameof(updatedAt), "Property is not nullable for class CheckBill.");
+                throw new ArgumentNullException(nameof(updatedAt), "Property is not nullable for class CheckBillPayment.");
 
             if (revisionNumber.IsSet && revisionNumber.Value == null)
-                throw new ArgumentNullException(nameof(revisionNumber), "Property is not nullable for class CheckBill.");
+                throw new ArgumentNullException(nameof(revisionNumber), "Property is not nullable for class CheckBillPayment.");
 
             if (objectType.IsSet && objectType.Value == null)
-                throw new ArgumentNullException(nameof(objectType), "Property is not nullable for class CheckBill.");
+                throw new ArgumentNullException(nameof(objectType), "Property is not nullable for class CheckBillPayment.");
 
             if (appliedToTransactions.IsSet && appliedToTransactions.Value == null)
-                throw new ArgumentNullException(nameof(appliedToTransactions), "Property is not nullable for class CheckBill.");
+                throw new ArgumentNullException(nameof(appliedToTransactions), "Property is not nullable for class CheckBillPayment.");
 
             if (hasValidLineItems.IsSet && hasValidLineItems.Value == null)
-                throw new ArgumentNullException(nameof(hasValidLineItems), "Property is not nullable for class CheckBill.");
+                throw new ArgumentNullException(nameof(hasValidLineItems), "Property is not nullable for class CheckBillPayment.");
 
             if (linkedTransactions.IsSet && linkedTransactions.Value == null)
-                throw new ArgumentNullException(nameof(linkedTransactions), "Property is not nullable for class CheckBill.");
+                throw new ArgumentNullException(nameof(linkedTransactions), "Property is not nullable for class CheckBillPayment.");
 
             if (expenseLines.IsSet && expenseLines.Value == null)
-                throw new ArgumentNullException(nameof(expenseLines), "Property is not nullable for class CheckBill.");
+                throw new ArgumentNullException(nameof(expenseLines), "Property is not nullable for class CheckBillPayment.");
 
             if (itemLines.IsSet && itemLines.Value == null)
-                throw new ArgumentNullException(nameof(itemLines), "Property is not nullable for class CheckBill.");
+                throw new ArgumentNullException(nameof(itemLines), "Property is not nullable for class CheckBillPayment.");
 
             if (itemGroupLines.IsSet && itemGroupLines.Value == null)
-                throw new ArgumentNullException(nameof(itemGroupLines), "Property is not nullable for class CheckBill.");
+                throw new ArgumentNullException(nameof(itemGroupLines), "Property is not nullable for class CheckBillPayment.");
 
             if (customFields.IsSet && customFields.Value == null)
-                throw new ArgumentNullException(nameof(customFields), "Property is not nullable for class CheckBill.");
+                throw new ArgumentNullException(nameof(customFields), "Property is not nullable for class CheckBillPayment.");
 
-            return new CheckBill(id.Value!, createdAt.Value!.Value!, updatedAt.Value!.Value!, revisionNumber.Value!, objectType, transactionDate, currency, exchangeRate, refNumber, memo, transactionNumber, payablesAccount, address, addressBlock, isQueuedForPrint, appliedToTransactions, amount, entity, account, amountInHomeCurrency, hasValidLineItems, externalId, linkedTransactions, expenseLines, itemLines, itemGroupLines, customFields);
+            return new CheckBillPayment(id.Value!, createdAt.Value!.Value!, updatedAt.Value!.Value!, revisionNumber.Value!, objectType, transactionDate, currency, exchangeRate, refNumber, memo, transactionNumber, payablesAccount, address, addressBlock, isQueuedForPrint, appliedToTransactions, amount, entity, account, amountInHomeCurrency, hasValidLineItems, externalId, linkedTransactions, expenseLines, itemLines, itemGroupLines, customFields);
         }
 
         /// <summary>
-        /// Serializes a <see cref="CheckBill" />
+        /// Serializes a <see cref="CheckBillPayment" />
         /// </summary>
         /// <param name="writer"></param>
-        /// <param name="checkBill"></param>
+        /// <param name="checkBillPayment"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <exception cref="NotImplementedException"></exception>
-        public override void Write(Utf8JsonWriter writer, CheckBill checkBill, JsonSerializerOptions jsonSerializerOptions)
+        public override void Write(Utf8JsonWriter writer, CheckBillPayment checkBillPayment, JsonSerializerOptions jsonSerializerOptions)
         {
             writer.WriteStartObject();
 
-            WriteProperties(writer, checkBill, jsonSerializerOptions);
+            WriteProperties(writer, checkBillPayment, jsonSerializerOptions);
             writer.WriteEndObject();
         }
 
         /// <summary>
-        /// Serializes the properties of <see cref="CheckBill" />
+        /// Serializes the properties of <see cref="CheckBillPayment" />
         /// </summary>
         /// <param name="writer"></param>
-        /// <param name="checkBill"></param>
+        /// <param name="checkBillPayment"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <exception cref="NotImplementedException"></exception>
-        public void WriteProperties(Utf8JsonWriter writer, CheckBill checkBill, JsonSerializerOptions jsonSerializerOptions)
+        public void WriteProperties(Utf8JsonWriter writer, CheckBillPayment checkBillPayment, JsonSerializerOptions jsonSerializerOptions)
         {
-            if (checkBill.Id == null)
-                throw new ArgumentNullException(nameof(checkBill.Id), "Property is required for class CheckBill.");
+            if (checkBillPayment.Id == null)
+                throw new ArgumentNullException(nameof(checkBillPayment.Id), "Property is required for class CheckBillPayment.");
 
-            if (checkBill.RevisionNumber == null)
-                throw new ArgumentNullException(nameof(checkBill.RevisionNumber), "Property is required for class CheckBill.");
+            if (checkBillPayment.RevisionNumber == null)
+                throw new ArgumentNullException(nameof(checkBillPayment.RevisionNumber), "Property is required for class CheckBillPayment.");
 
-            if (checkBill.ObjectTypeOption.IsSet && checkBill.ObjectType == null)
-                throw new ArgumentNullException(nameof(checkBill.ObjectType), "Property is required for class CheckBill.");
+            if (checkBillPayment.ObjectTypeOption.IsSet && checkBillPayment.ObjectType == null)
+                throw new ArgumentNullException(nameof(checkBillPayment.ObjectType), "Property is required for class CheckBillPayment.");
 
-            if (checkBill.AppliedToTransactionsOption.IsSet && checkBill.AppliedToTransactions == null)
-                throw new ArgumentNullException(nameof(checkBill.AppliedToTransactions), "Property is required for class CheckBill.");
+            if (checkBillPayment.AppliedToTransactionsOption.IsSet && checkBillPayment.AppliedToTransactions == null)
+                throw new ArgumentNullException(nameof(checkBillPayment.AppliedToTransactions), "Property is required for class CheckBillPayment.");
 
-            if (checkBill.LinkedTransactionsOption.IsSet && checkBill.LinkedTransactions == null)
-                throw new ArgumentNullException(nameof(checkBill.LinkedTransactions), "Property is required for class CheckBill.");
+            if (checkBillPayment.LinkedTransactionsOption.IsSet && checkBillPayment.LinkedTransactions == null)
+                throw new ArgumentNullException(nameof(checkBillPayment.LinkedTransactions), "Property is required for class CheckBillPayment.");
 
-            if (checkBill.ExpenseLinesOption.IsSet && checkBill.ExpenseLines == null)
-                throw new ArgumentNullException(nameof(checkBill.ExpenseLines), "Property is required for class CheckBill.");
+            if (checkBillPayment.ExpenseLinesOption.IsSet && checkBillPayment.ExpenseLines == null)
+                throw new ArgumentNullException(nameof(checkBillPayment.ExpenseLines), "Property is required for class CheckBillPayment.");
 
-            if (checkBill.ItemLinesOption.IsSet && checkBill.ItemLines == null)
-                throw new ArgumentNullException(nameof(checkBill.ItemLines), "Property is required for class CheckBill.");
+            if (checkBillPayment.ItemLinesOption.IsSet && checkBillPayment.ItemLines == null)
+                throw new ArgumentNullException(nameof(checkBillPayment.ItemLines), "Property is required for class CheckBillPayment.");
 
-            if (checkBill.ItemGroupLinesOption.IsSet && checkBill.ItemGroupLines == null)
-                throw new ArgumentNullException(nameof(checkBill.ItemGroupLines), "Property is required for class CheckBill.");
+            if (checkBillPayment.ItemGroupLinesOption.IsSet && checkBillPayment.ItemGroupLines == null)
+                throw new ArgumentNullException(nameof(checkBillPayment.ItemGroupLines), "Property is required for class CheckBillPayment.");
 
-            if (checkBill.CustomFieldsOption.IsSet && checkBill.CustomFields == null)
-                throw new ArgumentNullException(nameof(checkBill.CustomFields), "Property is required for class CheckBill.");
+            if (checkBillPayment.CustomFieldsOption.IsSet && checkBillPayment.CustomFields == null)
+                throw new ArgumentNullException(nameof(checkBillPayment.CustomFields), "Property is required for class CheckBillPayment.");
 
-            writer.WriteString("id", checkBill.Id);
+            writer.WriteString("id", checkBillPayment.Id);
 
-            writer.WriteString("createdAt", checkBill.CreatedAt.ToString(CreatedAtFormat));
+            writer.WriteString("createdAt", checkBillPayment.CreatedAt.ToString(CreatedAtFormat));
 
-            writer.WriteString("updatedAt", checkBill.UpdatedAt.ToString(UpdatedAtFormat));
+            writer.WriteString("updatedAt", checkBillPayment.UpdatedAt.ToString(UpdatedAtFormat));
 
-            writer.WriteString("revisionNumber", checkBill.RevisionNumber);
+            writer.WriteString("revisionNumber", checkBillPayment.RevisionNumber);
 
-            if (checkBill.ObjectTypeOption.IsSet)
-                writer.WriteString("objectType", checkBill.ObjectType);
+            if (checkBillPayment.ObjectTypeOption.IsSet)
+                writer.WriteString("objectType", checkBillPayment.ObjectType);
 
-            if (checkBill.TransactionDateOption.IsSet)
-                if (checkBill.TransactionDateOption.Value != null)
-                    writer.WriteString("transactionDate", checkBill.TransactionDateOption.Value!.Value.ToString(TransactionDateFormat));
+            if (checkBillPayment.TransactionDateOption.IsSet)
+                if (checkBillPayment.TransactionDateOption.Value != null)
+                    writer.WriteString("transactionDate", checkBillPayment.TransactionDateOption.Value!.Value.ToString(TransactionDateFormat));
                 else
                     writer.WriteNull("transactionDate");
 
-            if (checkBill.CurrencyOption.IsSet)
-                if (checkBill.CurrencyOption.Value != null)
+            if (checkBillPayment.CurrencyOption.IsSet)
+                if (checkBillPayment.CurrencyOption.Value != null)
                 {
                     writer.WritePropertyName("currency");
-                    JsonSerializer.Serialize(writer, checkBill.Currency, jsonSerializerOptions);
+                    JsonSerializer.Serialize(writer, checkBillPayment.Currency, jsonSerializerOptions);
                 }
                 else
                     writer.WriteNull("currency");
-            if (checkBill.ExchangeRateOption.IsSet)
-                if (checkBill.ExchangeRateOption.Value != null)
-                    writer.WriteNumber("exchangeRate", checkBill.ExchangeRateOption.Value!.Value);
+            if (checkBillPayment.ExchangeRateOption.IsSet)
+                if (checkBillPayment.ExchangeRateOption.Value != null)
+                    writer.WriteNumber("exchangeRate", checkBillPayment.ExchangeRateOption.Value!.Value);
                 else
                     writer.WriteNull("exchangeRate");
 
-            if (checkBill.RefNumberOption.IsSet)
-                if (checkBill.RefNumberOption.Value != null)
-                    writer.WriteString("refNumber", checkBill.RefNumber);
+            if (checkBillPayment.RefNumberOption.IsSet)
+                if (checkBillPayment.RefNumberOption.Value != null)
+                    writer.WriteString("refNumber", checkBillPayment.RefNumber);
                 else
                     writer.WriteNull("refNumber");
 
-            if (checkBill.MemoOption.IsSet)
-                if (checkBill.MemoOption.Value != null)
-                    writer.WriteString("memo", checkBill.Memo);
+            if (checkBillPayment.MemoOption.IsSet)
+                if (checkBillPayment.MemoOption.Value != null)
+                    writer.WriteString("memo", checkBillPayment.Memo);
                 else
                     writer.WriteNull("memo");
 
-            if (checkBill.TransactionNumberOption.IsSet)
-                if (checkBill.TransactionNumberOption.Value != null)
-                    writer.WriteNumber("transactionNumber", checkBill.TransactionNumberOption.Value!.Value);
+            if (checkBillPayment.TransactionNumberOption.IsSet)
+                if (checkBillPayment.TransactionNumberOption.Value != null)
+                    writer.WriteNumber("transactionNumber", checkBillPayment.TransactionNumberOption.Value!.Value);
                 else
                     writer.WriteNull("transactionNumber");
 
-            if (checkBill.PayablesAccountOption.IsSet)
-                if (checkBill.PayablesAccountOption.Value != null)
+            if (checkBillPayment.PayablesAccountOption.IsSet)
+                if (checkBillPayment.PayablesAccountOption.Value != null)
                 {
                     writer.WritePropertyName("payablesAccount");
-                    JsonSerializer.Serialize(writer, checkBill.PayablesAccount, jsonSerializerOptions);
+                    JsonSerializer.Serialize(writer, checkBillPayment.PayablesAccount, jsonSerializerOptions);
                 }
                 else
                     writer.WriteNull("payablesAccount");
-            if (checkBill.AddressOption.IsSet)
-                if (checkBill.AddressOption.Value != null)
+            if (checkBillPayment.AddressOption.IsSet)
+                if (checkBillPayment.AddressOption.Value != null)
                 {
                     writer.WritePropertyName("address");
-                    JsonSerializer.Serialize(writer, checkBill.Address, jsonSerializerOptions);
+                    JsonSerializer.Serialize(writer, checkBillPayment.Address, jsonSerializerOptions);
                 }
                 else
                     writer.WriteNull("address");
-            if (checkBill.AddressBlockOption.IsSet)
-                if (checkBill.AddressBlockOption.Value != null)
+            if (checkBillPayment.AddressBlockOption.IsSet)
+                if (checkBillPayment.AddressBlockOption.Value != null)
                 {
                     writer.WritePropertyName("addressBlock");
-                    JsonSerializer.Serialize(writer, checkBill.AddressBlock, jsonSerializerOptions);
+                    JsonSerializer.Serialize(writer, checkBillPayment.AddressBlock, jsonSerializerOptions);
                 }
                 else
                     writer.WriteNull("addressBlock");
-            if (checkBill.IsQueuedForPrintOption.IsSet)
-                if (checkBill.IsQueuedForPrintOption.Value != null)
-                    writer.WriteBoolean("isQueuedForPrint", checkBill.IsQueuedForPrintOption.Value!.Value);
+            if (checkBillPayment.IsQueuedForPrintOption.IsSet)
+                if (checkBillPayment.IsQueuedForPrintOption.Value != null)
+                    writer.WriteBoolean("isQueuedForPrint", checkBillPayment.IsQueuedForPrintOption.Value!.Value);
                 else
                     writer.WriteNull("isQueuedForPrint");
 
-            if (checkBill.AppliedToTransactionsOption.IsSet)
+            if (checkBillPayment.AppliedToTransactionsOption.IsSet)
             {
                 writer.WritePropertyName("appliedToTransactions");
-                JsonSerializer.Serialize(writer, checkBill.AppliedToTransactions, jsonSerializerOptions);
+                JsonSerializer.Serialize(writer, checkBillPayment.AppliedToTransactions, jsonSerializerOptions);
             }
-            if (checkBill.AmountOption.IsSet)
-                if (checkBill.AmountOption.Value != null)
-                    writer.WriteNumber("amount", checkBill.AmountOption.Value!.Value);
+            if (checkBillPayment.AmountOption.IsSet)
+                if (checkBillPayment.AmountOption.Value != null)
+                    writer.WriteNumber("amount", checkBillPayment.AmountOption.Value!.Value);
                 else
                     writer.WriteNull("amount");
 
-            if (checkBill.EntityOption.IsSet)
-                if (checkBill.EntityOption.Value != null)
+            if (checkBillPayment.EntityOption.IsSet)
+                if (checkBillPayment.EntityOption.Value != null)
                 {
                     writer.WritePropertyName("entity");
-                    JsonSerializer.Serialize(writer, checkBill.Entity, jsonSerializerOptions);
+                    JsonSerializer.Serialize(writer, checkBillPayment.Entity, jsonSerializerOptions);
                 }
                 else
                     writer.WriteNull("entity");
-            if (checkBill.AccountOption.IsSet)
-                if (checkBill.AccountOption.Value != null)
+            if (checkBillPayment.AccountOption.IsSet)
+                if (checkBillPayment.AccountOption.Value != null)
                 {
                     writer.WritePropertyName("account");
-                    JsonSerializer.Serialize(writer, checkBill.Account, jsonSerializerOptions);
+                    JsonSerializer.Serialize(writer, checkBillPayment.Account, jsonSerializerOptions);
                 }
                 else
                     writer.WriteNull("account");
-            if (checkBill.AmountInHomeCurrencyOption.IsSet)
-                if (checkBill.AmountInHomeCurrencyOption.Value != null)
-                    writer.WriteString("amountInHomeCurrency", checkBill.AmountInHomeCurrency);
+            if (checkBillPayment.AmountInHomeCurrencyOption.IsSet)
+                if (checkBillPayment.AmountInHomeCurrencyOption.Value != null)
+                    writer.WriteString("amountInHomeCurrency", checkBillPayment.AmountInHomeCurrency);
                 else
                     writer.WriteNull("amountInHomeCurrency");
 
-            if (checkBill.HasValidLineItemsOption.IsSet)
-                writer.WriteBoolean("hasValidLineItems", checkBill.HasValidLineItemsOption.Value!.Value);
+            if (checkBillPayment.HasValidLineItemsOption.IsSet)
+                writer.WriteBoolean("hasValidLineItems", checkBillPayment.HasValidLineItemsOption.Value!.Value);
 
-            if (checkBill.ExternalIdOption.IsSet)
-                if (checkBill.ExternalIdOption.Value != null)
-                    writer.WriteString("externalId", checkBill.ExternalId);
+            if (checkBillPayment.ExternalIdOption.IsSet)
+                if (checkBillPayment.ExternalIdOption.Value != null)
+                    writer.WriteString("externalId", checkBillPayment.ExternalId);
                 else
                     writer.WriteNull("externalId");
 
-            if (checkBill.LinkedTransactionsOption.IsSet)
+            if (checkBillPayment.LinkedTransactionsOption.IsSet)
             {
                 writer.WritePropertyName("linkedTransactions");
-                JsonSerializer.Serialize(writer, checkBill.LinkedTransactions, jsonSerializerOptions);
+                JsonSerializer.Serialize(writer, checkBillPayment.LinkedTransactions, jsonSerializerOptions);
             }
-            if (checkBill.ExpenseLinesOption.IsSet)
+            if (checkBillPayment.ExpenseLinesOption.IsSet)
             {
                 writer.WritePropertyName("expenseLines");
-                JsonSerializer.Serialize(writer, checkBill.ExpenseLines, jsonSerializerOptions);
+                JsonSerializer.Serialize(writer, checkBillPayment.ExpenseLines, jsonSerializerOptions);
             }
-            if (checkBill.ItemLinesOption.IsSet)
+            if (checkBillPayment.ItemLinesOption.IsSet)
             {
                 writer.WritePropertyName("itemLines");
-                JsonSerializer.Serialize(writer, checkBill.ItemLines, jsonSerializerOptions);
+                JsonSerializer.Serialize(writer, checkBillPayment.ItemLines, jsonSerializerOptions);
             }
-            if (checkBill.ItemGroupLinesOption.IsSet)
+            if (checkBillPayment.ItemGroupLinesOption.IsSet)
             {
                 writer.WritePropertyName("itemGroupLines");
-                JsonSerializer.Serialize(writer, checkBill.ItemGroupLines, jsonSerializerOptions);
+                JsonSerializer.Serialize(writer, checkBillPayment.ItemGroupLines, jsonSerializerOptions);
             }
-            if (checkBill.CustomFieldsOption.IsSet)
+            if (checkBillPayment.CustomFieldsOption.IsSet)
             {
                 writer.WritePropertyName("customFields");
-                JsonSerializer.Serialize(writer, checkBill.CustomFields, jsonSerializerOptions);
+                JsonSerializer.Serialize(writer, checkBillPayment.CustomFields, jsonSerializerOptions);
             }
         }
     }

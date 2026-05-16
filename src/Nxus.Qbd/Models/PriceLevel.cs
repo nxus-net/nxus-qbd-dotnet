@@ -38,12 +38,12 @@ namespace Nxus.Qbd.Models
         /// <param name="updatedAt">updatedAt</param>
         /// <param name="revisionNumber">revisionNumber</param>
         /// <param name="objectType">objectType</param>
-        /// <param name="name">(Required) The name of the new price level. Max length: 31 characters.</param>
-        /// <param name="priceLevelType">The type of price level: \&quot;FixedPercentage\&quot; or \&quot;PerItem\&quot;.</param>
-        /// <param name="fixedPercentage">The fixed percentage adjustment (only for FixedPercentage type).</param>
+        /// <param name="name">The primary display name for the List object (e.g., Customer Name, Vendor Name).</param>
+        /// <param name="priceLevelType">priceLevelType</param>
+        /// <param name="fixedPercentage">fixedPercentage</param>
         /// <param name="perItemPriceLevels">perItemPriceLevels</param>
-        /// <param name="currency">The currency associated with this price level.</param>
-        /// <param name="isActive">(Optional) Whether the price level is active. Defaults to true.</param>
+        /// <param name="currency">currency</param>
+        /// <param name="isActive">Indicates whether the list item is active. Common to all list types.</param>
         /// <param name="customFields">customFields</param>
         [JsonConstructor]
         public PriceLevel(string id, DateTimeOffset createdAt, DateTimeOffset updatedAt, string revisionNumber, Option<string?> objectType = default, Option<string?> name = default, Option<string?> priceLevelType = default, Option<double?> fixedPercentage = default, Option<List<PriceLevelPerItem>?> perItemPriceLevels = default, Option<QbdRef?> currency = default, Option<bool?> isActive = default, Option<List<QbdDataExt>?> customFields = default)
@@ -110,9 +110,9 @@ namespace Nxus.Qbd.Models
         public Option<string?> NameOption { get; private set; }
 
         /// <summary>
-        /// (Required) The name of the new price level. Max length: 31 characters.
+        /// The primary display name for the List object (e.g., Customer Name, Vendor Name).
         /// </summary>
-        /// <value>(Required) The name of the new price level. Max length: 31 characters.</value>
+        /// <value>The primary display name for the List object (e.g., Customer Name, Vendor Name).</value>
         [JsonPropertyName("name")]
         public string? Name { get { return this.NameOption.Value; } set { this.NameOption = new(value); } }
 
@@ -124,9 +124,8 @@ namespace Nxus.Qbd.Models
         public Option<string?> PriceLevelTypeOption { get; private set; }
 
         /// <summary>
-        /// The type of price level: \&quot;FixedPercentage\&quot; or \&quot;PerItem\&quot;.
+        /// Gets or Sets PriceLevelType
         /// </summary>
-        /// <value>The type of price level: \&quot;FixedPercentage\&quot; or \&quot;PerItem\&quot;.</value>
         [JsonPropertyName("priceLevelType")]
         public string? PriceLevelType { get { return this.PriceLevelTypeOption.Value; } set { this.PriceLevelTypeOption = new(value); } }
 
@@ -138,9 +137,8 @@ namespace Nxus.Qbd.Models
         public Option<double?> FixedPercentageOption { get; private set; }
 
         /// <summary>
-        /// The fixed percentage adjustment (only for FixedPercentage type).
+        /// Gets or Sets FixedPercentage
         /// </summary>
-        /// <value>The fixed percentage adjustment (only for FixedPercentage type).</value>
         [JsonPropertyName("fixedPercentage")]
         public double? FixedPercentage { get { return this.FixedPercentageOption.Value; } set { this.FixedPercentageOption = new(value); } }
 
@@ -165,9 +163,8 @@ namespace Nxus.Qbd.Models
         public Option<QbdRef?> CurrencyOption { get; private set; }
 
         /// <summary>
-        /// The currency associated with this price level.
+        /// Gets or Sets Currency
         /// </summary>
-        /// <value>The currency associated with this price level.</value>
         [JsonPropertyName("currency")]
         public QbdRef? Currency { get { return this.CurrencyOption.Value; } set { this.CurrencyOption = new(value); } }
 
@@ -179,9 +176,9 @@ namespace Nxus.Qbd.Models
         public Option<bool?> IsActiveOption { get; private set; }
 
         /// <summary>
-        /// (Optional) Whether the price level is active. Defaults to true.
+        /// Indicates whether the list item is active. Common to all list types.
         /// </summary>
-        /// <value>(Optional) Whether the price level is active. Defaults to true.</value>
+        /// <value>Indicates whether the list item is active. Common to all list types.</value>
         [JsonPropertyName("isActive")]
         public bool? IsActive { get { return this.IsActiveOption.Value; } set { this.IsActiveOption = new(value); } }
 

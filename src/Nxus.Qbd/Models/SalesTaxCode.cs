@@ -38,12 +38,12 @@ namespace Nxus.Qbd.Models
         /// <param name="updatedAt">updatedAt</param>
         /// <param name="revisionNumber">revisionNumber</param>
         /// <param name="objectType">objectType</param>
-        /// <param name="name">(Required) The name of the sales tax code. (Max 3 characters)</param>
-        /// <param name="isTaxable">(Required) Indicates whether the sales tax code represents a taxable (true) or non-taxable (false) item.</param>
+        /// <param name="name">The primary display name for the List object (e.g., Customer Name, Vendor Name).</param>
+        /// <param name="isTaxable">isTaxable</param>
         /// <param name="desc">desc</param>
         /// <param name="itemPurchaseTax">itemPurchaseTax</param>
         /// <param name="itemSalesTax">itemSalesTax</param>
-        /// <param name="isActive">(Optional) If false, this Sales Tax Code is inactive. Default is true.</param>
+        /// <param name="isActive">Indicates whether the list item is active. Common to all list types.</param>
         /// <param name="customFields">customFields</param>
         [JsonConstructor]
         public SalesTaxCode(string id, DateTimeOffset createdAt, DateTimeOffset updatedAt, string revisionNumber, Option<string?> objectType = default, Option<string?> name = default, Option<bool?> isTaxable = default, Option<string?> desc = default, Option<QbdRef?> itemPurchaseTax = default, Option<QbdRef?> itemSalesTax = default, Option<bool?> isActive = default, Option<List<QbdDataExt>?> customFields = default)
@@ -110,9 +110,9 @@ namespace Nxus.Qbd.Models
         public Option<string?> NameOption { get; private set; }
 
         /// <summary>
-        /// (Required) The name of the sales tax code. (Max 3 characters)
+        /// The primary display name for the List object (e.g., Customer Name, Vendor Name).
         /// </summary>
-        /// <value>(Required) The name of the sales tax code. (Max 3 characters)</value>
+        /// <value>The primary display name for the List object (e.g., Customer Name, Vendor Name).</value>
         [JsonPropertyName("name")]
         public string? Name { get { return this.NameOption.Value; } set { this.NameOption = new(value); } }
 
@@ -124,9 +124,8 @@ namespace Nxus.Qbd.Models
         public Option<bool?> IsTaxableOption { get; private set; }
 
         /// <summary>
-        /// (Required) Indicates whether the sales tax code represents a taxable (true) or non-taxable (false) item.
+        /// Gets or Sets IsTaxable
         /// </summary>
-        /// <value>(Required) Indicates whether the sales tax code represents a taxable (true) or non-taxable (false) item.</value>
         [JsonPropertyName("isTaxable")]
         public bool? IsTaxable { get { return this.IsTaxableOption.Value; } set { this.IsTaxableOption = new(value); } }
 
@@ -177,9 +176,9 @@ namespace Nxus.Qbd.Models
         public Option<bool?> IsActiveOption { get; private set; }
 
         /// <summary>
-        /// (Optional) If false, this Sales Tax Code is inactive. Default is true.
+        /// Indicates whether the list item is active. Common to all list types.
         /// </summary>
-        /// <value>(Optional) If false, this Sales Tax Code is inactive. Default is true.</value>
+        /// <value>Indicates whether the list item is active. Common to all list types.</value>
         [JsonPropertyName("isActive")]
         public bool? IsActive { get { return this.IsActiveOption.Value; } set { this.IsActiveOption = new(value); } }
 

@@ -37,7 +37,7 @@ namespace Nxus.Qbd.Models
         /// <param name="objectType">objectType</param>
         /// <param name="itemGroup">itemGroup</param>
         /// <param name="description">description</param>
-        /// <param name="quantity">(Optional) Quantity of the group to purchase.</param>
+        /// <param name="quantity">quantity</param>
         /// <param name="unitOfMeasure">unitOfMeasure</param>
         /// <param name="overrideUnitOfMeasureSet">overrideUnitOfMeasureSet</param>
         /// <param name="isPrintItemsInGroup">isPrintItemsInGroup</param>
@@ -116,9 +116,8 @@ namespace Nxus.Qbd.Models
         public Option<double?> QuantityOption { get; private set; }
 
         /// <summary>
-        /// (Optional) Quantity of the group to purchase.
+        /// Gets or Sets Quantity
         /// </summary>
-        /// <value>(Optional) Quantity of the group to purchase.</value>
         [JsonPropertyName("quantity")]
         public double? Quantity { get { return this.QuantityOption.Value; } set { this.QuantityOption = new(value); } }
 

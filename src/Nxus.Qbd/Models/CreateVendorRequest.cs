@@ -789,6 +789,114 @@ namespace Nxus.Qbd.Models
         /// <returns>Validation Result</returns>
         IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
+            // CompanyName (string) maxLength
+            if (this.CompanyName != null && this.CompanyName.Length > 41)
+            {
+                yield return new ValidationResult("Invalid value for CompanyName, length must be less than 41.", new [] { "CompanyName" });
+            }
+
+            // Salutation (string) maxLength
+            if (this.Salutation != null && this.Salutation.Length > 15)
+            {
+                yield return new ValidationResult("Invalid value for Salutation, length must be less than 15.", new [] { "Salutation" });
+            }
+
+            // FirstName (string) maxLength
+            if (this.FirstName != null && this.FirstName.Length > 25)
+            {
+                yield return new ValidationResult("Invalid value for FirstName, length must be less than 25.", new [] { "FirstName" });
+            }
+
+            // MiddleName (string) maxLength
+            if (this.MiddleName != null && this.MiddleName.Length > 5)
+            {
+                yield return new ValidationResult("Invalid value for MiddleName, length must be less than 5.", new [] { "MiddleName" });
+            }
+
+            // LastName (string) maxLength
+            if (this.LastName != null && this.LastName.Length > 25)
+            {
+                yield return new ValidationResult("Invalid value for LastName, length must be less than 25.", new [] { "LastName" });
+            }
+
+            // JobTitle (string) maxLength
+            if (this.JobTitle != null && this.JobTitle.Length > 41)
+            {
+                yield return new ValidationResult("Invalid value for JobTitle, length must be less than 41.", new [] { "JobTitle" });
+            }
+
+            // Phone (string) maxLength
+            if (this.Phone != null && this.Phone.Length > 21)
+            {
+                yield return new ValidationResult("Invalid value for Phone, length must be less than 21.", new [] { "Phone" });
+            }
+
+            // AlternatePhone (string) maxLength
+            if (this.AlternatePhone != null && this.AlternatePhone.Length > 21)
+            {
+                yield return new ValidationResult("Invalid value for AlternatePhone, length must be less than 21.", new [] { "AlternatePhone" });
+            }
+
+            // Fax (string) maxLength
+            if (this.Fax != null && this.Fax.Length > 21)
+            {
+                yield return new ValidationResult("Invalid value for Fax, length must be less than 21.", new [] { "Fax" });
+            }
+
+            // Email (string) maxLength
+            if (this.Email != null && this.Email.Length > 1023)
+            {
+                yield return new ValidationResult("Invalid value for Email, length must be less than 1023.", new [] { "Email" });
+            }
+
+            // CcEmail (string) maxLength
+            if (this.CcEmail != null && this.CcEmail.Length > 1023)
+            {
+                yield return new ValidationResult("Invalid value for CcEmail, length must be less than 1023.", new [] { "CcEmail" });
+            }
+
+            // Contact (string) maxLength
+            if (this.Contact != null && this.Contact.Length > 41)
+            {
+                yield return new ValidationResult("Invalid value for Contact, length must be less than 41.", new [] { "Contact" });
+            }
+
+            // AlternateContact (string) maxLength
+            if (this.AlternateContact != null && this.AlternateContact.Length > 41)
+            {
+                yield return new ValidationResult("Invalid value for AlternateContact, length must be less than 41.", new [] { "AlternateContact" });
+            }
+
+            // NameOnCheck (string) maxLength
+            if (this.NameOnCheck != null && this.NameOnCheck.Length > 41)
+            {
+                yield return new ValidationResult("Invalid value for NameOnCheck, length must be less than 41.", new [] { "NameOnCheck" });
+            }
+
+            // AccountNumber (string) maxLength
+            if (this.AccountNumber != null && this.AccountNumber.Length > 99)
+            {
+                yield return new ValidationResult("Invalid value for AccountNumber, length must be less than 99.", new [] { "AccountNumber" });
+            }
+
+            // Notes (string) maxLength
+            if (this.Notes != null && this.Notes.Length > 4095)
+            {
+                yield return new ValidationResult("Invalid value for Notes, length must be less than 4095.", new [] { "Notes" });
+            }
+
+            // TaxIdentificationNumber (string) maxLength
+            if (this.TaxIdentificationNumber != null && this.TaxIdentificationNumber.Length > 15)
+            {
+                yield return new ValidationResult("Invalid value for TaxIdentificationNumber, length must be less than 15.", new [] { "TaxIdentificationNumber" });
+            }
+
+            // TaxRegistrationNumber (string) maxLength
+            if (this.TaxRegistrationNumber != null && this.TaxRegistrationNumber.Length > 30)
+            {
+                yield return new ValidationResult("Invalid value for TaxRegistrationNumber, length must be less than 30.", new [] { "TaxRegistrationNumber" });
+            }
+
             yield break;
         }
     }

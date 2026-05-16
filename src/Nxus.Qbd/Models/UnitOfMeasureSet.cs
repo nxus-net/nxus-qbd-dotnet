@@ -38,12 +38,12 @@ namespace Nxus.Qbd.Models
         /// <param name="updatedAt">updatedAt</param>
         /// <param name="revisionNumber">revisionNumber</param>
         /// <param name="objectType">objectType</param>
-        /// <param name="name">(Required) The name of the unit of measure set. Max length: 31.</param>
-        /// <param name="unitOfMeasureType">The type of measurement: \&quot;Area\&quot;, \&quot;Count\&quot;, \&quot;Length\&quot;, \&quot;Other\&quot;, \&quot;Time\&quot;, \&quot;Volume\&quot;, \&quot;Weight\&quot;.</param>
-        /// <param name="baseUnit">The base unit definition for this set.</param>
+        /// <param name="name">The primary display name for the List object (e.g., Customer Name, Vendor Name).</param>
+        /// <param name="unitOfMeasureType">The type of measurement (e.g., Area, Count, Length, Other, Time, Volume, Weight).</param>
+        /// <param name="baseUnit">The fundamental unit for this set (e.g., \&quot;Inch\&quot;).</param>
         /// <param name="relatedUnits">relatedUnits</param>
         /// <param name="defaultUnits">defaultUnits</param>
-        /// <param name="isActive">(Optional) Whether the UOM set is active. Defaults to true.</param>
+        /// <param name="isActive">Indicates whether the list item is active. Common to all list types.</param>
         /// <param name="customFields">customFields</param>
         [JsonConstructor]
         public UnitOfMeasureSet(string id, DateTimeOffset createdAt, DateTimeOffset updatedAt, string revisionNumber, Option<string?> objectType = default, Option<string?> name = default, Option<string?> unitOfMeasureType = default, Option<BaseUnit?> baseUnit = default, Option<List<RelatedUnit>?> relatedUnits = default, Option<List<DefaultUnit>?> defaultUnits = default, Option<bool?> isActive = default, Option<List<QbdDataExt>?> customFields = default)
@@ -110,9 +110,9 @@ namespace Nxus.Qbd.Models
         public Option<string?> NameOption { get; private set; }
 
         /// <summary>
-        /// (Required) The name of the unit of measure set. Max length: 31.
+        /// The primary display name for the List object (e.g., Customer Name, Vendor Name).
         /// </summary>
-        /// <value>(Required) The name of the unit of measure set. Max length: 31.</value>
+        /// <value>The primary display name for the List object (e.g., Customer Name, Vendor Name).</value>
         [JsonPropertyName("name")]
         public string? Name { get { return this.NameOption.Value; } set { this.NameOption = new(value); } }
 
@@ -124,9 +124,9 @@ namespace Nxus.Qbd.Models
         public Option<string?> UnitOfMeasureTypeOption { get; private set; }
 
         /// <summary>
-        /// The type of measurement: \&quot;Area\&quot;, \&quot;Count\&quot;, \&quot;Length\&quot;, \&quot;Other\&quot;, \&quot;Time\&quot;, \&quot;Volume\&quot;, \&quot;Weight\&quot;.
+        /// The type of measurement (e.g., Area, Count, Length, Other, Time, Volume, Weight).
         /// </summary>
-        /// <value>The type of measurement: \&quot;Area\&quot;, \&quot;Count\&quot;, \&quot;Length\&quot;, \&quot;Other\&quot;, \&quot;Time\&quot;, \&quot;Volume\&quot;, \&quot;Weight\&quot;.</value>
+        /// <value>The type of measurement (e.g., Area, Count, Length, Other, Time, Volume, Weight).</value>
         [JsonPropertyName("unitOfMeasureType")]
         public string? UnitOfMeasureType { get { return this.UnitOfMeasureTypeOption.Value; } set { this.UnitOfMeasureTypeOption = new(value); } }
 
@@ -138,9 +138,9 @@ namespace Nxus.Qbd.Models
         public Option<BaseUnit?> BaseUnitOption { get; private set; }
 
         /// <summary>
-        /// The base unit definition for this set.
+        /// The fundamental unit for this set (e.g., \&quot;Inch\&quot;).
         /// </summary>
-        /// <value>The base unit definition for this set.</value>
+        /// <value>The fundamental unit for this set (e.g., \&quot;Inch\&quot;).</value>
         [JsonPropertyName("baseUnit")]
         public BaseUnit? BaseUnit { get { return this.BaseUnitOption.Value; } set { this.BaseUnitOption = new(value); } }
 
@@ -178,9 +178,9 @@ namespace Nxus.Qbd.Models
         public Option<bool?> IsActiveOption { get; private set; }
 
         /// <summary>
-        /// (Optional) Whether the UOM set is active. Defaults to true.
+        /// Indicates whether the list item is active. Common to all list types.
         /// </summary>
-        /// <value>(Optional) Whether the UOM set is active. Defaults to true.</value>
+        /// <value>Indicates whether the list item is active. Common to all list types.</value>
         [JsonPropertyName("isActive")]
         public bool? IsActive { get { return this.IsActiveOption.Value; } set { this.IsActiveOption = new(value); } }
 

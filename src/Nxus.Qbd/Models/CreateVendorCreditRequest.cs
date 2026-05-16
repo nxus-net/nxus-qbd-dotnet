@@ -33,7 +33,7 @@ namespace Nxus.Qbd.Models
         /// <summary>
         /// Initializes a new instance of the <see cref="CreateVendorCreditRequest" /> class.
         /// </summary>
-        /// <param name="vendorId">Filter by Vendor ID.</param>
+        /// <param name="vendorId">(Optional) The ListID or FullName of the vendor.</param>
         /// <param name="payablesAccountId">payablesAccountId</param>
         /// <param name="transactionDate">(Optional) The date of the transaction. Defaults to the current date.</param>
         /// <param name="refNumber">(Optional) The reference number (e.g., credit memo number from vendor). Max 20 chars.</param>
@@ -73,9 +73,9 @@ namespace Nxus.Qbd.Models
         public Option<string?> VendorIdOption { get; private set; }
 
         /// <summary>
-        /// Filter by Vendor ID.
+        /// (Optional) The ListID or FullName of the vendor.
         /// </summary>
-        /// <value>Filter by Vendor ID.</value>
+        /// <value>(Optional) The ListID or FullName of the vendor.</value>
         /* <example>10000001-1039043346</example> */
         [JsonPropertyName("vendorId")]
         public string? VendorId { get { return this.VendorIdOption.Value; } set { this.VendorIdOption = new(value); } }
@@ -264,6 +264,24 @@ namespace Nxus.Qbd.Models
         /// <returns>Validation Result</returns>
         IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
+            // VendorId (string) minLength
+            if (this.VendorId != null && this.VendorId.Length < 1)
+            {
+                yield return new ValidationResult("Invalid value for VendorId, length must be greater than 1.", new [] { "VendorId" });
+            }
+
+            // RefNumber (string) maxLength
+            if (this.RefNumber != null && this.RefNumber.Length > 20)
+            {
+                yield return new ValidationResult("Invalid value for RefNumber, length must be less than 20.", new [] { "RefNumber" });
+            }
+
+            // Memo (string) maxLength
+            if (this.Memo != null && this.Memo.Length > 4095)
+            {
+                yield return new ValidationResult("Invalid value for Memo, length must be less than 4095.", new [] { "Memo" });
+            }
+
             yield break;
         }
     }

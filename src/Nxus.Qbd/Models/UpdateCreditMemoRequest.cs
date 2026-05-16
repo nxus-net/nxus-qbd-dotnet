@@ -516,6 +516,36 @@ namespace Nxus.Qbd.Models
         /// <returns>Validation Result</returns>
         IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
+            // RefNumber (string) maxLength
+            if (this.RefNumber != null && this.RefNumber.Length > 11)
+            {
+                yield return new ValidationResult("Invalid value for RefNumber, length must be less than 11.", new [] { "RefNumber" });
+            }
+
+            // PurchaseOrderNumber (string) maxLength
+            if (this.PurchaseOrderNumber != null && this.PurchaseOrderNumber.Length > 25)
+            {
+                yield return new ValidationResult("Invalid value for PurchaseOrderNumber, length must be less than 25.", new [] { "PurchaseOrderNumber" });
+            }
+
+            // ShippingOrigin (string) maxLength
+            if (this.ShippingOrigin != null && this.ShippingOrigin.Length > 13)
+            {
+                yield return new ValidationResult("Invalid value for ShippingOrigin, length must be less than 13.", new [] { "ShippingOrigin" });
+            }
+
+            // Memo (string) maxLength
+            if (this.Memo != null && this.Memo.Length > 4095)
+            {
+                yield return new ValidationResult("Invalid value for Memo, length must be less than 4095.", new [] { "Memo" });
+            }
+
+            // OtherCustomField (string) maxLength
+            if (this.OtherCustomField != null && this.OtherCustomField.Length > 29)
+            {
+                yield return new ValidationResult("Invalid value for OtherCustomField, length must be less than 29.", new [] { "OtherCustomField" });
+            }
+
             yield break;
         }
     }

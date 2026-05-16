@@ -38,36 +38,36 @@ namespace Nxus.Qbd.Models
         /// <param name="updatedAt">updatedAt</param>
         /// <param name="revisionNumber">revisionNumber</param>
         /// <param name="objectType">objectType</param>
-        /// <param name="transactionDate">(Optional) The date of the transaction. Cannot be cleared. (DATETYPE)</param>
+        /// <param name="transactionDate">transactionDate</param>
         /// <param name="currency">currency</param>
-        /// <param name="exchangeRate">(Optional) The exchange rate for multi-currency transactions. (FLOATTYPE)</param>
-        /// <param name="refNumber">(Optional) The sequential reference number for the Estimate (e.g., Estimate Number). (STRTYPE)</param>
-        /// <param name="memo">(Optional) A memo for the entire transaction. (STRTYPE)</param>
+        /// <param name="exchangeRate">exchangeRate</param>
+        /// <param name="refNumber">The primary reference number for the transaction (e.g., Invoice #, Check #).</param>
+        /// <param name="memo">memo</param>
         /// <param name="transactionNumber">transactionNumber</param>
         /// <param name="customer">customer</param>
         /// <param name="class">class</param>
         /// <param name="template">template</param>
         /// <param name="billingAddress">billingAddress</param>
         /// <param name="shippingAddress">shippingAddress</param>
-        /// <param name="isActive">(Optional) Whether the Estimate is active. (BOOLTYPE)</param>
-        /// <param name="poNumber">(Optional) Customer&#39;s Purchase Order number. (STRTYPE)</param>
+        /// <param name="isActive">isActive</param>
+        /// <param name="poNumber">poNumber</param>
         /// <param name="terms">terms</param>
-        /// <param name="dueDate">(Optional) The due date calculated from the terms. (DATETYPE)</param>
+        /// <param name="dueDate">dueDate</param>
         /// <param name="salesRepresentative">salesRepresentative</param>
-        /// <param name="fob">(Optional) Freight on Board term. (STRTYPE)</param>
+        /// <param name="fob">fob</param>
         /// <param name="subtotal">subtotal</param>
         /// <param name="itemSalesTax">itemSalesTax</param>
         /// <param name="salesTaxPercentage">salesTaxPercentage</param>
         /// <param name="salesTaxTotal">salesTaxTotal</param>
         /// <param name="totalAmountInHomeCurrency">totalAmountInHomeCurrency</param>
         /// <param name="customerMsg">customerMsg</param>
-        /// <param name="isToBeEmailed">(Optional) Whether the Estimate should be flagged to be emailed. (BOOLTYPE)</param>
-        /// <param name="isTaxIncluded">(Optional) Whether tax is included in the line item amounts. (BOOLTYPE)</param>
+        /// <param name="isToBeEmailed">isToBeEmailed</param>
+        /// <param name="isTaxIncluded">isTaxIncluded</param>
         /// <param name="customerSalesTaxCode">customerSalesTaxCode</param>
         /// <param name="linkedTransactions">linkedTransactions</param>
         /// <param name="itemLines">itemLines</param>
         /// <param name="itemGroupLines">itemGroupLines</param>
-        /// <param name="other">(Optional) The Other field for the transaction. (STRTYPE)</param>
+        /// <param name="other">other</param>
         /// <param name="amount">amount</param>
         /// <param name="entity">entity</param>
         /// <param name="account">account</param>
@@ -170,9 +170,8 @@ namespace Nxus.Qbd.Models
         public Option<DateOnly?> TransactionDateOption { get; private set; }
 
         /// <summary>
-        /// (Optional) The date of the transaction. Cannot be cleared. (DATETYPE)
+        /// Gets or Sets TransactionDate
         /// </summary>
-        /// <value>(Optional) The date of the transaction. Cannot be cleared. (DATETYPE)</value>
         [JsonPropertyName("transactionDate")]
         public DateOnly? TransactionDate { get { return this.TransactionDateOption.Value; } set { this.TransactionDateOption = new(value); } }
 
@@ -197,9 +196,8 @@ namespace Nxus.Qbd.Models
         public Option<double?> ExchangeRateOption { get; private set; }
 
         /// <summary>
-        /// (Optional) The exchange rate for multi-currency transactions. (FLOATTYPE)
+        /// Gets or Sets ExchangeRate
         /// </summary>
-        /// <value>(Optional) The exchange rate for multi-currency transactions. (FLOATTYPE)</value>
         [JsonPropertyName("exchangeRate")]
         public double? ExchangeRate { get { return this.ExchangeRateOption.Value; } set { this.ExchangeRateOption = new(value); } }
 
@@ -211,9 +209,9 @@ namespace Nxus.Qbd.Models
         public Option<string?> RefNumberOption { get; private set; }
 
         /// <summary>
-        /// (Optional) The sequential reference number for the Estimate (e.g., Estimate Number). (STRTYPE)
+        /// The primary reference number for the transaction (e.g., Invoice #, Check #).
         /// </summary>
-        /// <value>(Optional) The sequential reference number for the Estimate (e.g., Estimate Number). (STRTYPE)</value>
+        /// <value>The primary reference number for the transaction (e.g., Invoice #, Check #).</value>
         [JsonPropertyName("refNumber")]
         public string? RefNumber { get { return this.RefNumberOption.Value; } set { this.RefNumberOption = new(value); } }
 
@@ -225,9 +223,8 @@ namespace Nxus.Qbd.Models
         public Option<string?> MemoOption { get; private set; }
 
         /// <summary>
-        /// (Optional) A memo for the entire transaction. (STRTYPE)
+        /// Gets or Sets Memo
         /// </summary>
-        /// <value>(Optional) A memo for the entire transaction. (STRTYPE)</value>
         [JsonPropertyName("memo")]
         public string? Memo { get { return this.MemoOption.Value; } set { this.MemoOption = new(value); } }
 
@@ -317,9 +314,8 @@ namespace Nxus.Qbd.Models
         public Option<bool?> IsActiveOption { get; private set; }
 
         /// <summary>
-        /// (Optional) Whether the Estimate is active. (BOOLTYPE)
+        /// Gets or Sets IsActive
         /// </summary>
-        /// <value>(Optional) Whether the Estimate is active. (BOOLTYPE)</value>
         [JsonPropertyName("isActive")]
         public bool? IsActive { get { return this.IsActiveOption.Value; } set { this.IsActiveOption = new(value); } }
 
@@ -331,9 +327,8 @@ namespace Nxus.Qbd.Models
         public Option<string?> PoNumberOption { get; private set; }
 
         /// <summary>
-        /// (Optional) Customer&#39;s Purchase Order number. (STRTYPE)
+        /// Gets or Sets PoNumber
         /// </summary>
-        /// <value>(Optional) Customer&#39;s Purchase Order number. (STRTYPE)</value>
         [JsonPropertyName("poNumber")]
         public string? PoNumber { get { return this.PoNumberOption.Value; } set { this.PoNumberOption = new(value); } }
 
@@ -358,9 +353,8 @@ namespace Nxus.Qbd.Models
         public Option<DateOnly?> DueDateOption { get; private set; }
 
         /// <summary>
-        /// (Optional) The due date calculated from the terms. (DATETYPE)
+        /// Gets or Sets DueDate
         /// </summary>
-        /// <value>(Optional) The due date calculated from the terms. (DATETYPE)</value>
         [JsonPropertyName("dueDate")]
         public DateOnly? DueDate { get { return this.DueDateOption.Value; } set { this.DueDateOption = new(value); } }
 
@@ -385,9 +379,8 @@ namespace Nxus.Qbd.Models
         public Option<string?> FobOption { get; private set; }
 
         /// <summary>
-        /// (Optional) Freight on Board term. (STRTYPE)
+        /// Gets or Sets Fob
         /// </summary>
-        /// <value>(Optional) Freight on Board term. (STRTYPE)</value>
         [JsonPropertyName("fob")]
         public string? Fob { get { return this.FobOption.Value; } set { this.FobOption = new(value); } }
 
@@ -477,9 +470,8 @@ namespace Nxus.Qbd.Models
         public Option<bool?> IsToBeEmailedOption { get; private set; }
 
         /// <summary>
-        /// (Optional) Whether the Estimate should be flagged to be emailed. (BOOLTYPE)
+        /// Gets or Sets IsToBeEmailed
         /// </summary>
-        /// <value>(Optional) Whether the Estimate should be flagged to be emailed. (BOOLTYPE)</value>
         [JsonPropertyName("isToBeEmailed")]
         public bool? IsToBeEmailed { get { return this.IsToBeEmailedOption.Value; } set { this.IsToBeEmailedOption = new(value); } }
 
@@ -491,9 +483,8 @@ namespace Nxus.Qbd.Models
         public Option<bool?> IsTaxIncludedOption { get; private set; }
 
         /// <summary>
-        /// (Optional) Whether tax is included in the line item amounts. (BOOLTYPE)
+        /// Gets or Sets IsTaxIncluded
         /// </summary>
-        /// <value>(Optional) Whether tax is included in the line item amounts. (BOOLTYPE)</value>
         [JsonPropertyName("isTaxIncluded")]
         public bool? IsTaxIncluded { get { return this.IsTaxIncludedOption.Value; } set { this.IsTaxIncludedOption = new(value); } }
 
@@ -557,9 +548,8 @@ namespace Nxus.Qbd.Models
         public Option<string?> OtherOption { get; private set; }
 
         /// <summary>
-        /// (Optional) The Other field for the transaction. (STRTYPE)
+        /// Gets or Sets Other
         /// </summary>
-        /// <value>(Optional) The Other field for the transaction. (STRTYPE)</value>
         [JsonPropertyName("other")]
         public string? Other { get { return this.OtherOption.Value; } set { this.OtherOption = new(value); } }
 

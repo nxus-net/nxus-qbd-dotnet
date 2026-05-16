@@ -103,6 +103,12 @@ namespace Nxus.Qbd.Models
         /// <returns>Validation Result</returns>
         IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
+            // SpecialItemType (string) minLength
+            if (this.SpecialItemType != null && this.SpecialItemType.Length < 1)
+            {
+                yield return new ValidationResult("Invalid value for SpecialItemType, length must be greater than 1.", new [] { "SpecialItemType" });
+            }
+
             yield break;
         }
     }

@@ -33,9 +33,9 @@ namespace Nxus.Qbd.Models
         /// <summary>
         /// Initializes a new instance of the <see cref="ReportRow" /> class.
         /// </summary>
-        /// <param name="type">The type of the row.</param>
-        /// <param name="rowNumber">The row number of the row.</param>
-        /// <param name="value">The value of the row.</param>
+        /// <param name="type">The type of row: \&quot;TextRow\&quot;, \&quot;DataRow\&quot;, \&quot;SubtotalRow\&quot;, or \&quot;TotalRow\&quot;.</param>
+        /// <param name="rowNumber">Optional row number for positioning.</param>
+        /// <param name="value">For TextRow: The text content of the row.</param>
         /// <param name="info">info</param>
         /// <param name="values">values</param>
         /// <param name="rows">rows</param>
@@ -61,9 +61,9 @@ namespace Nxus.Qbd.Models
         public Option<string?> TypeOption { get; private set; }
 
         /// <summary>
-        /// The type of the row.
+        /// The type of row: \&quot;TextRow\&quot;, \&quot;DataRow\&quot;, \&quot;SubtotalRow\&quot;, or \&quot;TotalRow\&quot;.
         /// </summary>
-        /// <value>The type of the row.</value>
+        /// <value>The type of row: \&quot;TextRow\&quot;, \&quot;DataRow\&quot;, \&quot;SubtotalRow\&quot;, or \&quot;TotalRow\&quot;.</value>
         [JsonPropertyName("type")]
         public string? Type { get { return this.TypeOption.Value; } set { this.TypeOption = new(value); } }
 
@@ -75,9 +75,9 @@ namespace Nxus.Qbd.Models
         public Option<int?> RowNumberOption { get; private set; }
 
         /// <summary>
-        /// The row number of the row.
+        /// Optional row number for positioning.
         /// </summary>
-        /// <value>The row number of the row.</value>
+        /// <value>Optional row number for positioning.</value>
         [JsonPropertyName("rowNumber")]
         public int? RowNumber { get { return this.RowNumberOption.Value; } set { this.RowNumberOption = new(value); } }
 
@@ -89,9 +89,9 @@ namespace Nxus.Qbd.Models
         public Option<string?> ValueOption { get; private set; }
 
         /// <summary>
-        /// The value of the row.
+        /// For TextRow: The text content of the row.
         /// </summary>
-        /// <value>The value of the row.</value>
+        /// <value>For TextRow: The text content of the row.</value>
         [JsonPropertyName("value")]
         public string? Value { get { return this.ValueOption.Value; } set { this.ValueOption = new(value); } }
 
