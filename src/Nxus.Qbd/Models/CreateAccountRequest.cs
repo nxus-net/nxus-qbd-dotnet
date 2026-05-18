@@ -26,26 +26,26 @@ using Nxus.Qbd.Json;
 namespace Nxus.Qbd.Models
 {
     /// <summary>
-    /// Request model for creating a new account.
+    /// Contains parameters for creating a new financial account.
     /// </summary>
     public partial class CreateAccountRequest : IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="CreateAccountRequest" /> class.
         /// </summary>
-        /// <param name="name">Account name (required)</param>
-        /// <param name="accountType">Account type (required) NOTE: Cannot create non_posting accounts via API - QuickBooks creates these internally</param>
-        /// <param name="accountNumber">Account number (optional)</param>
-        /// <param name="description">Account description (optional)</param>
-        /// <param name="parentId">Parent account reference (for sub-accounts)</param>
-        /// <param name="salesTaxCodeId">The default sales-tax code for transactions with this account, determining whether the transactions are taxable or non-taxable. This can be overridden at the transaction or transaction-line level. Default codes include \&quot;Non\&quot; (non-taxable) and \&quot;Tax\&quot; (taxable), but custom codes can also be created in QuickBooks. If QuickBooks is not set up to charge sales tax(via the \&quot;Do You Charge Sales Tax?\&quot; preference), it will assign the default non-taxable code to all sales.</param>
-        /// <param name="taxLineId">The identifier of the tax line associated with this account. You can see a list of all available values for this field by calling the endpoint for account tax lines.</param>
-        /// <param name="currencyId">The account&#39;s currency. For built-in currencies, the name and code are standard international values. For user-defined currencies, all values are editable.</param>
-        /// <param name="isActive">Whether the account is active (default: true)</param>
-        /// <param name="isTaxAccount">Whether the account is a tax account (optional, default: false) Only set to true for accounts that track tax liabilities/expenses</param>
-        /// <param name="openBalance">Opening balance for the account (optional)</param>
-        /// <param name="openBalanceDate">Opening balance date (optional, defaults to today)</param>
-        /// <param name="bankNumber">Bank account number (for bank accounts only)</param>
+        /// <param name="name">The case-insensitive name of this account.  Not guaranteed to be unique across all accounts, but must be unique within its hierarchical parent.</param>
+        /// <param name="accountType">The classification of this account, indicating its purpose within the chart of accounts.</param>
+        /// <param name="accountNumber">The account number, which appears in the chart of accounts, reports, and graphs.</param>
+        /// <param name="description">A description of this account.</param>
+        /// <param name="parentId">The parent account one level above this one in the hierarchy.  Required for creating sub-accounts. If omitted, the account is created at the top level.</param>
+        /// <param name="salesTaxCodeId">The default sales-tax code for transactions with this account.  Determines whether the transactions are taxable or non-taxable. This can be overridden at the transaction or transaction-line level. Default codes typically include \&quot;Non\&quot; (non-taxable) and \&quot;Tax\&quot; (taxable).</param>
+        /// <param name="taxLineId">The identifier of the tax line associated with this account.</param>
+        /// <param name="currencyId">The account&#39;s currency.</param>
+        /// <param name="isActive">Indicates whether this account is active.  Inactive objects are typically hidden from views and reports.</param>
+        /// <param name="isTaxAccount">Indicates whether this account is used for tracking taxes.</param>
+        /// <param name="openBalance">The amount of money in, or the value of, this account as of the opening balance date.</param>
+        /// <param name="openBalanceDate">The date of the opening balance of this account.</param>
+        /// <param name="bankNumber">The bank account number or identifying note.</param>
         /// <param name="externalId">externalId</param>
         [JsonConstructor]
         public CreateAccountRequest(string name, AccountType accountType, Option<string?> accountNumber = default, Option<string?> description = default, Option<string?> parentId = default, Option<string?> salesTaxCodeId = default, Option<string?> taxLineId = default, Option<string?> currencyId = default, Option<bool?> isActive = default, Option<bool?> isTaxAccount = default, Option<double?> openBalance = default, Option<DateOnly?> openBalanceDate = default, Option<string?> bankNumber = default, Option<string?> externalId = default)
@@ -70,16 +70,16 @@ namespace Nxus.Qbd.Models
         partial void OnCreated();
 
         /// <summary>
-        /// Account type (required) NOTE: Cannot create non_posting accounts via API - QuickBooks creates these internally
+        /// The classification of this account, indicating its purpose within the chart of accounts.
         /// </summary>
-        /// <value>Account type (required) NOTE: Cannot create non_posting accounts via API - QuickBooks creates these internally</value>
+        /// <value>The classification of this account, indicating its purpose within the chart of accounts.</value>
         [JsonPropertyName("accountType")]
         public AccountType AccountType { get; set; }
 
         /// <summary>
-        /// Account name (required)
+        /// The case-insensitive name of this account.  Not guaranteed to be unique across all accounts, but must be unique within its hierarchical parent.
         /// </summary>
-        /// <value>Account name (required)</value>
+        /// <value>The case-insensitive name of this account.  Not guaranteed to be unique across all accounts, but must be unique within its hierarchical parent.</value>
         [JsonPropertyName("name")]
         public string Name { get; set; }
 
@@ -91,9 +91,10 @@ namespace Nxus.Qbd.Models
         public Option<string?> AccountNumberOption { get; private set; }
 
         /// <summary>
-        /// Account number (optional)
+        /// The account number, which appears in the chart of accounts, reports, and graphs.
         /// </summary>
-        /// <value>Account number (optional)</value>
+        /// <value>The account number, which appears in the chart of accounts, reports, and graphs.</value>
+        /* <example>&quot;1010&quot;</example> */
         [JsonPropertyName("accountNumber")]
         public string? AccountNumber { get { return this.AccountNumberOption.Value; } set { this.AccountNumberOption = new(value); } }
 
@@ -105,9 +106,10 @@ namespace Nxus.Qbd.Models
         public Option<string?> DescriptionOption { get; private set; }
 
         /// <summary>
-        /// Account description (optional)
+        /// A description of this account.
         /// </summary>
-        /// <value>Account description (optional)</value>
+        /// <value>A description of this account.</value>
+        /* <example>&quot;Amounts owed to suppliers for goods and services purchased on credit.&quot;</example> */
         [JsonPropertyName("description")]
         public string? Description { get { return this.DescriptionOption.Value; } set { this.DescriptionOption = new(value); } }
 
@@ -119,9 +121,10 @@ namespace Nxus.Qbd.Models
         public Option<string?> ParentIdOption { get; private set; }
 
         /// <summary>
-        /// Parent account reference (for sub-accounts)
+        /// The parent account one level above this one in the hierarchy.  Required for creating sub-accounts. If omitted, the account is created at the top level.
         /// </summary>
-        /// <value>Parent account reference (for sub-accounts)</value>
+        /// <value>The parent account one level above this one in the hierarchy.  Required for creating sub-accounts. If omitted, the account is created at the top level.</value>
+        /* <example>&quot;80000001-1234567890&quot;</example> */
         [JsonPropertyName("parentId")]
         public string? ParentId { get { return this.ParentIdOption.Value; } set { this.ParentIdOption = new(value); } }
 
@@ -133,9 +136,9 @@ namespace Nxus.Qbd.Models
         public Option<string?> SalesTaxCodeIdOption { get; private set; }
 
         /// <summary>
-        /// The default sales-tax code for transactions with this account, determining whether the transactions are taxable or non-taxable. This can be overridden at the transaction or transaction-line level. Default codes include \&quot;Non\&quot; (non-taxable) and \&quot;Tax\&quot; (taxable), but custom codes can also be created in QuickBooks. If QuickBooks is not set up to charge sales tax(via the \&quot;Do You Charge Sales Tax?\&quot; preference), it will assign the default non-taxable code to all sales.
+        /// The default sales-tax code for transactions with this account.  Determines whether the transactions are taxable or non-taxable. This can be overridden at the transaction or transaction-line level. Default codes typically include \&quot;Non\&quot; (non-taxable) and \&quot;Tax\&quot; (taxable).
         /// </summary>
-        /// <value>The default sales-tax code for transactions with this account, determining whether the transactions are taxable or non-taxable. This can be overridden at the transaction or transaction-line level. Default codes include \&quot;Non\&quot; (non-taxable) and \&quot;Tax\&quot; (taxable), but custom codes can also be created in QuickBooks. If QuickBooks is not set up to charge sales tax(via the \&quot;Do You Charge Sales Tax?\&quot; preference), it will assign the default non-taxable code to all sales.</value>
+        /// <value>The default sales-tax code for transactions with this account.  Determines whether the transactions are taxable or non-taxable. This can be overridden at the transaction or transaction-line level. Default codes typically include \&quot;Non\&quot; (non-taxable) and \&quot;Tax\&quot; (taxable).</value>
         [JsonPropertyName("salesTaxCodeId")]
         public string? SalesTaxCodeId { get { return this.SalesTaxCodeIdOption.Value; } set { this.SalesTaxCodeIdOption = new(value); } }
 
@@ -147,9 +150,9 @@ namespace Nxus.Qbd.Models
         public Option<string?> TaxLineIdOption { get; private set; }
 
         /// <summary>
-        /// The identifier of the tax line associated with this account. You can see a list of all available values for this field by calling the endpoint for account tax lines.
+        /// The identifier of the tax line associated with this account.
         /// </summary>
-        /// <value>The identifier of the tax line associated with this account. You can see a list of all available values for this field by calling the endpoint for account tax lines.</value>
+        /// <value>The identifier of the tax line associated with this account.</value>
         [JsonPropertyName("taxLineId")]
         public string? TaxLineId { get { return this.TaxLineIdOption.Value; } set { this.TaxLineIdOption = new(value); } }
 
@@ -161,9 +164,9 @@ namespace Nxus.Qbd.Models
         public Option<string?> CurrencyIdOption { get; private set; }
 
         /// <summary>
-        /// The account&#39;s currency. For built-in currencies, the name and code are standard international values. For user-defined currencies, all values are editable.
+        /// The account&#39;s currency.
         /// </summary>
-        /// <value>The account&#39;s currency. For built-in currencies, the name and code are standard international values. For user-defined currencies, all values are editable.</value>
+        /// <value>The account&#39;s currency.</value>
         [JsonPropertyName("currencyId")]
         public string? CurrencyId { get { return this.CurrencyIdOption.Value; } set { this.CurrencyIdOption = new(value); } }
 
@@ -175,9 +178,9 @@ namespace Nxus.Qbd.Models
         public Option<bool?> IsActiveOption { get; private set; }
 
         /// <summary>
-        /// Whether the account is active (default: true)
+        /// Indicates whether this account is active.  Inactive objects are typically hidden from views and reports.
         /// </summary>
-        /// <value>Whether the account is active (default: true)</value>
+        /// <value>Indicates whether this account is active.  Inactive objects are typically hidden from views and reports.</value>
         [JsonPropertyName("isActive")]
         public bool? IsActive { get { return this.IsActiveOption.Value; } set { this.IsActiveOption = new(value); } }
 
@@ -189,9 +192,9 @@ namespace Nxus.Qbd.Models
         public Option<bool?> IsTaxAccountOption { get; private set; }
 
         /// <summary>
-        /// Whether the account is a tax account (optional, default: false) Only set to true for accounts that track tax liabilities/expenses
+        /// Indicates whether this account is used for tracking taxes.
         /// </summary>
-        /// <value>Whether the account is a tax account (optional, default: false) Only set to true for accounts that track tax liabilities/expenses</value>
+        /// <value>Indicates whether this account is used for tracking taxes.</value>
         [JsonPropertyName("isTaxAccount")]
         public bool? IsTaxAccount { get { return this.IsTaxAccountOption.Value; } set { this.IsTaxAccountOption = new(value); } }
 
@@ -203,9 +206,10 @@ namespace Nxus.Qbd.Models
         public Option<double?> OpenBalanceOption { get; private set; }
 
         /// <summary>
-        /// Opening balance for the account (optional)
+        /// The amount of money in, or the value of, this account as of the opening balance date.
         /// </summary>
-        /// <value>Opening balance for the account (optional)</value>
+        /// <value>The amount of money in, or the value of, this account as of the opening balance date.</value>
+        /* <example>1000.00</example> */
         [JsonPropertyName("openBalance")]
         public double? OpenBalance { get { return this.OpenBalanceOption.Value; } set { this.OpenBalanceOption = new(value); } }
 
@@ -217,9 +221,9 @@ namespace Nxus.Qbd.Models
         public Option<DateOnly?> OpenBalanceDateOption { get; private set; }
 
         /// <summary>
-        /// Opening balance date (optional, defaults to today)
+        /// The date of the opening balance of this account.
         /// </summary>
-        /// <value>Opening balance date (optional, defaults to today)</value>
+        /// <value>The date of the opening balance of this account.</value>
         [JsonPropertyName("openBalanceDate")]
         public DateOnly? OpenBalanceDate { get { return this.OpenBalanceDateOption.Value; } set { this.OpenBalanceDateOption = new(value); } }
 
@@ -231,9 +235,10 @@ namespace Nxus.Qbd.Models
         public Option<string?> BankNumberOption { get; private set; }
 
         /// <summary>
-        /// Bank account number (for bank accounts only)
+        /// The bank account number or identifying note.
         /// </summary>
-        /// <value>Bank account number (for bank accounts only)</value>
+        /// <value>The bank account number or identifying note.</value>
+        /* <example>&quot;123456789&quot;</example> */
         [JsonPropertyName("bankNumber")]
         public string? BankNumber { get { return this.BankNumberOption.Value; } set { this.BankNumberOption = new(value); } }
 

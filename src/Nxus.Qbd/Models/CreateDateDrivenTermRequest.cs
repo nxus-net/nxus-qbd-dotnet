@@ -34,11 +34,11 @@ namespace Nxus.Qbd.Models
         /// Initializes a new instance of the <see cref="CreateDateDrivenTermRequest" /> class.
         /// </summary>
         /// <param name="id">id</param>
-        /// <param name="name">name</param>
-        /// <param name="isActive">isActive</param>
+        /// <param name="name">The case-insensitive unique name of this date-driven term, unique across all date-driven terms.  **NOTE**: Date-driven terms do not have a &#x60;fullName&#x60; field because they are not hierarchical objects, which is why &#x60;name&#x60; is unique for them but not for objects that have parents.</param>
+        /// <param name="isActive">Indicates whether this date-driven term is active. Inactive objects are typically hidden from views and reports in QuickBooks. Defaults to &#x60;true&#x60;.</param>
         /// <param name="dueDayOfMonth">dueDayOfMonth</param>
         /// <param name="gracePeriod">gracePeriod</param>
-        /// <param name="discountDayOfMonth">discountDayOfMonth</param>
+        /// <param name="discountDayOfMonth">The day of the month within which payment must be received to qualify for the discount specified by &#x60;discountPercentage&#x60;.</param>
         /// <param name="discountPercentage">discountPercentage</param>
         [JsonConstructor]
         public CreateDateDrivenTermRequest(string id, string name, Option<bool?> isActive = default, Option<string?> dueDayOfMonth = default, Option<string?> gracePeriod = default, Option<string?> discountDayOfMonth = default, Option<string?> discountPercentage = default)
@@ -62,8 +62,9 @@ namespace Nxus.Qbd.Models
         public string Id { get; set; }
 
         /// <summary>
-        /// Gets or Sets Name
+        /// The case-insensitive unique name of this date-driven term, unique across all date-driven terms.  **NOTE**: Date-driven terms do not have a &#x60;fullName&#x60; field because they are not hierarchical objects, which is why &#x60;name&#x60; is unique for them but not for objects that have parents.
         /// </summary>
+        /// <value>The case-insensitive unique name of this date-driven term, unique across all date-driven terms.  **NOTE**: Date-driven terms do not have a &#x60;fullName&#x60; field because they are not hierarchical objects, which is why &#x60;name&#x60; is unique for them but not for objects that have parents.</value>
         [JsonPropertyName("name")]
         public string Name { get; set; }
 
@@ -75,8 +76,10 @@ namespace Nxus.Qbd.Models
         public Option<bool?> IsActiveOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets IsActive
+        /// Indicates whether this date-driven term is active. Inactive objects are typically hidden from views and reports in QuickBooks. Defaults to &#x60;true&#x60;.
         /// </summary>
+        /// <value>Indicates whether this date-driven term is active. Inactive objects are typically hidden from views and reports in QuickBooks. Defaults to &#x60;true&#x60;.</value>
+        /* <example>true</example> */
         [JsonPropertyName("isActive")]
         public bool? IsActive { get { return this.IsActiveOption.Value; } set { this.IsActiveOption = new(value); } }
 
@@ -114,8 +117,10 @@ namespace Nxus.Qbd.Models
         public Option<string?> DiscountDayOfMonthOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets DiscountDayOfMonth
+        /// The day of the month within which payment must be received to qualify for the discount specified by &#x60;discountPercentage&#x60;.
         /// </summary>
+        /// <value>The day of the month within which payment must be received to qualify for the discount specified by &#x60;discountPercentage&#x60;.</value>
+        /* <example>5</example> */
         [JsonPropertyName("discountDayOfMonth")]
         public string? DiscountDayOfMonth { get { return this.DiscountDayOfMonthOption.Value; } set { this.DiscountDayOfMonthOption = new(value); } }
 

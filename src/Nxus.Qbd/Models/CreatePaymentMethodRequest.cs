@@ -33,9 +33,9 @@ namespace Nxus.Qbd.Models
         /// <summary>
         /// Initializes a new instance of the <see cref="CreatePaymentMethodRequest" /> class.
         /// </summary>
-        /// <param name="name">(Required) The name of the payment method.</param>
-        /// <param name="isActive">(Optional) Whether the payment method is active. Defaults to true if not specified.</param>
-        /// <param name="paymentMethodType">(Optional) The type of payment method. Valid values: american_express, cash, check, debit_card, discover, e_check, gift_card, master_card, other, other_credit_card, visa.</param>
+        /// <param name="name">The case-insensitive unique name of this payment method, unique across all payment methods.  **NOTE**: Payment methods do not have a &#x60;fullName&#x60; field because they are not hierarchical objects, which is why &#x60;name&#x60; is unique for them but not for objects that have parents.</param>
+        /// <param name="isActive">Indicates whether this payment method is active. Inactive objects are typically hidden from views and reports in QuickBooks. Defaults to &#x60;true&#x60;.</param>
+        /// <param name="paymentMethodType">This payment method&#39;s type.</param>
         [JsonConstructor]
         public CreatePaymentMethodRequest(string name, Option<bool?> isActive = default, Option<string?> paymentMethodType = default)
         {
@@ -48,9 +48,9 @@ namespace Nxus.Qbd.Models
         partial void OnCreated();
 
         /// <summary>
-        /// (Required) The name of the payment method.
+        /// The case-insensitive unique name of this payment method, unique across all payment methods.  **NOTE**: Payment methods do not have a &#x60;fullName&#x60; field because they are not hierarchical objects, which is why &#x60;name&#x60; is unique for them but not for objects that have parents.
         /// </summary>
-        /// <value>(Required) The name of the payment method.</value>
+        /// <value>The case-insensitive unique name of this payment method, unique across all payment methods.  **NOTE**: Payment methods do not have a &#x60;fullName&#x60; field because they are not hierarchical objects, which is why &#x60;name&#x60; is unique for them but not for objects that have parents.</value>
         [JsonPropertyName("name")]
         public string Name { get; set; }
 
@@ -62,9 +62,9 @@ namespace Nxus.Qbd.Models
         public Option<bool?> IsActiveOption { get; private set; }
 
         /// <summary>
-        /// (Optional) Whether the payment method is active. Defaults to true if not specified.
+        /// Indicates whether this payment method is active. Inactive objects are typically hidden from views and reports in QuickBooks. Defaults to &#x60;true&#x60;.
         /// </summary>
-        /// <value>(Optional) Whether the payment method is active. Defaults to true if not specified.</value>
+        /// <value>Indicates whether this payment method is active. Inactive objects are typically hidden from views and reports in QuickBooks. Defaults to &#x60;true&#x60;.</value>
         [JsonPropertyName("isActive")]
         public bool? IsActive { get { return this.IsActiveOption.Value; } set { this.IsActiveOption = new(value); } }
 
@@ -76,9 +76,10 @@ namespace Nxus.Qbd.Models
         public Option<string?> PaymentMethodTypeOption { get; private set; }
 
         /// <summary>
-        /// (Optional) The type of payment method. Valid values: american_express, cash, check, debit_card, discover, e_check, gift_card, master_card, other, other_credit_card, visa.
+        /// This payment method&#39;s type.
         /// </summary>
-        /// <value>(Optional) The type of payment method. Valid values: american_express, cash, check, debit_card, discover, e_check, gift_card, master_card, other, other_credit_card, visa.</value>
+        /// <value>This payment method&#39;s type.</value>
+        /* <example>&quot;cash&quot;</example> */
         [JsonPropertyName("paymentMethodType")]
         public string? PaymentMethodType { get { return this.PaymentMethodTypeOption.Value; } set { this.PaymentMethodTypeOption = new(value); } }
 

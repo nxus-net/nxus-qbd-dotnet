@@ -34,20 +34,14 @@ namespace Nxus.Qbd.Models
         /// Initializes a new instance of the <see cref="AccountTaxLineInfo" /> class.
         /// </summary>
         /// <param name="id">id</param>
-        /// <param name="createdAt">createdAt</param>
-        /// <param name="updatedAt">updatedAt</param>
-        /// <param name="revisionNumber">revisionNumber</param>
         /// <param name="objectType">objectType</param>
         /// <param name="name">The primary display name for the List object (e.g., Customer Name, Vendor Name).</param>
         /// <param name="isActive">Indicates whether the list item is active. Common to all list types.</param>
         /// <param name="customFields">customFields</param>
         [JsonConstructor]
-        public AccountTaxLineInfo(string id, DateTimeOffset createdAt, DateTimeOffset updatedAt, string revisionNumber, Option<string?> objectType = default, Option<string?> name = default, Option<bool?> isActive = default, Option<List<QbdDataExt>?> customFields = default)
+        public AccountTaxLineInfo(string id, Option<string?> objectType = default, Option<string?> name = default, Option<bool?> isActive = default, Option<List<QbdDataExt>?> customFields = default)
         {
             Id = id;
-            CreatedAt = createdAt;
-            UpdatedAt = updatedAt;
-            RevisionNumber = revisionNumber;
             ObjectTypeOption = objectType;
             NameOption = name;
             IsActiveOption = isActive;
@@ -62,24 +56,6 @@ namespace Nxus.Qbd.Models
         /// </summary>
         [JsonPropertyName("id")]
         public string Id { get; set; }
-
-        /// <summary>
-        /// Gets or Sets CreatedAt
-        /// </summary>
-        [JsonPropertyName("createdAt")]
-        public DateTimeOffset CreatedAt { get; set; }
-
-        /// <summary>
-        /// Gets or Sets UpdatedAt
-        /// </summary>
-        [JsonPropertyName("updatedAt")]
-        public DateTimeOffset UpdatedAt { get; set; }
-
-        /// <summary>
-        /// Gets or Sets RevisionNumber
-        /// </summary>
-        [JsonPropertyName("revisionNumber")]
-        public string RevisionNumber { get; set; }
 
         /// <summary>
         /// Used to track the state of ObjectType
@@ -144,9 +120,6 @@ namespace Nxus.Qbd.Models
             StringBuilder sb = new StringBuilder();
             sb.Append("class AccountTaxLineInfo {\n");
             sb.Append("  Id: ").Append(Id).Append("\n");
-            sb.Append("  CreatedAt: ").Append(CreatedAt).Append("\n");
-            sb.Append("  UpdatedAt: ").Append(UpdatedAt).Append("\n");
-            sb.Append("  RevisionNumber: ").Append(RevisionNumber).Append("\n");
             sb.Append("  ObjectType: ").Append(ObjectType).Append("\n");
             sb.Append("  Name: ").Append(Name).Append("\n");
             sb.Append("  IsActive: ").Append(IsActive).Append("\n");
@@ -172,16 +145,6 @@ namespace Nxus.Qbd.Models
     public class AccountTaxLineInfoJsonConverter : JsonConverter<AccountTaxLineInfo>
     {
         /// <summary>
-        /// The format to use to serialize CreatedAt
-        /// </summary>
-        public static string CreatedAtFormat { get; set; } = "yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fffffffK";
-
-        /// <summary>
-        /// The format to use to serialize UpdatedAt
-        /// </summary>
-        public static string UpdatedAtFormat { get; set; } = "yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fffffffK";
-
-        /// <summary>
         /// Deserializes json to <see cref="AccountTaxLineInfo" />
         /// </summary>
         /// <param name="utf8JsonReader"></param>
@@ -199,9 +162,6 @@ namespace Nxus.Qbd.Models
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
             Option<string?> id = default;
-            Option<DateTimeOffset?> createdAt = default;
-            Option<DateTimeOffset?> updatedAt = default;
-            Option<string?> revisionNumber = default;
             Option<string?> objectType = default;
             Option<string?> name = default;
             Option<bool?> isActive = default;
@@ -225,15 +185,6 @@ namespace Nxus.Qbd.Models
                         case "id":
                             id = new Option<string?>(utf8JsonReader.GetString()!);
                             break;
-                        case "createdAt":
-                            createdAt = new Option<DateTimeOffset?>(JsonSerializer.Deserialize<DateTimeOffset>(ref utf8JsonReader, jsonSerializerOptions));
-                            break;
-                        case "updatedAt":
-                            updatedAt = new Option<DateTimeOffset?>(JsonSerializer.Deserialize<DateTimeOffset>(ref utf8JsonReader, jsonSerializerOptions));
-                            break;
-                        case "revisionNumber":
-                            revisionNumber = new Option<string?>(utf8JsonReader.GetString()!);
-                            break;
                         case "objectType":
                             objectType = new Option<string?>(utf8JsonReader.GetString()!);
                             break;
@@ -255,26 +206,8 @@ namespace Nxus.Qbd.Models
             if (!id.IsSet)
                 throw new ArgumentException("Property is required for class AccountTaxLineInfo.", nameof(id));
 
-            if (!createdAt.IsSet)
-                throw new ArgumentException("Property is required for class AccountTaxLineInfo.", nameof(createdAt));
-
-            if (!updatedAt.IsSet)
-                throw new ArgumentException("Property is required for class AccountTaxLineInfo.", nameof(updatedAt));
-
-            if (!revisionNumber.IsSet)
-                throw new ArgumentException("Property is required for class AccountTaxLineInfo.", nameof(revisionNumber));
-
             if (id.IsSet && id.Value == null)
                 throw new ArgumentNullException(nameof(id), "Property is not nullable for class AccountTaxLineInfo.");
-
-            if (createdAt.IsSet && createdAt.Value == null)
-                throw new ArgumentNullException(nameof(createdAt), "Property is not nullable for class AccountTaxLineInfo.");
-
-            if (updatedAt.IsSet && updatedAt.Value == null)
-                throw new ArgumentNullException(nameof(updatedAt), "Property is not nullable for class AccountTaxLineInfo.");
-
-            if (revisionNumber.IsSet && revisionNumber.Value == null)
-                throw new ArgumentNullException(nameof(revisionNumber), "Property is not nullable for class AccountTaxLineInfo.");
 
             if (objectType.IsSet && objectType.Value == null)
                 throw new ArgumentNullException(nameof(objectType), "Property is not nullable for class AccountTaxLineInfo.");
@@ -285,7 +218,7 @@ namespace Nxus.Qbd.Models
             if (customFields.IsSet && customFields.Value == null)
                 throw new ArgumentNullException(nameof(customFields), "Property is not nullable for class AccountTaxLineInfo.");
 
-            return new AccountTaxLineInfo(id.Value!, createdAt.Value!.Value!, updatedAt.Value!.Value!, revisionNumber.Value!, objectType, name, isActive, customFields);
+            return new AccountTaxLineInfo(id.Value!, objectType, name, isActive, customFields);
         }
 
         /// <summary>
@@ -315,9 +248,6 @@ namespace Nxus.Qbd.Models
             if (accountTaxLineInfo.Id == null)
                 throw new ArgumentNullException(nameof(accountTaxLineInfo.Id), "Property is required for class AccountTaxLineInfo.");
 
-            if (accountTaxLineInfo.RevisionNumber == null)
-                throw new ArgumentNullException(nameof(accountTaxLineInfo.RevisionNumber), "Property is required for class AccountTaxLineInfo.");
-
             if (accountTaxLineInfo.ObjectTypeOption.IsSet && accountTaxLineInfo.ObjectType == null)
                 throw new ArgumentNullException(nameof(accountTaxLineInfo.ObjectType), "Property is required for class AccountTaxLineInfo.");
 
@@ -325,12 +255,6 @@ namespace Nxus.Qbd.Models
                 throw new ArgumentNullException(nameof(accountTaxLineInfo.CustomFields), "Property is required for class AccountTaxLineInfo.");
 
             writer.WriteString("id", accountTaxLineInfo.Id);
-
-            writer.WriteString("createdAt", accountTaxLineInfo.CreatedAt.ToString(CreatedAtFormat));
-
-            writer.WriteString("updatedAt", accountTaxLineInfo.UpdatedAt.ToString(UpdatedAtFormat));
-
-            writer.WriteString("revisionNumber", accountTaxLineInfo.RevisionNumber);
 
             if (accountTaxLineInfo.ObjectTypeOption.IsSet)
                 writer.WriteString("objectType", accountTaxLineInfo.ObjectType);

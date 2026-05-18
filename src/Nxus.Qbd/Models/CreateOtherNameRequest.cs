@@ -33,21 +33,21 @@ namespace Nxus.Qbd.Models
         /// <summary>
         /// Initializes a new instance of the <see cref="CreateOtherNameRequest" /> class.
         /// </summary>
-        /// <param name="name">name</param>
-        /// <param name="companyName">companyName</param>
-        /// <param name="salutation">salutation</param>
-        /// <param name="firstName">firstName</param>
-        /// <param name="middleName">middleName</param>
-        /// <param name="lastName">lastName</param>
-        /// <param name="address">address</param>
+        /// <param name="name">The case-insensitive unique name of this other-name, unique across all other-names.  **NOTE**: Other-names do not have a &#x60;fullName&#x60; field because they are not hierarchical objects, which is why &#x60;name&#x60; is unique for them but not for objects that have parents.</param>
+        /// <param name="companyName">The name of the company associated with this other-name. This name is used on invoices, checks, and other forms.</param>
+        /// <param name="salutation">The formal salutation title that precedes the name of the contact person for this other-name, such as \&quot;Mr.\&quot;, \&quot;Ms.\&quot;, or \&quot;Dr.\&quot;.</param>
+        /// <param name="firstName">The first name of the contact person for this other-name.</param>
+        /// <param name="middleName">The middle name of the contact person for this other-name.</param>
+        /// <param name="lastName">The last name of the contact person for this other-name.</param>
+        /// <param name="address">The other-name&#39;s address.</param>
         /// <param name="addressBlock">addressBlock</param>
-        /// <param name="phone">phone</param>
+        /// <param name="phone">The other-name&#39;s primary telephone number.</param>
         /// <param name="alternatPhone">alternatPhone</param>
-        /// <param name="fax">fax</param>
-        /// <param name="email">email</param>
-        /// <param name="contact">contact</param>
+        /// <param name="fax">The other-name&#39;s fax number.</param>
+        /// <param name="email">The other-name&#39;s email address.</param>
+        /// <param name="contact">The name of the primary contact person for this other-name.</param>
         /// <param name="alternateContact">alternateContact</param>
-        /// <param name="accountNumber">accountNumber</param>
+        /// <param name="accountNumber">The other-name&#39;s account number, which appears in the QuickBooks chart of accounts, reports, and graphs.  Note that if the \&quot;Use Account Numbers\&quot; preference is turned off in QuickBooks, the account number may not be visible in the user interface, but it can still be set and retrieved through the API.</param>
         /// <param name="notes">notes</param>
         /// <param name="customFields">customFields</param>
         /// <param name="externalId">externalId</param>
@@ -85,8 +85,10 @@ namespace Nxus.Qbd.Models
         public Option<string?> NameOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets Name
+        /// The case-insensitive unique name of this other-name, unique across all other-names.  **NOTE**: Other-names do not have a &#x60;fullName&#x60; field because they are not hierarchical objects, which is why &#x60;name&#x60; is unique for them but not for objects that have parents.
         /// </summary>
+        /// <value>The case-insensitive unique name of this other-name, unique across all other-names.  **NOTE**: Other-names do not have a &#x60;fullName&#x60; field because they are not hierarchical objects, which is why &#x60;name&#x60; is unique for them but not for objects that have parents.</value>
+        /* <example>&quot;John Doe&quot;</example> */
         [JsonPropertyName("name")]
         public string? Name { get { return this.NameOption.Value; } set { this.NameOption = new(value); } }
 
@@ -98,8 +100,10 @@ namespace Nxus.Qbd.Models
         public Option<string?> CompanyNameOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets CompanyName
+        /// The name of the company associated with this other-name. This name is used on invoices, checks, and other forms.
         /// </summary>
+        /// <value>The name of the company associated with this other-name. This name is used on invoices, checks, and other forms.</value>
+        /* <example>&quot;Acme Corporation&quot;</example> */
         [JsonPropertyName("companyName")]
         public string? CompanyName { get { return this.CompanyNameOption.Value; } set { this.CompanyNameOption = new(value); } }
 
@@ -111,8 +115,10 @@ namespace Nxus.Qbd.Models
         public Option<string?> SalutationOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets Salutation
+        /// The formal salutation title that precedes the name of the contact person for this other-name, such as \&quot;Mr.\&quot;, \&quot;Ms.\&quot;, or \&quot;Dr.\&quot;.
         /// </summary>
+        /// <value>The formal salutation title that precedes the name of the contact person for this other-name, such as \&quot;Mr.\&quot;, \&quot;Ms.\&quot;, or \&quot;Dr.\&quot;.</value>
+        /* <example>&quot;Dr.&quot;</example> */
         [JsonPropertyName("salutation")]
         public string? Salutation { get { return this.SalutationOption.Value; } set { this.SalutationOption = new(value); } }
 
@@ -124,8 +130,10 @@ namespace Nxus.Qbd.Models
         public Option<string?> FirstNameOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets FirstName
+        /// The first name of the contact person for this other-name.
         /// </summary>
+        /// <value>The first name of the contact person for this other-name.</value>
+        /* <example>&quot;John&quot;</example> */
         [JsonPropertyName("firstName")]
         public string? FirstName { get { return this.FirstNameOption.Value; } set { this.FirstNameOption = new(value); } }
 
@@ -137,8 +145,10 @@ namespace Nxus.Qbd.Models
         public Option<string?> MiddleNameOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets MiddleName
+        /// The middle name of the contact person for this other-name.
         /// </summary>
+        /// <value>The middle name of the contact person for this other-name.</value>
+        /* <example>&quot;A.&quot;</example> */
         [JsonPropertyName("middleName")]
         public string? MiddleName { get { return this.MiddleNameOption.Value; } set { this.MiddleNameOption = new(value); } }
 
@@ -150,8 +160,10 @@ namespace Nxus.Qbd.Models
         public Option<string?> LastNameOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets LastName
+        /// The last name of the contact person for this other-name.
         /// </summary>
+        /// <value>The last name of the contact person for this other-name.</value>
+        /* <example>&quot;Doe&quot;</example> */
         [JsonPropertyName("lastName")]
         public string? LastName { get { return this.LastNameOption.Value; } set { this.LastNameOption = new(value); } }
 
@@ -163,8 +175,9 @@ namespace Nxus.Qbd.Models
         public Option<Address?> AddressOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets Address
+        /// The other-name&#39;s address.
         /// </summary>
+        /// <value>The other-name&#39;s address.</value>
         [JsonPropertyName("address")]
         public Address? Address { get { return this.AddressOption.Value; } set { this.AddressOption = new(value); } }
 
@@ -189,8 +202,10 @@ namespace Nxus.Qbd.Models
         public Option<string?> PhoneOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets Phone
+        /// The other-name&#39;s primary telephone number.
         /// </summary>
+        /// <value>The other-name&#39;s primary telephone number.</value>
+        /* <example>&quot;+1-555-123-4567&quot;</example> */
         [JsonPropertyName("phone")]
         public string? Phone { get { return this.PhoneOption.Value; } set { this.PhoneOption = new(value); } }
 
@@ -215,8 +230,10 @@ namespace Nxus.Qbd.Models
         public Option<string?> FaxOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets Fax
+        /// The other-name&#39;s fax number.
         /// </summary>
+        /// <value>The other-name&#39;s fax number.</value>
+        /* <example>&quot;+1-555-555-1212&quot;</example> */
         [JsonPropertyName("fax")]
         public string? Fax { get { return this.FaxOption.Value; } set { this.FaxOption = new(value); } }
 
@@ -228,8 +245,10 @@ namespace Nxus.Qbd.Models
         public Option<string?> EmailOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets Email
+        /// The other-name&#39;s email address.
         /// </summary>
+        /// <value>The other-name&#39;s email address.</value>
+        /* <example>&quot;other-name@example.com&quot;</example> */
         [JsonPropertyName("email")]
         public string? Email { get { return this.EmailOption.Value; } set { this.EmailOption = new(value); } }
 
@@ -241,8 +260,10 @@ namespace Nxus.Qbd.Models
         public Option<string?> ContactOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets Contact
+        /// The name of the primary contact person for this other-name.
         /// </summary>
+        /// <value>The name of the primary contact person for this other-name.</value>
+        /* <example>&quot;Jane Smith&quot;</example> */
         [JsonPropertyName("contact")]
         public string? Contact { get { return this.ContactOption.Value; } set { this.ContactOption = new(value); } }
 
@@ -267,8 +288,10 @@ namespace Nxus.Qbd.Models
         public Option<string?> AccountNumberOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets AccountNumber
+        /// The other-name&#39;s account number, which appears in the QuickBooks chart of accounts, reports, and graphs.  Note that if the \&quot;Use Account Numbers\&quot; preference is turned off in QuickBooks, the account number may not be visible in the user interface, but it can still be set and retrieved through the API.
         /// </summary>
+        /// <value>The other-name&#39;s account number, which appears in the QuickBooks chart of accounts, reports, and graphs.  Note that if the \&quot;Use Account Numbers\&quot; preference is turned off in QuickBooks, the account number may not be visible in the user interface, but it can still be set and retrieved through the API.</value>
+        /* <example>&quot;1010&quot;</example> */
         [JsonPropertyName("accountNumber")]
         public string? AccountNumber { get { return this.AccountNumberOption.Value; } set { this.AccountNumberOption = new(value); } }
 

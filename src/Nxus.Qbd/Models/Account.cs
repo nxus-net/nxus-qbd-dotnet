@@ -26,7 +26,7 @@ using Nxus.Qbd.Json;
 namespace Nxus.Qbd.Models
 {
     /// <summary>
-    /// A QuickBooks Desktop Account object is a type of List object that represents a financial account within a company&#39;s chart of accounts, such as a Bank, Accounts Payable, Accounts Receivable, or Credit Card account Because it is a list object, it is tracked and identified by a unique, QuickBooks-assigned ListID as well as a FullName.
+    /// Represents a financial account within the chart of accounts.
     /// </summary>
     public partial class Account : IValidatableObject
     {

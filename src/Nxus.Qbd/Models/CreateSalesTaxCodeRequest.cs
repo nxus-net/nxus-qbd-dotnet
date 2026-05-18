@@ -33,10 +33,10 @@ namespace Nxus.Qbd.Models
         /// <summary>
         /// Initializes a new instance of the <see cref="CreateSalesTaxCodeRequest" /> class.
         /// </summary>
-        /// <param name="name">(Required) The name of the sales tax code. (Max 3 characters)</param>
-        /// <param name="isTaxable">(Required) Indicates whether the sales tax code represents a taxable (true) or non-taxable (false) item.</param>
-        /// <param name="isActive">(Optional) If false, this Sales Tax Code is inactive. Default is true.</param>
-        /// <param name="description">(Optional) A description for the sales tax code. (Max 50 characters)</param>
+        /// <param name="name">The case-insensitive unique name of this sales-tax code, unique across all sales-tax codes. This short name will appear on sales forms to identify the tax status of an item.  **NOTE**: Sales-tax codes do not have a &#x60;fullName&#x60; field because they are not hierarchical objects, which is why &#x60;name&#x60; is unique for them but not for objects that have parents.</param>
+        /// <param name="isTaxable">Indicates whether this sales-tax code is tracking taxable sales. This field cannot be modified once the sales-tax code has been used in a transaction.</param>
+        /// <param name="isActive">Indicates whether this sales-tax code is active. Inactive objects are typically hidden from views and reports in QuickBooks. Defaults to &#x60;true&#x60;.</param>
+        /// <param name="description">A description of this sales-tax code.</param>
         /// <param name="itemPurchaseTaxId">(Optional) The ListID or FullName of the ItemSalesTax item used for tax calculation on purchases. Follows the Flattened-ID Pattern for ItemPurchaseTaxRef.</param>
         /// <param name="itemSalesTaxId">(Optional) The ListID or FullName of the ItemSalesTax item used for tax calculation on sales. Follows the Flattened-ID Pattern for ItemSalesTaxRef.</param>
         [JsonConstructor]
@@ -54,16 +54,16 @@ namespace Nxus.Qbd.Models
         partial void OnCreated();
 
         /// <summary>
-        /// (Required) The name of the sales tax code. (Max 3 characters)
+        /// The case-insensitive unique name of this sales-tax code, unique across all sales-tax codes. This short name will appear on sales forms to identify the tax status of an item.  **NOTE**: Sales-tax codes do not have a &#x60;fullName&#x60; field because they are not hierarchical objects, which is why &#x60;name&#x60; is unique for them but not for objects that have parents.
         /// </summary>
-        /// <value>(Required) The name of the sales tax code. (Max 3 characters)</value>
+        /// <value>The case-insensitive unique name of this sales-tax code, unique across all sales-tax codes. This short name will appear on sales forms to identify the tax status of an item.  **NOTE**: Sales-tax codes do not have a &#x60;fullName&#x60; field because they are not hierarchical objects, which is why &#x60;name&#x60; is unique for them but not for objects that have parents.</value>
         [JsonPropertyName("name")]
         public string Name { get; set; }
 
         /// <summary>
-        /// (Required) Indicates whether the sales tax code represents a taxable (true) or non-taxable (false) item.
+        /// Indicates whether this sales-tax code is tracking taxable sales. This field cannot be modified once the sales-tax code has been used in a transaction.
         /// </summary>
-        /// <value>(Required) Indicates whether the sales tax code represents a taxable (true) or non-taxable (false) item.</value>
+        /// <value>Indicates whether this sales-tax code is tracking taxable sales. This field cannot be modified once the sales-tax code has been used in a transaction.</value>
         [JsonPropertyName("isTaxable")]
         public bool IsTaxable { get; set; }
 
@@ -75,9 +75,10 @@ namespace Nxus.Qbd.Models
         public Option<bool?> IsActiveOption { get; private set; }
 
         /// <summary>
-        /// (Optional) If false, this Sales Tax Code is inactive. Default is true.
+        /// Indicates whether this sales-tax code is active. Inactive objects are typically hidden from views and reports in QuickBooks. Defaults to &#x60;true&#x60;.
         /// </summary>
-        /// <value>(Optional) If false, this Sales Tax Code is inactive. Default is true.</value>
+        /// <value>Indicates whether this sales-tax code is active. Inactive objects are typically hidden from views and reports in QuickBooks. Defaults to &#x60;true&#x60;.</value>
+        /* <example>true</example> */
         [JsonPropertyName("isActive")]
         public bool? IsActive { get { return this.IsActiveOption.Value; } set { this.IsActiveOption = new(value); } }
 
@@ -89,9 +90,10 @@ namespace Nxus.Qbd.Models
         public Option<string?> DescriptionOption { get; private set; }
 
         /// <summary>
-        /// (Optional) A description for the sales tax code. (Max 50 characters)
+        /// A description of this sales-tax code.
         /// </summary>
-        /// <value>(Optional) A description for the sales tax code. (Max 50 characters)</value>
+        /// <value>A description of this sales-tax code.</value>
+        /* <example>&quot;Standard tax rate for California&quot;</example> */
         [JsonPropertyName("description")]
         public string? Description { get { return this.DescriptionOption.Value; } set { this.DescriptionOption = new(value); } }
 

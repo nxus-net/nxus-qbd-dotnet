@@ -26,16 +26,16 @@ using Nxus.Qbd.Json;
 namespace Nxus.Qbd.Models
 {
     /// <summary>
-    /// Creates a new QuickBooks Class with the specified properties.
+    /// Contains parameters for creating a new class.
     /// </summary>
     public partial class CreateClassRequest : IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="CreateClassRequest" /> class.
         /// </summary>
-        /// <param name="name">(Required) The name of the class (up to 31 characters). Note: If the class is going to be a sub-class, this property should only contain the child&#39;s name, not the full hierarchical name of its ancestors.</param>
-        /// <param name="isActive">(Optional) Whether the class is active. Defaults to true.</param>
-        /// <param name="parentId">(Optional) The ListID or FullName of the parent class. A reference to the list object that is exactly one level above this one. Used to create sub-classes.</param>
+        /// <param name="name">The case-insensitive name of this class.  Not guaranteed to be unique across all classes, but must be unique within its hierarchical parent.</param>
+        /// <param name="isActive">Indicates whether this class is active.  Inactive objects are typically hidden from views and reports. Defaults to true.</param>
+        /// <param name="parentId">The parent class one level above this one in the hierarchy.  If this class is at the top level, this field will be null.</param>
         [JsonConstructor]
         public CreateClassRequest(string name, Option<bool?> isActive = default, Option<string?> parentId = default)
         {
@@ -48,9 +48,9 @@ namespace Nxus.Qbd.Models
         partial void OnCreated();
 
         /// <summary>
-        /// (Required) The name of the class (up to 31 characters). Note: If the class is going to be a sub-class, this property should only contain the child&#39;s name, not the full hierarchical name of its ancestors.
+        /// The case-insensitive name of this class.  Not guaranteed to be unique across all classes, but must be unique within its hierarchical parent.
         /// </summary>
-        /// <value>(Required) The name of the class (up to 31 characters). Note: If the class is going to be a sub-class, this property should only contain the child&#39;s name, not the full hierarchical name of its ancestors.</value>
+        /// <value>The case-insensitive name of this class.  Not guaranteed to be unique across all classes, but must be unique within its hierarchical parent.</value>
         [JsonPropertyName("name")]
         public string Name { get; set; }
 
@@ -62,9 +62,9 @@ namespace Nxus.Qbd.Models
         public Option<bool?> IsActiveOption { get; private set; }
 
         /// <summary>
-        /// (Optional) Whether the class is active. Defaults to true.
+        /// Indicates whether this class is active.  Inactive objects are typically hidden from views and reports. Defaults to true.
         /// </summary>
-        /// <value>(Optional) Whether the class is active. Defaults to true.</value>
+        /// <value>Indicates whether this class is active.  Inactive objects are typically hidden from views and reports. Defaults to true.</value>
         /* <example>true</example> */
         [JsonPropertyName("isActive")]
         public bool? IsActive { get { return this.IsActiveOption.Value; } set { this.IsActiveOption = new(value); } }
@@ -77,10 +77,10 @@ namespace Nxus.Qbd.Models
         public Option<string?> ParentIdOption { get; private set; }
 
         /// <summary>
-        /// (Optional) The ListID or FullName of the parent class. A reference to the list object that is exactly one level above this one. Used to create sub-classes.
+        /// The parent class one level above this one in the hierarchy.  If this class is at the top level, this field will be null.
         /// </summary>
-        /// <value>(Optional) The ListID or FullName of the parent class. A reference to the list object that is exactly one level above this one. Used to create sub-classes.</value>
-        /* <example>10000001-1039043346</example> */
+        /// <value>The parent class one level above this one in the hierarchy.  If this class is at the top level, this field will be null.</value>
+        /* <example>&quot;10000001-1039043346&quot;</example> */
         [JsonPropertyName("parentId")]
         public string? ParentId { get { return this.ParentIdOption.Value; } set { this.ParentIdOption = new(value); } }
 

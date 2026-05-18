@@ -34,17 +34,17 @@ namespace Nxus.Qbd.Models
         /// Initializes a new instance of the <see cref="UpdateItemNonInventoryRequest" /> class.
         /// </summary>
         /// <param name="revisionNumber">revisionNumber</param>
-        /// <param name="name">name</param>
+        /// <param name="name">The case-insensitive name of this non-inventory item. Not guaranteed to be unique because it does not include the names of its hierarchical parent objects like &#x60;fullName&#x60; does. For example, two non-inventory items could both have the &#x60;name&#x60; \&quot;Printer Ink Cartridge\&quot;, but they could have unique &#x60;fullName&#x60; values, such as \&quot;Office Supplies:Printer Ink Cartridge\&quot; and \&quot;Miscellaneous:Printer Ink Cartridge\&quot;.</param>
         /// <param name="barcode">barcode</param>
-        /// <param name="isActive">isActive</param>
+        /// <param name="isActive">Indicates whether this non-inventory item is active. Inactive objects are typically hidden from views and reports in QuickBooks. Defaults to &#x60;true&#x60;.</param>
         /// <param name="classId">classId</param>
         /// <param name="parentId">parentId</param>
         /// <param name="sku">sku</param>
         /// <param name="unitOfMeasureSetId">unitOfMeasureSetId</param>
         /// <param name="isTaxIncluded">isTaxIncluded</param>
         /// <param name="salesTaxCodeId">salesTaxCodeId</param>
-        /// <param name="salesOrPurchaseDetails">salesOrPurchaseDetails</param>
-        /// <param name="salesAndPurchaseDetails">salesAndPurchaseDetails</param>
+        /// <param name="salesOrPurchaseDetails">Details for non-inventory items that are exclusively sold or exclusively purchased, but not both. This typically applies to non-inventory items (like a purchased office supply that isn&#39;t resold) or service items (like consulting services that are sold but not purchased).  **IMPORTANT**: A non-inventory item will have either &#x60;salesAndPurchaseDetails&#x60; or &#x60;salesOrPurchaseDetails&#x60;, but never both because an item cannot have both configurations.</param>
+        /// <param name="salesAndPurchaseDetails">Details for non-inventory items that are both purchased and sold, such as reimbursable expenses or inventory items that are bought from vendors and sold to customers.  **IMPORTANT**: A non-inventory item will have either &#x60;salesAndPurchaseDetails&#x60; or &#x60;salesOrPurchaseDetails&#x60;, but never both because an item cannot have both configurations.</param>
         [JsonConstructor]
         public UpdateItemNonInventoryRequest(string revisionNumber, Option<string?> name = default, Option<BarCodeRequest?> barcode = default, Option<bool?> isActive = default, Option<string?> classId = default, Option<string?> parentId = default, Option<string?> sku = default, Option<string?> unitOfMeasureSetId = default, Option<bool?> isTaxIncluded = default, Option<string?> salesTaxCodeId = default, Option<ItemNonInventorySalesOrPurchaseDetailsRequest?> salesOrPurchaseDetails = default, Option<ItemNonInventorySalesAndPurchaseDetailsRequest?> salesAndPurchaseDetails = default)
         {
@@ -79,8 +79,10 @@ namespace Nxus.Qbd.Models
         public Option<string?> NameOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets Name
+        /// The case-insensitive name of this non-inventory item. Not guaranteed to be unique because it does not include the names of its hierarchical parent objects like &#x60;fullName&#x60; does. For example, two non-inventory items could both have the &#x60;name&#x60; \&quot;Printer Ink Cartridge\&quot;, but they could have unique &#x60;fullName&#x60; values, such as \&quot;Office Supplies:Printer Ink Cartridge\&quot; and \&quot;Miscellaneous:Printer Ink Cartridge\&quot;.
         /// </summary>
+        /// <value>The case-insensitive name of this non-inventory item. Not guaranteed to be unique because it does not include the names of its hierarchical parent objects like &#x60;fullName&#x60; does. For example, two non-inventory items could both have the &#x60;name&#x60; \&quot;Printer Ink Cartridge\&quot;, but they could have unique &#x60;fullName&#x60; values, such as \&quot;Office Supplies:Printer Ink Cartridge\&quot; and \&quot;Miscellaneous:Printer Ink Cartridge\&quot;.</value>
+        /* <example>&quot;Sample Name&quot;</example> */
         [JsonPropertyName("name")]
         public string? Name { get { return this.NameOption.Value; } set { this.NameOption = new(value); } }
 
@@ -105,8 +107,10 @@ namespace Nxus.Qbd.Models
         public Option<bool?> IsActiveOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets IsActive
+        /// Indicates whether this non-inventory item is active. Inactive objects are typically hidden from views and reports in QuickBooks. Defaults to &#x60;true&#x60;.
         /// </summary>
+        /// <value>Indicates whether this non-inventory item is active. Inactive objects are typically hidden from views and reports in QuickBooks. Defaults to &#x60;true&#x60;.</value>
+        /* <example>true</example> */
         [JsonPropertyName("isActive")]
         public bool? IsActive { get { return this.IsActiveOption.Value; } set { this.IsActiveOption = new(value); } }
 
@@ -196,8 +200,9 @@ namespace Nxus.Qbd.Models
         public Option<ItemNonInventorySalesOrPurchaseDetailsRequest?> SalesOrPurchaseDetailsOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets SalesOrPurchaseDetails
+        /// Details for non-inventory items that are exclusively sold or exclusively purchased, but not both. This typically applies to non-inventory items (like a purchased office supply that isn&#39;t resold) or service items (like consulting services that are sold but not purchased).  **IMPORTANT**: A non-inventory item will have either &#x60;salesAndPurchaseDetails&#x60; or &#x60;salesOrPurchaseDetails&#x60;, but never both because an item cannot have both configurations.
         /// </summary>
+        /// <value>Details for non-inventory items that are exclusively sold or exclusively purchased, but not both. This typically applies to non-inventory items (like a purchased office supply that isn&#39;t resold) or service items (like consulting services that are sold but not purchased).  **IMPORTANT**: A non-inventory item will have either &#x60;salesAndPurchaseDetails&#x60; or &#x60;salesOrPurchaseDetails&#x60;, but never both because an item cannot have both configurations.</value>
         [JsonPropertyName("salesOrPurchaseDetails")]
         public ItemNonInventorySalesOrPurchaseDetailsRequest? SalesOrPurchaseDetails { get { return this.SalesOrPurchaseDetailsOption.Value; } set { this.SalesOrPurchaseDetailsOption = new(value); } }
 
@@ -209,8 +214,9 @@ namespace Nxus.Qbd.Models
         public Option<ItemNonInventorySalesAndPurchaseDetailsRequest?> SalesAndPurchaseDetailsOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets SalesAndPurchaseDetails
+        /// Details for non-inventory items that are both purchased and sold, such as reimbursable expenses or inventory items that are bought from vendors and sold to customers.  **IMPORTANT**: A non-inventory item will have either &#x60;salesAndPurchaseDetails&#x60; or &#x60;salesOrPurchaseDetails&#x60;, but never both because an item cannot have both configurations.
         /// </summary>
+        /// <value>Details for non-inventory items that are both purchased and sold, such as reimbursable expenses or inventory items that are bought from vendors and sold to customers.  **IMPORTANT**: A non-inventory item will have either &#x60;salesAndPurchaseDetails&#x60; or &#x60;salesOrPurchaseDetails&#x60;, but never both because an item cannot have both configurations.</value>
         [JsonPropertyName("salesAndPurchaseDetails")]
         public ItemNonInventorySalesAndPurchaseDetailsRequest? SalesAndPurchaseDetails { get { return this.SalesAndPurchaseDetailsOption.Value; } set { this.SalesAndPurchaseDetailsOption = new(value); } }
 

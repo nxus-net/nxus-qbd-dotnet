@@ -37,11 +37,11 @@ namespace Nxus.Qbd.Models
         /// <param name="objectType">objectType</param>
         /// <param name="transactionType">transactionType</param>
         /// <param name="transactionDate">transactionDate</param>
-        /// <param name="refNumber">refNumber</param>
-        /// <param name="creditRemaining">creditRemaining</param>
-        /// <param name="refundAmount">refundAmount</param>
-        /// <param name="creditRemainingInHomeCurrency">creditRemainingInHomeCurrency</param>
-        /// <param name="refundAmountInHomeCurrency">refundAmountInHomeCurrency</param>
+        /// <param name="refNumber">The RefNumber associated with this object.</param>
+        /// <param name="creditRemaining">The CreditRemaining associated with this object.</param>
+        /// <param name="refundAmount">The RefundAmount associated with this object.</param>
+        /// <param name="creditRemainingInHomeCurrency">The CreditRemainingInHomeCurrency associated with this object.</param>
+        /// <param name="refundAmountInHomeCurrency">The RefundAmountInHomeCurrency associated with this object.</param>
         [JsonConstructor]
         public RefundAppliedToTransaction(string id, Option<string?> objectType = default, Option<string?> transactionType = default, Option<DateOnly?> transactionDate = default, Option<string?> refNumber = default, Option<double?> creditRemaining = default, Option<double?> refundAmount = default, Option<double?> creditRemainingInHomeCurrency = default, Option<double?> refundAmountInHomeCurrency = default)
         {
@@ -112,8 +112,9 @@ namespace Nxus.Qbd.Models
         public Option<string?> RefNumberOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets RefNumber
+        /// The RefNumber associated with this object.
         /// </summary>
+        /// <value>The RefNumber associated with this object.</value>
         [JsonPropertyName("refNumber")]
         public string? RefNumber { get { return this.RefNumberOption.Value; } set { this.RefNumberOption = new(value); } }
 
@@ -125,8 +126,9 @@ namespace Nxus.Qbd.Models
         public Option<double?> CreditRemainingOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets CreditRemaining
+        /// The CreditRemaining associated with this object.
         /// </summary>
+        /// <value>The CreditRemaining associated with this object.</value>
         [JsonPropertyName("creditRemaining")]
         public double? CreditRemaining { get { return this.CreditRemainingOption.Value; } set { this.CreditRemainingOption = new(value); } }
 
@@ -138,8 +140,9 @@ namespace Nxus.Qbd.Models
         public Option<double?> RefundAmountOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets RefundAmount
+        /// The RefundAmount associated with this object.
         /// </summary>
+        /// <value>The RefundAmount associated with this object.</value>
         [JsonPropertyName("refundAmount")]
         public double? RefundAmount { get { return this.RefundAmountOption.Value; } set { this.RefundAmountOption = new(value); } }
 
@@ -151,8 +154,9 @@ namespace Nxus.Qbd.Models
         public Option<double?> CreditRemainingInHomeCurrencyOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets CreditRemainingInHomeCurrency
+        /// The CreditRemainingInHomeCurrency associated with this object.
         /// </summary>
+        /// <value>The CreditRemainingInHomeCurrency associated with this object.</value>
         [JsonPropertyName("creditRemainingInHomeCurrency")]
         public double? CreditRemainingInHomeCurrency { get { return this.CreditRemainingInHomeCurrencyOption.Value; } set { this.CreditRemainingInHomeCurrencyOption = new(value); } }
 
@@ -164,8 +168,9 @@ namespace Nxus.Qbd.Models
         public Option<double?> RefundAmountInHomeCurrencyOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets RefundAmountInHomeCurrency
+        /// The RefundAmountInHomeCurrency associated with this object.
         /// </summary>
+        /// <value>The RefundAmountInHomeCurrency associated with this object.</value>
         [JsonPropertyName("refundAmountInHomeCurrency")]
         public double? RefundAmountInHomeCurrency { get { return this.RefundAmountInHomeCurrencyOption.Value; } set { this.RefundAmountInHomeCurrencyOption = new(value); } }
 

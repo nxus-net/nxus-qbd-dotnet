@@ -34,8 +34,8 @@ namespace Nxus.Qbd.Models
         /// Initializes a new instance of the <see cref="UpdateShipMethodRequest" /> class.
         /// </summary>
         /// <param name="revisionNumber">revisionNumber</param>
-        /// <param name="name">(Optional) The new name of the shipping method. (Max 15 characters)</param>
-        /// <param name="isActive">(Optional) If false, this Shipping Method is inactive.</param>
+        /// <param name="name">The case-insensitive unique name of this shipping method, unique across all shipping methods.  **NOTE**: Shipping methods do not have a &#x60;fullName&#x60; field because they are not hierarchical objects, which is why &#x60;name&#x60; is unique for them but not for objects that have parents.</param>
+        /// <param name="isActive">Indicates whether this shipping method is active. Inactive objects are typically hidden from views and reports in QuickBooks. Defaults to &#x60;true&#x60;.</param>
         [JsonConstructor]
         public UpdateShipMethodRequest(string revisionNumber, Option<string?> name = default, Option<bool?> isActive = default)
         {
@@ -61,9 +61,10 @@ namespace Nxus.Qbd.Models
         public Option<string?> NameOption { get; private set; }
 
         /// <summary>
-        /// (Optional) The new name of the shipping method. (Max 15 characters)
+        /// The case-insensitive unique name of this shipping method, unique across all shipping methods.  **NOTE**: Shipping methods do not have a &#x60;fullName&#x60; field because they are not hierarchical objects, which is why &#x60;name&#x60; is unique for them but not for objects that have parents.
         /// </summary>
-        /// <value>(Optional) The new name of the shipping method. (Max 15 characters)</value>
+        /// <value>The case-insensitive unique name of this shipping method, unique across all shipping methods.  **NOTE**: Shipping methods do not have a &#x60;fullName&#x60; field because they are not hierarchical objects, which is why &#x60;name&#x60; is unique for them but not for objects that have parents.</value>
+        /* <example>&quot;FedEx Ground&quot;</example> */
         [JsonPropertyName("name")]
         public string? Name { get { return this.NameOption.Value; } set { this.NameOption = new(value); } }
 
@@ -75,9 +76,10 @@ namespace Nxus.Qbd.Models
         public Option<bool?> IsActiveOption { get; private set; }
 
         /// <summary>
-        /// (Optional) If false, this Shipping Method is inactive.
+        /// Indicates whether this shipping method is active. Inactive objects are typically hidden from views and reports in QuickBooks. Defaults to &#x60;true&#x60;.
         /// </summary>
-        /// <value>(Optional) If false, this Shipping Method is inactive.</value>
+        /// <value>Indicates whether this shipping method is active. Inactive objects are typically hidden from views and reports in QuickBooks. Defaults to &#x60;true&#x60;.</value>
+        /* <example>true</example> */
         [JsonPropertyName("isActive")]
         public bool? IsActive { get { return this.IsActiveOption.Value; } set { this.IsActiveOption = new(value); } }
 

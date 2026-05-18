@@ -33,8 +33,8 @@ namespace Nxus.Qbd.Models
         /// <summary>
         /// Initializes a new instance of the <see cref="CreatePriceLevelRequest" /> class.
         /// </summary>
-        /// <param name="name">(Required) The name of the new price level. Max length: 31 characters.</param>
-        /// <param name="isActive">(Optional) Whether the price level is active. Defaults to true.</param>
+        /// <param name="name">The case-insensitive unique name of this price level, unique across all price levels.  **NOTE**: Price levels do not have a &#x60;fullName&#x60; field because they are not hierarchical objects, which is why &#x60;name&#x60; is unique for them but not for objects that have parents.</param>
+        /// <param name="isActive">Indicates whether this price level is active. Inactive objects are typically hidden from views and reports in QuickBooks. Defaults to &#x60;true&#x60;.</param>
         /// <param name="priceLevelFixedPercentage">(Optional) The fixed percentage to adjust prices by. Mutually exclusive with PriceLevelPerItem list.</param>
         /// <param name="priceLevelPerItem">priceLevelPerItem</param>
         /// <param name="currencyId">(Optional) The ListID of the currency associated with this price level. Only used with &#39;per item&#39; price levels.</param>
@@ -54,9 +54,9 @@ namespace Nxus.Qbd.Models
         partial void OnCreated();
 
         /// <summary>
-        /// (Required) The name of the new price level. Max length: 31 characters.
+        /// The case-insensitive unique name of this price level, unique across all price levels.  **NOTE**: Price levels do not have a &#x60;fullName&#x60; field because they are not hierarchical objects, which is why &#x60;name&#x60; is unique for them but not for objects that have parents.
         /// </summary>
-        /// <value>(Required) The name of the new price level. Max length: 31 characters.</value>
+        /// <value>The case-insensitive unique name of this price level, unique across all price levels.  **NOTE**: Price levels do not have a &#x60;fullName&#x60; field because they are not hierarchical objects, which is why &#x60;name&#x60; is unique for them but not for objects that have parents.</value>
         [JsonPropertyName("name")]
         public string Name { get; set; }
 
@@ -68,9 +68,10 @@ namespace Nxus.Qbd.Models
         public Option<bool?> IsActiveOption { get; private set; }
 
         /// <summary>
-        /// (Optional) Whether the price level is active. Defaults to true.
+        /// Indicates whether this price level is active. Inactive objects are typically hidden from views and reports in QuickBooks. Defaults to &#x60;true&#x60;.
         /// </summary>
-        /// <value>(Optional) Whether the price level is active. Defaults to true.</value>
+        /// <value>Indicates whether this price level is active. Inactive objects are typically hidden from views and reports in QuickBooks. Defaults to &#x60;true&#x60;.</value>
+        /* <example>true</example> */
         [JsonPropertyName("isActive")]
         public bool? IsActive { get { return this.IsActiveOption.Value; } set { this.IsActiveOption = new(value); } }
 

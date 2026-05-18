@@ -33,7 +33,7 @@ namespace Nxus.Qbd.Models
         /// <summary>
         /// Initializes a new instance of the <see cref="CreateInventoryItemRequest" /> class.
         /// </summary>
-        /// <param name="name">name</param>
+        /// <param name="name">The case-insensitive name of this inventory item. Not guaranteed to be unique because it does not include the names of its hierarchical parent objects like &#x60;fullName&#x60; does. For example, two inventory items could both have the &#x60;name&#x60; \&quot;Cabinet\&quot;, but they could have unique &#x60;fullName&#x60; values, such as \&quot;Kitchen:Cabinet\&quot; and \&quot;Inventory:Cabinet\&quot;.</param>
         /// <param name="assetAccountId">assetAccountId</param>
         /// <param name="barcode">barcode</param>
         /// <param name="classId">classId</param>
@@ -43,19 +43,19 @@ namespace Nxus.Qbd.Models
         /// <param name="isTaxIncluded">isTaxIncluded</param>
         /// <param name="salesTaxCodeId">salesTaxCodeId</param>
         /// <param name="salesDescription">salesDescription</param>
-        /// <param name="salesPrice">salesPrice</param>
+        /// <param name="salesPrice">The price at which this inventory item is sold to customers, represented as a decimal string.</param>
         /// <param name="incomeAccountId">incomeAccountId</param>
         /// <param name="purchaseDescription">purchaseDescription</param>
-        /// <param name="purchaseCost">purchaseCost</param>
+        /// <param name="purchaseCost">The cost at which this inventory item is purchased from vendors, represented as a decimal string.</param>
         /// <param name="purchaseTaxCodeId">purchaseTaxCodeId</param>
         /// <param name="cogsAccountId">cogsAccountId</param>
         /// <param name="preferredVendorId">preferredVendorId</param>
-        /// <param name="reorderPoint">reorderPoint</param>
+        /// <param name="reorderPoint">The minimum quantity of this inventory item at which QuickBooks prompts for reordering.</param>
         /// <param name="maximumQuantityOnHand">maximumQuantityOnHand</param>
-        /// <param name="quantityOnHand">quantityOnHand</param>
+        /// <param name="quantityOnHand">The number of units of this inventory item currently in inventory. &#x60;quantityOnHand&#x60; multiplied by &#x60;averageCost&#x60; equals &#x60;totalValue&#x60; for inventory item lists. To change the &#x60;quantityOnHand&#x60; for an inventory item, you must use an inventory-adjustment instead of updating the inventory item directly.</param>
         /// <param name="totalValue">totalValue</param>
         /// <param name="inventoryDate">inventoryDate</param>
-        /// <param name="isActive">isActive</param>
+        /// <param name="isActive">Indicates whether this inventory item is active. Inactive objects are typically hidden from views and reports in QuickBooks. Defaults to &#x60;true&#x60;.</param>
         /// <param name="externalId">externalId</param>
         [JsonConstructor]
         public CreateInventoryItemRequest(string name, string assetAccountId, Option<BarCodeRequest?> barcode = default, Option<string?> classId = default, Option<string?> parentId = default, Option<string?> sku = default, Option<string?> unitOfMeasureSetId = default, Option<bool?> isTaxIncluded = default, Option<string?> salesTaxCodeId = default, Option<string?> salesDescription = default, Option<double?> salesPrice = default, Option<string?> incomeAccountId = default, Option<string?> purchaseDescription = default, Option<double?> purchaseCost = default, Option<string?> purchaseTaxCodeId = default, Option<string?> cogsAccountId = default, Option<string?> preferredVendorId = default, Option<double?> reorderPoint = default, Option<double?> maximumQuantityOnHand = default, Option<double?> quantityOnHand = default, Option<double?> totalValue = default, Option<DateOnly?> inventoryDate = default, Option<bool?> isActive = default, Option<string?> externalId = default)
@@ -90,8 +90,9 @@ namespace Nxus.Qbd.Models
         partial void OnCreated();
 
         /// <summary>
-        /// Gets or Sets Name
+        /// The case-insensitive name of this inventory item. Not guaranteed to be unique because it does not include the names of its hierarchical parent objects like &#x60;fullName&#x60; does. For example, two inventory items could both have the &#x60;name&#x60; \&quot;Cabinet\&quot;, but they could have unique &#x60;fullName&#x60; values, such as \&quot;Kitchen:Cabinet\&quot; and \&quot;Inventory:Cabinet\&quot;.
         /// </summary>
+        /// <value>The case-insensitive name of this inventory item. Not guaranteed to be unique because it does not include the names of its hierarchical parent objects like &#x60;fullName&#x60; does. For example, two inventory items could both have the &#x60;name&#x60; \&quot;Cabinet\&quot;, but they could have unique &#x60;fullName&#x60; values, such as \&quot;Kitchen:Cabinet\&quot; and \&quot;Inventory:Cabinet\&quot;.</value>
         [JsonPropertyName("name")]
         public string Name { get; set; }
 
@@ -213,8 +214,9 @@ namespace Nxus.Qbd.Models
         public Option<double?> SalesPriceOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets SalesPrice
+        /// The price at which this inventory item is sold to customers, represented as a decimal string.
         /// </summary>
+        /// <value>The price at which this inventory item is sold to customers, represented as a decimal string.</value>
         [JsonPropertyName("salesPrice")]
         public double? SalesPrice { get { return this.SalesPriceOption.Value; } set { this.SalesPriceOption = new(value); } }
 
@@ -252,8 +254,9 @@ namespace Nxus.Qbd.Models
         public Option<double?> PurchaseCostOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets PurchaseCost
+        /// The cost at which this inventory item is purchased from vendors, represented as a decimal string.
         /// </summary>
+        /// <value>The cost at which this inventory item is purchased from vendors, represented as a decimal string.</value>
         [JsonPropertyName("purchaseCost")]
         public double? PurchaseCost { get { return this.PurchaseCostOption.Value; } set { this.PurchaseCostOption = new(value); } }
 
@@ -304,8 +307,10 @@ namespace Nxus.Qbd.Models
         public Option<double?> ReorderPointOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets ReorderPoint
+        /// The minimum quantity of this inventory item at which QuickBooks prompts for reordering.
         /// </summary>
+        /// <value>The minimum quantity of this inventory item at which QuickBooks prompts for reordering.</value>
+        /* <example>100</example> */
         [JsonPropertyName("reorderPoint")]
         public double? ReorderPoint { get { return this.ReorderPointOption.Value; } set { this.ReorderPointOption = new(value); } }
 
@@ -330,8 +335,10 @@ namespace Nxus.Qbd.Models
         public Option<double?> QuantityOnHandOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets QuantityOnHand
+        /// The number of units of this inventory item currently in inventory. &#x60;quantityOnHand&#x60; multiplied by &#x60;averageCost&#x60; equals &#x60;totalValue&#x60; for inventory item lists. To change the &#x60;quantityOnHand&#x60; for an inventory item, you must use an inventory-adjustment instead of updating the inventory item directly.
         /// </summary>
+        /// <value>The number of units of this inventory item currently in inventory. &#x60;quantityOnHand&#x60; multiplied by &#x60;averageCost&#x60; equals &#x60;totalValue&#x60; for inventory item lists. To change the &#x60;quantityOnHand&#x60; for an inventory item, you must use an inventory-adjustment instead of updating the inventory item directly.</value>
+        /* <example>300</example> */
         [JsonPropertyName("quantityOnHand")]
         public double? QuantityOnHand { get { return this.QuantityOnHandOption.Value; } set { this.QuantityOnHandOption = new(value); } }
 
@@ -369,8 +376,9 @@ namespace Nxus.Qbd.Models
         public Option<bool?> IsActiveOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets IsActive
+        /// Indicates whether this inventory item is active. Inactive objects are typically hidden from views and reports in QuickBooks. Defaults to &#x60;true&#x60;.
         /// </summary>
+        /// <value>Indicates whether this inventory item is active. Inactive objects are typically hidden from views and reports in QuickBooks. Defaults to &#x60;true&#x60;.</value>
         [JsonPropertyName("isActive")]
         public bool? IsActive { get { return this.IsActiveOption.Value; } set { this.IsActiveOption = new(value); } }
 
@@ -430,6 +438,12 @@ namespace Nxus.Qbd.Models
         /// <returns>Validation Result</returns>
         IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
+            // Name (string) maxLength
+            if (this.Name != null && this.Name.Length > 31)
+            {
+                yield return new ValidationResult("Invalid value for Name, length must be less than 31.", new [] { "Name" });
+            }
+
             // ParentId (string) maxLength
             if (this.ParentId != null && this.ParentId.Length > 159)
             {

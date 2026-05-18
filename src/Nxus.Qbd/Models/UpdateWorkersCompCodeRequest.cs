@@ -34,8 +34,8 @@ namespace Nxus.Qbd.Models
         /// Initializes a new instance of the <see cref="UpdateWorkersCompCodeRequest" /> class.
         /// </summary>
         /// <param name="revisionNumber">revisionNumber</param>
-        /// <param name="name">(Optional) New name for the code. Max length: 13.</param>
-        /// <param name="isActive">(Optional) Update the active status.</param>
+        /// <param name="name">The case-insensitive unique name of this employee, unique across all employees. A concatenation of the employee&#39;s &#x60;firstName&#x60;, &#x60;middleName&#x60;, and &#x60;lastName&#x60; fields.  **NOTE**: Employees do not have a &#x60;fullName&#x60; field because they are not hierarchical objects, which is why &#x60;name&#x60; is unique for them but not for objects that have parents.</param>
+        /// <param name="isActive">Indicates whether this employee is active. Inactive objects are typically hidden from views and reports in QuickBooks. Defaults to &#x60;true&#x60;.</param>
         /// <param name="desc">(Optional) Update the description. Max length: 31.</param>
         /// <param name="rateEntries">rateEntries</param>
         [JsonConstructor]
@@ -65,9 +65,10 @@ namespace Nxus.Qbd.Models
         public Option<string?> NameOption { get; private set; }
 
         /// <summary>
-        /// (Optional) New name for the code. Max length: 13.
+        /// The case-insensitive unique name of this employee, unique across all employees. A concatenation of the employee&#39;s &#x60;firstName&#x60;, &#x60;middleName&#x60;, and &#x60;lastName&#x60; fields.  **NOTE**: Employees do not have a &#x60;fullName&#x60; field because they are not hierarchical objects, which is why &#x60;name&#x60; is unique for them but not for objects that have parents.
         /// </summary>
-        /// <value>(Optional) New name for the code. Max length: 13.</value>
+        /// <value>The case-insensitive unique name of this employee, unique across all employees. A concatenation of the employee&#39;s &#x60;firstName&#x60;, &#x60;middleName&#x60;, and &#x60;lastName&#x60; fields.  **NOTE**: Employees do not have a &#x60;fullName&#x60; field because they are not hierarchical objects, which is why &#x60;name&#x60; is unique for them but not for objects that have parents.</value>
+        /* <example>&quot;John Doe&quot;</example> */
         [JsonPropertyName("name")]
         public string? Name { get { return this.NameOption.Value; } set { this.NameOption = new(value); } }
 
@@ -79,9 +80,10 @@ namespace Nxus.Qbd.Models
         public Option<bool?> IsActiveOption { get; private set; }
 
         /// <summary>
-        /// (Optional) Update the active status.
+        /// Indicates whether this employee is active. Inactive objects are typically hidden from views and reports in QuickBooks. Defaults to &#x60;true&#x60;.
         /// </summary>
-        /// <value>(Optional) Update the active status.</value>
+        /// <value>Indicates whether this employee is active. Inactive objects are typically hidden from views and reports in QuickBooks. Defaults to &#x60;true&#x60;.</value>
+        /* <example>true</example> */
         [JsonPropertyName("isActive")]
         public bool? IsActive { get { return this.IsActiveOption.Value; } set { this.IsActiveOption = new(value); } }
 

@@ -26,7 +26,7 @@ using Nxus.Qbd.Json;
 namespace Nxus.Qbd.Models
 {
     /// <summary>
-    /// Request model for modifying an existing Bill.
+    /// UpdateBillRequest
     /// </summary>
     public partial class UpdateBillRequest : IValidatableObject
     {
@@ -34,21 +34,21 @@ namespace Nxus.Qbd.Models
         /// Initializes a new instance of the <see cref="UpdateBillRequest" /> class.
         /// </summary>
         /// <param name="revisionNumber">revisionNumber</param>
-        /// <param name="vendorId">vendorId</param>
-        /// <param name="vendorAddress">vendorAddress</param>
+        /// <param name="vendorId">The unique identifier of the vendor associated with this bill.  **Important:** If this bill is linked to other transactions, this vendor&#39;s A/P account must match the account used in those transactions.</param>
+        /// <param name="vendorAddress">An optional override for the vendor&#39;s billing address.</param>
         /// <param name="payablesAccountId">payablesAccountId</param>
         /// <param name="transactionDate">transactionDate</param>
-        /// <param name="dueDate">dueDate</param>
-        /// <param name="refNumber">refNumber</param>
-        /// <param name="termsId">termsId</param>
-        /// <param name="classId">Reference to the QuickBooks Class for this transaction (PRIVATE, v13.0).</param>
-        /// <param name="memo">memo</param>
-        /// <param name="isTaxIncluded">Whether tax is included in item amounts (not in QBD).</param>
-        /// <param name="salesTaxCodeId">Sales tax code reference (not in QBD).</param>
-        /// <param name="exchangeRate">Exchange rate for multi-currency transactions.</param>
-        /// <param name="clearExpenseLines">clearExpenseLines</param>
+        /// <param name="dueDate">The date by which the bill must be paid.</param>
+        /// <param name="refNumber">A user-defined reference number for the bill. Case-sensitive.  Set to an empty string (&#x60;\&quot;\&quot;&#x60;) to clear the existing reference number in QuickBooks.</param>
+        /// <param name="termsId">The payment terms defining when the bill is due and applicable discounts.</param>
+        /// <param name="classId">Reference to the QuickBooks Class for categorization (e.g., department, location).</param>
+        /// <param name="memo">A note that appears in the A/P register and related reports.  Set to an empty string (&#x60;\&quot;\&quot;&#x60;) to clear the existing memo in QuickBooks.</param>
+        /// <param name="isTaxIncluded">Whether tax is included in item amounts.</param>
+        /// <param name="salesTaxCodeId">salesTaxCodeId</param>
+        /// <param name="exchangeRate">The market exchange rate between the bill&#39;s currency and the home currency.</param>
+        /// <param name="clearExpenseLines">When &#x60;true&#x60;, forcefully removes all existing expense lines from the bill.  To selectively modify or add lines instead of wiping them, use the &#x60;ExpenseLines&#x60; array.</param>
         /// <param name="expenseLines">expenseLines</param>
-        /// <param name="clearItemLines">clearItemLines</param>
+        /// <param name="clearItemLines">When &#x60;true&#x60;, forcefully removes all existing item lines from the bill.  To selectively modify or add lines instead of wiping them, use the &#x60;ItemLines&#x60; array.</param>
         /// <param name="itemLines">itemLines</param>
         [JsonConstructor]
         public UpdateBillRequest(string revisionNumber, Option<string?> vendorId = default, Option<AddressRequest?> vendorAddress = default, Option<string?> payablesAccountId = default, Option<DateOnly?> transactionDate = default, Option<DateOnly?> dueDate = default, Option<string?> refNumber = default, Option<string?> termsId = default, Option<string?> classId = default, Option<string?> memo = default, Option<bool?> isTaxIncluded = default, Option<string?> salesTaxCodeId = default, Option<double?> exchangeRate = default, Option<bool?> clearExpenseLines = default, Option<List<UpdateExpenseLineRequest>?> expenseLines = default, Option<bool?> clearItemLines = default, Option<List<UpdateItemLineRequest>?> itemLines = default)
@@ -89,8 +89,10 @@ namespace Nxus.Qbd.Models
         public Option<string?> VendorIdOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets VendorId
+        /// The unique identifier of the vendor associated with this bill.  **Important:** If this bill is linked to other transactions, this vendor&#39;s A/P account must match the account used in those transactions.
         /// </summary>
+        /// <value>The unique identifier of the vendor associated with this bill.  **Important:** If this bill is linked to other transactions, this vendor&#39;s A/P account must match the account used in those transactions.</value>
+        /* <example>80000001-1234567890</example> */
         [JsonPropertyName("vendorId")]
         public string? VendorId { get { return this.VendorIdOption.Value; } set { this.VendorIdOption = new(value); } }
 
@@ -102,8 +104,9 @@ namespace Nxus.Qbd.Models
         public Option<AddressRequest?> VendorAddressOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets VendorAddress
+        /// An optional override for the vendor&#39;s billing address.
         /// </summary>
+        /// <value>An optional override for the vendor&#39;s billing address.</value>
         [JsonPropertyName("vendorAddress")]
         public AddressRequest? VendorAddress { get { return this.VendorAddressOption.Value; } set { this.VendorAddressOption = new(value); } }
 
@@ -141,8 +144,10 @@ namespace Nxus.Qbd.Models
         public Option<DateOnly?> DueDateOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets DueDate
+        /// The date by which the bill must be paid.
         /// </summary>
+        /// <value>The date by which the bill must be paid.</value>
+        /* <example>Wed Oct 30 20:00:00 EDT 2024</example> */
         [JsonPropertyName("dueDate")]
         public DateOnly? DueDate { get { return this.DueDateOption.Value; } set { this.DueDateOption = new(value); } }
 
@@ -154,8 +159,10 @@ namespace Nxus.Qbd.Models
         public Option<string?> RefNumberOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets RefNumber
+        /// A user-defined reference number for the bill. Case-sensitive.  Set to an empty string (&#x60;\&quot;\&quot;&#x60;) to clear the existing reference number in QuickBooks.
         /// </summary>
+        /// <value>A user-defined reference number for the bill. Case-sensitive.  Set to an empty string (&#x60;\&quot;\&quot;&#x60;) to clear the existing reference number in QuickBooks.</value>
+        /* <example>BILL-1234</example> */
         [JsonPropertyName("refNumber")]
         public string? RefNumber { get { return this.RefNumberOption.Value; } set { this.RefNumberOption = new(value); } }
 
@@ -167,8 +174,10 @@ namespace Nxus.Qbd.Models
         public Option<string?> TermsIdOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets TermsId
+        /// The payment terms defining when the bill is due and applicable discounts.
         /// </summary>
+        /// <value>The payment terms defining when the bill is due and applicable discounts.</value>
+        /* <example>80000001-1234567890</example> */
         [JsonPropertyName("termsId")]
         public string? TermsId { get { return this.TermsIdOption.Value; } set { this.TermsIdOption = new(value); } }
 
@@ -180,9 +189,10 @@ namespace Nxus.Qbd.Models
         public Option<string?> ClassIdOption { get; private set; }
 
         /// <summary>
-        /// Reference to the QuickBooks Class for this transaction (PRIVATE, v13.0).
+        /// Reference to the QuickBooks Class for categorization (e.g., department, location).
         /// </summary>
-        /// <value>Reference to the QuickBooks Class for this transaction (PRIVATE, v13.0).</value>
+        /// <value>Reference to the QuickBooks Class for categorization (e.g., department, location).</value>
+        /* <example>80000001-1234567890</example> */
         [JsonPropertyName("classId")]
         public string? ClassId { get { return this.ClassIdOption.Value; } set { this.ClassIdOption = new(value); } }
 
@@ -194,8 +204,10 @@ namespace Nxus.Qbd.Models
         public Option<string?> MemoOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets Memo
+        /// A note that appears in the A/P register and related reports.  Set to an empty string (&#x60;\&quot;\&quot;&#x60;) to clear the existing memo in QuickBooks.
         /// </summary>
+        /// <value>A note that appears in the A/P register and related reports.  Set to an empty string (&#x60;\&quot;\&quot;&#x60;) to clear the existing memo in QuickBooks.</value>
+        /* <example>Office supplies for September</example> */
         [JsonPropertyName("memo")]
         public string? Memo { get { return this.MemoOption.Value; } set { this.MemoOption = new(value); } }
 
@@ -207,9 +219,9 @@ namespace Nxus.Qbd.Models
         public Option<bool?> IsTaxIncludedOption { get; private set; }
 
         /// <summary>
-        /// Whether tax is included in item amounts (not in QBD).
+        /// Whether tax is included in item amounts.
         /// </summary>
-        /// <value>Whether tax is included in item amounts (not in QBD).</value>
+        /// <value>Whether tax is included in item amounts.</value>
         [JsonPropertyName("isTaxIncluded")]
         public bool? IsTaxIncluded { get { return this.IsTaxIncludedOption.Value; } set { this.IsTaxIncludedOption = new(value); } }
 
@@ -221,9 +233,8 @@ namespace Nxus.Qbd.Models
         public Option<string?> SalesTaxCodeIdOption { get; private set; }
 
         /// <summary>
-        /// Sales tax code reference (not in QBD).
+        /// Gets or Sets SalesTaxCodeId
         /// </summary>
-        /// <value>Sales tax code reference (not in QBD).</value>
         [JsonPropertyName("salesTaxCodeId")]
         public string? SalesTaxCodeId { get { return this.SalesTaxCodeIdOption.Value; } set { this.SalesTaxCodeIdOption = new(value); } }
 
@@ -235,9 +246,10 @@ namespace Nxus.Qbd.Models
         public Option<double?> ExchangeRateOption { get; private set; }
 
         /// <summary>
-        /// Exchange rate for multi-currency transactions.
+        /// The market exchange rate between the bill&#39;s currency and the home currency.
         /// </summary>
-        /// <value>Exchange rate for multi-currency transactions.</value>
+        /// <value>The market exchange rate between the bill&#39;s currency and the home currency.</value>
+        /* <example>1.2345</example> */
         [JsonPropertyName("exchangeRate")]
         public double? ExchangeRate { get { return this.ExchangeRateOption.Value; } set { this.ExchangeRateOption = new(value); } }
 
@@ -249,8 +261,9 @@ namespace Nxus.Qbd.Models
         public Option<bool?> ClearExpenseLinesOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets ClearExpenseLines
+        /// When &#x60;true&#x60;, forcefully removes all existing expense lines from the bill.  To selectively modify or add lines instead of wiping them, use the &#x60;ExpenseLines&#x60; array.
         /// </summary>
+        /// <value>When &#x60;true&#x60;, forcefully removes all existing expense lines from the bill.  To selectively modify or add lines instead of wiping them, use the &#x60;ExpenseLines&#x60; array.</value>
         [JsonPropertyName("clearExpenseLines")]
         public bool? ClearExpenseLines { get { return this.ClearExpenseLinesOption.Value; } set { this.ClearExpenseLinesOption = new(value); } }
 
@@ -275,8 +288,9 @@ namespace Nxus.Qbd.Models
         public Option<bool?> ClearItemLinesOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets ClearItemLines
+        /// When &#x60;true&#x60;, forcefully removes all existing item lines from the bill.  To selectively modify or add lines instead of wiping them, use the &#x60;ItemLines&#x60; array.
         /// </summary>
+        /// <value>When &#x60;true&#x60;, forcefully removes all existing item lines from the bill.  To selectively modify or add lines instead of wiping them, use the &#x60;ItemLines&#x60; array.</value>
         [JsonPropertyName("clearItemLines")]
         public bool? ClearItemLines { get { return this.ClearItemLinesOption.Value; } set { this.ClearItemLinesOption = new(value); } }
 
@@ -351,6 +365,12 @@ namespace Nxus.Qbd.Models
             if (this.Memo != null && this.Memo.Length > 4095)
             {
                 yield return new ValidationResult("Invalid value for Memo, length must be less than 4095.", new [] { "Memo" });
+            }
+
+            // SalesTaxCodeId (string) maxLength
+            if (this.SalesTaxCodeId != null && this.SalesTaxCodeId.Length > 36)
+            {
+                yield return new ValidationResult("Invalid value for SalesTaxCodeId, length must be less than 36.", new [] { "SalesTaxCodeId" });
             }
 
             yield break;

@@ -33,15 +33,15 @@ namespace Nxus.Qbd.Models
         /// <summary>
         /// Initializes a new instance of the <see cref="CreateInventorySiteRequest" /> class.
         /// </summary>
-        /// <param name="name">name</param>
-        /// <param name="isActive">isActive</param>
+        /// <param name="name">The case-insensitive unique name of this inventory site, unique across all inventory sites.  **NOTE**: Inventory sites do not have a &#x60;fullName&#x60; field because they are not hierarchical objects, which is why &#x60;name&#x60; is unique for them but not for objects that have parents.</param>
+        /// <param name="isActive">Indicates whether this inventory site is active. Inactive objects are typically hidden from views and reports in QuickBooks. Defaults to &#x60;true&#x60;.</param>
         /// <param name="parentId">parentId</param>
-        /// <param name="description">description</param>
-        /// <param name="contact">contact</param>
-        /// <param name="phone">phone</param>
-        /// <param name="fax">fax</param>
-        /// <param name="email">email</param>
-        /// <param name="address">address</param>
+        /// <param name="description">A description of this inventory site.</param>
+        /// <param name="contact">The name of the primary contact person for this inventory site.</param>
+        /// <param name="phone">The inventory site&#39;s primary telephone number.</param>
+        /// <param name="fax">The inventory site&#39;s fax number.</param>
+        /// <param name="email">The inventory site&#39;s email address.</param>
+        /// <param name="address">The inventory site&#39;s address.</param>
         /// <param name="externalId">externalId</param>
         [JsonConstructor]
         public CreateInventorySiteRequest(string name, Option<bool?> isActive = default, Option<string?> parentId = default, Option<string?> description = default, Option<string?> contact = default, Option<string?> phone = default, Option<string?> fax = default, Option<string?> email = default, Option<AddressRequest?> address = default, Option<string?> externalId = default)
@@ -62,8 +62,9 @@ namespace Nxus.Qbd.Models
         partial void OnCreated();
 
         /// <summary>
-        /// Gets or Sets Name
+        /// The case-insensitive unique name of this inventory site, unique across all inventory sites.  **NOTE**: Inventory sites do not have a &#x60;fullName&#x60; field because they are not hierarchical objects, which is why &#x60;name&#x60; is unique for them but not for objects that have parents.
         /// </summary>
+        /// <value>The case-insensitive unique name of this inventory site, unique across all inventory sites.  **NOTE**: Inventory sites do not have a &#x60;fullName&#x60; field because they are not hierarchical objects, which is why &#x60;name&#x60; is unique for them but not for objects that have parents.</value>
         [JsonPropertyName("name")]
         public string Name { get; set; }
 
@@ -75,8 +76,10 @@ namespace Nxus.Qbd.Models
         public Option<bool?> IsActiveOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets IsActive
+        /// Indicates whether this inventory site is active. Inactive objects are typically hidden from views and reports in QuickBooks. Defaults to &#x60;true&#x60;.
         /// </summary>
+        /// <value>Indicates whether this inventory site is active. Inactive objects are typically hidden from views and reports in QuickBooks. Defaults to &#x60;true&#x60;.</value>
+        /* <example>true</example> */
         [JsonPropertyName("isActive")]
         public bool? IsActive { get { return this.IsActiveOption.Value; } set { this.IsActiveOption = new(value); } }
 
@@ -101,8 +104,10 @@ namespace Nxus.Qbd.Models
         public Option<string?> DescriptionOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets Description
+        /// A description of this inventory site.
         /// </summary>
+        /// <value>A description of this inventory site.</value>
+        /* <example>&quot;Main Stockroom for Electronics&quot;</example> */
         [JsonPropertyName("description")]
         public string? Description { get { return this.DescriptionOption.Value; } set { this.DescriptionOption = new(value); } }
 
@@ -114,8 +119,10 @@ namespace Nxus.Qbd.Models
         public Option<string?> ContactOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets Contact
+        /// The name of the primary contact person for this inventory site.
         /// </summary>
+        /// <value>The name of the primary contact person for this inventory site.</value>
+        /* <example>&quot;Jane Smith&quot;</example> */
         [JsonPropertyName("contact")]
         public string? Contact { get { return this.ContactOption.Value; } set { this.ContactOption = new(value); } }
 
@@ -127,8 +134,10 @@ namespace Nxus.Qbd.Models
         public Option<string?> PhoneOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets Phone
+        /// The inventory site&#39;s primary telephone number.
         /// </summary>
+        /// <value>The inventory site&#39;s primary telephone number.</value>
+        /* <example>&quot;+1-555-123-4567&quot;</example> */
         [JsonPropertyName("phone")]
         public string? Phone { get { return this.PhoneOption.Value; } set { this.PhoneOption = new(value); } }
 
@@ -140,8 +149,10 @@ namespace Nxus.Qbd.Models
         public Option<string?> FaxOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets Fax
+        /// The inventory site&#39;s fax number.
         /// </summary>
+        /// <value>The inventory site&#39;s fax number.</value>
+        /* <example>&quot;+1-555-555-1212&quot;</example> */
         [JsonPropertyName("fax")]
         public string? Fax { get { return this.FaxOption.Value; } set { this.FaxOption = new(value); } }
 
@@ -153,8 +164,10 @@ namespace Nxus.Qbd.Models
         public Option<string?> EmailOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets Email
+        /// The inventory site&#39;s email address.
         /// </summary>
+        /// <value>The inventory site&#39;s email address.</value>
+        /* <example>&quot;inventory-site@example.com&quot;</example> */
         [JsonPropertyName("email")]
         public string? Email { get { return this.EmailOption.Value; } set { this.EmailOption = new(value); } }
 
@@ -166,8 +179,9 @@ namespace Nxus.Qbd.Models
         public Option<AddressRequest?> AddressOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets Address
+        /// The inventory site&#39;s address.
         /// </summary>
+        /// <value>The inventory site&#39;s address.</value>
         [JsonPropertyName("address")]
         public AddressRequest? Address { get { return this.AddressOption.Value; } set { this.AddressOption = new(value); } }
 
@@ -213,6 +227,12 @@ namespace Nxus.Qbd.Models
         /// <returns>Validation Result</returns>
         IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
+            // Name (string) maxLength
+            if (this.Name != null && this.Name.Length > 31)
+            {
+                yield return new ValidationResult("Invalid value for Name, length must be less than 31.", new [] { "Name" });
+            }
+
             // Description (string) maxLength
             if (this.Description != null && this.Description.Length > 100)
             {

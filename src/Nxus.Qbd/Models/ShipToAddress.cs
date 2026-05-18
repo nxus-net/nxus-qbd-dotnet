@@ -26,7 +26,7 @@ using Nxus.Qbd.Json;
 namespace Nxus.Qbd.Models
 {
     /// <summary>
-    /// DTO for an alternate shipping address on a customer.
+    /// Represents an additional shipping destination associated with a customer profile.
     /// </summary>
     public partial class ShipToAddress : IValidatableObject
     {

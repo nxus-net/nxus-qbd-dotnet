@@ -34,42 +34,42 @@ namespace Nxus.Qbd.Models
         /// Initializes a new instance of the <see cref="UpdateVendorRequest" /> class.
         /// </summary>
         /// <param name="revisionNumber">revisionNumber</param>
-        /// <param name="name">name</param>
-        /// <param name="isActive">isActive</param>
+        /// <param name="name">The case-insensitive unique name of this vendor, unique across all vendors.  **NOTE**: Vendors do not have a &#x60;fullName&#x60; field because they are not hierarchical objects, which is why &#x60;name&#x60; is unique for them but not for objects that have parents.</param>
+        /// <param name="isActive">Indicates whether this vendor is active. Inactive objects are typically hidden from views and reports in QuickBooks. Defaults to &#x60;true&#x60;.</param>
         /// <param name="classId">classId</param>
-        /// <param name="companyName">companyName</param>
-        /// <param name="salutation">salutation</param>
-        /// <param name="firstName">firstName</param>
-        /// <param name="middleName">middleName</param>
-        /// <param name="lastName">lastName</param>
-        /// <param name="jobTitle">jobTitle</param>
+        /// <param name="companyName">The name of the company associated with this vendor. This name is used on invoices, checks, and other forms.</param>
+        /// <param name="salutation">The formal salutation title that precedes the name of the contact person for this vendor, such as \&quot;Mr.\&quot;, \&quot;Ms.\&quot;, or \&quot;Dr.\&quot;.</param>
+        /// <param name="firstName">The first name of the contact person for this vendor.</param>
+        /// <param name="middleName">The middle name of the contact person for this vendor.</param>
+        /// <param name="lastName">The last name of the contact person for this vendor.</param>
+        /// <param name="jobTitle">The job title of the contact person for this vendor.</param>
         /// <param name="billingAddress">billingAddress</param>
         /// <param name="shippingAddress">shippingAddress</param>
-        /// <param name="phone">phone</param>
+        /// <param name="phone">The vendor&#39;s primary telephone number.</param>
         /// <param name="alternatePhone">alternatePhone</param>
-        /// <param name="fax">fax</param>
-        /// <param name="email">email</param>
+        /// <param name="fax">The vendor&#39;s fax number.</param>
+        /// <param name="email">The vendor&#39;s email address.</param>
         /// <param name="ccEmail">ccEmail</param>
-        /// <param name="contact">contact</param>
+        /// <param name="contact">The name of the primary contact person for this vendor.</param>
         /// <param name="alternateContact">alternateContact</param>
         /// <param name="customContactFields">customContactFields</param>
         /// <param name="additionalContacts">additionalContacts</param>
-        /// <param name="nameOnCheck">nameOnCheck</param>
-        /// <param name="accountNumber">accountNumber</param>
+        /// <param name="nameOnCheck">The vendor&#39;s name as it should appear on checks issued to this vendor.</param>
+        /// <param name="accountNumber">The vendor&#39;s account number, which appears in the QuickBooks chart of accounts, reports, and graphs.  Note that if the \&quot;Use Account Numbers\&quot; preference is turned off in QuickBooks, the account number may not be visible in the user interface, but it can still be set and retrieved through the API.</param>
         /// <param name="note">note</param>
         /// <param name="additionalNotes">additionalNotes</param>
         /// <param name="vendorTypeId">vendorTypeId</param>
         /// <param name="termsId">termsId</param>
-        /// <param name="creditLimit">creditLimit</param>
+        /// <param name="creditLimit">The vendor&#39;s credit limit, represented as a decimal string. This is the maximum amount of money that can be spent being before billed by this vendor. If &#x60;null&#x60;, there is no credit limit.</param>
         /// <param name="taxIdentificationNumber">taxIdentificationNumber</param>
         /// <param name="isEligibleFor1099">isEligibleFor1099</param>
         /// <param name="billingRateId">billingRateId</param>
         /// <param name="salesTaxCodeId">salesTaxCodeId</param>
-        /// <param name="salesTaxCountry">salesTaxCountry</param>
-        /// <param name="isSalesTaxAgency">isSalesTaxAgency</param>
+        /// <param name="salesTaxCountry">The country for which sales tax is collected for this vendor.</param>
+        /// <param name="isSalesTaxAgency">Indicates whether this vendor is a sales tax agency.</param>
         /// <param name="salesTaxReturnId">salesTaxReturnId</param>
-        /// <param name="taxRegistrationNumber">taxRegistrationNumber</param>
-        /// <param name="reportingPeriod">reportingPeriod</param>
+        /// <param name="taxRegistrationNumber">The vendor&#39;s tax registration number, for use in Canada or the UK.</param>
+        /// <param name="reportingPeriod">The vendor&#39;s tax reporting period, for use in Canada or the UK.</param>
         /// <param name="isTrackingPurchaseTax">isTrackingPurchaseTax</param>
         /// <param name="purchaseTaxAccountId">purchaseTaxAccountId</param>
         /// <param name="isTrackingSalesTax">isTrackingSalesTax</param>
@@ -143,8 +143,10 @@ namespace Nxus.Qbd.Models
         public Option<string?> NameOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets Name
+        /// The case-insensitive unique name of this vendor, unique across all vendors.  **NOTE**: Vendors do not have a &#x60;fullName&#x60; field because they are not hierarchical objects, which is why &#x60;name&#x60; is unique for them but not for objects that have parents.
         /// </summary>
+        /// <value>The case-insensitive unique name of this vendor, unique across all vendors.  **NOTE**: Vendors do not have a &#x60;fullName&#x60; field because they are not hierarchical objects, which is why &#x60;name&#x60; is unique for them but not for objects that have parents.</value>
+        /* <example>&quot;Acme Supplies Inc.&quot;</example> */
         [JsonPropertyName("name")]
         public string? Name { get { return this.NameOption.Value; } set { this.NameOption = new(value); } }
 
@@ -156,8 +158,9 @@ namespace Nxus.Qbd.Models
         public Option<bool?> IsActiveOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets IsActive
+        /// Indicates whether this vendor is active. Inactive objects are typically hidden from views and reports in QuickBooks. Defaults to &#x60;true&#x60;.
         /// </summary>
+        /// <value>Indicates whether this vendor is active. Inactive objects are typically hidden from views and reports in QuickBooks. Defaults to &#x60;true&#x60;.</value>
         [JsonPropertyName("isActive")]
         public bool? IsActive { get { return this.IsActiveOption.Value; } set { this.IsActiveOption = new(value); } }
 
@@ -182,8 +185,10 @@ namespace Nxus.Qbd.Models
         public Option<string?> CompanyNameOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets CompanyName
+        /// The name of the company associated with this vendor. This name is used on invoices, checks, and other forms.
         /// </summary>
+        /// <value>The name of the company associated with this vendor. This name is used on invoices, checks, and other forms.</value>
+        /* <example>&quot;Acme Corporation&quot;</example> */
         [JsonPropertyName("companyName")]
         public string? CompanyName { get { return this.CompanyNameOption.Value; } set { this.CompanyNameOption = new(value); } }
 
@@ -195,8 +200,10 @@ namespace Nxus.Qbd.Models
         public Option<string?> SalutationOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets Salutation
+        /// The formal salutation title that precedes the name of the contact person for this vendor, such as \&quot;Mr.\&quot;, \&quot;Ms.\&quot;, or \&quot;Dr.\&quot;.
         /// </summary>
+        /// <value>The formal salutation title that precedes the name of the contact person for this vendor, such as \&quot;Mr.\&quot;, \&quot;Ms.\&quot;, or \&quot;Dr.\&quot;.</value>
+        /* <example>&quot;Dr.&quot;</example> */
         [JsonPropertyName("salutation")]
         public string? Salutation { get { return this.SalutationOption.Value; } set { this.SalutationOption = new(value); } }
 
@@ -208,8 +215,10 @@ namespace Nxus.Qbd.Models
         public Option<string?> FirstNameOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets FirstName
+        /// The first name of the contact person for this vendor.
         /// </summary>
+        /// <value>The first name of the contact person for this vendor.</value>
+        /* <example>&quot;John&quot;</example> */
         [JsonPropertyName("firstName")]
         public string? FirstName { get { return this.FirstNameOption.Value; } set { this.FirstNameOption = new(value); } }
 
@@ -221,8 +230,10 @@ namespace Nxus.Qbd.Models
         public Option<string?> MiddleNameOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets MiddleName
+        /// The middle name of the contact person for this vendor.
         /// </summary>
+        /// <value>The middle name of the contact person for this vendor.</value>
+        /* <example>&quot;A.&quot;</example> */
         [JsonPropertyName("middleName")]
         public string? MiddleName { get { return this.MiddleNameOption.Value; } set { this.MiddleNameOption = new(value); } }
 
@@ -234,8 +245,10 @@ namespace Nxus.Qbd.Models
         public Option<string?> LastNameOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets LastName
+        /// The last name of the contact person for this vendor.
         /// </summary>
+        /// <value>The last name of the contact person for this vendor.</value>
+        /* <example>&quot;Doe&quot;</example> */
         [JsonPropertyName("lastName")]
         public string? LastName { get { return this.LastNameOption.Value; } set { this.LastNameOption = new(value); } }
 
@@ -247,8 +260,10 @@ namespace Nxus.Qbd.Models
         public Option<string?> JobTitleOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets JobTitle
+        /// The job title of the contact person for this vendor.
         /// </summary>
+        /// <value>The job title of the contact person for this vendor.</value>
+        /* <example>&quot;Purchasing Manager&quot;</example> */
         [JsonPropertyName("jobTitle")]
         public string? JobTitle { get { return this.JobTitleOption.Value; } set { this.JobTitleOption = new(value); } }
 
@@ -286,8 +301,10 @@ namespace Nxus.Qbd.Models
         public Option<string?> PhoneOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets Phone
+        /// The vendor&#39;s primary telephone number.
         /// </summary>
+        /// <value>The vendor&#39;s primary telephone number.</value>
+        /* <example>&quot;+1-555-123-4567&quot;</example> */
         [JsonPropertyName("phone")]
         public string? Phone { get { return this.PhoneOption.Value; } set { this.PhoneOption = new(value); } }
 
@@ -312,8 +329,10 @@ namespace Nxus.Qbd.Models
         public Option<string?> FaxOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets Fax
+        /// The vendor&#39;s fax number.
         /// </summary>
+        /// <value>The vendor&#39;s fax number.</value>
+        /* <example>&quot;+1-555-555-1212&quot;</example> */
         [JsonPropertyName("fax")]
         public string? Fax { get { return this.FaxOption.Value; } set { this.FaxOption = new(value); } }
 
@@ -325,8 +344,10 @@ namespace Nxus.Qbd.Models
         public Option<string?> EmailOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets Email
+        /// The vendor&#39;s email address.
         /// </summary>
+        /// <value>The vendor&#39;s email address.</value>
+        /* <example>&quot;vendor@example.com&quot;</example> */
         [JsonPropertyName("email")]
         public string? Email { get { return this.EmailOption.Value; } set { this.EmailOption = new(value); } }
 
@@ -351,8 +372,10 @@ namespace Nxus.Qbd.Models
         public Option<string?> ContactOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets Contact
+        /// The name of the primary contact person for this vendor.
         /// </summary>
+        /// <value>The name of the primary contact person for this vendor.</value>
+        /* <example>&quot;Jane Smith&quot;</example> */
         [JsonPropertyName("contact")]
         public string? Contact { get { return this.ContactOption.Value; } set { this.ContactOption = new(value); } }
 
@@ -403,8 +426,10 @@ namespace Nxus.Qbd.Models
         public Option<string?> NameOnCheckOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets NameOnCheck
+        /// The vendor&#39;s name as it should appear on checks issued to this vendor.
         /// </summary>
+        /// <value>The vendor&#39;s name as it should appear on checks issued to this vendor.</value>
+        /* <example>&quot;Acme Supplies Ltd.&quot;</example> */
         [JsonPropertyName("nameOnCheck")]
         public string? NameOnCheck { get { return this.NameOnCheckOption.Value; } set { this.NameOnCheckOption = new(value); } }
 
@@ -416,8 +441,10 @@ namespace Nxus.Qbd.Models
         public Option<string?> AccountNumberOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets AccountNumber
+        /// The vendor&#39;s account number, which appears in the QuickBooks chart of accounts, reports, and graphs.  Note that if the \&quot;Use Account Numbers\&quot; preference is turned off in QuickBooks, the account number may not be visible in the user interface, but it can still be set and retrieved through the API.
         /// </summary>
+        /// <value>The vendor&#39;s account number, which appears in the QuickBooks chart of accounts, reports, and graphs.  Note that if the \&quot;Use Account Numbers\&quot; preference is turned off in QuickBooks, the account number may not be visible in the user interface, but it can still be set and retrieved through the API.</value>
+        /* <example>&quot;1010&quot;</example> */
         [JsonPropertyName("accountNumber")]
         public string? AccountNumber { get { return this.AccountNumberOption.Value; } set { this.AccountNumberOption = new(value); } }
 
@@ -481,8 +508,9 @@ namespace Nxus.Qbd.Models
         public Option<double?> CreditLimitOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets CreditLimit
+        /// The vendor&#39;s credit limit, represented as a decimal string. This is the maximum amount of money that can be spent being before billed by this vendor. If &#x60;null&#x60;, there is no credit limit.
         /// </summary>
+        /// <value>The vendor&#39;s credit limit, represented as a decimal string. This is the maximum amount of money that can be spent being before billed by this vendor. If &#x60;null&#x60;, there is no credit limit.</value>
         [JsonPropertyName("creditLimit")]
         public double? CreditLimit { get { return this.CreditLimitOption.Value; } set { this.CreditLimitOption = new(value); } }
 
@@ -546,8 +574,10 @@ namespace Nxus.Qbd.Models
         public Option<string?> SalesTaxCountryOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets SalesTaxCountry
+        /// The country for which sales tax is collected for this vendor.
         /// </summary>
+        /// <value>The country for which sales tax is collected for this vendor.</value>
+        /* <example>&quot;us&quot;</example> */
         [JsonPropertyName("salesTaxCountry")]
         public string? SalesTaxCountry { get { return this.SalesTaxCountryOption.Value; } set { this.SalesTaxCountryOption = new(value); } }
 
@@ -559,8 +589,10 @@ namespace Nxus.Qbd.Models
         public Option<bool?> IsSalesTaxAgencyOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets IsSalesTaxAgency
+        /// Indicates whether this vendor is a sales tax agency.
         /// </summary>
+        /// <value>Indicates whether this vendor is a sales tax agency.</value>
+        /* <example>false</example> */
         [JsonPropertyName("isSalesTaxAgency")]
         public bool? IsSalesTaxAgency { get { return this.IsSalesTaxAgencyOption.Value; } set { this.IsSalesTaxAgencyOption = new(value); } }
 
@@ -585,8 +617,10 @@ namespace Nxus.Qbd.Models
         public Option<string?> TaxRegistrationNumberOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets TaxRegistrationNumber
+        /// The vendor&#39;s tax registration number, for use in Canada or the UK.
         /// </summary>
+        /// <value>The vendor&#39;s tax registration number, for use in Canada or the UK.</value>
+        /* <example>&quot;GB123456789&quot;</example> */
         [JsonPropertyName("taxRegistrationNumber")]
         public string? TaxRegistrationNumber { get { return this.TaxRegistrationNumberOption.Value; } set { this.TaxRegistrationNumberOption = new(value); } }
 
@@ -598,8 +632,10 @@ namespace Nxus.Qbd.Models
         public Option<string?> ReportingPeriodOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets ReportingPeriod
+        /// The vendor&#39;s tax reporting period, for use in Canada or the UK.
         /// </summary>
+        /// <value>The vendor&#39;s tax reporting period, for use in Canada or the UK.</value>
+        /* <example>&quot;quarterly&quot;</example> */
         [JsonPropertyName("reportingPeriod")]
         public string? ReportingPeriod { get { return this.ReportingPeriodOption.Value; } set { this.ReportingPeriodOption = new(value); } }
 

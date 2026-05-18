@@ -33,15 +33,15 @@ namespace Nxus.Qbd.Models
         /// <summary>
         /// Initializes a new instance of the <see cref="CreateItemDiscountRequest" /> class.
         /// </summary>
-        /// <param name="name">name</param>
-        /// <param name="isActive">isActive</param>
+        /// <param name="name">The case-insensitive name of this discount item. Not guaranteed to be unique because it does not include the names of its hierarchical parent objects like &#x60;fullName&#x60; does. For example, two discount items could both have the &#x60;name&#x60; \&quot;10% labor discount\&quot;, but they could have unique &#x60;fullName&#x60; values, such as \&quot;Discounts:10% labor discount\&quot; and \&quot;Promotions:10% labor discount\&quot;.</param>
+        /// <param name="isActive">Indicates whether this discount item is active. Inactive objects are typically hidden from views and reports in QuickBooks. Defaults to &#x60;true&#x60;.</param>
         /// <param name="parentId">parentId</param>
         /// <param name="parentName">parentName</param>
         /// <param name="itemDesc">itemDesc</param>
         /// <param name="salesTaxCodeId">salesTaxCodeId</param>
         /// <param name="salesTaxCodeName">salesTaxCodeName</param>
-        /// <param name="discountRate">discountRate</param>
-        /// <param name="discountRatePercent">discountRatePercent</param>
+        /// <param name="discountRate">The monetary amount to subtract from the total or subtotal when applying this discount item to a transaction, represented as a decimal string.  **NOTE**: A flat rate discount applies to ALL lines recorded above it and distributes the discount amount equally across those lines, which affects tax calculations. For example, a $10 discount applied to a $100 taxable item and $100 non-taxable item would result in a $5 taxable discount and $5 non-taxable discount.</param>
+        /// <param name="discountRatePercent">The percentage amount to subtract from the total or subtotal when applying this discount item to a transaction.  **NOTE**: A percentage discount only applies to the line immediately above it, so tax implications only affect that specific line.</param>
         /// <param name="accountId">accountId</param>
         /// <param name="accountName">accountName</param>
         /// <param name="externalId">externalId</param>
@@ -66,8 +66,9 @@ namespace Nxus.Qbd.Models
         partial void OnCreated();
 
         /// <summary>
-        /// Gets or Sets Name
+        /// The case-insensitive name of this discount item. Not guaranteed to be unique because it does not include the names of its hierarchical parent objects like &#x60;fullName&#x60; does. For example, two discount items could both have the &#x60;name&#x60; \&quot;10% labor discount\&quot;, but they could have unique &#x60;fullName&#x60; values, such as \&quot;Discounts:10% labor discount\&quot; and \&quot;Promotions:10% labor discount\&quot;.
         /// </summary>
+        /// <value>The case-insensitive name of this discount item. Not guaranteed to be unique because it does not include the names of its hierarchical parent objects like &#x60;fullName&#x60; does. For example, two discount items could both have the &#x60;name&#x60; \&quot;10% labor discount\&quot;, but they could have unique &#x60;fullName&#x60; values, such as \&quot;Discounts:10% labor discount\&quot; and \&quot;Promotions:10% labor discount\&quot;.</value>
         [JsonPropertyName("name")]
         public string Name { get; set; }
 
@@ -79,8 +80,10 @@ namespace Nxus.Qbd.Models
         public Option<bool?> IsActiveOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets IsActive
+        /// Indicates whether this discount item is active. Inactive objects are typically hidden from views and reports in QuickBooks. Defaults to &#x60;true&#x60;.
         /// </summary>
+        /// <value>Indicates whether this discount item is active. Inactive objects are typically hidden from views and reports in QuickBooks. Defaults to &#x60;true&#x60;.</value>
+        /* <example>true</example> */
         [JsonPropertyName("isActive")]
         public bool? IsActive { get { return this.IsActiveOption.Value; } set { this.IsActiveOption = new(value); } }
 
@@ -157,8 +160,9 @@ namespace Nxus.Qbd.Models
         public Option<double?> DiscountRateOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets DiscountRate
+        /// The monetary amount to subtract from the total or subtotal when applying this discount item to a transaction, represented as a decimal string.  **NOTE**: A flat rate discount applies to ALL lines recorded above it and distributes the discount amount equally across those lines, which affects tax calculations. For example, a $10 discount applied to a $100 taxable item and $100 non-taxable item would result in a $5 taxable discount and $5 non-taxable discount.
         /// </summary>
+        /// <value>The monetary amount to subtract from the total or subtotal when applying this discount item to a transaction, represented as a decimal string.  **NOTE**: A flat rate discount applies to ALL lines recorded above it and distributes the discount amount equally across those lines, which affects tax calculations. For example, a $10 discount applied to a $100 taxable item and $100 non-taxable item would result in a $5 taxable discount and $5 non-taxable discount.</value>
         [JsonPropertyName("discountRate")]
         public double? DiscountRate { get { return this.DiscountRateOption.Value; } set { this.DiscountRateOption = new(value); } }
 
@@ -170,8 +174,9 @@ namespace Nxus.Qbd.Models
         public Option<double?> DiscountRatePercentOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets DiscountRatePercent
+        /// The percentage amount to subtract from the total or subtotal when applying this discount item to a transaction.  **NOTE**: A percentage discount only applies to the line immediately above it, so tax implications only affect that specific line.
         /// </summary>
+        /// <value>The percentage amount to subtract from the total or subtotal when applying this discount item to a transaction.  **NOTE**: A percentage discount only applies to the line immediately above it, so tax implications only affect that specific line.</value>
         [JsonPropertyName("discountRatePercent")]
         public double? DiscountRatePercent { get { return this.DiscountRatePercentOption.Value; } set { this.DiscountRatePercentOption = new(value); } }
 
@@ -245,6 +250,12 @@ namespace Nxus.Qbd.Models
         /// <returns>Validation Result</returns>
         IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
+            // Name (string) maxLength
+            if (this.Name != null && this.Name.Length > 31)
+            {
+                yield return new ValidationResult("Invalid value for Name, length must be less than 31.", new [] { "Name" });
+            }
+
             // ParentId (string) maxLength
             if (this.ParentId != null && this.ParentId.Length > 159)
             {

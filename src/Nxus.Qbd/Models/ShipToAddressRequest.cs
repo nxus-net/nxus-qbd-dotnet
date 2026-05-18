@@ -162,6 +162,7 @@ namespace Nxus.Qbd.Models
         /// (Optional) City.
         /// </summary>
         /// <value>(Optional) City.</value>
+        /* <example>&quot;San Francisco&quot;</example> */
         [JsonPropertyName("city")]
         public string? City { get { return this.CityOption.Value; } set { this.CityOption = new(value); } }
 
@@ -176,6 +177,7 @@ namespace Nxus.Qbd.Models
         /// (Optional) State.
         /// </summary>
         /// <value>(Optional) State.</value>
+        /* <example>&quot;CA&quot;</example> */
         [JsonPropertyName("state")]
         public string? State { get { return this.StateOption.Value; } set { this.StateOption = new(value); } }
 
@@ -190,6 +192,7 @@ namespace Nxus.Qbd.Models
         /// (Optional) Postal code.
         /// </summary>
         /// <value>(Optional) Postal code.</value>
+        /* <example>&quot;94110&quot;</example> */
         [JsonPropertyName("postalCode")]
         public string? PostalCode { get { return this.PostalCodeOption.Value; } set { this.PostalCodeOption = new(value); } }
 
@@ -204,6 +207,7 @@ namespace Nxus.Qbd.Models
         /// (Optional) Country.
         /// </summary>
         /// <value>(Optional) Country.</value>
+        /* <example>&quot;United States&quot;</example> */
         [JsonPropertyName("country")]
         public string? Country { get { return this.CountryOption.Value; } set { this.CountryOption = new(value); } }
 
@@ -218,6 +222,7 @@ namespace Nxus.Qbd.Models
         /// (Optional) A note associated with the address.
         /// </summary>
         /// <value>(Optional) A note associated with the address.</value>
+        /* <example>&quot;Leave at front desk.&quot;</example> */
         [JsonPropertyName("note")]
         public string? Note { get { return this.NoteOption.Value; } set { this.NoteOption = new(value); } }
 

@@ -33,10 +33,10 @@ namespace Nxus.Qbd.Models
         /// <summary>
         /// Initializes a new instance of the <see cref="UpdatePaymentMethodRequest" /> class.
         /// </summary>
-        /// <param name="name">name</param>
+        /// <param name="name">The case-insensitive unique name of this payment method, unique across all payment methods.  **NOTE**: Payment methods do not have a &#x60;fullName&#x60; field because they are not hierarchical objects, which is why &#x60;name&#x60; is unique for them but not for objects that have parents.</param>
         /// <param name="revisionNumber">revisionNumber</param>
-        /// <param name="isActive">isActive</param>
-        /// <param name="paymentMethodType">(Optional) The type of payment method. Valid values: american_express, cash, check, debit_card, discover, e_check, gift_card, master_card, other, other_credit_card, visa.</param>
+        /// <param name="isActive">Indicates whether this payment method is active. Inactive objects are typically hidden from views and reports in QuickBooks. Defaults to &#x60;true&#x60;.</param>
+        /// <param name="paymentMethodType">This payment method&#39;s type.</param>
         [JsonConstructor]
         public UpdatePaymentMethodRequest(string name, string revisionNumber, Option<bool?> isActive = default, Option<string?> paymentMethodType = default)
         {
@@ -50,8 +50,9 @@ namespace Nxus.Qbd.Models
         partial void OnCreated();
 
         /// <summary>
-        /// Gets or Sets Name
+        /// The case-insensitive unique name of this payment method, unique across all payment methods.  **NOTE**: Payment methods do not have a &#x60;fullName&#x60; field because they are not hierarchical objects, which is why &#x60;name&#x60; is unique for them but not for objects that have parents.
         /// </summary>
+        /// <value>The case-insensitive unique name of this payment method, unique across all payment methods.  **NOTE**: Payment methods do not have a &#x60;fullName&#x60; field because they are not hierarchical objects, which is why &#x60;name&#x60; is unique for them but not for objects that have parents.</value>
         [JsonPropertyName("name")]
         public string Name { get; set; }
 
@@ -69,8 +70,10 @@ namespace Nxus.Qbd.Models
         public Option<bool?> IsActiveOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets IsActive
+        /// Indicates whether this payment method is active. Inactive objects are typically hidden from views and reports in QuickBooks. Defaults to &#x60;true&#x60;.
         /// </summary>
+        /// <value>Indicates whether this payment method is active. Inactive objects are typically hidden from views and reports in QuickBooks. Defaults to &#x60;true&#x60;.</value>
+        /* <example>true</example> */
         [JsonPropertyName("isActive")]
         public bool? IsActive { get { return this.IsActiveOption.Value; } set { this.IsActiveOption = new(value); } }
 
@@ -82,9 +85,10 @@ namespace Nxus.Qbd.Models
         public Option<string?> PaymentMethodTypeOption { get; private set; }
 
         /// <summary>
-        /// (Optional) The type of payment method. Valid values: american_express, cash, check, debit_card, discover, e_check, gift_card, master_card, other, other_credit_card, visa.
+        /// This payment method&#39;s type.
         /// </summary>
-        /// <value>(Optional) The type of payment method. Valid values: american_express, cash, check, debit_card, discover, e_check, gift_card, master_card, other, other_credit_card, visa.</value>
+        /// <value>This payment method&#39;s type.</value>
+        /* <example>&quot;cash&quot;</example> */
         [JsonPropertyName("paymentMethodType")]
         public string? PaymentMethodType { get { return this.PaymentMethodTypeOption.Value; } set { this.PaymentMethodTypeOption = new(value); } }
 
@@ -111,6 +115,12 @@ namespace Nxus.Qbd.Models
         /// <returns>Validation Result</returns>
         IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
+            // Name (string) maxLength
+            if (this.Name != null && this.Name.Length > 31)
+            {
+                yield return new ValidationResult("Invalid value for Name, length must be less than 31.", new [] { "Name" });
+            }
+
             yield break;
         }
     }

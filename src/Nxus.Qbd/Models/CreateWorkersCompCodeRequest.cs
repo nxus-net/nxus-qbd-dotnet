@@ -33,9 +33,9 @@ namespace Nxus.Qbd.Models
         /// <summary>
         /// Initializes a new instance of the <see cref="CreateWorkersCompCodeRequest" /> class.
         /// </summary>
-        /// <param name="name">(Required) The name of the Workers Comp Code. Max length: 13.</param>
+        /// <param name="name">The case-insensitive unique name of this employee, unique across all employees. A concatenation of the employee&#39;s &#x60;firstName&#x60;, &#x60;middleName&#x60;, and &#x60;lastName&#x60; fields.  **NOTE**: Employees do not have a &#x60;fullName&#x60; field because they are not hierarchical objects, which is why &#x60;name&#x60; is unique for them but not for objects that have parents.</param>
         /// <param name="rateEntries">rateEntries</param>
-        /// <param name="isActive">(Optional) Indicates if the code is active. Defaults to true.</param>
+        /// <param name="isActive">Indicates whether this employee is active. Inactive objects are typically hidden from views and reports in QuickBooks. Defaults to &#x60;true&#x60;.</param>
         /// <param name="desc">(Optional) Description of the code. Max length: 31.</param>
         /// <param name="externalId">externalId</param>
         [JsonConstructor]
@@ -52,9 +52,9 @@ namespace Nxus.Qbd.Models
         partial void OnCreated();
 
         /// <summary>
-        /// (Required) The name of the Workers Comp Code. Max length: 13.
+        /// The case-insensitive unique name of this employee, unique across all employees. A concatenation of the employee&#39;s &#x60;firstName&#x60;, &#x60;middleName&#x60;, and &#x60;lastName&#x60; fields.  **NOTE**: Employees do not have a &#x60;fullName&#x60; field because they are not hierarchical objects, which is why &#x60;name&#x60; is unique for them but not for objects that have parents.
         /// </summary>
-        /// <value>(Required) The name of the Workers Comp Code. Max length: 13.</value>
+        /// <value>The case-insensitive unique name of this employee, unique across all employees. A concatenation of the employee&#39;s &#x60;firstName&#x60;, &#x60;middleName&#x60;, and &#x60;lastName&#x60; fields.  **NOTE**: Employees do not have a &#x60;fullName&#x60; field because they are not hierarchical objects, which is why &#x60;name&#x60; is unique for them but not for objects that have parents.</value>
         [JsonPropertyName("name")]
         public string Name { get; set; }
 
@@ -72,9 +72,10 @@ namespace Nxus.Qbd.Models
         public Option<bool?> IsActiveOption { get; private set; }
 
         /// <summary>
-        /// (Optional) Indicates if the code is active. Defaults to true.
+        /// Indicates whether this employee is active. Inactive objects are typically hidden from views and reports in QuickBooks. Defaults to &#x60;true&#x60;.
         /// </summary>
-        /// <value>(Optional) Indicates if the code is active. Defaults to true.</value>
+        /// <value>Indicates whether this employee is active. Inactive objects are typically hidden from views and reports in QuickBooks. Defaults to &#x60;true&#x60;.</value>
+        /* <example>true</example> */
         [JsonPropertyName("isActive")]
         public bool? IsActive { get { return this.IsActiveOption.Value; } set { this.IsActiveOption = new(value); } }
 

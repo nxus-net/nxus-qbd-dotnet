@@ -34,10 +34,10 @@ namespace Nxus.Qbd.Models
         /// Initializes a new instance of the <see cref="UpdateSalesTaxCodeRequest" /> class.
         /// </summary>
         /// <param name="revisionNumber">revisionNumber</param>
-        /// <param name="name">(Optional) The new name of the sales tax code. (Max 31 characters)</param>
-        /// <param name="isActive">(Optional) If false, this Sales Tax Code will be made inactive.</param>
-        /// <param name="isTaxable">(Optional) Indicates whether the sales tax code represents a taxable (true) or non-taxable (false) item. NOTE: You cannot change this after the code has been used in a transaction.</param>
-        /// <param name="description">(Optional) The new description for the sales tax code. (Max 50 characters)</param>
+        /// <param name="name">The case-insensitive unique name of this sales-tax code, unique across all sales-tax codes. This short name will appear on sales forms to identify the tax status of an item.  **NOTE**: Sales-tax codes do not have a &#x60;fullName&#x60; field because they are not hierarchical objects, which is why &#x60;name&#x60; is unique for them but not for objects that have parents.</param>
+        /// <param name="isActive">Indicates whether this sales-tax code is active. Inactive objects are typically hidden from views and reports in QuickBooks. Defaults to &#x60;true&#x60;.</param>
+        /// <param name="isTaxable">Indicates whether this sales-tax code is tracking taxable sales. This field cannot be modified once the sales-tax code has been used in a transaction.</param>
+        /// <param name="description">A description of this sales-tax code.</param>
         /// <param name="itemPurchaseTaxId">(Optional) The ListID or FullName of the ItemSalesTax item used for tax calculation on purchases. Follows the Flattened-ID Pattern for ItemPurchaseTaxRef.</param>
         /// <param name="itemSalesTaxId">(Optional) The ListID or FullName of the ItemSalesTax item used for tax calculation on sales. Follows the Flattened-ID Pattern for ItemSalesTaxRef.</param>
         [JsonConstructor]
@@ -69,9 +69,10 @@ namespace Nxus.Qbd.Models
         public Option<string?> NameOption { get; private set; }
 
         /// <summary>
-        /// (Optional) The new name of the sales tax code. (Max 31 characters)
+        /// The case-insensitive unique name of this sales-tax code, unique across all sales-tax codes. This short name will appear on sales forms to identify the tax status of an item.  **NOTE**: Sales-tax codes do not have a &#x60;fullName&#x60; field because they are not hierarchical objects, which is why &#x60;name&#x60; is unique for them but not for objects that have parents.
         /// </summary>
-        /// <value>(Optional) The new name of the sales tax code. (Max 31 characters)</value>
+        /// <value>The case-insensitive unique name of this sales-tax code, unique across all sales-tax codes. This short name will appear on sales forms to identify the tax status of an item.  **NOTE**: Sales-tax codes do not have a &#x60;fullName&#x60; field because they are not hierarchical objects, which is why &#x60;name&#x60; is unique for them but not for objects that have parents.</value>
+        /* <example>&quot;Tax&quot;</example> */
         [JsonPropertyName("name")]
         public string? Name { get { return this.NameOption.Value; } set { this.NameOption = new(value); } }
 
@@ -83,9 +84,10 @@ namespace Nxus.Qbd.Models
         public Option<bool?> IsActiveOption { get; private set; }
 
         /// <summary>
-        /// (Optional) If false, this Sales Tax Code will be made inactive.
+        /// Indicates whether this sales-tax code is active. Inactive objects are typically hidden from views and reports in QuickBooks. Defaults to &#x60;true&#x60;.
         /// </summary>
-        /// <value>(Optional) If false, this Sales Tax Code will be made inactive.</value>
+        /// <value>Indicates whether this sales-tax code is active. Inactive objects are typically hidden from views and reports in QuickBooks. Defaults to &#x60;true&#x60;.</value>
+        /* <example>true</example> */
         [JsonPropertyName("isActive")]
         public bool? IsActive { get { return this.IsActiveOption.Value; } set { this.IsActiveOption = new(value); } }
 
@@ -97,9 +99,10 @@ namespace Nxus.Qbd.Models
         public Option<bool?> IsTaxableOption { get; private set; }
 
         /// <summary>
-        /// (Optional) Indicates whether the sales tax code represents a taxable (true) or non-taxable (false) item. NOTE: You cannot change this after the code has been used in a transaction.
+        /// Indicates whether this sales-tax code is tracking taxable sales. This field cannot be modified once the sales-tax code has been used in a transaction.
         /// </summary>
-        /// <value>(Optional) Indicates whether the sales tax code represents a taxable (true) or non-taxable (false) item. NOTE: You cannot change this after the code has been used in a transaction.</value>
+        /// <value>Indicates whether this sales-tax code is tracking taxable sales. This field cannot be modified once the sales-tax code has been used in a transaction.</value>
+        /* <example>true</example> */
         [JsonPropertyName("isTaxable")]
         public bool? IsTaxable { get { return this.IsTaxableOption.Value; } set { this.IsTaxableOption = new(value); } }
 
@@ -111,9 +114,10 @@ namespace Nxus.Qbd.Models
         public Option<string?> DescriptionOption { get; private set; }
 
         /// <summary>
-        /// (Optional) The new description for the sales tax code. (Max 50 characters)
+        /// A description of this sales-tax code.
         /// </summary>
-        /// <value>(Optional) The new description for the sales tax code. (Max 50 characters)</value>
+        /// <value>A description of this sales-tax code.</value>
+        /* <example>&quot;Standard tax rate for California&quot;</example> */
         [JsonPropertyName("description")]
         public string? Description { get { return this.DescriptionOption.Value; } set { this.DescriptionOption = new(value); } }
 

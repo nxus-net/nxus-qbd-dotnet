@@ -35,12 +35,12 @@ namespace Nxus.Qbd.Models
         /// </summary>
         /// <param name="number">number</param>
         /// <param name="name">name</param>
-        /// <param name="expirationMonth">expirationMonth</param>
-        /// <param name="expirationYear">expirationYear</param>
+        /// <param name="expirationMonth">The expirationMonth associated with this object.</param>
+        /// <param name="expirationYear">The expirationYear associated with this object.</param>
         /// <param name="sddress">sddress</param>
         /// <param name="postalCode">postalCode</param>
-        /// <param name="commercialCardCode">commercialCardCode</param>
-        /// <param name="transactionMode">transactionMode</param>
+        /// <param name="commercialCardCode">The commercialCardCode associated with this object.</param>
+        /// <param name="transactionMode">The transactionMode associated with this object.</param>
         /// <param name="transactionType">transactionType</param>
         [JsonConstructor]
         public CreditCardTransactionInputInfo(string number, string name, int? expirationMonth = default, int? expirationYear = default, Option<string?> sddress = default, Option<string?> postalCode = default, Option<string?> commercialCardCode = default, Option<NullableTransactionMode?> transactionMode = default, Option<NullableCreditCardTransactionType?> transactionType = default)
@@ -67,8 +67,9 @@ namespace Nxus.Qbd.Models
         public Option<NullableTransactionMode?> TransactionModeOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets TransactionMode
+        /// The transactionMode associated with this object.
         /// </summary>
+        /// <value>The transactionMode associated with this object.</value>
         [JsonPropertyName("transactionMode")]
         public NullableTransactionMode? TransactionMode { get { return this.TransactionModeOption.Value; } set { this.TransactionModeOption = new(value); } }
 
@@ -98,14 +99,18 @@ namespace Nxus.Qbd.Models
         public string Name { get; set; }
 
         /// <summary>
-        /// Gets or Sets ExpirationMonth
+        /// The expirationMonth associated with this object.
         /// </summary>
+        /// <value>The expirationMonth associated with this object.</value>
+        /* <example>123</example> */
         [JsonPropertyName("expirationMonth")]
         public int? ExpirationMonth { get; set; }
 
         /// <summary>
-        /// Gets or Sets ExpirationYear
+        /// The expirationYear associated with this object.
         /// </summary>
+        /// <value>The expirationYear associated with this object.</value>
+        /* <example>123</example> */
         [JsonPropertyName("expirationYear")]
         public int? ExpirationYear { get; set; }
 
@@ -143,8 +148,10 @@ namespace Nxus.Qbd.Models
         public Option<string?> CommercialCardCodeOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets CommercialCardCode
+        /// The commercialCardCode associated with this object.
         /// </summary>
+        /// <value>The commercialCardCode associated with this object.</value>
+        /* <example>&quot;Sample text value&quot;</example> */
         [JsonPropertyName("commercialCardCode")]
         public string? CommercialCardCode { get { return this.CommercialCardCodeOption.Value; } set { this.CommercialCardCodeOption = new(value); } }
 

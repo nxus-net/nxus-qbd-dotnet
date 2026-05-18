@@ -26,7 +26,7 @@ using Nxus.Qbd.Json;
 namespace Nxus.Qbd.Models
 {
     /// <summary>
-    /// Tax Line Information.
+    /// Tax line information mappings for federal tax form reporting.
     /// </summary>
     public partial class TaxLineInfo : IValidatableObject
     {

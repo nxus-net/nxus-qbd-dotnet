@@ -34,15 +34,15 @@ namespace Nxus.Qbd.Models
         /// Initializes a new instance of the <see cref="UpdateItemOtherChargeRequest" /> class.
         /// </summary>
         /// <param name="revisionNumber">revisionNumber</param>
-        /// <param name="name">name</param>
+        /// <param name="name">The case-insensitive name of this other charge item. Not guaranteed to be unique because it does not include the names of its hierarchical parent objects like &#x60;fullName&#x60; does. For example, two other charge items could both have the &#x60;name&#x60; \&quot;Overnight Delivery\&quot;, but they could have unique &#x60;fullName&#x60; values, such as \&quot;Shipping Charges:Overnight Delivery\&quot; and \&quot;Misc Fees:Overnight Delivery\&quot;.</param>
         /// <param name="barcode">barcode</param>
-        /// <param name="isActive">isActive</param>
+        /// <param name="isActive">Indicates whether this other charge item is active. Inactive objects are typically hidden from views and reports in QuickBooks. Defaults to &#x60;true&#x60;.</param>
         /// <param name="classId">classId</param>
         /// <param name="parentId">parentId</param>
         /// <param name="isTaxIncluded">isTaxIncluded</param>
         /// <param name="salesTaxCodeId">salesTaxCodeId</param>
-        /// <param name="salesOrPurchaseDetails">salesOrPurchaseDetails</param>
-        /// <param name="salesAndPurchaseDetails">salesAndPurchaseDetails</param>
+        /// <param name="salesOrPurchaseDetails">Details for other charge items that are exclusively sold or exclusively purchased, but not both. This typically applies to non-inventory items (like a purchased office supply that isn&#39;t resold) or service items (like consulting services that are sold but not purchased).  **IMPORTANT**: An other charge item will have either &#x60;salesAndPurchaseDetails&#x60; or &#x60;salesOrPurchaseDetails&#x60;, but never both because an item cannot have both configurations.</param>
+        /// <param name="salesAndPurchaseDetails">Details for other charge items that are both purchased and sold, such as reimbursable expenses or inventory items that are bought from vendors and sold to customers.  **IMPORTANT**: An other charge item will have either &#x60;salesAndPurchaseDetails&#x60; or &#x60;salesOrPurchaseDetails&#x60;, but never both because an item cannot have both configurations.</param>
         [JsonConstructor]
         public UpdateItemOtherChargeRequest(string revisionNumber, Option<string?> name = default, Option<BarCodeRequest?> barcode = default, Option<bool?> isActive = default, Option<string?> classId = default, Option<string?> parentId = default, Option<bool?> isTaxIncluded = default, Option<string?> salesTaxCodeId = default, Option<ItemOtherChargeSalesOrPurchaseDetailsRequest?> salesOrPurchaseDetails = default, Option<ItemOtherChargeSalesAndPurchaseDetailsRequest?> salesAndPurchaseDetails = default)
         {
@@ -75,8 +75,10 @@ namespace Nxus.Qbd.Models
         public Option<string?> NameOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets Name
+        /// The case-insensitive name of this other charge item. Not guaranteed to be unique because it does not include the names of its hierarchical parent objects like &#x60;fullName&#x60; does. For example, two other charge items could both have the &#x60;name&#x60; \&quot;Overnight Delivery\&quot;, but they could have unique &#x60;fullName&#x60; values, such as \&quot;Shipping Charges:Overnight Delivery\&quot; and \&quot;Misc Fees:Overnight Delivery\&quot;.
         /// </summary>
+        /// <value>The case-insensitive name of this other charge item. Not guaranteed to be unique because it does not include the names of its hierarchical parent objects like &#x60;fullName&#x60; does. For example, two other charge items could both have the &#x60;name&#x60; \&quot;Overnight Delivery\&quot;, but they could have unique &#x60;fullName&#x60; values, such as \&quot;Shipping Charges:Overnight Delivery\&quot; and \&quot;Misc Fees:Overnight Delivery\&quot;.</value>
+        /* <example>&quot;Sample Name&quot;</example> */
         [JsonPropertyName("name")]
         public string? Name { get { return this.NameOption.Value; } set { this.NameOption = new(value); } }
 
@@ -101,8 +103,10 @@ namespace Nxus.Qbd.Models
         public Option<bool?> IsActiveOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets IsActive
+        /// Indicates whether this other charge item is active. Inactive objects are typically hidden from views and reports in QuickBooks. Defaults to &#x60;true&#x60;.
         /// </summary>
+        /// <value>Indicates whether this other charge item is active. Inactive objects are typically hidden from views and reports in QuickBooks. Defaults to &#x60;true&#x60;.</value>
+        /* <example>true</example> */
         [JsonPropertyName("isActive")]
         public bool? IsActive { get { return this.IsActiveOption.Value; } set { this.IsActiveOption = new(value); } }
 
@@ -166,8 +170,9 @@ namespace Nxus.Qbd.Models
         public Option<ItemOtherChargeSalesOrPurchaseDetailsRequest?> SalesOrPurchaseDetailsOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets SalesOrPurchaseDetails
+        /// Details for other charge items that are exclusively sold or exclusively purchased, but not both. This typically applies to non-inventory items (like a purchased office supply that isn&#39;t resold) or service items (like consulting services that are sold but not purchased).  **IMPORTANT**: An other charge item will have either &#x60;salesAndPurchaseDetails&#x60; or &#x60;salesOrPurchaseDetails&#x60;, but never both because an item cannot have both configurations.
         /// </summary>
+        /// <value>Details for other charge items that are exclusively sold or exclusively purchased, but not both. This typically applies to non-inventory items (like a purchased office supply that isn&#39;t resold) or service items (like consulting services that are sold but not purchased).  **IMPORTANT**: An other charge item will have either &#x60;salesAndPurchaseDetails&#x60; or &#x60;salesOrPurchaseDetails&#x60;, but never both because an item cannot have both configurations.</value>
         [JsonPropertyName("salesOrPurchaseDetails")]
         public ItemOtherChargeSalesOrPurchaseDetailsRequest? SalesOrPurchaseDetails { get { return this.SalesOrPurchaseDetailsOption.Value; } set { this.SalesOrPurchaseDetailsOption = new(value); } }
 
@@ -179,8 +184,9 @@ namespace Nxus.Qbd.Models
         public Option<ItemOtherChargeSalesAndPurchaseDetailsRequest?> SalesAndPurchaseDetailsOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets SalesAndPurchaseDetails
+        /// Details for other charge items that are both purchased and sold, such as reimbursable expenses or inventory items that are bought from vendors and sold to customers.  **IMPORTANT**: An other charge item will have either &#x60;salesAndPurchaseDetails&#x60; or &#x60;salesOrPurchaseDetails&#x60;, but never both because an item cannot have both configurations.
         /// </summary>
+        /// <value>Details for other charge items that are both purchased and sold, such as reimbursable expenses or inventory items that are bought from vendors and sold to customers.  **IMPORTANT**: An other charge item will have either &#x60;salesAndPurchaseDetails&#x60; or &#x60;salesOrPurchaseDetails&#x60;, but never both because an item cannot have both configurations.</value>
         [JsonPropertyName("salesAndPurchaseDetails")]
         public ItemOtherChargeSalesAndPurchaseDetailsRequest? SalesAndPurchaseDetails { get { return this.SalesAndPurchaseDetailsOption.Value; } set { this.SalesAndPurchaseDetailsOption = new(value); } }
 

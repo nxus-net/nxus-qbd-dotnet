@@ -34,9 +34,9 @@ namespace Nxus.Qbd.Models
         /// Initializes a new instance of the <see cref="UpdateItemGroupRequest" /> class.
         /// </summary>
         /// <param name="revisionNumber">revisionNumber</param>
-        /// <param name="name">name</param>
+        /// <param name="name">The case-insensitive unique name of this item group, unique across all item groups.  **NOTE**: Item groups do not have a &#x60;fullName&#x60; field because they are not hierarchical objects, which is why &#x60;name&#x60; is unique for them but not for objects that have parents.</param>
         /// <param name="barCode">barCode</param>
-        /// <param name="isActive">isActive</param>
+        /// <param name="isActive">Indicates whether this item group is active. Inactive objects are typically hidden from views and reports in QuickBooks. Defaults to &#x60;true&#x60;.</param>
         /// <param name="description">description</param>
         /// <param name="unitOfMeasureSetId">unitOfMeasureSetId</param>
         /// <param name="forceUnitOfMeasureChange">forceUnitOfMeasureChange</param>
@@ -75,8 +75,10 @@ namespace Nxus.Qbd.Models
         public Option<string?> NameOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets Name
+        /// The case-insensitive unique name of this item group, unique across all item groups.  **NOTE**: Item groups do not have a &#x60;fullName&#x60; field because they are not hierarchical objects, which is why &#x60;name&#x60; is unique for them but not for objects that have parents.
         /// </summary>
+        /// <value>The case-insensitive unique name of this item group, unique across all item groups.  **NOTE**: Item groups do not have a &#x60;fullName&#x60; field because they are not hierarchical objects, which is why &#x60;name&#x60; is unique for them but not for objects that have parents.</value>
+        /* <example>&quot;Sample Name&quot;</example> */
         [JsonPropertyName("name")]
         public string? Name { get { return this.NameOption.Value; } set { this.NameOption = new(value); } }
 
@@ -101,8 +103,10 @@ namespace Nxus.Qbd.Models
         public Option<bool?> IsActiveOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets IsActive
+        /// Indicates whether this item group is active. Inactive objects are typically hidden from views and reports in QuickBooks. Defaults to &#x60;true&#x60;.
         /// </summary>
+        /// <value>Indicates whether this item group is active. Inactive objects are typically hidden from views and reports in QuickBooks. Defaults to &#x60;true&#x60;.</value>
+        /* <example>true</example> */
         [JsonPropertyName("isActive")]
         public bool? IsActive { get { return this.IsActiveOption.Value; } set { this.IsActiveOption = new(value); } }
 

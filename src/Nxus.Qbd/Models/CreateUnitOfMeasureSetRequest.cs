@@ -33,10 +33,10 @@ namespace Nxus.Qbd.Models
         /// <summary>
         /// Initializes a new instance of the <see cref="CreateUnitOfMeasureSetRequest" /> class.
         /// </summary>
-        /// <param name="name">(Required) The name of the unit of measure set. Max length: 31.</param>
-        /// <param name="unitOfMeasureType">(Required) The type of measurement this set is for. Valid values: \&quot;Area\&quot;, \&quot;Count\&quot;, \&quot;Length\&quot;, \&quot;Other\&quot;, \&quot;Time\&quot;, \&quot;Volume\&quot;, \&quot;Weight\&quot;</param>
-        /// <param name="baseUnit">(Required) The base unit definition for the set.</param>
-        /// <param name="isActive">(Optional) Whether the UOM set is active. Defaults to true.</param>
+        /// <param name="name">The case-insensitive unique name of this unit-of-measure set, unique across all unit-of-measure sets. To ensure this set appears in the QuickBooks UI for companies configured with a single unit per item, prefix the name with \&quot;By the\&quot; (e.g., \&quot;By the Barrel\&quot;).  **NOTE**: Unit-of-measure sets do not have a &#x60;fullName&#x60; field because they are not hierarchical objects, which is why &#x60;name&#x60; is unique for them but not for objects that have parents.</param>
+        /// <param name="unitOfMeasureType">The unit-of-measure set&#39;s type. Use \&quot;other\&quot; for a custom type defined in QuickBooks.</param>
+        /// <param name="baseUnit">The unit-of-measure set&#39;s base unit used to track and price item quantities. If the company file is enabled for a single unit of measure per item, the base unit is the only unit available on transaction line items. If enabled for multiple units per item, the base unit is the default unless overridden by the set&#39;s default units.</param>
+        /// <param name="isActive">Indicates whether this unit-of-measure set is active. Inactive objects are typically hidden from views and reports in QuickBooks. Defaults to &#x60;true&#x60;.</param>
         /// <param name="relatedUnits">relatedUnits</param>
         /// <param name="defaultUnits">defaultUnits</param>
         /// <param name="externalId">externalId</param>
@@ -56,23 +56,23 @@ namespace Nxus.Qbd.Models
         partial void OnCreated();
 
         /// <summary>
-        /// (Required) The name of the unit of measure set. Max length: 31.
+        /// The case-insensitive unique name of this unit-of-measure set, unique across all unit-of-measure sets. To ensure this set appears in the QuickBooks UI for companies configured with a single unit per item, prefix the name with \&quot;By the\&quot; (e.g., \&quot;By the Barrel\&quot;).  **NOTE**: Unit-of-measure sets do not have a &#x60;fullName&#x60; field because they are not hierarchical objects, which is why &#x60;name&#x60; is unique for them but not for objects that have parents.
         /// </summary>
-        /// <value>(Required) The name of the unit of measure set. Max length: 31.</value>
+        /// <value>The case-insensitive unique name of this unit-of-measure set, unique across all unit-of-measure sets. To ensure this set appears in the QuickBooks UI for companies configured with a single unit per item, prefix the name with \&quot;By the\&quot; (e.g., \&quot;By the Barrel\&quot;).  **NOTE**: Unit-of-measure sets do not have a &#x60;fullName&#x60; field because they are not hierarchical objects, which is why &#x60;name&#x60; is unique for them but not for objects that have parents.</value>
         [JsonPropertyName("name")]
         public string Name { get; set; }
 
         /// <summary>
-        /// (Required) The type of measurement this set is for. Valid values: \&quot;Area\&quot;, \&quot;Count\&quot;, \&quot;Length\&quot;, \&quot;Other\&quot;, \&quot;Time\&quot;, \&quot;Volume\&quot;, \&quot;Weight\&quot;
+        /// The unit-of-measure set&#39;s type. Use \&quot;other\&quot; for a custom type defined in QuickBooks.
         /// </summary>
-        /// <value>(Required) The type of measurement this set is for. Valid values: \&quot;Area\&quot;, \&quot;Count\&quot;, \&quot;Length\&quot;, \&quot;Other\&quot;, \&quot;Time\&quot;, \&quot;Volume\&quot;, \&quot;Weight\&quot;</value>
+        /// <value>The unit-of-measure set&#39;s type. Use \&quot;other\&quot; for a custom type defined in QuickBooks.</value>
         [JsonPropertyName("unitOfMeasureType")]
         public string UnitOfMeasureType { get; set; }
 
         /// <summary>
-        /// (Required) The base unit definition for the set.
+        /// The unit-of-measure set&#39;s base unit used to track and price item quantities. If the company file is enabled for a single unit of measure per item, the base unit is the only unit available on transaction line items. If enabled for multiple units per item, the base unit is the default unless overridden by the set&#39;s default units.
         /// </summary>
-        /// <value>(Required) The base unit definition for the set.</value>
+        /// <value>The unit-of-measure set&#39;s base unit used to track and price item quantities. If the company file is enabled for a single unit of measure per item, the base unit is the only unit available on transaction line items. If enabled for multiple units per item, the base unit is the default unless overridden by the set&#39;s default units.</value>
         [JsonPropertyName("baseUnit")]
         public BaseUnitRequest BaseUnit { get; set; }
 
@@ -84,9 +84,10 @@ namespace Nxus.Qbd.Models
         public Option<bool?> IsActiveOption { get; private set; }
 
         /// <summary>
-        /// (Optional) Whether the UOM set is active. Defaults to true.
+        /// Indicates whether this unit-of-measure set is active. Inactive objects are typically hidden from views and reports in QuickBooks. Defaults to &#x60;true&#x60;.
         /// </summary>
-        /// <value>(Optional) Whether the UOM set is active. Defaults to true.</value>
+        /// <value>Indicates whether this unit-of-measure set is active. Inactive objects are typically hidden from views and reports in QuickBooks. Defaults to &#x60;true&#x60;.</value>
+        /* <example>true</example> */
         [JsonPropertyName("isActive")]
         public bool? IsActive { get { return this.IsActiveOption.Value; } set { this.IsActiveOption = new(value); } }
 

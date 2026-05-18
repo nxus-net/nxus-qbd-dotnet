@@ -26,7 +26,7 @@ using Nxus.Qbd.Json;
 namespace Nxus.Qbd.Models
 {
     /// <summary>
-    /// Modifies a QuickBooks Class with the specified properties. Only provided properties will be updated.
+    /// Contains parameters to modify an existing class.
     /// </summary>
     public partial class UpdateClassRequest : IValidatableObject
     {
@@ -34,9 +34,9 @@ namespace Nxus.Qbd.Models
         /// Initializes a new instance of the <see cref="UpdateClassRequest" /> class.
         /// </summary>
         /// <param name="revisionNumber">revisionNumber</param>
-        /// <param name="name">(Optional) The new name for the class.</param>
-        /// <param name="isActive">(Optional) Update the active status of the class.</param>
-        /// <param name="parentId">(Optional) The ListID or FullName of the parent class (to move this class). To remove the class from its current parent and move it to the top level, provide an empty string.</param>
+        /// <param name="name">The case-insensitive name of this class.</param>
+        /// <param name="isActive">Indicates whether this class is active.</param>
+        /// <param name="parentId">The parent class one level above this one in the hierarchy.</param>
         [JsonConstructor]
         public UpdateClassRequest(string revisionNumber, Option<string?> name = default, Option<bool?> isActive = default, Option<string?> parentId = default)
         {
@@ -63,10 +63,10 @@ namespace Nxus.Qbd.Models
         public Option<string?> NameOption { get; private set; }
 
         /// <summary>
-        /// (Optional) The new name for the class.
+        /// The case-insensitive name of this class.
         /// </summary>
-        /// <value>(Optional) The new name for the class.</value>
-        /* <example>Kitchen</example> */
+        /// <value>The case-insensitive name of this class.</value>
+        /* <example>&quot;Marketing&quot;</example> */
         [JsonPropertyName("name")]
         public string? Name { get { return this.NameOption.Value; } set { this.NameOption = new(value); } }
 
@@ -78,9 +78,9 @@ namespace Nxus.Qbd.Models
         public Option<bool?> IsActiveOption { get; private set; }
 
         /// <summary>
-        /// (Optional) Update the active status of the class.
+        /// Indicates whether this class is active.
         /// </summary>
-        /// <value>(Optional) Update the active status of the class.</value>
+        /// <value>Indicates whether this class is active.</value>
         /* <example>true</example> */
         [JsonPropertyName("isActive")]
         public bool? IsActive { get { return this.IsActiveOption.Value; } set { this.IsActiveOption = new(value); } }
@@ -93,10 +93,10 @@ namespace Nxus.Qbd.Models
         public Option<string?> ParentIdOption { get; private set; }
 
         /// <summary>
-        /// (Optional) The ListID or FullName of the parent class (to move this class). To remove the class from its current parent and move it to the top level, provide an empty string.
+        /// The parent class one level above this one in the hierarchy.
         /// </summary>
-        /// <value>(Optional) The ListID or FullName of the parent class (to move this class). To remove the class from its current parent and move it to the top level, provide an empty string.</value>
-        /* <example>10000001-1039043346</example> */
+        /// <value>The parent class one level above this one in the hierarchy.</value>
+        /* <example>&quot;10000001-1039043346&quot;</example> */
         [JsonPropertyName("parentId")]
         public string? ParentId { get { return this.ParentIdOption.Value; } set { this.ParentIdOption = new(value); } }
 

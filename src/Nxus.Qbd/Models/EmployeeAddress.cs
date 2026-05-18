@@ -42,7 +42,7 @@ namespace Nxus.Qbd.Models
         /// <param name="state">state</param>
         /// <param name="postalCode">postalCode</param>
         /// <param name="country">country</param>
-        /// <param name="note">note</param>
+        /// <param name="note">A note or comment about this employee.</param>
         [JsonConstructor]
         public EmployeeAddress(Option<string?> line1 = default, Option<string?> line2 = default, Option<string?> line3 = default, Option<string?> line4 = default, Option<string?> line5 = default, Option<string?> city = default, Option<string?> state = default, Option<string?> postalCode = default, Option<string?> country = default, Option<string?> note = default)
         {
@@ -186,8 +186,10 @@ namespace Nxus.Qbd.Models
         public Option<string?> NoteOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets Note
+        /// A note or comment about this employee.
         /// </summary>
+        /// <value>A note or comment about this employee.</value>
+        /* <example>&quot;This employee is a key employee.&quot;</example> */
         [JsonPropertyName("note")]
         public string? Note { get { return this.NoteOption.Value; } set { this.NoteOption = new(value); } }
 

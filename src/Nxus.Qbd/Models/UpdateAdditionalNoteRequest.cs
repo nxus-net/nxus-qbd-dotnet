@@ -34,7 +34,7 @@ namespace Nxus.Qbd.Models
         /// Initializes a new instance of the <see cref="UpdateAdditionalNoteRequest" /> class.
         /// </summary>
         /// <param name="noteId">The ID of the note to modify (required for updates).</param>
-        /// <param name="note">The note text (max 4095 characters).</param>
+        /// <param name="note">A note or comment about this employee.</param>
         [JsonConstructor]
         public UpdateAdditionalNoteRequest(int noteId, string note)
         {
@@ -53,9 +53,9 @@ namespace Nxus.Qbd.Models
         public int NoteId { get; set; }
 
         /// <summary>
-        /// The note text (max 4095 characters).
+        /// A note or comment about this employee.
         /// </summary>
-        /// <value>The note text (max 4095 characters).</value>
+        /// <value>A note or comment about this employee.</value>
         [JsonPropertyName("note")]
         public string Note { get; set; }
 

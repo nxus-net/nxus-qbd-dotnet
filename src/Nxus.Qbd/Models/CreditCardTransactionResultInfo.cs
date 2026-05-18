@@ -33,17 +33,17 @@ namespace Nxus.Qbd.Models
         /// <summary>
         /// Initializes a new instance of the <see cref="CreditCardTransactionResultInfo" /> class.
         /// </summary>
-        /// <param name="resultMessage">resultMessage</param>
-        /// <param name="creditCardTransID">creditCardTransID</param>
-        /// <param name="merchantAccountNumber">merchantAccountNumber</param>
-        /// <param name="paymentStatus">paymentStatus</param>
-        /// <param name="resultCode">resultCode</param>
-        /// <param name="authorizationCode">authorizationCode</param>
-        /// <param name="avsStreet">avsStreet</param>
-        /// <param name="avsZip">avsZip</param>
-        /// <param name="cardSecurityCodeMatch">cardSecurityCodeMatch</param>
-        /// <param name="reconBatchID">reconBatchID</param>
-        /// <param name="paymentGroupingCode">paymentGroupingCode</param>
+        /// <param name="resultMessage">The resultMessage associated with this object.</param>
+        /// <param name="creditCardTransID">The creditCardTransID associated with this object.</param>
+        /// <param name="merchantAccountNumber">The merchantAccountNumber associated with this object.</param>
+        /// <param name="paymentStatus">The paymentStatus associated with this object.</param>
+        /// <param name="resultCode">The resultCode associated with this object.</param>
+        /// <param name="authorizationCode">The authorizationCode associated with this object.</param>
+        /// <param name="avsStreet">The avsStreet associated with this object.</param>
+        /// <param name="avsZip">The avsZip associated with this object.</param>
+        /// <param name="cardSecurityCodeMatch">The cardSecurityCodeMatch associated with this object.</param>
+        /// <param name="reconBatchID">The reconBatchID associated with this object.</param>
+        /// <param name="paymentGroupingCode">The paymentGroupingCode associated with this object.</param>
         /// <param name="transactionAuthorizationTime">transactionAuthorizationTime</param>
         /// <param name="transactionAuthorizationStamp">transactionAuthorizationStamp</param>
         /// <param name="clientTransactionId">clientTransactionId</param>
@@ -70,8 +70,9 @@ namespace Nxus.Qbd.Models
         partial void OnCreated();
 
         /// <summary>
-        /// Gets or Sets PaymentStatus
+        /// The paymentStatus associated with this object.
         /// </summary>
+        /// <value>The paymentStatus associated with this object.</value>
         [JsonPropertyName("paymentStatus")]
         public PaymentStatus PaymentStatus { get; set; }
 
@@ -83,8 +84,9 @@ namespace Nxus.Qbd.Models
         public Option<NullableAvsStreet?> AvsStreetOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets AvsStreet
+        /// The avsStreet associated with this object.
         /// </summary>
+        /// <value>The avsStreet associated with this object.</value>
         [JsonPropertyName("avsStreet")]
         public NullableAvsStreet? AvsStreet { get { return this.AvsStreetOption.Value; } set { this.AvsStreetOption = new(value); } }
 
@@ -96,8 +98,9 @@ namespace Nxus.Qbd.Models
         public Option<NullableAvsZip?> AvsZipOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets AvsZip
+        /// The avsZip associated with this object.
         /// </summary>
+        /// <value>The avsZip associated with this object.</value>
         [JsonPropertyName("avsZip")]
         public NullableAvsZip? AvsZip { get { return this.AvsZipOption.Value; } set { this.AvsZipOption = new(value); } }
 
@@ -109,32 +112,38 @@ namespace Nxus.Qbd.Models
         public Option<NullableCardSecurityCodeMatch?> CardSecurityCodeMatchOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets CardSecurityCodeMatch
+        /// The cardSecurityCodeMatch associated with this object.
         /// </summary>
+        /// <value>The cardSecurityCodeMatch associated with this object.</value>
         [JsonPropertyName("cardSecurityCodeMatch")]
         public NullableCardSecurityCodeMatch? CardSecurityCodeMatch { get { return this.CardSecurityCodeMatchOption.Value; } set { this.CardSecurityCodeMatchOption = new(value); } }
 
         /// <summary>
-        /// Gets or Sets ResultMessage
+        /// The resultMessage associated with this object.
         /// </summary>
+        /// <value>The resultMessage associated with this object.</value>
         [JsonPropertyName("resultMessage")]
         public string ResultMessage { get; set; }
 
         /// <summary>
-        /// Gets or Sets CreditCardTransID
+        /// The creditCardTransID associated with this object.
         /// </summary>
+        /// <value>The creditCardTransID associated with this object.</value>
         [JsonPropertyName("creditCardTransID")]
         public string CreditCardTransID { get; set; }
 
         /// <summary>
-        /// Gets or Sets MerchantAccountNumber
+        /// The merchantAccountNumber associated with this object.
         /// </summary>
+        /// <value>The merchantAccountNumber associated with this object.</value>
         [JsonPropertyName("merchantAccountNumber")]
         public string MerchantAccountNumber { get; set; }
 
         /// <summary>
-        /// Gets or Sets ResultCode
+        /// The resultCode associated with this object.
         /// </summary>
+        /// <value>The resultCode associated with this object.</value>
+        /* <example>123</example> */
         [JsonPropertyName("resultCode")]
         public int? ResultCode { get; set; }
 
@@ -146,8 +155,10 @@ namespace Nxus.Qbd.Models
         public Option<string?> AuthorizationCodeOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets AuthorizationCode
+        /// The authorizationCode associated with this object.
         /// </summary>
+        /// <value>The authorizationCode associated with this object.</value>
+        /* <example>&quot;Sample text value&quot;</example> */
         [JsonPropertyName("authorizationCode")]
         public string? AuthorizationCode { get { return this.AuthorizationCodeOption.Value; } set { this.AuthorizationCodeOption = new(value); } }
 
@@ -159,8 +170,10 @@ namespace Nxus.Qbd.Models
         public Option<string?> ReconBatchIDOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets ReconBatchID
+        /// The reconBatchID associated with this object.
         /// </summary>
+        /// <value>The reconBatchID associated with this object.</value>
+        /* <example>&quot;Sample text value&quot;</example> */
         [JsonPropertyName("reconBatchID")]
         public string? ReconBatchID { get { return this.ReconBatchIDOption.Value; } set { this.ReconBatchIDOption = new(value); } }
 
@@ -172,8 +185,10 @@ namespace Nxus.Qbd.Models
         public Option<int?> PaymentGroupingCodeOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets PaymentGroupingCode
+        /// The paymentGroupingCode associated with this object.
         /// </summary>
+        /// <value>The paymentGroupingCode associated with this object.</value>
+        /* <example>123</example> */
         [JsonPropertyName("paymentGroupingCode")]
         public int? PaymentGroupingCode { get { return this.PaymentGroupingCodeOption.Value; } set { this.PaymentGroupingCodeOption = new(value); } }
 

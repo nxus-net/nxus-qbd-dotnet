@@ -26,7 +26,7 @@ using Nxus.Qbd.Json;
 namespace Nxus.Qbd.Models
 {
     /// <summary>
-    /// Classes can be used to separate transactions into meaningful categories.  For example, transactions could be classified according to department, business location, or type of work.
+    /// A category used to group objects into meaningful categories within the nXus platform.
     /// </summary>
     public partial class Class : IValidatableObject
     {
@@ -39,9 +39,9 @@ namespace Nxus.Qbd.Models
         /// <param name="revisionNumber">revisionNumber</param>
         /// <param name="objectType">objectType</param>
         /// <param name="name">The primary, user-defined display name for the list object (e.g., Customer Name, Vendor Name, Item Name).  This value is often used by QuickBooks to construct the fully qualified hierarchical name (e.g., &#x60;Parent:Child&#x60;).</param>
-        /// <param name="fullname">The FullName is the name prefixed by the names of each ancestor, for example Parent:Child:SubClass. FullName values are not case-sensitive.</param>
-        /// <param name="parent">parent</param>
-        /// <param name="sublevel">A number indicating the number of ancestors. For example, The customer job with Name &#x3D; carpets and FullName &#x3D; Jones:Building2:carpets would have a sublevel of 2.</param>
+        /// <param name="fullname">The case-insensitive fully-qualified unique name of this class.  Formed by combining the names of its hierarchical parent objects with its own name, separated by colons.</param>
+        /// <param name="parent">The parent class one level above this one in the hierarchy.  If this class is at the top level, this field will be null.</param>
+        /// <param name="sublevel">The depth level of this class in the hierarchy.  A top-level class has a sublevel of 0; each subsequent sublevel increases this number by 1.</param>
         /// <param name="isActive">Indicates whether the list item is currently active.  **Soft Delete Behavior:** QuickBooks rarely allows hard deletions of records that have been used in transactions. Instead, they are marked as inactive (hidden from standard drop-downs and UI lists) to preserve historical data integrity.</param>
         /// <param name="customFields">customFields</param>
         [JsonConstructor]
@@ -123,10 +123,10 @@ namespace Nxus.Qbd.Models
         public Option<string?> FullnameOption { get; private set; }
 
         /// <summary>
-        /// The FullName is the name prefixed by the names of each ancestor, for example Parent:Child:SubClass. FullName values are not case-sensitive.
+        /// The case-insensitive fully-qualified unique name of this class.  Formed by combining the names of its hierarchical parent objects with its own name, separated by colons.
         /// </summary>
-        /// <value>The FullName is the name prefixed by the names of each ancestor, for example Parent:Child:SubClass. FullName values are not case-sensitive.</value>
-        /* <example>Jones:Kitchen:Cabinets</example> */
+        /// <value>The case-insensitive fully-qualified unique name of this class.  Formed by combining the names of its hierarchical parent objects with its own name, separated by colons.</value>
+        /* <example>&quot;Department:Marketing&quot;</example> */
         [JsonPropertyName("fullname")]
         public string? Fullname { get { return this.FullnameOption.Value; } set { this.FullnameOption = new(value); } }
 
@@ -138,8 +138,9 @@ namespace Nxus.Qbd.Models
         public Option<QbdRef?> ParentOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets Parent
+        /// The parent class one level above this one in the hierarchy.  If this class is at the top level, this field will be null.
         /// </summary>
+        /// <value>The parent class one level above this one in the hierarchy.  If this class is at the top level, this field will be null.</value>
         [JsonPropertyName("parent")]
         public QbdRef? Parent { get { return this.ParentOption.Value; } set { this.ParentOption = new(value); } }
 
@@ -151,10 +152,10 @@ namespace Nxus.Qbd.Models
         public Option<int?> SublevelOption { get; private set; }
 
         /// <summary>
-        /// A number indicating the number of ancestors. For example, The customer job with Name &#x3D; carpets and FullName &#x3D; Jones:Building2:carpets would have a sublevel of 2.
+        /// The depth level of this class in the hierarchy.  A top-level class has a sublevel of 0; each subsequent sublevel increases this number by 1.
         /// </summary>
-        /// <value>A number indicating the number of ancestors. For example, The customer job with Name &#x3D; carpets and FullName &#x3D; Jones:Building2:carpets would have a sublevel of 2.</value>
-        /* <example>2</example> */
+        /// <value>The depth level of this class in the hierarchy.  A top-level class has a sublevel of 0; each subsequent sublevel increases this number by 1.</value>
+        /* <example>1</example> */
         [JsonPropertyName("sublevel")]
         public int? Sublevel { get { return this.SublevelOption.Value; } set { this.SublevelOption = new(value); } }
 

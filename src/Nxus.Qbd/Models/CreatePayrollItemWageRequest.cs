@@ -33,10 +33,10 @@ namespace Nxus.Qbd.Models
         /// <summary>
         /// Initializes a new instance of the <see cref="CreatePayrollItemWageRequest" /> class.
         /// </summary>
-        /// <param name="name">(Required) The name of the wage payroll item.</param>
-        /// <param name="wageType">(Required) The wage item type. Possible values: Bonus, Commission, HourlyOvertime, HourlyRegular, HourlySick, HourlyVacation, SalaryRegular, SalarySick, SalaryVacation.</param>
+        /// <param name="name">The case-insensitive unique name of this payroll wage item, unique across all payroll wage items.  **NOTE**: Payroll wage items do not have a &#x60;fullName&#x60; field because they are not hierarchical objects, which is why &#x60;name&#x60; is unique for them but not for objects that have parents.</param>
+        /// <param name="wageType">Categorizes how this payroll wage item calculates pay - can be hourly (regular, overtime, sick, or vacation), salary (regular, sick, or vacation), bonus, or commission based.</param>
         /// <param name="expenseAccountId">(Required) The ListID of the Expense Account associated with the payroll item. (Flattened-ID Pattern)</param>
-        /// <param name="isActive">(Optional) Indicates whether the payroll item is active.</param>
+        /// <param name="isActive">Indicates whether this payroll wage item is active. Inactive objects are typically hidden from views and reports in QuickBooks. Defaults to &#x60;true&#x60;.</param>
         /// <param name="externalId">externalId</param>
         [JsonConstructor]
         public CreatePayrollItemWageRequest(string name, string wageType, string expenseAccountId, Option<bool?> isActive = default, Option<string?> externalId = default)
@@ -52,16 +52,16 @@ namespace Nxus.Qbd.Models
         partial void OnCreated();
 
         /// <summary>
-        /// (Required) The name of the wage payroll item.
+        /// The case-insensitive unique name of this payroll wage item, unique across all payroll wage items.  **NOTE**: Payroll wage items do not have a &#x60;fullName&#x60; field because they are not hierarchical objects, which is why &#x60;name&#x60; is unique for them but not for objects that have parents.
         /// </summary>
-        /// <value>(Required) The name of the wage payroll item.</value>
+        /// <value>The case-insensitive unique name of this payroll wage item, unique across all payroll wage items.  **NOTE**: Payroll wage items do not have a &#x60;fullName&#x60; field because they are not hierarchical objects, which is why &#x60;name&#x60; is unique for them but not for objects that have parents.</value>
         [JsonPropertyName("name")]
         public string Name { get; set; }
 
         /// <summary>
-        /// (Required) The wage item type. Possible values: Bonus, Commission, HourlyOvertime, HourlyRegular, HourlySick, HourlyVacation, SalaryRegular, SalarySick, SalaryVacation.
+        /// Categorizes how this payroll wage item calculates pay - can be hourly (regular, overtime, sick, or vacation), salary (regular, sick, or vacation), bonus, or commission based.
         /// </summary>
-        /// <value>(Required) The wage item type. Possible values: Bonus, Commission, HourlyOvertime, HourlyRegular, HourlySick, HourlyVacation, SalaryRegular, SalarySick, SalaryVacation.</value>
+        /// <value>Categorizes how this payroll wage item calculates pay - can be hourly (regular, overtime, sick, or vacation), salary (regular, sick, or vacation), bonus, or commission based.</value>
         [JsonPropertyName("wageType")]
         public string WageType { get; set; }
 
@@ -80,9 +80,10 @@ namespace Nxus.Qbd.Models
         public Option<bool?> IsActiveOption { get; private set; }
 
         /// <summary>
-        /// (Optional) Indicates whether the payroll item is active.
+        /// Indicates whether this payroll wage item is active. Inactive objects are typically hidden from views and reports in QuickBooks. Defaults to &#x60;true&#x60;.
         /// </summary>
-        /// <value>(Optional) Indicates whether the payroll item is active.</value>
+        /// <value>Indicates whether this payroll wage item is active. Inactive objects are typically hidden from views and reports in QuickBooks. Defaults to &#x60;true&#x60;.</value>
+        /* <example>true</example> */
         [JsonPropertyName("isActive")]
         public bool? IsActive { get { return this.IsActiveOption.Value; } set { this.IsActiveOption = new(value); } }
 

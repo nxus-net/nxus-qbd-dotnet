@@ -33,8 +33,8 @@ namespace Nxus.Qbd.Models
         /// <summary>
         /// Initializes a new instance of the <see cref="CreateVendorTypeRequest" /> class.
         /// </summary>
-        /// <param name="name">(Required) The name of the vendor type. (Max 31 characters)</param>
-        /// <param name="isActive">(Optional) If false, this Vendor Type is inactive. Default is true.</param>
+        /// <param name="name">The case-insensitive name of this customer type. Not guaranteed to be unique because it does not include the names of its hierarchical parent objects like &#x60;fullName&#x60; does. For example, two customer types could both have the &#x60;name&#x60; \&quot;Healthcare\&quot;, but they could have unique &#x60;fullName&#x60; values, such as \&quot;Industry:Healthcare\&quot; and \&quot;Region:Healthcare\&quot;.</param>
+        /// <param name="isActive">Indicates whether this customer type is active. Inactive objects are typically hidden from views and reports in QuickBooks. Defaults to &#x60;true&#x60;.</param>
         /// <param name="parentId">(Optional) The ListID or FullName of the parent vendor type. Used for hierarchical vendor types. Follows the Flattened-ID Pattern for ParentRef.</param>
         /// <param name="externalId">externalId</param>
         [JsonConstructor]
@@ -50,9 +50,9 @@ namespace Nxus.Qbd.Models
         partial void OnCreated();
 
         /// <summary>
-        /// (Required) The name of the vendor type. (Max 31 characters)
+        /// The case-insensitive name of this customer type. Not guaranteed to be unique because it does not include the names of its hierarchical parent objects like &#x60;fullName&#x60; does. For example, two customer types could both have the &#x60;name&#x60; \&quot;Healthcare\&quot;, but they could have unique &#x60;fullName&#x60; values, such as \&quot;Industry:Healthcare\&quot; and \&quot;Region:Healthcare\&quot;.
         /// </summary>
-        /// <value>(Required) The name of the vendor type. (Max 31 characters)</value>
+        /// <value>The case-insensitive name of this customer type. Not guaranteed to be unique because it does not include the names of its hierarchical parent objects like &#x60;fullName&#x60; does. For example, two customer types could both have the &#x60;name&#x60; \&quot;Healthcare\&quot;, but they could have unique &#x60;fullName&#x60; values, such as \&quot;Industry:Healthcare\&quot; and \&quot;Region:Healthcare\&quot;.</value>
         [JsonPropertyName("name")]
         public string Name { get; set; }
 
@@ -64,9 +64,10 @@ namespace Nxus.Qbd.Models
         public Option<bool?> IsActiveOption { get; private set; }
 
         /// <summary>
-        /// (Optional) If false, this Vendor Type is inactive. Default is true.
+        /// Indicates whether this customer type is active. Inactive objects are typically hidden from views and reports in QuickBooks. Defaults to &#x60;true&#x60;.
         /// </summary>
-        /// <value>(Optional) If false, this Vendor Type is inactive. Default is true.</value>
+        /// <value>Indicates whether this customer type is active. Inactive objects are typically hidden from views and reports in QuickBooks. Defaults to &#x60;true&#x60;.</value>
+        /* <example>true</example> */
         [JsonPropertyName("isActive")]
         public bool? IsActive { get { return this.IsActiveOption.Value; } set { this.IsActiveOption = new(value); } }
 

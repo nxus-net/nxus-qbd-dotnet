@@ -26,7 +26,7 @@ using Nxus.Qbd.Json;
 namespace Nxus.Qbd.Models
 {
     /// <summary>
-    /// Customers:  A customer record in QuickBooks represents either a business or individual who purchases goods or services, or a specific job/project being performed for that customer.   Jobs are treated as sub-customers; they inherit billing information from their parent customer while allowing for job-specific details to be tracked.
+    /// Represents a Customer or Job record retrieved from QuickBooks Desktop.
     /// </summary>
     public partial class Customer : IValidatableObject
     {

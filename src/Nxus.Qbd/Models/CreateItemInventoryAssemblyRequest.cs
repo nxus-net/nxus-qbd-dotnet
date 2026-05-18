@@ -33,12 +33,12 @@ namespace Nxus.Qbd.Models
         /// <summary>
         /// Initializes a new instance of the <see cref="CreateItemInventoryAssemblyRequest" /> class.
         /// </summary>
-        /// <param name="name">name</param>
+        /// <param name="name">The case-insensitive name of this inventory assembly item. Not guaranteed to be unique because it does not include the names of its hierarchical parent objects like &#x60;fullName&#x60; does. For example, two inventory assembly items could both have the &#x60;name&#x60; \&quot;Deluxe Kit\&quot;, but they could have unique &#x60;fullName&#x60; values, such as \&quot;Assemblies:Deluxe Kit\&quot; and \&quot;Inventory:Deluxe Kit\&quot;.</param>
         /// <param name="incomeAccountId">incomeAccountId</param>
         /// <param name="assetAccountId">assetAccountId</param>
         /// <param name="cogsAccountId">cogsAccountId</param>
         /// <param name="barCode">barCode</param>
-        /// <param name="isActive">isActive</param>
+        /// <param name="isActive">Indicates whether this inventory assembly item is active. Inactive objects are typically hidden from views and reports in QuickBooks. Defaults to &#x60;true&#x60;.</param>
         /// <param name="classId">classId</param>
         /// <param name="parentId">parentId</param>
         /// <param name="sku">sku</param>
@@ -46,14 +46,14 @@ namespace Nxus.Qbd.Models
         /// <param name="isTaxIncluded">isTaxIncluded</param>
         /// <param name="salesTaxCodeId">salesTaxCodeId</param>
         /// <param name="salesDescription">salesDescription</param>
-        /// <param name="salesPrice">salesPrice</param>
+        /// <param name="salesPrice">The price at which this inventory assembly item is sold to customers, represented as a decimal string.</param>
         /// <param name="purchaseDescription">purchaseDescription</param>
-        /// <param name="purchaseCost">purchaseCost</param>
+        /// <param name="purchaseCost">The cost at which this inventory assembly item is purchased from vendors, represented as a decimal string.</param>
         /// <param name="purchaseTaxCodeId">purchaseTaxCodeId</param>
         /// <param name="preferredVendorId">preferredVendorId</param>
-        /// <param name="buildNotificationThreshold">buildNotificationThreshold</param>
-        /// <param name="maximumQuantityOnHand">maximumQuantityOnHand</param>
-        /// <param name="quantityOnHand">quantityOnHand</param>
+        /// <param name="buildNotificationThreshold">The inventory assembly item&#39;s minimum quantity threshold that triggers a build notification in QuickBooks. When the sum of &#x60;quantityOnHand&#x60; (current inventory) and &#x60;quantityOnOrder&#x60; (pending purchase orders) drops below this threshold, QuickBooks will notify users that more units need to be built or assembled. This helps ensure adequate inventory levels for inventory assembly items.</param>
+        /// <param name="maximumQuantityOnHand">The maximum quantity of this inventory assembly item desired in inventory.</param>
+        /// <param name="quantityOnHand">The number of units of this inventory assembly item currently in inventory. &#x60;quantityOnHand&#x60; multiplied by &#x60;averageCost&#x60; equals &#x60;totalValue&#x60; for inventory item lists. To change the &#x60;quantityOnHand&#x60; for an inventory assembly item, you must use an inventory-adjustment instead of updating the inventory assembly item directly.</param>
         /// <param name="totalValue">totalValue</param>
         /// <param name="inventoryDate">inventoryDate</param>
         /// <param name="lines">lines</param>
@@ -92,8 +92,9 @@ namespace Nxus.Qbd.Models
         partial void OnCreated();
 
         /// <summary>
-        /// Gets or Sets Name
+        /// The case-insensitive name of this inventory assembly item. Not guaranteed to be unique because it does not include the names of its hierarchical parent objects like &#x60;fullName&#x60; does. For example, two inventory assembly items could both have the &#x60;name&#x60; \&quot;Deluxe Kit\&quot;, but they could have unique &#x60;fullName&#x60; values, such as \&quot;Assemblies:Deluxe Kit\&quot; and \&quot;Inventory:Deluxe Kit\&quot;.
         /// </summary>
+        /// <value>The case-insensitive name of this inventory assembly item. Not guaranteed to be unique because it does not include the names of its hierarchical parent objects like &#x60;fullName&#x60; does. For example, two inventory assembly items could both have the &#x60;name&#x60; \&quot;Deluxe Kit\&quot;, but they could have unique &#x60;fullName&#x60; values, such as \&quot;Assemblies:Deluxe Kit\&quot; and \&quot;Inventory:Deluxe Kit\&quot;.</value>
         [JsonPropertyName("name")]
         public string Name { get; set; }
 
@@ -150,8 +151,10 @@ namespace Nxus.Qbd.Models
         public Option<bool?> IsActiveOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets IsActive
+        /// Indicates whether this inventory assembly item is active. Inactive objects are typically hidden from views and reports in QuickBooks. Defaults to &#x60;true&#x60;.
         /// </summary>
+        /// <value>Indicates whether this inventory assembly item is active. Inactive objects are typically hidden from views and reports in QuickBooks. Defaults to &#x60;true&#x60;.</value>
+        /* <example>true</example> */
         [JsonPropertyName("isActive")]
         public bool? IsActive { get { return this.IsActiveOption.Value; } set { this.IsActiveOption = new(value); } }
 
@@ -254,8 +257,9 @@ namespace Nxus.Qbd.Models
         public Option<double?> SalesPriceOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets SalesPrice
+        /// The price at which this inventory assembly item is sold to customers, represented as a decimal string.
         /// </summary>
+        /// <value>The price at which this inventory assembly item is sold to customers, represented as a decimal string.</value>
         [JsonPropertyName("salesPrice")]
         public double? SalesPrice { get { return this.SalesPriceOption.Value; } set { this.SalesPriceOption = new(value); } }
 
@@ -280,8 +284,9 @@ namespace Nxus.Qbd.Models
         public Option<double?> PurchaseCostOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets PurchaseCost
+        /// The cost at which this inventory assembly item is purchased from vendors, represented as a decimal string.
         /// </summary>
+        /// <value>The cost at which this inventory assembly item is purchased from vendors, represented as a decimal string.</value>
         [JsonPropertyName("purchaseCost")]
         public double? PurchaseCost { get { return this.PurchaseCostOption.Value; } set { this.PurchaseCostOption = new(value); } }
 
@@ -319,8 +324,10 @@ namespace Nxus.Qbd.Models
         public Option<double?> BuildNotificationThresholdOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets BuildNotificationThreshold
+        /// The inventory assembly item&#39;s minimum quantity threshold that triggers a build notification in QuickBooks. When the sum of &#x60;quantityOnHand&#x60; (current inventory) and &#x60;quantityOnOrder&#x60; (pending purchase orders) drops below this threshold, QuickBooks will notify users that more units need to be built or assembled. This helps ensure adequate inventory levels for inventory assembly items.
         /// </summary>
+        /// <value>The inventory assembly item&#39;s minimum quantity threshold that triggers a build notification in QuickBooks. When the sum of &#x60;quantityOnHand&#x60; (current inventory) and &#x60;quantityOnOrder&#x60; (pending purchase orders) drops below this threshold, QuickBooks will notify users that more units need to be built or assembled. This helps ensure adequate inventory levels for inventory assembly items.</value>
+        /* <example>20</example> */
         [JsonPropertyName("buildNotificationThreshold")]
         public double? BuildNotificationThreshold { get { return this.BuildNotificationThresholdOption.Value; } set { this.BuildNotificationThresholdOption = new(value); } }
 
@@ -332,8 +339,10 @@ namespace Nxus.Qbd.Models
         public Option<double?> MaximumQuantityOnHandOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets MaximumQuantityOnHand
+        /// The maximum quantity of this inventory assembly item desired in inventory.
         /// </summary>
+        /// <value>The maximum quantity of this inventory assembly item desired in inventory.</value>
+        /* <example>400</example> */
         [JsonPropertyName("maximumQuantityOnHand")]
         public double? MaximumQuantityOnHand { get { return this.MaximumQuantityOnHandOption.Value; } set { this.MaximumQuantityOnHandOption = new(value); } }
 
@@ -345,8 +354,10 @@ namespace Nxus.Qbd.Models
         public Option<double?> QuantityOnHandOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets QuantityOnHand
+        /// The number of units of this inventory assembly item currently in inventory. &#x60;quantityOnHand&#x60; multiplied by &#x60;averageCost&#x60; equals &#x60;totalValue&#x60; for inventory item lists. To change the &#x60;quantityOnHand&#x60; for an inventory assembly item, you must use an inventory-adjustment instead of updating the inventory assembly item directly.
         /// </summary>
+        /// <value>The number of units of this inventory assembly item currently in inventory. &#x60;quantityOnHand&#x60; multiplied by &#x60;averageCost&#x60; equals &#x60;totalValue&#x60; for inventory item lists. To change the &#x60;quantityOnHand&#x60; for an inventory assembly item, you must use an inventory-adjustment instead of updating the inventory assembly item directly.</value>
+        /* <example>300</example> */
         [JsonPropertyName("quantityOnHand")]
         public double? QuantityOnHand { get { return this.QuantityOnHandOption.Value; } set { this.QuantityOnHandOption = new(value); } }
 
@@ -446,6 +457,12 @@ namespace Nxus.Qbd.Models
         /// <returns>Validation Result</returns>
         IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
+            // Name (string) maxLength
+            if (this.Name != null && this.Name.Length > 31)
+            {
+                yield return new ValidationResult("Invalid value for Name, length must be less than 31.", new [] { "Name" });
+            }
+
             // ParentId (string) maxLength
             if (this.ParentId != null && this.ParentId.Length > 159)
             {

@@ -26,7 +26,7 @@ using Nxus.Qbd.Json;
 namespace Nxus.Qbd.Models
 {
     /// <summary>
-    /// Address data model - shared across all QuickBooks entities
+    /// The Address object represents a physical address, which can be associated with various entities in QuickBooks, such as customers, vendors, or employees.   It includes properties for the street address, city, state, postal code, country, and an optional note.   The Address object is used to capture and store location information for these entities in QuickBooks.
     /// </summary>
     public partial class Address : IValidatableObject
     {

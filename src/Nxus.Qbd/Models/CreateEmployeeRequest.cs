@@ -33,50 +33,50 @@ namespace Nxus.Qbd.Models
         /// <summary>
         /// Initializes a new instance of the <see cref="CreateEmployeeRequest" /> class.
         /// </summary>
-        /// <param name="isActive">The employee&#39;s name (required). This is the display name in QuickBooks.</param>
-        /// <param name="salutation">salutation</param>
-        /// <param name="firstName">firstName</param>
-        /// <param name="middleName">middleName</param>
-        /// <param name="lastName">lastName</param>
-        /// <param name="jobTitle">jobTitle</param>
+        /// <param name="isActive">Indicates whether this employee is active. Inactive objects are typically hidden from views and reports in QuickBooks. Defaults to &#x60;true&#x60;.</param>
+        /// <param name="salutation">The employee&#39;s formal salutation title that precedes their name, such as \&quot;Mr.\&quot;, \&quot;Ms.\&quot;, or \&quot;Dr.\&quot;.</param>
+        /// <param name="firstName">The employee&#39;s first name.</param>
+        /// <param name="middleName">The employee&#39;s middle name.</param>
+        /// <param name="lastName">The employee&#39;s last name.</param>
+        /// <param name="jobTitle">The employee&#39;s job title.</param>
         /// <param name="supervisorId">ListID of the supervisor employee.</param>
-        /// <param name="department">department</param>
-        /// <param name="description">description</param>
+        /// <param name="department">The employee&#39;s department. Found in the \&quot;employment job details\&quot; section of the employee&#39;s record in QuickBooks.</param>
+        /// <param name="description">A description of this employee. Found in the \&quot;employment job details\&quot; section of the employee&#39;s record in QuickBooks.</param>
         /// <param name="employeeAddress">employeeAddress</param>
-        /// <param name="printAs">printAs</param>
-        /// <param name="phone">phone</param>
-        /// <param name="mobile">mobile</param>
-        /// <param name="pager">pager</param>
-        /// <param name="pagerPin">pagerPin</param>
+        /// <param name="printAs">The name to use when printing this employee from QuickBooks. By default, this is the same as the &#x60;name&#x60; field.</param>
+        /// <param name="phone">The employee&#39;s primary telephone number.</param>
+        /// <param name="mobile">The employee&#39;s mobile phone number.</param>
+        /// <param name="pager">The employee&#39;s pager number.</param>
+        /// <param name="pagerPin">The employee&#39;s pager PIN.</param>
         /// <param name="alternatePhone">alternatePhone</param>
-        /// <param name="fax">fax</param>
-        /// <param name="email">email</param>
-        /// <param name="ssn">ssn</param>
+        /// <param name="fax">The employee&#39;s fax number.</param>
+        /// <param name="email">The employee&#39;s email address.</param>
+        /// <param name="ssn">The employee&#39;s Social Security Number. The value can be with or without dashes.  **NOTE**: This field cannot be changed after the employee is created.</param>
         /// <param name="additionalContacts">additionalContacts</param>
         /// <param name="emergencyContacts">Emergency contacts for the employee (QBD only, v13.0+).</param>
         /// <param name="additionalNotes">additionalNotes</param>
-        /// <param name="employeeType">employeeType</param>
+        /// <param name="employeeType">The employee type. This affects payroll taxes - a statutory employee is defined as an employee by statute. Note that owners/partners are typically on the \&quot;Other Names\&quot; list in QuickBooks, but if listed as an employee their type will be &#x60;owner&#x60;.</param>
         /// <param name="partOrFullTime">partOrFullTime</param>
-        /// <param name="gender">gender</param>
-        /// <param name="hiredDate">hiredDate</param>
+        /// <param name="gender">This employee&#39;s gender.</param>
+        /// <param name="hiredDate">The date this employee was hired, in ISO 8601 format (YYYY-MM-DD).</param>
         /// <param name="releasedDate">releasedDate</param>
-        /// <param name="birthDate">birthDate</param>
-        /// <param name="accountNumber">accountNumber</param>
+        /// <param name="birthDate">This employee&#39;s date of birth, in ISO 8601 format (YYYY-MM-DD).</param>
+        /// <param name="accountNumber">The employee&#39;s account number, which appears in the QuickBooks chart of accounts, reports, and graphs.  Note that if the \&quot;Use Account Numbers\&quot; preference is turned off in QuickBooks, the account number may not be visible in the user interface, but it can still be set and retrieved through the API.</param>
         /// <param name="notes">notes</param>
         /// <param name="billingRateId">ListID of the billing rate.</param>
-        /// <param name="targetBonus">targetBonus</param>
+        /// <param name="targetBonus">The target bonus for this employee, represented as a decimal string. Found in the \&quot;employment job details\&quot; section of the employee&#39;s record in QuickBooks.</param>
         /// <param name="exempt">exempt</param>
         /// <param name="keyEmployee">keyEmployee</param>
-        /// <param name="originalHireDate">originalHireDate</param>
-        /// <param name="adjustedServiceDate">adjustedServiceDate</param>
+        /// <param name="originalHireDate">The original hire date for this employee, in ISO 8601 format (YYYY-MM-DD).</param>
+        /// <param name="adjustedServiceDate">The adjusted service date for this employee, in ISO 8601 format (YYYY-MM-DD). This date accounts for previous employment periods or leaves that affect seniority.</param>
         /// <param name="usCitizen">usCitizen</param>
-        /// <param name="ethnicity">ethnicity</param>
+        /// <param name="ethnicity">This employee&#39;s ethnicity.</param>
         /// <param name="disabled">disabled</param>
         /// <param name="disabilityDesc">disabilityDesc</param>
         /// <param name="onFile">onFile</param>
         /// <param name="workAuthExpireDate">workAuthExpireDate</param>
         /// <param name="usVeteran">usVeteran</param>
-        /// <param name="militaryStatus">militaryStatus</param>
+        /// <param name="militaryStatus">This employee&#39;s military status if they are a U.S. veteran.</param>
         /// <param name="employeePayrollInfo">employeePayrollInfo</param>
         /// <param name="externalId">externalId</param>
         /// <param name="suffix">suffix</param>
@@ -143,9 +143,10 @@ namespace Nxus.Qbd.Models
         public Option<bool?> IsActiveOption { get; private set; }
 
         /// <summary>
-        /// The employee&#39;s name (required). This is the display name in QuickBooks.
+        /// Indicates whether this employee is active. Inactive objects are typically hidden from views and reports in QuickBooks. Defaults to &#x60;true&#x60;.
         /// </summary>
-        /// <value>The employee&#39;s name (required). This is the display name in QuickBooks.</value>
+        /// <value>Indicates whether this employee is active. Inactive objects are typically hidden from views and reports in QuickBooks. Defaults to &#x60;true&#x60;.</value>
+        /* <example>true</example> */
         [JsonPropertyName("isActive")]
         public bool? IsActive { get { return this.IsActiveOption.Value; } set { this.IsActiveOption = new(value); } }
 
@@ -157,8 +158,10 @@ namespace Nxus.Qbd.Models
         public Option<string?> SalutationOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets Salutation
+        /// The employee&#39;s formal salutation title that precedes their name, such as \&quot;Mr.\&quot;, \&quot;Ms.\&quot;, or \&quot;Dr.\&quot;.
         /// </summary>
+        /// <value>The employee&#39;s formal salutation title that precedes their name, such as \&quot;Mr.\&quot;, \&quot;Ms.\&quot;, or \&quot;Dr.\&quot;.</value>
+        /* <example>&quot;Dr.&quot;</example> */
         [JsonPropertyName("salutation")]
         public string? Salutation { get { return this.SalutationOption.Value; } set { this.SalutationOption = new(value); } }
 
@@ -170,8 +173,10 @@ namespace Nxus.Qbd.Models
         public Option<string?> FirstNameOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets FirstName
+        /// The employee&#39;s first name.
         /// </summary>
+        /// <value>The employee&#39;s first name.</value>
+        /* <example>&quot;John&quot;</example> */
         [JsonPropertyName("firstName")]
         public string? FirstName { get { return this.FirstNameOption.Value; } set { this.FirstNameOption = new(value); } }
 
@@ -183,8 +188,10 @@ namespace Nxus.Qbd.Models
         public Option<string?> MiddleNameOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets MiddleName
+        /// The employee&#39;s middle name.
         /// </summary>
+        /// <value>The employee&#39;s middle name.</value>
+        /* <example>&quot;A.&quot;</example> */
         [JsonPropertyName("middleName")]
         public string? MiddleName { get { return this.MiddleNameOption.Value; } set { this.MiddleNameOption = new(value); } }
 
@@ -196,8 +203,10 @@ namespace Nxus.Qbd.Models
         public Option<string?> LastNameOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets LastName
+        /// The employee&#39;s last name.
         /// </summary>
+        /// <value>The employee&#39;s last name.</value>
+        /* <example>&quot;Doe&quot;</example> */
         [JsonPropertyName("lastName")]
         public string? LastName { get { return this.LastNameOption.Value; } set { this.LastNameOption = new(value); } }
 
@@ -209,8 +218,10 @@ namespace Nxus.Qbd.Models
         public Option<string?> JobTitleOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets JobTitle
+        /// The employee&#39;s job title.
         /// </summary>
+        /// <value>The employee&#39;s job title.</value>
+        /* <example>&quot;Purchasing Manager&quot;</example> */
         [JsonPropertyName("jobTitle")]
         public string? JobTitle { get { return this.JobTitleOption.Value; } set { this.JobTitleOption = new(value); } }
 
@@ -236,8 +247,10 @@ namespace Nxus.Qbd.Models
         public Option<string?> DepartmentOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets Department
+        /// The employee&#39;s department. Found in the \&quot;employment job details\&quot; section of the employee&#39;s record in QuickBooks.
         /// </summary>
+        /// <value>The employee&#39;s department. Found in the \&quot;employment job details\&quot; section of the employee&#39;s record in QuickBooks.</value>
+        /* <example>&quot;Sales&quot;</example> */
         [JsonPropertyName("department")]
         public string? Department { get { return this.DepartmentOption.Value; } set { this.DepartmentOption = new(value); } }
 
@@ -249,8 +262,10 @@ namespace Nxus.Qbd.Models
         public Option<string?> DescriptionOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets Description
+        /// A description of this employee. Found in the \&quot;employment job details\&quot; section of the employee&#39;s record in QuickBooks.
         /// </summary>
+        /// <value>A description of this employee. Found in the \&quot;employment job details\&quot; section of the employee&#39;s record in QuickBooks.</value>
+        /* <example>&quot;This employee is a key employee.&quot;</example> */
         [JsonPropertyName("description")]
         public string? Description { get { return this.DescriptionOption.Value; } set { this.DescriptionOption = new(value); } }
 
@@ -275,8 +290,10 @@ namespace Nxus.Qbd.Models
         public Option<string?> PrintAsOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets PrintAs
+        /// The name to use when printing this employee from QuickBooks. By default, this is the same as the &#x60;name&#x60; field.
         /// </summary>
+        /// <value>The name to use when printing this employee from QuickBooks. By default, this is the same as the &#x60;name&#x60; field.</value>
+        /* <example>&quot;John Doe&quot;</example> */
         [JsonPropertyName("printAs")]
         public string? PrintAs { get { return this.PrintAsOption.Value; } set { this.PrintAsOption = new(value); } }
 
@@ -288,8 +305,10 @@ namespace Nxus.Qbd.Models
         public Option<string?> PhoneOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets Phone
+        /// The employee&#39;s primary telephone number.
         /// </summary>
+        /// <value>The employee&#39;s primary telephone number.</value>
+        /* <example>&quot;+1-555-123-4567&quot;</example> */
         [JsonPropertyName("phone")]
         public string? Phone { get { return this.PhoneOption.Value; } set { this.PhoneOption = new(value); } }
 
@@ -301,8 +320,10 @@ namespace Nxus.Qbd.Models
         public Option<string?> MobileOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets Mobile
+        /// The employee&#39;s mobile phone number.
         /// </summary>
+        /// <value>The employee&#39;s mobile phone number.</value>
+        /* <example>&quot;+1-555-555-1212&quot;</example> */
         [JsonPropertyName("mobile")]
         public string? Mobile { get { return this.MobileOption.Value; } set { this.MobileOption = new(value); } }
 
@@ -314,8 +335,10 @@ namespace Nxus.Qbd.Models
         public Option<string?> PagerOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets Pager
+        /// The employee&#39;s pager number.
         /// </summary>
+        /// <value>The employee&#39;s pager number.</value>
+        /* <example>&quot;+1-555-555-1212&quot;</example> */
         [JsonPropertyName("pager")]
         public string? Pager { get { return this.PagerOption.Value; } set { this.PagerOption = new(value); } }
 
@@ -327,8 +350,10 @@ namespace Nxus.Qbd.Models
         public Option<string?> PagerPinOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets PagerPin
+        /// The employee&#39;s pager PIN.
         /// </summary>
+        /// <value>The employee&#39;s pager PIN.</value>
+        /* <example>&quot;1234&quot;</example> */
         [JsonPropertyName("pagerPin")]
         public string? PagerPin { get { return this.PagerPinOption.Value; } set { this.PagerPinOption = new(value); } }
 
@@ -353,8 +378,10 @@ namespace Nxus.Qbd.Models
         public Option<string?> FaxOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets Fax
+        /// The employee&#39;s fax number.
         /// </summary>
+        /// <value>The employee&#39;s fax number.</value>
+        /* <example>&quot;+1-555-555-1212&quot;</example> */
         [JsonPropertyName("fax")]
         public string? Fax { get { return this.FaxOption.Value; } set { this.FaxOption = new(value); } }
 
@@ -366,8 +393,10 @@ namespace Nxus.Qbd.Models
         public Option<string?> EmailOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets Email
+        /// The employee&#39;s email address.
         /// </summary>
+        /// <value>The employee&#39;s email address.</value>
+        /* <example>&quot;employee@example.com&quot;</example> */
         [JsonPropertyName("email")]
         public string? Email { get { return this.EmailOption.Value; } set { this.EmailOption = new(value); } }
 
@@ -379,8 +408,10 @@ namespace Nxus.Qbd.Models
         public Option<string?> SsnOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets Ssn
+        /// The employee&#39;s Social Security Number. The value can be with or without dashes.  **NOTE**: This field cannot be changed after the employee is created.
         /// </summary>
+        /// <value>The employee&#39;s Social Security Number. The value can be with or without dashes.  **NOTE**: This field cannot be changed after the employee is created.</value>
+        /* <example>&quot;123-45-6789&quot;</example> */
         [JsonPropertyName("ssn")]
         public string? Ssn { get { return this.SsnOption.Value; } set { this.SsnOption = new(value); } }
 
@@ -432,8 +463,10 @@ namespace Nxus.Qbd.Models
         public Option<string?> EmployeeTypeOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets EmployeeType
+        /// The employee type. This affects payroll taxes - a statutory employee is defined as an employee by statute. Note that owners/partners are typically on the \&quot;Other Names\&quot; list in QuickBooks, but if listed as an employee their type will be &#x60;owner&#x60;.
         /// </summary>
+        /// <value>The employee type. This affects payroll taxes - a statutory employee is defined as an employee by statute. Note that owners/partners are typically on the \&quot;Other Names\&quot; list in QuickBooks, but if listed as an employee their type will be &#x60;owner&#x60;.</value>
+        /* <example>&quot;regular&quot;</example> */
         [JsonPropertyName("employeeType")]
         public string? EmployeeType { get { return this.EmployeeTypeOption.Value; } set { this.EmployeeTypeOption = new(value); } }
 
@@ -458,8 +491,10 @@ namespace Nxus.Qbd.Models
         public Option<string?> GenderOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets Gender
+        /// This employee&#39;s gender.
         /// </summary>
+        /// <value>This employee&#39;s gender.</value>
+        /* <example>&quot;male&quot;</example> */
         [JsonPropertyName("gender")]
         public string? Gender { get { return this.GenderOption.Value; } set { this.GenderOption = new(value); } }
 
@@ -471,8 +506,9 @@ namespace Nxus.Qbd.Models
         public Option<DateOnly?> HiredDateOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets HiredDate
+        /// The date this employee was hired, in ISO 8601 format (YYYY-MM-DD).
         /// </summary>
+        /// <value>The date this employee was hired, in ISO 8601 format (YYYY-MM-DD).</value>
         [JsonPropertyName("hiredDate")]
         public DateOnly? HiredDate { get { return this.HiredDateOption.Value; } set { this.HiredDateOption = new(value); } }
 
@@ -497,8 +533,9 @@ namespace Nxus.Qbd.Models
         public Option<DateOnly?> BirthDateOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets BirthDate
+        /// This employee&#39;s date of birth, in ISO 8601 format (YYYY-MM-DD).
         /// </summary>
+        /// <value>This employee&#39;s date of birth, in ISO 8601 format (YYYY-MM-DD).</value>
         [JsonPropertyName("birthDate")]
         public DateOnly? BirthDate { get { return this.BirthDateOption.Value; } set { this.BirthDateOption = new(value); } }
 
@@ -510,8 +547,10 @@ namespace Nxus.Qbd.Models
         public Option<string?> AccountNumberOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets AccountNumber
+        /// The employee&#39;s account number, which appears in the QuickBooks chart of accounts, reports, and graphs.  Note that if the \&quot;Use Account Numbers\&quot; preference is turned off in QuickBooks, the account number may not be visible in the user interface, but it can still be set and retrieved through the API.
         /// </summary>
+        /// <value>The employee&#39;s account number, which appears in the QuickBooks chart of accounts, reports, and graphs.  Note that if the \&quot;Use Account Numbers\&quot; preference is turned off in QuickBooks, the account number may not be visible in the user interface, but it can still be set and retrieved through the API.</value>
+        /* <example>&quot;1010&quot;</example> */
         [JsonPropertyName("accountNumber")]
         public string? AccountNumber { get { return this.AccountNumberOption.Value; } set { this.AccountNumberOption = new(value); } }
 
@@ -550,8 +589,9 @@ namespace Nxus.Qbd.Models
         public Option<double?> TargetBonusOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets TargetBonus
+        /// The target bonus for this employee, represented as a decimal string. Found in the \&quot;employment job details\&quot; section of the employee&#39;s record in QuickBooks.
         /// </summary>
+        /// <value>The target bonus for this employee, represented as a decimal string. Found in the \&quot;employment job details\&quot; section of the employee&#39;s record in QuickBooks.</value>
         [JsonPropertyName("targetBonus")]
         public double? TargetBonus { get { return this.TargetBonusOption.Value; } set { this.TargetBonusOption = new(value); } }
 
@@ -589,8 +629,9 @@ namespace Nxus.Qbd.Models
         public Option<DateOnly?> OriginalHireDateOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets OriginalHireDate
+        /// The original hire date for this employee, in ISO 8601 format (YYYY-MM-DD).
         /// </summary>
+        /// <value>The original hire date for this employee, in ISO 8601 format (YYYY-MM-DD).</value>
         [JsonPropertyName("originalHireDate")]
         public DateOnly? OriginalHireDate { get { return this.OriginalHireDateOption.Value; } set { this.OriginalHireDateOption = new(value); } }
 
@@ -602,8 +643,9 @@ namespace Nxus.Qbd.Models
         public Option<DateOnly?> AdjustedServiceDateOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets AdjustedServiceDate
+        /// The adjusted service date for this employee, in ISO 8601 format (YYYY-MM-DD). This date accounts for previous employment periods or leaves that affect seniority.
         /// </summary>
+        /// <value>The adjusted service date for this employee, in ISO 8601 format (YYYY-MM-DD). This date accounts for previous employment periods or leaves that affect seniority.</value>
         [JsonPropertyName("adjustedServiceDate")]
         public DateOnly? AdjustedServiceDate { get { return this.AdjustedServiceDateOption.Value; } set { this.AdjustedServiceDateOption = new(value); } }
 
@@ -628,8 +670,10 @@ namespace Nxus.Qbd.Models
         public Option<string?> EthnicityOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets Ethnicity
+        /// This employee&#39;s ethnicity.
         /// </summary>
+        /// <value>This employee&#39;s ethnicity.</value>
+        /* <example>&quot;asian&quot;</example> */
         [JsonPropertyName("ethnicity")]
         public string? Ethnicity { get { return this.EthnicityOption.Value; } set { this.EthnicityOption = new(value); } }
 
@@ -706,8 +750,10 @@ namespace Nxus.Qbd.Models
         public Option<string?> MilitaryStatusOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets MilitaryStatus
+        /// This employee&#39;s military status if they are a U.S. veteran.
         /// </summary>
+        /// <value>This employee&#39;s military status if they are a U.S. veteran.</value>
+        /* <example>&quot;active&quot;</example> */
         [JsonPropertyName("militaryStatus")]
         public string? MilitaryStatus { get { return this.MilitaryStatusOption.Value; } set { this.MilitaryStatusOption = new(value); } }
 

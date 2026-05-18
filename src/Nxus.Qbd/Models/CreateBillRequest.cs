@@ -26,7 +26,7 @@ using Nxus.Qbd.Json;
 namespace Nxus.Qbd.Models
 {
     /// <summary>
-    /// Model used to create a new vendor Bill in QuickBooks Desktop.
+    /// Request model used to create a new Bill in QuickBooks.
     /// </summary>
     public partial class CreateBillRequest : IValidatableObject
     {

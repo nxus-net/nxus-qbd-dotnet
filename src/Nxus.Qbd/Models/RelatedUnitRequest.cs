@@ -33,7 +33,7 @@ namespace Nxus.Qbd.Models
         /// <summary>
         /// Initializes a new instance of the <see cref="RelatedUnitRequest" /> class.
         /// </summary>
-        /// <param name="name">(Required) The name of the related unit (e.g., \&quot;Gallon\&quot;). Max length: 31.</param>
+        /// <param name="name">The case-insensitive unique name of this unit-of-measure set, unique across all unit-of-measure sets. To ensure this set appears in the QuickBooks UI for companies configured with a single unit per item, prefix the name with \&quot;By the\&quot; (e.g., \&quot;By the Barrel\&quot;).  **NOTE**: Unit-of-measure sets do not have a &#x60;fullName&#x60; field because they are not hierarchical objects, which is why &#x60;name&#x60; is unique for them but not for objects that have parents.</param>
         /// <param name="abbreviation">(Required) The abbreviation of the related unit (e.g., \&quot;gal\&quot;). Max length: 31.</param>
         /// <param name="conversionRatio">(Required) The conversion ratio to the BaseUnit (e.g., 42 for Barrel to Gallons). Valid range: 0.001 to 5000.</param>
         [JsonConstructor]
@@ -48,9 +48,9 @@ namespace Nxus.Qbd.Models
         partial void OnCreated();
 
         /// <summary>
-        /// (Required) The name of the related unit (e.g., \&quot;Gallon\&quot;). Max length: 31.
+        /// The case-insensitive unique name of this unit-of-measure set, unique across all unit-of-measure sets. To ensure this set appears in the QuickBooks UI for companies configured with a single unit per item, prefix the name with \&quot;By the\&quot; (e.g., \&quot;By the Barrel\&quot;).  **NOTE**: Unit-of-measure sets do not have a &#x60;fullName&#x60; field because they are not hierarchical objects, which is why &#x60;name&#x60; is unique for them but not for objects that have parents.
         /// </summary>
-        /// <value>(Required) The name of the related unit (e.g., \&quot;Gallon\&quot;). Max length: 31.</value>
+        /// <value>The case-insensitive unique name of this unit-of-measure set, unique across all unit-of-measure sets. To ensure this set appears in the QuickBooks UI for companies configured with a single unit per item, prefix the name with \&quot;By the\&quot; (e.g., \&quot;By the Barrel\&quot;).  **NOTE**: Unit-of-measure sets do not have a &#x60;fullName&#x60; field because they are not hierarchical objects, which is why &#x60;name&#x60; is unique for them but not for objects that have parents.</value>
         [JsonPropertyName("name")]
         public string Name { get; set; }
 

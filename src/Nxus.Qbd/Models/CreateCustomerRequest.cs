@@ -26,66 +26,66 @@ using Nxus.Qbd.Json;
 namespace Nxus.Qbd.Models
 {
     /// <summary>
-    /// Request model for creating a new customer
+    /// Represents a request to create a new customer or project (job) in QuickBooks Desktop.
     /// </summary>
     public partial class CreateCustomerRequest : IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="CreateCustomerRequest" /> class.
         /// </summary>
-        /// <param name="name">name</param>
-        /// <param name="isActive">isActive</param>
-        /// <param name="classId">classId</param>
-        /// <param name="parentId">parentId</param>
-        /// <param name="companyName">companyName</param>
-        /// <param name="salutation">salutation</param>
-        /// <param name="firstName">firstName</param>
-        /// <param name="middleName">middleName</param>
-        /// <param name="lastName">lastName</param>
-        /// <param name="jobTitle">jobTitle</param>
+        /// <param name="name">The primary identifier name for the customer or job.  This value is case-insensitive. Because it does not include parent hierarchy prefixes, it is not guaranteed to be globally unique across your entire QuickBooks company file.</param>
+        /// <param name="isActive">The unique identifier of the Class associated with this customer.  Useful for segmenting records by department, region, or vertical. Class tracking must be enabled in QuickBooks preferences.</param>
+        /// <param name="classId">The unique identifier of the Class associated with this customer.  Useful for segmenting records by department, region, or vertical. Class tracking must be enabled in QuickBooks preferences.</param>
+        /// <param name="parentId">The unique identifier of the hierarchical parent customer.  Leave this null if creating a top-level customer. **Important:** This field is strictly required if you provide a &lt;see cref&#x3D;\&quot;P:QbdWebService.Application.Resources.Qbd.Lists.Customer.Models.CreateCustomerRequest.JobStatus\&quot; /&gt;, as that indicates this record is a sub-customer (job).</param>
+        /// <param name="companyName">The formal company name to be printed on invoices, checks, and official correspondence.</param>
+        /// <param name="salutation">The formal title preceding the primary contact&#39;s name (e.g., Mr., Ms., Dr.).</param>
+        /// <param name="firstName">The first name of the primary contact person.</param>
+        /// <param name="middleName">The middle name or initial of the primary contact person.</param>
+        /// <param name="lastName">The last name of the primary contact person.</param>
+        /// <param name="jobTitle">The professional title of the primary contact.</param>
         /// <param name="billingAddress">billingAddress</param>
         /// <param name="shippingAddress">shippingAddress</param>
         /// <param name="shippingAddresses">shippingAddresses</param>
-        /// <param name="phone">phone</param>
-        /// <param name="altPhone">altPhone</param>
-        /// <param name="fax">fax</param>
-        /// <param name="email">email</param>
-        /// <param name="ccEmail">ccEmail</param>
-        /// <param name="contact">contact</param>
+        /// <param name="phone">The primary telephone number.</param>
+        /// <param name="altPhone">A secondary telephone number.</param>
+        /// <param name="fax">The fax number of the primary contact.</param>
+        /// <param name="email">The primary email address used for digital correspondence and e-invoicing.</param>
+        /// <param name="ccEmail">An additional email address to automatically CC on communications.</param>
+        /// <param name="contact">The primary contact name used for digital correspondence and e-invoicing.</param>
         /// <param name="alternateContact">alternateContact</param>
         /// <param name="customContactFields">customContactFields</param>
         /// <param name="contacts">contacts</param>
-        /// <param name="customerTypeId">customerTypeId</param>
-        /// <param name="termsId">termsId</param>
-        /// <param name="salesRepresentativeId">salesRepresentativeId</param>
-        /// <param name="openBalance">openBalance</param>
-        /// <param name="openBalanceDate">openBalanceDate</param>
-        /// <param name="salesTaxCodeId">salesTaxCodeId</param>
-        /// <param name="itemSalesTaxId">itemSalesTaxId</param>
-        /// <param name="salesTaxCountry">salesTaxCountry</param>
-        /// <param name="resaleNumber">resaleNumber</param>
+        /// <param name="customerTypeId">The unique identifier of the type of the customer.</param>
+        /// <param name="termsId">The unique identifier of the terms dictating the payment schedule and early-payment discounts (e.g., Net 30).</param>
+        /// <param name="salesRepresentativeId">The unique identifier of the sales representative associated with this customer account.</param>
+        /// <param name="openBalance">The initial monetary balance owed by the customer at the time of creation.</param>
+        /// <param name="openBalanceDate">The date on which the open balance was established.</param>
+        /// <param name="salesTaxCodeId">The identifier for the default sales tax code (taxable vs. non-taxable).  Applied globally to transactions unless overridden at the line-item level.</param>
+        /// <param name="itemSalesTaxId">The identifier for the specific tax agency rate applied to this customer&#39;s purchases.  This drives the actual percentage calculation, unlike the binary &lt;see cref&#x3D;\&quot;P:QbdWebService.Application.Resources.Qbd.Lists.Customer.Models.CreateCustomerRequest.SalesTaxCodeId\&quot; /&gt;.</param>
+        /// <param name="salesTaxCountry">The geographical country jurisdiction for tax calculations (e.g., US, UK, Canada, Australia).</param>
+        /// <param name="resaleNumber">The certificate number provided by customers purchasing items wholesale/for resale.</param>
         /// <param name="accountNumber">accountNumber</param>
-        /// <param name="creditLimit">creditLimit</param>
-        /// <param name="preferredPaymentMethodId">preferredPaymentMethodId</param>
-        /// <param name="creditCardInfo">creditCardInfo</param>
-        /// <param name="jobStatus">JobStatus may have one of the following values: Awarded, Closed, InProgress, None [DEFAULT], NotAwarded, Pending</param>
-        /// <param name="jobStartDate">jobStartDate</param>
-        /// <param name="jobProjectedEndDate">jobProjectedEndDate</param>
-        /// <param name="jobEndDate">jobEndDate</param>
-        /// <param name="jobDesc">jobDesc</param>
-        /// <param name="jobTypeId">jobTypeId</param>
-        /// <param name="notes">notes</param>
-        /// <param name="additionalNotes">additionalNotes</param>
-        /// <param name="preferredDeliveryMethod">preferredDeliveryMethod</param>
-        /// <param name="priceLevelId">priceLevelId</param>
+        /// <param name="creditLimit">The maximum allowable outstanding balance before a credit hold is triggered.</param>
+        /// <param name="preferredPaymentMethodId">The identifier for the customer&#39;s default way of paying (e.g., Cash, Check, Visa).</param>
+        /// <param name="creditCardInfo">Stored credit card details for processing transactions.</param>
+        /// <param name="jobStatus">The current operational state of the job.  **Important:** Supplying this value explicitly requires &lt;see cref&#x3D;\&quot;P:QbdWebService.Application.Resources.Qbd.Lists.Customer.Models.CreateCustomerRequest.ParentId\&quot; /&gt; to be populated, indicating this is a sub-customer/job entity. Available values: Awarded, Closed, InProgress, None, NotAwarded, Pending.</param>
+        /// <param name="jobStartDate">The date active work commenced on the job.  Must be chronologically before or equal to &lt;see cref&#x3D;\&quot;P:QbdWebService.Application.Resources.Qbd.Lists.Customer.Models.CreateCustomerRequest.JobProjectedEndDate\&quot; /&gt; and &lt;see cref&#x3D;\&quot;P:QbdWebService.Application.Resources.Qbd.Lists.Customer.Models.CreateCustomerRequest.JobEndDate\&quot; /&gt;, if they are provided.</param>
+        /// <param name="jobProjectedEndDate">The estimated deadline for job completion.  Must be chronologically on or after the &lt;see cref&#x3D;\&quot;P:QbdWebService.Application.Resources.Qbd.Lists.Customer.Models.CreateCustomerRequest.JobStartDate\&quot; /&gt;, if provided.</param>
+        /// <param name="jobEndDate">The actual date the job was finalized.  Must be chronologically on or after the &lt;see cref&#x3D;\&quot;P:QbdWebService.Application.Resources.Qbd.Lists.Customer.Models.CreateCustomerRequest.JobStartDate\&quot; /&gt;, if provided.</param>
+        /// <param name="jobDesc">A short summary outlining the scope of work for the job.</param>
+        /// <param name="jobTypeId">The unique identifier categorizing the nature of the job (e.g., Commercial, Residential, Maintenance).</param>
+        /// <param name="notes">An overarching internal comment or memo regarding the customer.</param>
+        /// <param name="additionalNotes">A collection of individual, distinct internal notes attached to the customer record.</param>
+        /// <param name="preferredDeliveryMethod">The default medium for sending invoices and estimates (e.g., Email, Mail, None).</param>
+        /// <param name="priceLevelId">The identifier for a custom pricing tier applied automatically to items sold to this customer.  Overrides standard item rates automatically on new sales forms.</param>
         /// <param name="externalId">externalId</param>
-        /// <param name="taxRegistrationNumber">taxRegistrationNumber</param>
-        /// <param name="currencyId">currencyId</param>
-        /// <param name="suffix">suffix</param>
-        /// <param name="printAs">printAs</param>
-        /// <param name="pager">pager</param>
-        /// <param name="mobile">mobile</param>
-        /// <param name="cc">cc</param>
+        /// <param name="taxRegistrationNumber">The official tax identification number (primarily utilized in UK and Canadian QBD versions).</param>
+        /// <param name="currencyId">The unique identifier of the default currency used for this customer&#39;s transactions.  Note: You must have multicurrency support enabled in QuickBooks Desktop for this field to be available.</param>
+        /// <param name="suffix">A name suffix (e.g., Jr., Sr., III).</param>
+        /// <param name="printAs">The pager number for the primary contact.</param>
+        /// <param name="pager">The pager number for the primary contact.</param>
+        /// <param name="mobile">The mobile/cellular telephone number for the primary contact.</param>
+        /// <param name="cc">Additional carbon copy (CC) details.</param>
         [JsonConstructor]
         public CreateCustomerRequest(string name, Option<bool?> isActive = default, Option<string?> classId = default, Option<string?> parentId = default, Option<string?> companyName = default, Option<string?> salutation = default, Option<string?> firstName = default, Option<string?> middleName = default, Option<string?> lastName = default, Option<string?> jobTitle = default, Option<AddressRequest?> billingAddress = default, Option<AddressRequest?> shippingAddress = default, Option<List<ShipToAddressRequest>?> shippingAddresses = default, Option<string?> phone = default, Option<string?> altPhone = default, Option<string?> fax = default, Option<string?> email = default, Option<string?> ccEmail = default, Option<string?> contact = default, Option<string?> alternateContact = default, Option<List<CustomContactField>?> customContactFields = default, Option<List<Contact>?> contacts = default, Option<string?> customerTypeId = default, Option<string?> termsId = default, Option<string?> salesRepresentativeId = default, Option<double?> openBalance = default, Option<DateOnly?> openBalanceDate = default, Option<string?> salesTaxCodeId = default, Option<string?> itemSalesTaxId = default, Option<string?> salesTaxCountry = default, Option<string?> resaleNumber = default, Option<string?> accountNumber = default, Option<double?> creditLimit = default, Option<string?> preferredPaymentMethodId = default, Option<CreditCardInfo?> creditCardInfo = default, Option<NullableJobStatus?> jobStatus = default, Option<DateOnly?> jobStartDate = default, Option<DateOnly?> jobProjectedEndDate = default, Option<DateOnly?> jobEndDate = default, Option<string?> jobDesc = default, Option<string?> jobTypeId = default, Option<string?> notes = default, Option<List<string>?> additionalNotes = default, Option<string?> preferredDeliveryMethod = default, Option<string?> priceLevelId = default, Option<string?> externalId = default, Option<string?> taxRegistrationNumber = default, Option<string?> currencyId = default, Option<string?> suffix = default, Option<string?> printAs = default, Option<string?> pager = default, Option<string?> mobile = default, Option<string?> cc = default)
         {
@@ -155,15 +155,16 @@ namespace Nxus.Qbd.Models
         public Option<NullableJobStatus?> JobStatusOption { get; private set; }
 
         /// <summary>
-        /// JobStatus may have one of the following values: Awarded, Closed, InProgress, None [DEFAULT], NotAwarded, Pending
+        /// The current operational state of the job.  **Important:** Supplying this value explicitly requires &lt;see cref&#x3D;\&quot;P:QbdWebService.Application.Resources.Qbd.Lists.Customer.Models.CreateCustomerRequest.ParentId\&quot; /&gt; to be populated, indicating this is a sub-customer/job entity. Available values: Awarded, Closed, InProgress, None, NotAwarded, Pending.
         /// </summary>
-        /// <value>JobStatus may have one of the following values: Awarded, Closed, InProgress, None [DEFAULT], NotAwarded, Pending</value>
+        /// <value>The current operational state of the job.  **Important:** Supplying this value explicitly requires &lt;see cref&#x3D;\&quot;P:QbdWebService.Application.Resources.Qbd.Lists.Customer.Models.CreateCustomerRequest.ParentId\&quot; /&gt; to be populated, indicating this is a sub-customer/job entity. Available values: Awarded, Closed, InProgress, None, NotAwarded, Pending.</value>
         [JsonPropertyName("jobStatus")]
         public NullableJobStatus? JobStatus { get { return this.JobStatusOption.Value; } set { this.JobStatusOption = new(value); } }
 
         /// <summary>
-        /// Gets or Sets Name
+        /// The primary identifier name for the customer or job.  This value is case-insensitive. Because it does not include parent hierarchy prefixes, it is not guaranteed to be globally unique across your entire QuickBooks company file.
         /// </summary>
+        /// <value>The primary identifier name for the customer or job.  This value is case-insensitive. Because it does not include parent hierarchy prefixes, it is not guaranteed to be globally unique across your entire QuickBooks company file.</value>
         [JsonPropertyName("name")]
         public string Name { get; set; }
 
@@ -175,8 +176,10 @@ namespace Nxus.Qbd.Models
         public Option<bool?> IsActiveOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets IsActive
+        /// The unique identifier of the Class associated with this customer.  Useful for segmenting records by department, region, or vertical. Class tracking must be enabled in QuickBooks preferences.
         /// </summary>
+        /// <value>The unique identifier of the Class associated with this customer.  Useful for segmenting records by department, region, or vertical. Class tracking must be enabled in QuickBooks preferences.</value>
+        /* <example>false</example> */
         [JsonPropertyName("isActive")]
         public bool? IsActive { get { return this.IsActiveOption.Value; } set { this.IsActiveOption = new(value); } }
 
@@ -188,8 +191,10 @@ namespace Nxus.Qbd.Models
         public Option<string?> ClassIdOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets ClassId
+        /// The unique identifier of the Class associated with this customer.  Useful for segmenting records by department, region, or vertical. Class tracking must be enabled in QuickBooks preferences.
         /// </summary>
+        /// <value>The unique identifier of the Class associated with this customer.  Useful for segmenting records by department, region, or vertical. Class tracking must be enabled in QuickBooks preferences.</value>
+        /* <example>&quot;80000001-1234567890&quot;</example> */
         [JsonPropertyName("classId")]
         public string? ClassId { get { return this.ClassIdOption.Value; } set { this.ClassIdOption = new(value); } }
 
@@ -201,8 +206,10 @@ namespace Nxus.Qbd.Models
         public Option<string?> ParentIdOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets ParentId
+        /// The unique identifier of the hierarchical parent customer.  Leave this null if creating a top-level customer. **Important:** This field is strictly required if you provide a &lt;see cref&#x3D;\&quot;P:QbdWebService.Application.Resources.Qbd.Lists.Customer.Models.CreateCustomerRequest.JobStatus\&quot; /&gt;, as that indicates this record is a sub-customer (job).
         /// </summary>
+        /// <value>The unique identifier of the hierarchical parent customer.  Leave this null if creating a top-level customer. **Important:** This field is strictly required if you provide a &lt;see cref&#x3D;\&quot;P:QbdWebService.Application.Resources.Qbd.Lists.Customer.Models.CreateCustomerRequest.JobStatus\&quot; /&gt;, as that indicates this record is a sub-customer (job).</value>
+        /* <example>&quot;80000001-1234567890&quot;</example> */
         [JsonPropertyName("parentId")]
         public string? ParentId { get { return this.ParentIdOption.Value; } set { this.ParentIdOption = new(value); } }
 
@@ -214,8 +221,10 @@ namespace Nxus.Qbd.Models
         public Option<string?> CompanyNameOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets CompanyName
+        /// The formal company name to be printed on invoices, checks, and official correspondence.
         /// </summary>
+        /// <value>The formal company name to be printed on invoices, checks, and official correspondence.</value>
+        /* <example>&quot;Acme Corporation&quot;</example> */
         [JsonPropertyName("companyName")]
         public string? CompanyName { get { return this.CompanyNameOption.Value; } set { this.CompanyNameOption = new(value); } }
 
@@ -227,8 +236,10 @@ namespace Nxus.Qbd.Models
         public Option<string?> SalutationOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets Salutation
+        /// The formal title preceding the primary contact&#39;s name (e.g., Mr., Ms., Dr.).
         /// </summary>
+        /// <value>The formal title preceding the primary contact&#39;s name (e.g., Mr., Ms., Dr.).</value>
+        /* <example>&quot;Dr.&quot;</example> */
         [JsonPropertyName("salutation")]
         public string? Salutation { get { return this.SalutationOption.Value; } set { this.SalutationOption = new(value); } }
 
@@ -240,8 +251,10 @@ namespace Nxus.Qbd.Models
         public Option<string?> FirstNameOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets FirstName
+        /// The first name of the primary contact person.
         /// </summary>
+        /// <value>The first name of the primary contact person.</value>
+        /* <example>&quot;Jane&quot;</example> */
         [JsonPropertyName("firstName")]
         public string? FirstName { get { return this.FirstNameOption.Value; } set { this.FirstNameOption = new(value); } }
 
@@ -253,8 +266,10 @@ namespace Nxus.Qbd.Models
         public Option<string?> MiddleNameOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets MiddleName
+        /// The middle name or initial of the primary contact person.
         /// </summary>
+        /// <value>The middle name or initial of the primary contact person.</value>
+        /* <example>&quot;A.&quot;</example> */
         [JsonPropertyName("middleName")]
         public string? MiddleName { get { return this.MiddleNameOption.Value; } set { this.MiddleNameOption = new(value); } }
 
@@ -266,8 +281,10 @@ namespace Nxus.Qbd.Models
         public Option<string?> LastNameOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets LastName
+        /// The last name of the primary contact person.
         /// </summary>
+        /// <value>The last name of the primary contact person.</value>
+        /* <example>&quot;Doe&quot;</example> */
         [JsonPropertyName("lastName")]
         public string? LastName { get { return this.LastNameOption.Value; } set { this.LastNameOption = new(value); } }
 
@@ -279,8 +296,10 @@ namespace Nxus.Qbd.Models
         public Option<string?> JobTitleOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets JobTitle
+        /// The professional title of the primary contact.
         /// </summary>
+        /// <value>The professional title of the primary contact.</value>
+        /* <example>&quot;Director of IT&quot;</example> */
         [JsonPropertyName("jobTitle")]
         public string? JobTitle { get { return this.JobTitleOption.Value; } set { this.JobTitleOption = new(value); } }
 
@@ -331,8 +350,10 @@ namespace Nxus.Qbd.Models
         public Option<string?> PhoneOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets Phone
+        /// The primary telephone number.
         /// </summary>
+        /// <value>The primary telephone number.</value>
+        /* <example>&quot;+1-555-019-8273&quot;</example> */
         [JsonPropertyName("phone")]
         public string? Phone { get { return this.PhoneOption.Value; } set { this.PhoneOption = new(value); } }
 
@@ -344,8 +365,10 @@ namespace Nxus.Qbd.Models
         public Option<string?> AltPhoneOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets AltPhone
+        /// A secondary telephone number.
         /// </summary>
+        /// <value>A secondary telephone number.</value>
+        /* <example>&quot;+1-555-019-1122&quot;</example> */
         [JsonPropertyName("altPhone")]
         public string? AltPhone { get { return this.AltPhoneOption.Value; } set { this.AltPhoneOption = new(value); } }
 
@@ -357,8 +380,10 @@ namespace Nxus.Qbd.Models
         public Option<string?> FaxOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets Fax
+        /// The fax number of the primary contact.
         /// </summary>
+        /// <value>The fax number of the primary contact.</value>
+        /* <example>&quot;1-555-019-1122&quot;</example> */
         [JsonPropertyName("fax")]
         public string? Fax { get { return this.FaxOption.Value; } set { this.FaxOption = new(value); } }
 
@@ -370,8 +395,10 @@ namespace Nxus.Qbd.Models
         public Option<string?> EmailOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets Email
+        /// The primary email address used for digital correspondence and e-invoicing.
         /// </summary>
+        /// <value>The primary email address used for digital correspondence and e-invoicing.</value>
+        /* <example>&quot;billing@acmecorp.com&quot;</example> */
         [JsonPropertyName("email")]
         public string? Email { get { return this.EmailOption.Value; } set { this.EmailOption = new(value); } }
 
@@ -383,8 +410,10 @@ namespace Nxus.Qbd.Models
         public Option<string?> CcEmailOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets CcEmail
+        /// An additional email address to automatically CC on communications.
         /// </summary>
+        /// <value>An additional email address to automatically CC on communications.</value>
+        /* <example>&quot;ap-team@acmecorp.com&quot;</example> */
         [JsonPropertyName("ccEmail")]
         public string? CcEmail { get { return this.CcEmailOption.Value; } set { this.CcEmailOption = new(value); } }
 
@@ -396,8 +425,10 @@ namespace Nxus.Qbd.Models
         public Option<string?> ContactOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets Contact
+        /// The primary contact name used for digital correspondence and e-invoicing.
         /// </summary>
+        /// <value>The primary contact name used for digital correspondence and e-invoicing.</value>
+        /* <example>&quot;Jane Doe&quot;</example> */
         [JsonPropertyName("contact")]
         public string? Contact { get { return this.ContactOption.Value; } set { this.ContactOption = new(value); } }
 
@@ -448,8 +479,10 @@ namespace Nxus.Qbd.Models
         public Option<string?> CustomerTypeIdOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets CustomerTypeId
+        /// The unique identifier of the type of the customer.
         /// </summary>
+        /// <value>The unique identifier of the type of the customer.</value>
+        /* <example>&quot;80000001-1234567890&quot;</example> */
         [JsonPropertyName("customerTypeId")]
         public string? CustomerTypeId { get { return this.CustomerTypeIdOption.Value; } set { this.CustomerTypeIdOption = new(value); } }
 
@@ -461,8 +494,10 @@ namespace Nxus.Qbd.Models
         public Option<string?> TermsIdOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets TermsId
+        /// The unique identifier of the terms dictating the payment schedule and early-payment discounts (e.g., Net 30).
         /// </summary>
+        /// <value>The unique identifier of the terms dictating the payment schedule and early-payment discounts (e.g., Net 30).</value>
+        /* <example>&quot;80000001-1234567890&quot;</example> */
         [JsonPropertyName("termsId")]
         public string? TermsId { get { return this.TermsIdOption.Value; } set { this.TermsIdOption = new(value); } }
 
@@ -474,8 +509,10 @@ namespace Nxus.Qbd.Models
         public Option<string?> SalesRepresentativeIdOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets SalesRepresentativeId
+        /// The unique identifier of the sales representative associated with this customer account.
         /// </summary>
+        /// <value>The unique identifier of the sales representative associated with this customer account.</value>
+        /* <example>&quot;80000001-1234567890&quot;</example> */
         [JsonPropertyName("salesRepresentativeId")]
         public string? SalesRepresentativeId { get { return this.SalesRepresentativeIdOption.Value; } set { this.SalesRepresentativeIdOption = new(value); } }
 
@@ -487,8 +524,10 @@ namespace Nxus.Qbd.Models
         public Option<double?> OpenBalanceOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets OpenBalance
+        /// The initial monetary balance owed by the customer at the time of creation.
         /// </summary>
+        /// <value>The initial monetary balance owed by the customer at the time of creation.</value>
+        /* <example>1500.50</example> */
         [JsonPropertyName("openBalance")]
         public double? OpenBalance { get { return this.OpenBalanceOption.Value; } set { this.OpenBalanceOption = new(value); } }
 
@@ -500,8 +539,9 @@ namespace Nxus.Qbd.Models
         public Option<DateOnly?> OpenBalanceDateOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets OpenBalanceDate
+        /// The date on which the open balance was established.
         /// </summary>
+        /// <value>The date on which the open balance was established.</value>
         [JsonPropertyName("openBalanceDate")]
         public DateOnly? OpenBalanceDate { get { return this.OpenBalanceDateOption.Value; } set { this.OpenBalanceDateOption = new(value); } }
 
@@ -513,8 +553,10 @@ namespace Nxus.Qbd.Models
         public Option<string?> SalesTaxCodeIdOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets SalesTaxCodeId
+        /// The identifier for the default sales tax code (taxable vs. non-taxable).  Applied globally to transactions unless overridden at the line-item level.
         /// </summary>
+        /// <value>The identifier for the default sales tax code (taxable vs. non-taxable).  Applied globally to transactions unless overridden at the line-item level.</value>
+        /* <example>&quot;80000001-1234567890&quot;</example> */
         [JsonPropertyName("salesTaxCodeId")]
         public string? SalesTaxCodeId { get { return this.SalesTaxCodeIdOption.Value; } set { this.SalesTaxCodeIdOption = new(value); } }
 
@@ -526,8 +568,10 @@ namespace Nxus.Qbd.Models
         public Option<string?> ItemSalesTaxIdOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets ItemSalesTaxId
+        /// The identifier for the specific tax agency rate applied to this customer&#39;s purchases.  This drives the actual percentage calculation, unlike the binary &lt;see cref&#x3D;\&quot;P:QbdWebService.Application.Resources.Qbd.Lists.Customer.Models.CreateCustomerRequest.SalesTaxCodeId\&quot; /&gt;.
         /// </summary>
+        /// <value>The identifier for the specific tax agency rate applied to this customer&#39;s purchases.  This drives the actual percentage calculation, unlike the binary &lt;see cref&#x3D;\&quot;P:QbdWebService.Application.Resources.Qbd.Lists.Customer.Models.CreateCustomerRequest.SalesTaxCodeId\&quot; /&gt;.</value>
+        /* <example>&quot;80000001-1234567890&quot;</example> */
         [JsonPropertyName("itemSalesTaxId")]
         public string? ItemSalesTaxId { get { return this.ItemSalesTaxIdOption.Value; } set { this.ItemSalesTaxIdOption = new(value); } }
 
@@ -539,8 +583,10 @@ namespace Nxus.Qbd.Models
         public Option<string?> SalesTaxCountryOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets SalesTaxCountry
+        /// The geographical country jurisdiction for tax calculations (e.g., US, UK, Canada, Australia).
         /// </summary>
+        /// <value>The geographical country jurisdiction for tax calculations (e.g., US, UK, Canada, Australia).</value>
+        /* <example>&quot;us&quot;</example> */
         [JsonPropertyName("salesTaxCountry")]
         public string? SalesTaxCountry { get { return this.SalesTaxCountryOption.Value; } set { this.SalesTaxCountryOption = new(value); } }
 
@@ -552,8 +598,10 @@ namespace Nxus.Qbd.Models
         public Option<string?> ResaleNumberOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets ResaleNumber
+        /// The certificate number provided by customers purchasing items wholesale/for resale.
         /// </summary>
+        /// <value>The certificate number provided by customers purchasing items wholesale/for resale.</value>
+        /* <example>&quot;RS-987654321&quot;</example> */
         [JsonPropertyName("resaleNumber")]
         public string? ResaleNumber { get { return this.ResaleNumberOption.Value; } set { this.ResaleNumberOption = new(value); } }
 
@@ -578,8 +626,10 @@ namespace Nxus.Qbd.Models
         public Option<double?> CreditLimitOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets CreditLimit
+        /// The maximum allowable outstanding balance before a credit hold is triggered.
         /// </summary>
+        /// <value>The maximum allowable outstanding balance before a credit hold is triggered.</value>
+        /* <example>10000.00</example> */
         [JsonPropertyName("creditLimit")]
         public double? CreditLimit { get { return this.CreditLimitOption.Value; } set { this.CreditLimitOption = new(value); } }
 
@@ -591,8 +641,10 @@ namespace Nxus.Qbd.Models
         public Option<string?> PreferredPaymentMethodIdOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets PreferredPaymentMethodId
+        /// The identifier for the customer&#39;s default way of paying (e.g., Cash, Check, Visa).
         /// </summary>
+        /// <value>The identifier for the customer&#39;s default way of paying (e.g., Cash, Check, Visa).</value>
+        /* <example>&quot;80000001-1234567890&quot;</example> */
         [JsonPropertyName("preferredPaymentMethodId")]
         public string? PreferredPaymentMethodId { get { return this.PreferredPaymentMethodIdOption.Value; } set { this.PreferredPaymentMethodIdOption = new(value); } }
 
@@ -604,8 +656,9 @@ namespace Nxus.Qbd.Models
         public Option<CreditCardInfo?> CreditCardInfoOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets CreditCardInfo
+        /// Stored credit card details for processing transactions.
         /// </summary>
+        /// <value>Stored credit card details for processing transactions.</value>
         [JsonPropertyName("creditCardInfo")]
         public CreditCardInfo? CreditCardInfo { get { return this.CreditCardInfoOption.Value; } set { this.CreditCardInfoOption = new(value); } }
 
@@ -617,8 +670,9 @@ namespace Nxus.Qbd.Models
         public Option<DateOnly?> JobStartDateOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets JobStartDate
+        /// The date active work commenced on the job.  Must be chronologically before or equal to &lt;see cref&#x3D;\&quot;P:QbdWebService.Application.Resources.Qbd.Lists.Customer.Models.CreateCustomerRequest.JobProjectedEndDate\&quot; /&gt; and &lt;see cref&#x3D;\&quot;P:QbdWebService.Application.Resources.Qbd.Lists.Customer.Models.CreateCustomerRequest.JobEndDate\&quot; /&gt;, if they are provided.
         /// </summary>
+        /// <value>The date active work commenced on the job.  Must be chronologically before or equal to &lt;see cref&#x3D;\&quot;P:QbdWebService.Application.Resources.Qbd.Lists.Customer.Models.CreateCustomerRequest.JobProjectedEndDate\&quot; /&gt; and &lt;see cref&#x3D;\&quot;P:QbdWebService.Application.Resources.Qbd.Lists.Customer.Models.CreateCustomerRequest.JobEndDate\&quot; /&gt;, if they are provided.</value>
         [JsonPropertyName("jobStartDate")]
         public DateOnly? JobStartDate { get { return this.JobStartDateOption.Value; } set { this.JobStartDateOption = new(value); } }
 
@@ -630,8 +684,9 @@ namespace Nxus.Qbd.Models
         public Option<DateOnly?> JobProjectedEndDateOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets JobProjectedEndDate
+        /// The estimated deadline for job completion.  Must be chronologically on or after the &lt;see cref&#x3D;\&quot;P:QbdWebService.Application.Resources.Qbd.Lists.Customer.Models.CreateCustomerRequest.JobStartDate\&quot; /&gt;, if provided.
         /// </summary>
+        /// <value>The estimated deadline for job completion.  Must be chronologically on or after the &lt;see cref&#x3D;\&quot;P:QbdWebService.Application.Resources.Qbd.Lists.Customer.Models.CreateCustomerRequest.JobStartDate\&quot; /&gt;, if provided.</value>
         [JsonPropertyName("jobProjectedEndDate")]
         public DateOnly? JobProjectedEndDate { get { return this.JobProjectedEndDateOption.Value; } set { this.JobProjectedEndDateOption = new(value); } }
 
@@ -643,8 +698,9 @@ namespace Nxus.Qbd.Models
         public Option<DateOnly?> JobEndDateOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets JobEndDate
+        /// The actual date the job was finalized.  Must be chronologically on or after the &lt;see cref&#x3D;\&quot;P:QbdWebService.Application.Resources.Qbd.Lists.Customer.Models.CreateCustomerRequest.JobStartDate\&quot; /&gt;, if provided.
         /// </summary>
+        /// <value>The actual date the job was finalized.  Must be chronologically on or after the &lt;see cref&#x3D;\&quot;P:QbdWebService.Application.Resources.Qbd.Lists.Customer.Models.CreateCustomerRequest.JobStartDate\&quot; /&gt;, if provided.</value>
         [JsonPropertyName("jobEndDate")]
         public DateOnly? JobEndDate { get { return this.JobEndDateOption.Value; } set { this.JobEndDateOption = new(value); } }
 
@@ -656,8 +712,10 @@ namespace Nxus.Qbd.Models
         public Option<string?> JobDescOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets JobDesc
+        /// A short summary outlining the scope of work for the job.
         /// </summary>
+        /// <value>A short summary outlining the scope of work for the job.</value>
+        /* <example>&quot;Phase 1 structural tear-down and debris removal.&quot;</example> */
         [JsonPropertyName("jobDesc")]
         public string? JobDesc { get { return this.JobDescOption.Value; } set { this.JobDescOption = new(value); } }
 
@@ -669,8 +727,10 @@ namespace Nxus.Qbd.Models
         public Option<string?> JobTypeIdOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets JobTypeId
+        /// The unique identifier categorizing the nature of the job (e.g., Commercial, Residential, Maintenance).
         /// </summary>
+        /// <value>The unique identifier categorizing the nature of the job (e.g., Commercial, Residential, Maintenance).</value>
+        /* <example>&quot;80000001-1234567890&quot;</example> */
         [JsonPropertyName("jobTypeId")]
         public string? JobTypeId { get { return this.JobTypeIdOption.Value; } set { this.JobTypeIdOption = new(value); } }
 
@@ -682,8 +742,10 @@ namespace Nxus.Qbd.Models
         public Option<string?> NotesOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets Notes
+        /// An overarching internal comment or memo regarding the customer.
         /// </summary>
+        /// <value>An overarching internal comment or memo regarding the customer.</value>
+        /* <example>&quot;VIP client - prioritize support tickets.&quot;</example> */
         [JsonPropertyName("notes")]
         public string? Notes { get { return this.NotesOption.Value; } set { this.NotesOption = new(value); } }
 
@@ -695,8 +757,9 @@ namespace Nxus.Qbd.Models
         public Option<List<string>?> AdditionalNotesOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets AdditionalNotes
+        /// A collection of individual, distinct internal notes attached to the customer record.
         /// </summary>
+        /// <value>A collection of individual, distinct internal notes attached to the customer record.</value>
         [JsonPropertyName("additionalNotes")]
         public List<string>? AdditionalNotes { get { return this.AdditionalNotesOption.Value; } set { this.AdditionalNotesOption = new(value); } }
 
@@ -708,8 +771,10 @@ namespace Nxus.Qbd.Models
         public Option<string?> PreferredDeliveryMethodOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets PreferredDeliveryMethod
+        /// The default medium for sending invoices and estimates (e.g., Email, Mail, None).
         /// </summary>
+        /// <value>The default medium for sending invoices and estimates (e.g., Email, Mail, None).</value>
+        /* <example>&quot;Email&quot;</example> */
         [JsonPropertyName("preferredDeliveryMethod")]
         public string? PreferredDeliveryMethod { get { return this.PreferredDeliveryMethodOption.Value; } set { this.PreferredDeliveryMethodOption = new(value); } }
 
@@ -721,8 +786,10 @@ namespace Nxus.Qbd.Models
         public Option<string?> PriceLevelIdOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets PriceLevelId
+        /// The identifier for a custom pricing tier applied automatically to items sold to this customer.  Overrides standard item rates automatically on new sales forms.
         /// </summary>
+        /// <value>The identifier for a custom pricing tier applied automatically to items sold to this customer.  Overrides standard item rates automatically on new sales forms.</value>
+        /* <example>&quot;80000001-1234567890&quot;</example> */
         [JsonPropertyName("priceLevelId")]
         public string? PriceLevelId { get { return this.PriceLevelIdOption.Value; } set { this.PriceLevelIdOption = new(value); } }
 
@@ -747,8 +814,10 @@ namespace Nxus.Qbd.Models
         public Option<string?> TaxRegistrationNumberOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets TaxRegistrationNumber
+        /// The official tax identification number (primarily utilized in UK and Canadian QBD versions).
         /// </summary>
+        /// <value>The official tax identification number (primarily utilized in UK and Canadian QBD versions).</value>
+        /* <example>&quot;GB123456789&quot;</example> */
         [JsonPropertyName("taxRegistrationNumber")]
         public string? TaxRegistrationNumber { get { return this.TaxRegistrationNumberOption.Value; } set { this.TaxRegistrationNumberOption = new(value); } }
 
@@ -760,8 +829,10 @@ namespace Nxus.Qbd.Models
         public Option<string?> CurrencyIdOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets CurrencyId
+        /// The unique identifier of the default currency used for this customer&#39;s transactions.  Note: You must have multicurrency support enabled in QuickBooks Desktop for this field to be available.
         /// </summary>
+        /// <value>The unique identifier of the default currency used for this customer&#39;s transactions.  Note: You must have multicurrency support enabled in QuickBooks Desktop for this field to be available.</value>
+        /* <example>&quot;80000001-1234567890&quot;</example> */
         [JsonPropertyName("currencyId")]
         public string? CurrencyId { get { return this.CurrencyIdOption.Value; } set { this.CurrencyIdOption = new(value); } }
 
@@ -773,8 +844,10 @@ namespace Nxus.Qbd.Models
         public Option<string?> SuffixOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets Suffix
+        /// A name suffix (e.g., Jr., Sr., III).
         /// </summary>
+        /// <value>A name suffix (e.g., Jr., Sr., III).</value>
+        /* <example>&quot;Jr.&quot;</example> */
         [JsonPropertyName("suffix")]
         public string? Suffix { get { return this.SuffixOption.Value; } set { this.SuffixOption = new(value); } }
 
@@ -786,8 +859,9 @@ namespace Nxus.Qbd.Models
         public Option<string?> PrintAsOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets PrintAs
+        /// The pager number for the primary contact.
         /// </summary>
+        /// <value>The pager number for the primary contact.</value>
         [JsonPropertyName("printAs")]
         public string? PrintAs { get { return this.PrintAsOption.Value; } set { this.PrintAsOption = new(value); } }
 
@@ -799,8 +873,9 @@ namespace Nxus.Qbd.Models
         public Option<string?> PagerOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets Pager
+        /// The pager number for the primary contact.
         /// </summary>
+        /// <value>The pager number for the primary contact.</value>
         [JsonPropertyName("pager")]
         public string? Pager { get { return this.PagerOption.Value; } set { this.PagerOption = new(value); } }
 
@@ -812,8 +887,10 @@ namespace Nxus.Qbd.Models
         public Option<string?> MobileOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets Mobile
+        /// The mobile/cellular telephone number for the primary contact.
         /// </summary>
+        /// <value>The mobile/cellular telephone number for the primary contact.</value>
+        /* <example>&quot;+1-555-019-9988&quot;</example> */
         [JsonPropertyName("mobile")]
         public string? Mobile { get { return this.MobileOption.Value; } set { this.MobileOption = new(value); } }
 
@@ -825,8 +902,9 @@ namespace Nxus.Qbd.Models
         public Option<string?> CcOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets Cc
+        /// Additional carbon copy (CC) details.
         /// </summary>
+        /// <value>Additional carbon copy (CC) details.</value>
         [JsonPropertyName("cc")]
         public string? Cc { get { return this.CcOption.Value; } set { this.CcOption = new(value); } }
 
@@ -902,6 +980,18 @@ namespace Nxus.Qbd.Models
         /// <returns>Validation Result</returns>
         IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
+            // Name (string) maxLength
+            if (this.Name != null && this.Name.Length > 41)
+            {
+                yield return new ValidationResult("Invalid value for Name, length must be less than 41.", new [] { "Name" });
+            }
+
+            // Name (string) minLength
+            if (this.Name != null && this.Name.Length < 1)
+            {
+                yield return new ValidationResult("Invalid value for Name, length must be greater than 1.", new [] { "Name" });
+            }
+
             // ParentId (string) maxLength
             if (this.ParentId != null && this.ParentId.Length > 159)
             {
